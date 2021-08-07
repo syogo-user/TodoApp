@@ -27,23 +27,27 @@ class ListViewController: UIViewController {
         
         let nib = UINib(nibName:"ListTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
-        taskRequest()
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        taskRequest()
+        
         
     }
     @objc private func taskAdd(){
-        guard let postVC = self.storyboard?.instantiateViewController(withIdentifier:"PostViewController") else { return }
+        //タスクのIdで最大値を検索
+        let maxId = taskList.map{$0.taskId}.max() ?? 0
+        //登録画面に遷移
+        guard let postVC = self.storyboard?.instantiateViewController(withIdentifier:"PostViewController") as? PostViewController else { return }
         postVC.modalPresentationStyle = .fullScreen
+        postVC.maxId = maxId
         self.present(postVC,animated: true,completion:nil)
     }
     
     //タスクの一覧を取得
     func taskRequest(){
-        API.shared.request(type: [Task].self) { (tasks) in
-            self.taskList = tasks
+        API.shared.request(type: [Task?].self) { (tasks) in
+            self.taskList = tasks.compactMap{$0} //nilを除外
             print("self.taskList",self.taskList)
             DispatchQueue.main.async {
                 //メインスレッドにて実施
