@@ -27,9 +27,7 @@ class ListViewController: UIViewController {
         
         let nib = UINib(nibName:"ListTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
-        
-//        taskAdd()
-        tableView.reloadData()
+        taskRequest()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -42,15 +40,18 @@ class ListViewController: UIViewController {
         self.present(postVC,animated: true,completion:nil)
     }
     
-    
-    
-//    func taskAdd(){
-//        taskList.append(Task(id: "1", title: "Swift", content: "StackViewについて", date: Date()))
-//        taskList.append(Task(id: "2", title: "AWS", content: "CloudWatch", date: Date()))
-//        taskList.append(Task(id: "3", title: "Python", content: "AI", date: Date()))
-//        taskList.append(Task(id: "4", title: "TypeScript", content: "React", date: Date()))
-//    }
-    
+    //タスクの一覧を取得
+    func taskRequest(){
+        API.shared.request(type: [Task].self) { (tasks) in
+            self.taskList = tasks
+            print("self.taskList",self.taskList)
+            DispatchQueue.main.async {
+                //メインスレッドにて実施
+                self.tableView.reloadData()
+            }
+
+        }
+    }    
 }
 extension ListViewController:UITableViewDelegate,UITableViewDataSource{
     
