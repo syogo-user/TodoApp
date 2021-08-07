@@ -23,6 +23,7 @@ class ListViewController: UIViewController {
         taskAddButton.backgroundColor = .darkGray
         tableView.delegate = self
         tableView.dataSource = self
+        taskAddButton.addTarget(self, action: #selector(taskAdd), for: .touchUpInside)
         
         let nib = UINib(nibName:"ListTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
@@ -35,6 +36,14 @@ class ListViewController: UIViewController {
         super.viewWillAppear(animated)
         
     }
+    @objc private func taskAdd(){
+        guard let postVC = self.storyboard?.instantiateViewController(withIdentifier:"PostViewController") else { return }
+        postVC.modalPresentationStyle = .fullScreen
+        self.present(postVC,animated: true,completion:nil)
+    }
+    
+    
+    
 //    func taskAdd(){
 //        taskList.append(Task(id: "1", title: "Swift", content: "StackViewについて", date: Date()))
 //        taskList.append(Task(id: "2", title: "AWS", content: "CloudWatch", date: Date()))

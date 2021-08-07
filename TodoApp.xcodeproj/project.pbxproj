@@ -16,6 +16,7 @@
 		918FBC2026BD509B00C7276F /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FBC1E26BD509B00C7276F /* ListTableViewCell.swift */; };
 		918FBC2126BD509B00C7276F /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 918FBC1F26BD509B00C7276F /* ListTableViewCell.xib */; };
 		918FBC2426BD50D800C7276F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FBC2326BD50D800C7276F /* Task.swift */; };
+		918FBC2726BD638A00C7276F /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FBC2626BD638A00C7276F /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		918FBC1E26BD509B00C7276F /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		918FBC1F26BD509B00C7276F /* ListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 		918FBC2326BD50D800C7276F /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		918FBC2626BD638A00C7276F /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				918FBC1B26BD412E00C7276F /* ListViewController.swift */,
+				918FBC2626BD638A00C7276F /* PostViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				918FBC2726BD638A00C7276F /* PostViewController.swift in Sources */,
 				918FBC0226BD406D00C7276F /* AppDelegate.swift in Sources */,
 				918FBC2026BD509B00C7276F /* ListTableViewCell.swift in Sources */,
 				918FBC2426BD50D800C7276F /* Task.swift in Sources */,
