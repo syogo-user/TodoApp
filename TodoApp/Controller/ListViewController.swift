@@ -4,7 +4,7 @@
 //
 //  Created by 小野寺祥吾 on 2021/08/06.
 //
-
+import Firebase
 import UIKit
 
 class ListViewController: UIViewController {
@@ -24,19 +24,34 @@ class ListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         taskAddButton.addTarget(self, action: #selector(taskAdd), for: .touchUpInside)
-        
+        taskAddButton.setImage(UIImage(systemName:"plus"), for: .normal)
+        taskAddButton.tintColor = .white
         let nib = UINib(nibName:"ListTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
+        
+        //TODO ログアウト機能を別で設ける
+        // ログアウトする
+        try! Auth.auth().signOut()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let _ = Auth.auth().currentUser else{return}
+        //タスクの一覧を取得
         taskRequest()
         
-        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        // currentUserがnilならログインしていない
+        if Auth.auth().currentUser == nil {
+            // ログインしていないときの処理
+            guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {return}
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: true, completion: nil)
+        }
     }
     @objc private func taskAdd(){
         //タスクのIdで最大値を検索
-        let maxId = taskList.map{$0.taskId}.max() ?? 0
+        let maxId = taskList.map{$0.taskId}.max() ?? -1
         //登録画面に遷移
         guard let postVC = self.storyboard?.instantiateViewController(withIdentifier:"PostViewController") as? PostViewController else { return }
         postVC.modalPresentationStyle = .fullScreen
@@ -46,7 +61,10 @@ class ListViewController: UIViewController {
     
     //タスクの一覧を取得
     func taskRequest(){
-        API.shared.request(type: [Task?].self) { (tasks) in
+        //ログインUIDを取得
+        guard let myUid = Auth.auth().currentUser?.uid else{return}
+        //タスク一覧データを取得
+        API.shared.request(uid:myUid,type: [Task?].self) { (tasks) in
             self.taskList = tasks.compactMap{$0} //nilを除外
             print("self.taskList",self.taskList)
             DispatchQueue.main.async {

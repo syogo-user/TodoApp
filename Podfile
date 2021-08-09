@@ -7,5 +7,6 @@ target 'TodoApp' do
 
   # Pods for TodoApp
    pod 'Alamofire', '~> 5.4'
-
+   pod 'Firebase'
+   pod 'Firebase/Auth'
 end

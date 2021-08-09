@@ -9,10 +9,10 @@ import Foundation
 import Alamofire
 class API{
     static let shared = API()
-    private let baseUrl = "https://todoapp-7f440-default-rtdb.firebaseio.com/"
+    private let baseUrl = "https://todoapp-7f440-default-rtdb.firebaseio.com/users/"
     //タスク一覧の取得
-    func request<T:Decodable>(type:T.Type,completion:@escaping (T)->Void){
-        let url = baseUrl + "tasks.json"
+    func request<T:Decodable>(uid:String,type:T.Type,completion:@escaping (T)->Void){
+        let url = baseUrl + uid + "/tasks.json"
         let request = AF.request(url,method: .get,parameters: nil)
         print("url:",url)
         request.responseJSON { (response) in
@@ -32,8 +32,8 @@ class API{
         }
     }
     //タスクの追加
-    func patchRequest<T:Decodable>(task:Task,type:T.Type,completion:@escaping ()->Void){
-        let url = baseUrl + "tasks.json"
+    func patchRequest<T:Decodable>(uid:String,task:Task,type:T.Type,completion:@escaping ()->Void){
+        let url = baseUrl + uid + "/tasks.json"
         let parameters = [
             "\(task.taskId)":[
                 "taskId": task.taskId,
@@ -46,7 +46,20 @@ class API{
         request.responseJSON { (response) in
             //コールバック
             completion()
-
+            //TODO タスクの追加が成功したかどうかの判定
+            
+//            guard let statusCode = response.response?.statusCode else{return}
+//            if statusCode <= 300{
+//                //リクエストが成功した場合
+//                do{
+//                    guard let data = response.data else{return}
+//                    let decorder = JSONDecoder()
+//                    let value = try decorder.decode(T.self, from: data)
+//
+//                }catch{
+//                    print("Jsonの変換に失敗しました:",error)
+//                }
+//            }
         }
     }
 

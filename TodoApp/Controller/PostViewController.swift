@@ -4,7 +4,7 @@
 //
 //  Created by 小野寺祥吾 on 2021/08/06.
 //
-
+import Firebase
 import UIKit
 
 class PostViewController: UIViewController {
@@ -13,7 +13,7 @@ class PostViewController: UIViewController {
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    var maxId = 0//現在のタスクIDの最大値
+    var maxId = -1//現在のタスクIDの最大値
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +26,10 @@ class PostViewController: UIViewController {
             //TODO エラーのメッセージを出力
             return
         }
+        //ログインUIDを取得
+        guard let myUid = Auth.auth().currentUser?.uid else{return}
         let task = Task(taskId: maxId + 1, title:titleTextField.text! , content: contentTextView.text)
-        API.shared.patchRequest(task:task, type: Task.self) {
+        API.shared.patchRequest(uid:myUid,task:task, type: Task.self) {
             //登録後画面を閉じる
             self.dissmiss()
         }
