@@ -11,6 +11,7 @@ class ListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var taskAddButton: UIButton!
     let cellId = "cellId"
+    let toEditSegue = "toEdit"
     var taskList: [Task] = []
     
     override func viewDidLoad() {
@@ -71,6 +72,11 @@ extension ListViewController:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 編集画面へ遷移
+        performSegue(withIdentifier: toEditSegue, sender: taskList[indexPath.row])
+    }
+    
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)-> UITableViewCell.EditingStyle {
         return .delete
     }
@@ -83,4 +89,12 @@ extension ListViewController:UITableViewDelegate,UITableViewDataSource{
             self.taskRequest()
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == toEditSegue {
+            guard let editVC = segue.destination as? EditViewController else { return }
+            editVC.task = sender as? Task
+        }
+    }
+    
 }
