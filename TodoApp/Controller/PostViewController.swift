@@ -11,11 +11,11 @@ class PostViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var postButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
-    
+    @IBOutlet weak var cancelButton: UIButton!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        backButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
         postButton.addTarget(self, action: #selector(postTask), for: .touchUpInside)
     }
     

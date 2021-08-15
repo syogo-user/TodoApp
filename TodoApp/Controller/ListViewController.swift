@@ -24,11 +24,7 @@ class ListViewController: UIViewController {
         taskAddButton.setImage(UIImage(systemName:"plus"), for: .normal)
         taskAddButton.tintColor = .white
         let nib = UINib(nibName: "ListTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: cellId)
-        
-        // TODO ログアウト機能を別で設ける
-        // ログアウトする
-//        try! Auth.auth().signOut()
+        tableView.register(nib, forCellReuseIdentifier: cellId)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,16 +32,6 @@ class ListViewController: UIViewController {
         guard let _ = Auth.auth().currentUser else { return }
         // タスクの一覧を取得
         taskRequest()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // currentUserがnilならログインしていない
-        if Auth.auth().currentUser == nil {
-            // ログインしていないときの処理
-            guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
-            loginVC.modalPresentationStyle = .fullScreen
-            self.present(loginVC, animated: true, completion: nil)
-        }
     }
     
     @objc private func taskAdd() {
