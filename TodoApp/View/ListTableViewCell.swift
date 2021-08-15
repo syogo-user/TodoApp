@@ -8,11 +8,10 @@
 import UIKit
 
 class ListTableViewCell: UITableViewCell {
-
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
-
     @IBOutlet weak var backView: UIStackView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backView.layer.cornerRadius = 5
@@ -22,9 +21,8 @@ class ListTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setData(_ task:Task){
+    func setData(_ task:Task) {
         self.titleLabel.text = task.title
         self.contentLabel.text = task.content
     }
-    
 }
