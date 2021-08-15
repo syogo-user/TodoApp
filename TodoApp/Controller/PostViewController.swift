@@ -8,35 +8,34 @@ import Firebase
 import UIKit
 
 class PostViewController: UIViewController {
-
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    var maxId = -1//現在のタスクIDの最大値
     
     override func viewDidLoad() {
         super.viewDidLoad()
         backButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
         postButton.addTarget(self, action: #selector(postTask), for: .touchUpInside)
     }
-    //タスクを登録する
-    @objc private func postTask(){
-        if (titleTextField.text == nil || contentTextView.text.isEmpty){
-            //TODO エラーのメッセージを出力
+    
+    // タスクを登録する
+    @objc private func postTask() {
+        if (titleTextField.text == nil || contentTextView.text.isEmpty) {
+            // TODO エラーのメッセージを出力
             return
         }
-        //ログインUIDを取得
-        guard let myUid = Auth.auth().currentUser?.uid else{return}
-        let task = Task(taskId: maxId + 1, title:titleTextField.text! , content: contentTextView.text)
-        API.shared.patchRequest(uid:myUid,task:task, type: Task.self) {
-            //登録後画面を閉じる
+        // ログインuserIDを取得
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let newTask = Task(title: titleTextField.text! , content: contentTextView.text)
+        API.shared.createTask(uid: uid, method: .post, type: Task.self, task:newTask) { _ in
+            // 登録/更新 完了後に画面を閉じる
             self.dissmiss()
         }
     }
     
-    //画面を閉じる
-    @objc private func dissmiss(){
+    // 画面を閉じる
+    @objc private func dissmiss() {
         self.dismiss(animated: true, completion: nil)
     }
 }

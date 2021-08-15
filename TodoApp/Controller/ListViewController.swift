@@ -8,13 +8,10 @@ import Firebase
 import UIKit
 
 class ListViewController: UIViewController {
-    
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var taskAddButton: UIButton!
-    
     let cellId = "cellId"
-    var taskList:[Task] = []
+    var taskList: [Task] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,59 +23,60 @@ class ListViewController: UIViewController {
         taskAddButton.addTarget(self, action: #selector(taskAdd), for: .touchUpInside)
         taskAddButton.setImage(UIImage(systemName:"plus"), for: .normal)
         taskAddButton.tintColor = .white
-        let nib = UINib(nibName:"ListTableViewCell", bundle: nil)
+        let nib = UINib(nibName: "ListTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         
-        //TODO ログアウト機能を別で設ける
+        // TODO ログアウト機能を別で設ける
         // ログアウトする
-        try! Auth.auth().signOut()
+//        try! Auth.auth().signOut()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let _ = Auth.auth().currentUser else{return}
-        //タスクの一覧を取得
+        guard let _ = Auth.auth().currentUser else { return }
+        // タスクの一覧を取得
         taskRequest()
-        
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         // currentUserがnilならログインしていない
         if Auth.auth().currentUser == nil {
             // ログインしていないときの処理
-            guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {return}
+            guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
             loginVC.modalPresentationStyle = .fullScreen
             self.present(loginVC, animated: true, completion: nil)
         }
     }
-    @objc private func taskAdd(){
-        //タスクのIdで最大値を検索
-        let maxId = taskList.map{$0.taskId}.max() ?? -1
-        //登録画面に遷移
-        guard let postVC = self.storyboard?.instantiateViewController(withIdentifier:"PostViewController") as? PostViewController else { return }
+    
+    @objc private func taskAdd() {
+        // 登録画面に遷移
+        guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostViewController") as? PostViewController else { return }
         postVC.modalPresentationStyle = .fullScreen
-        postVC.maxId = maxId
-        self.present(postVC,animated: true,completion:nil)
+        self.present(postVC,animated: true, completion: nil)
     }
     
     //タスクの一覧を取得
-    func taskRequest(){
-        //ログインUIDを取得
-        guard let myUid = Auth.auth().currentUser?.uid else{return}
-        //タスク一覧データを取得
-        API.shared.request(uid:myUid,type: [Task?].self) { (tasks) in
-            self.taskList = tasks.compactMap{$0} //nilを除外
-            print("self.taskList",self.taskList)
+    func taskRequest() {
+        self.taskList = []
+        self.tableView.reloadData()
+        // ログインUIDを取得
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        // タスク一覧データを取得
+        API.shared.getTasks(uid:uid,method:.get,type: TaskList.self) { tasks in
+            guard let taskList = tasks else { return }
+            self.taskList =  taskList.tasks
             DispatchQueue.main.async {
                 //メインスレッドにて実施
                 self.tableView.reloadData()
             }
-
         }
     }    
 }
+
 extension ListViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskList.count
+        return taskList.count 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,5 +85,17 @@ extension ListViewController:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)-> UITableViewCell.EditingStyle {
+        return .delete
+    }
     
+    // 削除ボタンが押されて時に呼ばれる
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // 削除
+        guard let uid = Auth.auth().currentUser?.uid else{return}
+        API.shared.deleteTask(uid: uid,method: .delete, deleteTaskId: taskList[indexPath.row].taskId,type: Task.self) { _ in
+            // タスク削除後に一覧を再取得
+            self.taskRequest()
+        }
+    }
 }
