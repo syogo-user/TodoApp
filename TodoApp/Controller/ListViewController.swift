@@ -92,8 +92,7 @@ extension ListViewController:UITableViewDelegate,UITableViewDataSource{
     // 削除ボタンが押されて時に呼ばれる
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // 削除
-        guard let uid = Auth.auth().currentUser?.uid else{return}
-        API.shared.deleteTask(uid: uid,method: .delete, deleteTaskId: taskList[indexPath.row].taskId,type: Task.self) { _ in
+        API.shared.deleteTask(method: .delete, deleteTaskId: taskList[indexPath.row].taskId,type: Task.self) { _ in
             // タスク削除後に一覧を再取得
             self.taskRequest()
         }

@@ -27,8 +27,8 @@ class PostViewController: UIViewController {
         }
         // ログインuserIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let newTask = Task(title: titleTextField.text! , content: contentTextView.text)
-        API.shared.createTask(uid: uid, method: .post, type: Task.self, task:newTask) { _ in
+        let newTask = Task(taskId: "", title: titleTextField.text! , content: contentTextView.text, uid: uid)
+        API.shared.createTask(method: .post, type: Task.self, task:newTask) { _ in
             // 登録/更新 完了後に画面を閉じる
             self.dissmiss()
         }

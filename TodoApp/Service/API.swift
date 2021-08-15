@@ -10,32 +10,39 @@ import Alamofire
 
 class API {
     static let shared = API()
-    private let baseUrl = "https://todoapp-7f440-default-rtdb.firebaseio.com/users/"
-    
+    private let baseUrl = "https://todoapp-7f440-default-rtdb.firebaseio.com/"
     // タスク一覧を取得
-    func getTasks<T: Decodable>(uid: String, method: HTTPMethod,type: T.Type, completion: @escaping (T?) -> Void) {
-        let url = baseUrl + uid + "/tasks.json"
-        request(url: url, method: method, parameter: nil, type: type, completion: completion)
+    func getTasks<T: Decodable>(uid: String, method: HTTPMethod, type: T.Type, completion: @escaping (T?) -> Void) {
+        let url = baseUrl + "tasks.json"
+        let parameters = [
+            "orderBy": #""uid""#,
+            "equalTo": #""\#(uid)""#
+        ]
+        let encoding: ParameterEncoding = URLEncoding(destination:.queryString)
+        request(url: url, method: method, parameter: parameters, encoding: encoding, type: type, completion: completion)
     }
     
     // タスクの作成
-    func createTask<T: Decodable>(uid: String,method: HTTPMethod, type: T.Type, task:Task, completion: @escaping (T?) -> Void) {
-        let url = baseUrl + uid + "/tasks.json"
+    func createTask<T: Decodable>(method: HTTPMethod, type: T.Type, task:Task, completion: @escaping (T?) -> Void) {
+        let url = baseUrl + "tasks.json"
         let parameters = [
-                "title": task.title,
-                "content":task.content
-            ]
-        request(url: url, method: method, parameter: parameters, type: type, completion: completion)
+            "title": task.title,
+            "content": task.content,
+            "uid": task.uid
+        ]
+        let encoding: ParameterEncoding = JSONEncoding.default
+        request(url: url, method: method, parameter: parameters, encoding: encoding, type: type, completion: completion)
     }
     
     // タスクの削除
-    func deleteTask<T: Decodable>(uid: String, method: HTTPMethod , deleteTaskId: String, type: T.Type, completion: @escaping (T?) -> Void) {
-        let url = baseUrl + uid + "/tasks/" + deleteTaskId + ".json"
-        request(url:url, method: method, parameter: nil, type: type, completion: completion)
+    func deleteTask<T: Decodable>(method: HTTPMethod , deleteTaskId: String, type: T.Type, completion: @escaping (T?) -> Void) {
+        let url = baseUrl + "tasks/" + deleteTaskId + ".json"
+        let encoding: ParameterEncoding = JSONEncoding.default
+        request(url:url, method: method, parameter: nil, encoding: encoding, type: type, completion: completion)
     }
     
-    private func request<T: Decodable>(url: String, method: HTTPMethod, parameter: [String:String]?, type: T.Type, completion: @escaping (T?) -> Void) {
-        let request = AF.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default)
+    private func request<T: Decodable>(url: String, method: HTTPMethod, parameter: [String:String]?, encoding: ParameterEncoding, type: T.Type, completion: @escaping (T?) -> Void) {
+        let request = AF.request(url, method: method, parameters: parameter, encoding: encoding)
         print("url:", url)
         request.responseJSON { response in
             guard let statusCode = response.response?.statusCode else { return }
