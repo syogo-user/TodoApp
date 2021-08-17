@@ -25,11 +25,12 @@ class API {
     // タスクの作成
     func createTask<T: Decodable>(method: HTTPMethod, type: T.Type, task:Task, completion: @escaping (T?) -> Void) {
         let url = baseUrl + "tasks.json"
-        let parameters = [
+        let parameters: [String:Any] = [
             "title": task.title,
             "content": task.content,
             "uid": task.uid,
-            "date": task.date
+            "date": task.date,
+            "order": task.order
         ]
         let encoding: ParameterEncoding = JSONEncoding.default
         request(url: url, method: method, parameter: parameters, encoding: encoding, type: type, completion: completion)
@@ -45,17 +46,18 @@ class API {
     // タスクの再投稿
     func putTask<T: Decodable>(method: HTTPMethod, type: T.Type, task:Task, completion: @escaping (T?) -> Void) {
         let url = baseUrl + "tasks/" + task.taskId + ".json"
-        let parameters = [
+        let parameters: [String:Any] = [
             "title": task.title,
             "content": task.content,
             "uid": task.uid,
-            "date": task.date
+            "date": task.date,
+            "order": task.order
         ]
         let encoding: ParameterEncoding = JSONEncoding.default
         request(url: url, method: method, parameter: parameters, encoding: encoding, type: type, completion: completion)
     }
     
-    private func request<T: Decodable>(url: String, method: HTTPMethod, parameter: [String:String]?, encoding: ParameterEncoding, type: T.Type, completion: @escaping (T?) -> Void) {
+    private func request<T: Decodable>(url: String, method: HTTPMethod, parameter: [String:Any]?, encoding: ParameterEncoding, type: T.Type, completion: @escaping (T?) -> Void) {
         let request = AF.request(url, method: method, parameters: parameter, encoding: encoding)
         print("url:", url)
         request.responseJSON { response in

@@ -26,12 +26,12 @@ class CommonDate {
          return holiday.judgeJapaneseHoliday(year: year, month: month, day: day)
      }
     
-    //曜日判定(日曜日:0 〜 土曜日:6)
-    static func getWeekIdx(_ date: Date) -> Int{
+    // 曜日判定(日曜日:0 〜 土曜日:6)
+    static func getWeekIdx(_ date: Date) -> Int {
         let tmpCalendar = Calendar(identifier: .gregorian)
         return tmpCalendar.component(.weekday, from: date) - 1
     }
-    //年月日を取得
+    // 年月日を取得
     static func getDay(_ date:Date) -> (Int,Int,Int){
         let tmpCalendar = Calendar(identifier: .gregorian)
         let year = tmpCalendar.component(.year, from: date)
@@ -40,7 +40,7 @@ class CommonDate {
         return (year,month,day)
     }
     
-    //Dateを時間なしの文字列に変換
+    // Dateを時間なしの文字列に変換
     static func dateFormat(date:Date?) -> String {
         var strDate:String = ""
         if let day = date {

@@ -38,6 +38,7 @@ class ListViewController: UIViewController {
     @objc private func taskAdd() {
         // 登録画面に遷移
         guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostViewController") as? PostViewController else { return }
+        postVC.maxOrderNo = taskList.map{ $0.order }.max() ?? -1
         postVC.modalPresentationStyle = .fullScreen
         self.present(postVC,animated: true, completion: nil)
     }
@@ -52,6 +53,16 @@ class ListViewController: UIViewController {
         API.shared.getTasks(uid:uid,method:.get, type: TaskList.self) { tasks in
             guard let taskList = tasks else { return }
             self.taskList =  taskList.tasks
+            //日付順に入れ替える
+            self.taskList.sort{ (d0 ,d1) -> Bool in
+                if d0.date == d1.date {
+                    //日付が同じ場合
+                    return d0.order < d1.order
+                } else {
+                    //日付が異なる場合
+                    return Int(d0.date) ?? 0  < Int(d1.date) ?? 0
+                }
+            }
             DispatchQueue.main.async {
                 //メインスレッドにて実施
                 self.tableView.reloadData()

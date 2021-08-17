@@ -12,7 +12,8 @@ class PostViewController: UIViewController {
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-        
+    var maxOrderNo = -1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cancelButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
@@ -28,7 +29,7 @@ class PostViewController: UIViewController {
         // ログインuserIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let selectDate = Date().dateFormat()
-        let newTask = Task(taskId: "", title: titleTextField.text! , content: contentTextView.text, uid: uid, date: selectDate)
+        let newTask = Task(taskId: "", title: titleTextField.text! , content: contentTextView.text, uid: uid, date: selectDate, order: maxOrderNo + 1)
         API.shared.createTask(method: .post, type: Task.self, task:newTask) { _ in
             // 登録/更新 完了後に画面を閉じる
             self.dissmiss()

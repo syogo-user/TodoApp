@@ -13,7 +13,7 @@ extension Date {
     func dateFormat() -> String {
         var strDate:String = ""
         let format  = DateFormatter()
-        format.dateFormat = "yyyy/MM/dd"
+        format.dateFormat = "yyyyMMdd"
         strDate = format.string(from:self)
         return strDate
     }
