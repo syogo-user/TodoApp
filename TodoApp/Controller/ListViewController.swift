@@ -49,7 +49,7 @@ class ListViewController: UIViewController {
         // ログインUIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // タスク一覧データを取得
-        API.shared.getTasks(uid:uid,method:.get,type: TaskList.self) { tasks in
+        API.shared.getTasks(uid:uid,method:.get, type: TaskList.self) { tasks in
             guard let taskList = tasks else { return }
             self.taskList =  taskList.tasks
             DispatchQueue.main.async {
@@ -60,7 +60,7 @@ class ListViewController: UIViewController {
     }    
 }
 
-extension ListViewController:UITableViewDelegate,UITableViewDataSource{
+extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskList.count 

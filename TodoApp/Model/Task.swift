@@ -17,12 +17,14 @@ struct Task: Decodable {
     var title: String
     var content: String
     var uid: String
+    var date: String
     
-    init(taskId: String, title: String, content: String ,uid: String) {
+    init(taskId: String, title: String, content: String ,uid: String, date: String) {
         self.taskId = taskId
         self.title = title
         self.content = content
         self.uid = uid
+        self.date = date
     }    
 }
 
@@ -40,6 +42,7 @@ extension TaskList: Decodable {
         static let title = CustomCodingKey(stringValue: "title")!
         static let content = CustomCodingKey(stringValue: "content")!
         static let uid = CustomCodingKey(stringValue: "uid")!
+        static let date = CustomCodingKey(stringValue: "date")!
     }
         
     init(from decoder: Decoder) throws {
@@ -51,7 +54,8 @@ extension TaskList: Decodable {
             let title = try tasksContainer.decode(String.self, forKey: .title)
             let content = try tasksContainer.decode(String.self, forKey: .content)
             let uid = try tasksContainer.decode(String.self, forKey: .uid)
-            self.tasks.append(Task(taskId: key.stringValue, title: title, content: content, uid: uid))
+            let date = try tasksContainer.decode(String.self, forKey: .date)
+            self.tasks.append(Task(taskId: key.stringValue, title: title, content: content, uid: uid, date: date))
         }
     }
 }

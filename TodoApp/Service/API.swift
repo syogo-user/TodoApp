@@ -28,7 +28,8 @@ class API {
         let parameters = [
             "title": task.title,
             "content": task.content,
-            "uid": task.uid
+            "uid": task.uid,
+            "date": task.date
         ]
         let encoding: ParameterEncoding = JSONEncoding.default
         request(url: url, method: method, parameter: parameters, encoding: encoding, type: type, completion: completion)
@@ -47,7 +48,8 @@ class API {
         let parameters = [
             "title": task.title,
             "content": task.content,
-            "uid": task.uid
+            "uid": task.uid,
+            "date": task.date
         ]
         let encoding: ParameterEncoding = JSONEncoding.default
         request(url: url, method: method, parameter: parameters, encoding: encoding, type: type, completion: completion)

@@ -9,4 +9,6 @@ target 'TodoApp' do
    pod 'Alamofire', '~> 5.4'
    pod 'Firebase'
    pod 'Firebase/Auth'
+   pod 'FSCalendar'
+   pod 'CalculateCalendarLogic'
 end
