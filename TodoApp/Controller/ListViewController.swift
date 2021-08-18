@@ -39,7 +39,6 @@ class ListViewController: UIViewController {
         // 登録画面に遷移
         guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostViewController") as? PostViewController else { return }
         postVC.maxOrderNo = taskList.map{ $0.order }.max() ?? -1
-        postVC.modalPresentationStyle = .fullScreen
         self.present(postVC,animated: true, completion: nil)
     }
     
