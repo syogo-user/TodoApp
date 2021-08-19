@@ -109,6 +109,7 @@
                     </view>
                     <connections>
                         <outlet property="inputContentView" destination="8tr-0w-SkD" id="siu-Ld-cyu"/>
+                        <outlet property="inputStackView" destination="Dpr-qX-GIR" id="MMc-Jd-e5z"/>
                         <outlet property="inputTitleTextField" destination="oBR-bq-c1Y" id="zh9-na-fYZ"/>
                         <outlet property="postButton" destination="JAo-MS-jjX" id="557-31-uNE"/>
                     </connections>

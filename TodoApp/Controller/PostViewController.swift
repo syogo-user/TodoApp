@@ -7,10 +7,11 @@
 import Firebase
 import UIKit
 
-class PostViewController: UIViewController {
+class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
     @IBOutlet weak var inputTitleTextField: UITextField!
     @IBOutlet weak var inputContentView: UITextView!
     @IBOutlet weak var postButton: UIButton!
+    @IBOutlet weak var inputStackView: UIStackView!
     var maxOrderNo = -1
     
     override func viewDidLoad() {
@@ -18,14 +19,17 @@ class PostViewController: UIViewController {
         self.inputTitleTextField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        postButton.addTarget(self, action: #selector(postTask), for: .touchUpInside)
+
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dissmiss))
         tapGesture.cancelsTouchesInView = false
+        tapGesture.delegate = self
         self.view.addGestureRecognizer(tapGesture)
+        postButton.addTarget(self, action: #selector(postTask), for: .touchUpInside)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //テキストエリアにカーソルを設定しキーボードを起動
         inputTitleTextField.becomeFirstResponder()
     }
 
@@ -70,12 +74,24 @@ class PostViewController: UIViewController {
         }
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        guard let view = touch.view else { return false}
+        // inputStackViewもしくはそのsubViewはgestureRecognizerを反応させない
+        if (view.isDescendant(of: inputStackView)) {
+            return false
+        }
+        return true
+    }
+    
     // 画面を閉じる
     @objc private func dissmiss() {
-        self.dismiss(animated: true){
-            // 閉じた後
-            // TODO　デリゲートを呼びタスク一覧を取得
-        }
+        //前画面でタスクの一覧を取得
+        let tabVC = self.presentingViewController as! TabBarController
+        let navVC =  tabVC.selectedViewController as! UINavigationController
+        let listVC = navVC.topViewController as! ListViewController
+        listVC.taskRequest()
+        
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
