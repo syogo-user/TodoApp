@@ -10,8 +10,8 @@ import UIKit
 class ListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var taskAddButton: UIButton!
-    let cellId = "cellId"
-    let toEditSegue = "toEdit"
+    private let cellId = "cellId"
+    private let toEditSegue = "toEdit"
     var taskList: [Task] = []
     
     override func viewDidLoad() {

@@ -10,16 +10,25 @@ import FirebaseAuth
 import FSCalendar
 import CalculateCalendarLogic
 
-class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+class CalendarViewController: UIViewController {
 
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var tableView: UITableView!
     private let weekList = ["日", "月", "火", "水", "木", "金", "土"]
+    private let cellId = "cellId"
+    private var selectDate = Date().dateFormat()
     var taskList :[Task] = []
-        
+    var calendarTaskList:[Task] = []
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         calendar.dataSource = self
         calendar.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        let nib = UINib(nibName: "ListTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,30 +61,40 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     //タスクの一覧を取得
     private func taskRequest() {
         taskList = []
+        self.tableView.reloadData()
         // ログインUIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // タスク一覧データを取得
         API.shared.getTasks(uid:uid,method:.get, type: TaskList.self) { tasks in
             guard let taskList = tasks else { return }
-            self.taskList =  taskList.tasks
+            self.calendarTaskList = taskList.tasks
+            // カレンダーにて選択した日付のタスクのみを抽出
+            self.taskList =  taskList.tasks.filter({ (task) -> Bool in
+                task.date == self.selectDate
+            })
             DispatchQueue.main.async {
                 //メインスレッドにて実施
                 self.calendar.reloadData()
+                self.tableView.reloadData()
             }
         }
     }
     
+    
+}
+
+extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     // 日付選択時の処理
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         // 選択した日付を取得
-        let strDate = CommonDate.dateFormat(date:date)
-        // TODO 選択した日付のタスクをカレンダー下に表示
+        selectDate = date.dateFormat()
+        taskRequest()
     }
-
+    
     // 土日の文字色を変える
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
         // 祝日判定をする（祝日は赤色で表示する）
-        if CommonDate.judgeHoliday(date){
+        if CommonDate.judgeHoliday(date) {
             return UIColor.red
         }
         // 土日の判定を行う（土曜日は青色、日曜日は赤色で表示する）
@@ -94,7 +113,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     // 日付下のマーク（点）の表示
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         var count = 0
-        for i in self.taskList {
+        for i in self.calendarTaskList {
             if i.date == date.dateFormat() {
                 count = count + 1
             }
@@ -103,15 +122,17 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     }
 }
 
-//extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-//
-//
-//}
+extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return taskList.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ListTableViewCell
+        cell.setData(taskList[indexPath.row])
+        return cell
+    }
+
+
+}

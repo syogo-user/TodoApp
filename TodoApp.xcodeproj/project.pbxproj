@@ -23,6 +23,7 @@
 		9197FBA026C900BC0023129D /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9197FB9F26C900BC0023129D /* Calendar.storyboard */; };
 		91A3AA5426CA9125003678F3 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3AA5326CA9125003678F3 /* CalendarViewController.swift */; };
 		91A3AA5926CB28DA003678F3 /* CommonDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3AA5826CB28DA003678F3 /* CommonDate.swift */; };
+		91A3AA6526CE6EBF003678F3 /* DateSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3AA6426CE6EBF003678F3 /* DateSelectViewController.swift */; };
 		91E5A84A26BFF8F600AD927C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91E5A84926BFF8F600AD927C /* GoogleService-Info.plist */; };
 		91E5A85C26C0000700AD927C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E5A85B26C0000700AD927C /* LoginViewController.swift */; };
 		91E5A85F26C0C7EC00AD927C /* AccountCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E5A85E26C0C7EC00AD927C /* AccountCreateViewController.swift */; };
@@ -52,6 +53,7 @@
 		9197FB9F26C900BC0023129D /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		91A3AA5326CA9125003678F3 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		91A3AA5826CB28DA003678F3 /* CommonDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDate.swift; sourceTree = "<group>"; };
+		91A3AA6426CE6EBF003678F3 /* DateSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectViewController.swift; sourceTree = "<group>"; };
 		91E5A84926BFF8F600AD927C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		91E5A85B26C0000700AD927C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		91E5A85E26C0C7EC00AD927C /* AccountCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreateViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				91E5A85E26C0C7EC00AD927C /* AccountCreateViewController.swift */,
 				91F9E85C26C90D7100EEA991 /* EditViewController.swift */,
 				91A3AA5326CA9125003678F3 /* CalendarViewController.swift */,
+				91A3AA6426CE6EBF003678F3 /* DateSelectViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				918FBC2026BD509B00C7276F /* ListTableViewCell.swift in Sources */,
 				918FBC2426BD50D800C7276F /* Task.swift in Sources */,
 				91E5A85F26C0C7EC00AD927C /* AccountCreateViewController.swift in Sources */,
+				91A3AA6526CE6EBF003678F3 /* DateSelectViewController.swift in Sources */,
 				91E5A85C26C0000700AD927C /* LoginViewController.swift in Sources */,
 				918FBC0426BD406D00C7276F /* SceneDelegate.swift in Sources */,
 				91A3AA5426CA9125003678F3 /* CalendarViewController.swift in Sources */,

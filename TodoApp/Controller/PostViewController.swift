@@ -11,7 +11,9 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
     @IBOutlet weak var inputTitleTextField: UITextField!
     @IBOutlet weak var inputContentView: UITextView!
     @IBOutlet weak var postButton: UIButton!
+    @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var inputStackView: UIStackView!
+    var selectDate = Date().dateFormat()
     var maxOrderNo = -1
     
     override func viewDidLoad() {
@@ -25,6 +27,7 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
         tapGesture.delegate = self
         self.view.addGestureRecognizer(tapGesture)
         postButton.addTarget(self, action: #selector(postTask), for: .touchUpInside)
+        dateButton.addTarget(self, action: #selector(dateSelect), for: .touchUpInside)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -66,12 +69,18 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
         }
         // ログインuserIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let selectDate = Date().dateFormat()
         let newTask = Task(taskId: "", title: inputTitleTextField.text! , content: inputContentView.text, uid: uid, date: selectDate, order: maxOrderNo + 1)
         API.shared.createTask(method: .post, type: Task.self, task:newTask) { _ in
             // 登録/更新 完了後に画面を閉じる
             self.dissmiss()
         }
+    }
+    
+    // 日付を選択
+    @objc private func dateSelect() {
+        // 画面遷移
+        guard let dateSelectVC = self.storyboard?.instantiateViewController(withIdentifier: "DateSelectViewController") as? DateSelectViewController else { return }
+        self.present(dateSelectVC,animated: true, completion: nil)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
