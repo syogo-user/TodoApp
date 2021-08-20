@@ -50,6 +50,7 @@ class DateSelectViewController: UIViewController {
             // 投稿画面へ戻る場合
             guard let postVC = presentingViewController as? PostViewController else { return }
             postVC.selectDate = selectDate
+            postVC.setDateButton()
         } else {
             // 編集画面へ戻る場合
             guard let navVC =  self.presentingViewController as? UINavigationController else { return }

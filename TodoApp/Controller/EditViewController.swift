@@ -26,7 +26,7 @@ class EditViewController: UIViewController {
         guard let task = self.task else { return }
         self.titleTextField.text = task.title
         self.contentTextView.text = task.content
-        dateButton.setTitle(task.date.dateJpFormat(), for: UIControl.State.normal)
+        dateButton.setTitle(task.date.dateJpFormat(), for: .normal)
     }    
     
     // 再投稿

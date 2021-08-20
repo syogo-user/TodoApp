@@ -29,6 +29,7 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
         postButton.addTarget(self, action: #selector(postTask), for: .touchUpInside)
         dateButton.addTarget(self, action: #selector(dateSelect), for: .touchUpInside)
         inputTitleTextField.borderStyle = .none
+        setDateButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -102,6 +103,11 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
         listVC.taskRequest()
         
         self.dismiss(animated: true, completion: nil)
+    }
+     
+    // 日付をボタンに設定
+    func setDateButton() {
+        dateButton.setTitle(selectDate.dateJpFormat(), for: .normal)
     }
 }
 
