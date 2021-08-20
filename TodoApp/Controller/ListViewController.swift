@@ -80,6 +80,10 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ListTableViewCell
         cell.setData(taskList[indexPath.row])
+        // セル選択時白色
+        let selectionView = UIView()
+        selectionView.backgroundColor = UIColor.white
+        cell.selectedBackgroundView = selectionView
         return cell
     }
     
