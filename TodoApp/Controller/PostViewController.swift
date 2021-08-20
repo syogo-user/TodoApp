@@ -21,14 +21,15 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
         self.inputTitleTextField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dissmiss))
         tapGesture.cancelsTouchesInView = false
         tapGesture.delegate = self
         self.view.addGestureRecognizer(tapGesture)
-        postButton.addTarget(self, action: #selector(postTask), for: .touchUpInside)
-        dateButton.addTarget(self, action: #selector(dateSelect), for: .touchUpInside)
-        inputTitleTextField.borderStyle = .none
+        self.postButton.addTarget(self, action: #selector(postTask), for: .touchUpInside)
+        self.dateButton.addTarget(self, action: #selector(dateSelect), for: .touchUpInside)
+        self.inputTitleTextField.borderStyle = .none
+        self.inputContentView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
+        self.inputContentView.sizeToFit()
         setDateButton()
     }
     

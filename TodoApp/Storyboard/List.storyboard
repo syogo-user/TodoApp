@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5CA-Ku-K0V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kUC-hi-YsB">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
@@ -39,9 +39,6 @@
                             <constraint firstItem="P65-yJ-YaI" firstAttribute="trailing" secondItem="zs6-Sc-BkT" secondAttribute="trailing" constant="50" id="zsj-K2-nEk"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="vQC-2d-oNK">
-                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
                     <navigationItem key="navigationItem" id="Fhq-1L-hqE"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -52,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDS-3f-E6b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2042.0289855072465" y="-250.44642857142856"/>
+            <point key="canvasLocation" x="2952.1739130434785" y="-250.44642857142856"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="O5e-jZ-pDl">
@@ -72,14 +69,19 @@
                                             <constraint firstAttribute="height" constant="5" id="5Ka-yX-PKU"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タイトル" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oBR-bq-c1Y">
-                                        <rect key="frame" x="0.0" y="10" width="414" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タイトル" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oBR-bq-c1Y" customClass="InputTitleTextField" customModule="TodoApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="10" width="414" height="36.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="point" keyPath="padding">
+                                                <point key="value" x="10" y="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8tr-0w-SkD" customClass="PlaceHolderTextView" customModule="TodoApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="49" width="414" height="76"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8tr-0w-SkD" customClass="InputContentTextView" customModule="TodoApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="51.5" width="414" height="73.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -268,27 +270,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="afw-O3-gUi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2936.2318840579715" y="-250.44642857142856"/>
+            <point key="canvasLocation" x="3846.376811594203" y="-250.44642857142856"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="3Pb-Hq-S9D">
+        <scene sceneID="eKk-6h-zho">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5CA-Ku-K0V" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kUC-hi-YsB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="vQC-2d-oNK">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="J6A-eh-8ax">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Cd-hQ-Qyv">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="9kU-3s-tBO" kind="relationship" relationship="rootViewController" id="YUV-oP-ATT"/>
+                        <segue destination="9kU-3s-tBO" kind="relationship" relationship="rootViewController" id="yov-hM-B3b"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1HW-Do-U70" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pYv-ZS-llp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1131.8840579710145" y="-250.44642857142856"/>
+            <point key="canvasLocation" x="2042.0289855072465" y="-250.44642857142856"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="oBR-bq-c1Y">
+            <size key="intrinsicContentSize" width="85.5" height="36.5"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

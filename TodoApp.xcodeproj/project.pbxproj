@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		914B70E326CFB0B800E6C8F8 /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B70E226CFB0B800E6C8F8 /* String+Extention.swift */; };
 		914B70E626CFCB6300E6C8F8 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B70E526CFCB6300E6C8F8 /* PlaceholderTextView.swift */; };
+		914B70E926CFDF6F00E6C8F8 /* InputTitleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B70E826CFDF6F00E6C8F8 /* InputTitleTextField.swift */; };
 		918FBC0226BD406D00C7276F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FBC0126BD406D00C7276F /* AppDelegate.swift */; };
 		918FBC0426BD406D00C7276F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FBC0326BD406D00C7276F /* SceneDelegate.swift */; };
 		918FBC0926BD406D00C7276F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 918FBC0726BD406D00C7276F /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 		6B3DCD4AA100272637902B75 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
 		914B70E226CFB0B800E6C8F8 /* String+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extention.swift"; sourceTree = "<group>"; };
 		914B70E526CFCB6300E6C8F8 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
+		914B70E826CFDF6F00E6C8F8 /* InputTitleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTitleTextField.swift; sourceTree = "<group>"; };
 		918FBBFE26BD406D00C7276F /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918FBC0126BD406D00C7276F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		918FBC0326BD406D00C7276F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			children = (
 				91A3AA5826CB28DA003678F3 /* CommonDate.swift */,
 				914B70E526CFCB6300E6C8F8 /* PlaceholderTextView.swift */,
+				914B70E826CFDF6F00E6C8F8 /* InputTitleTextField.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				918FBC0426BD406D00C7276F /* SceneDelegate.swift in Sources */,
 				91A3AA5426CA9125003678F3 /* CalendarViewController.swift in Sources */,
 				918FBC1C26BD412E00C7276F /* ListViewController.swift in Sources */,
+				914B70E926CFDF6F00E6C8F8 /* InputTitleTextField.swift in Sources */,
 				91A3AA5926CB28DA003678F3 /* CommonDate.swift in Sources */,
 				91F9E85D26C90D7100EEA991 /* EditViewController.swift in Sources */,
 				91F9E87126C9DCF200EEA991 /* Date+Extention.swift in Sources */,

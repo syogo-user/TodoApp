@@ -7,7 +7,7 @@
 
 import UIKit
 
-@IBDesignable class PlaceHolderTextView: UITextView {
+@IBDesignable class InputContentTextView: UITextView {
 
     @IBInspectable private var placeHolder: String = "" {
         willSet {
@@ -17,7 +17,7 @@ import UIKit
     }
 
     private lazy var placeHolderLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 2.0, y: 7.0, width: 0.0, height: 0.0))
+        let label = UILabel(frame: CGRect(x: 10.0, y: 7.0, width: 0.0, height: 0.0))
         label.lineBreakMode = .byTruncatingTail // 折り返しの種類
         label.numberOfLines = 0
         label.font = self.font
