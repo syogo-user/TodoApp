@@ -10,21 +10,24 @@ import UIKit
 class EditViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
-    var task:Task?
-            
+    @IBOutlet weak var dateButton: UIButton!
+    var task: Task?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         displayLayout()
+        dateButton.addTarget(self, action: #selector(dateSelect), for: .touchUpInside)
         let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(putTask))
         self.navigationItem.rightBarButtonItems = [editBarButtonItem]
     }
     
     // 画面レイアウト
-    private func displayLayout() {
+   func displayLayout() {
         guard let task = self.task else { return }
         self.titleTextField.text = task.title
         self.contentTextView.text = task.content
-    }
+        dateButton.setTitle(task.date, for: UIControl.State.normal)
+    }    
     
     // 再投稿
     @objc private func putTask() {
@@ -36,4 +39,12 @@ class EditViewController: UIViewController {
         }
     }
     
+    // 日付選択
+    @objc private func dateSelect() {
+        // 画面遷移
+        guard let dateSelectVC = self.storyboard?.instantiateViewController(withIdentifier: "DateSelectViewController") as? DateSelectViewController else { return }
+        guard let task = self.task else { return }
+        dateSelectVC.task = Task(taskId: task.taskId, title: self.titleTextField.text!, content: self.contentTextView.text, uid: task.uid, date: task.date, order: task.order)
+        self.present(dateSelectVC,animated: true, completion: nil)
+    }
 }

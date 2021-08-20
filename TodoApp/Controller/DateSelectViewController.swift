@@ -13,7 +13,7 @@ class DateSelectViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var decisionButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    private var selectDate: String = Date().dateFormat()
+    var task :Task?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +27,18 @@ class DateSelectViewController: UIViewController {
     
     // 日付決定
     @objc private func decision() {
-        guard let preVC = presentingViewController as? PostViewController else { return }
-        preVC.selectDate = selectDate
+        if presentingViewController is PostViewController {
+            // 投稿画面へ戻る場合
+            guard let postVC = presentingViewController as? PostViewController else { return }
+            guard let task = task else { return }
+            postVC.selectDate = task.date
+        } else {
+            // 編集画面へ戻る場合
+            guard let navVC =  self.presentingViewController as? UINavigationController else { return }
+            guard let editVC = navVC.topViewController as? EditViewController else { return }
+            editVC.task = self.task
+            editVC.displayLayout()
+        }
         dissmiss()
     }
     
@@ -43,7 +53,7 @@ extension DateSelectViewController: FSCalendarDelegate, FSCalendarDataSource, FS
     // 日付選択時の処理
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         // 選択した日付を取得
-        selectDate = date.dateFormat()
+        self.task?.date = date.dateFormat()
     }
     
     // 土日の文字色を変える
