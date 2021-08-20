@@ -16,7 +16,6 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
         taskAddButton.layer.cornerRadius = taskAddButton.bounds.width / 2
         taskAddButton.backgroundColor = .darkGray
         tableView.delegate = self

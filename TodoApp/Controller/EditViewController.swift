@@ -15,10 +15,13 @@ class EditViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        displayLayout()
         dateButton.addTarget(self, action: #selector(dateSelect), for: .touchUpInside)
+        contentTextView.layer.borderColor = UIColor.darkGray.cgColor
+        contentTextView.layer.borderWidth = 0.2
+        contentTextView.layer.cornerRadius = 5
         let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(putTask))
         self.navigationItem.rightBarButtonItems = [editBarButtonItem]
+        displayLayout()
     }
     
     // 画面レイアウト
