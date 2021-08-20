@@ -13,6 +13,7 @@ class DateSelectViewController: UIViewController {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var decisionButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    private var selectDate = Date().dateFormat()
     var task :Task?
     
     override func viewDidLoad() {
@@ -23,6 +24,22 @@ class DateSelectViewController: UIViewController {
         cancelButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
         //　カレンダーの設定
         CommonDate.layoutCalendar(calendar:self.calendar)
+        calendarSelect()
+    }
+    
+    // 初期日付を設定
+    private func calendarSelect(){
+        guard let task = self.task else { return }
+        let year = Int(String(task.date.prefix(4)))
+        // 5文字目の位置を指定
+        let startIndex = task.date.index(task.date.startIndex, offsetBy: 4)
+        // 6文字目の位置を指定
+        let endIndex = task.date.index(task.date.endIndex, offsetBy: -3)
+        let month = Int(String(task.date[startIndex...endIndex]))
+        let day = Int(String(task.date.suffix(2)))
+        let calendar = Calendar.current
+        let selectDate = calendar.date(from: DateComponents(year: year, month: month, day: day))
+        self.calendar.select(selectDate)
     }
     
     // 日付決定
@@ -30,8 +47,7 @@ class DateSelectViewController: UIViewController {
         if presentingViewController is PostViewController {
             // 投稿画面へ戻る場合
             guard let postVC = presentingViewController as? PostViewController else { return }
-            guard let task = task else { return }
-            postVC.selectDate = task.date
+            postVC.selectDate = selectDate
         } else {
             // 編集画面へ戻る場合
             guard let navVC =  self.presentingViewController as? UINavigationController else { return }
@@ -53,7 +69,13 @@ extension DateSelectViewController: FSCalendarDelegate, FSCalendarDataSource, FS
     // 日付選択時の処理
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         // 選択した日付を取得
-        self.task?.date = date.dateFormat()
+        if self.task != nil {
+            // タスクがnilの場合(投稿画面からの遷移)
+            self.task?.date = date.dateFormat()
+        } else {
+            // タスクがnilでない場合(編集画面からの遷移)
+            self.selectDate = date.dateFormat()
+        }
     }
     
     // 土日の文字色を変える
