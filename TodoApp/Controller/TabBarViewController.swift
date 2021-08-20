@@ -12,9 +12,6 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO ログアウト機能を別で設ける
-        // ログアウトする
-//        try! Auth.auth().signOut()
     }
     
     override func viewDidAppear(_ animated: Bool) {

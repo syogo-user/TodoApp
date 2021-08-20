@@ -30,6 +30,8 @@ class CalendarViewController: UIViewController {
         let nib = UINib(nibName: "ListTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.separatorStyle = .none
+        let settingBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "figure.walk"), style: .plain, target: self, action: #selector(logoutMenu))
+        self.navigationItem.rightBarButtonItems = [settingBarButtonItem]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,16 +65,34 @@ class CalendarViewController: UIViewController {
             }
         }
     }
-    
-    
+        
+    @objc private func logoutMenu() {
+        let dialog = UIAlertController(title: "ログアウトしてもよろしいでしょうか？", message: nil, preferredStyle: .actionSheet)
+        dialog.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            // ログアウト
+            try! Auth.auth().signOut()
+            // ログイン画面を表示する
+            let mainStoryboard =  UIStoryboard(name: "Main", bundle: nil)
+            guard let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: true, completion: nil)
+            // 左タブを選択
+            self.tabBarController?.selectedIndex = 0
+        }))
+        dialog.addAction(UIAlertAction(title: "キャンセル", style: .default, handler: nil))
+        self.present(dialog,animated: true,completion: nil)
+    }
 }
 
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     // 日付選択時の処理
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        // 選択した日付を取得
+        // 選択日付のタスクを取得
         selectDate = date.dateFormat()
-        taskRequest()
+        self.taskList = self.calendarTaskList.filter({ (task) -> Bool in
+            task.date == self.selectDate
+        })
+        self.tableView.reloadData()
     }
     
     // 土日の文字色を変える
