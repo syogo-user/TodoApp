@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		914B70E326CFB0B800E6C8F8 /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B70E226CFB0B800E6C8F8 /* String+Extention.swift */; };
 		918FBC0226BD406D00C7276F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FBC0126BD406D00C7276F /* AppDelegate.swift */; };
 		918FBC0426BD406D00C7276F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FBC0326BD406D00C7276F /* SceneDelegate.swift */; };
 		918FBC0926BD406D00C7276F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 918FBC0726BD406D00C7276F /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		69C73DBCB475EDE977C2BCFA /* Pods-TodoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.debug.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		6B3DCD4AA100272637902B75 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
+		914B70E226CFB0B800E6C8F8 /* String+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extention.swift"; sourceTree = "<group>"; };
 		918FBBFE26BD406D00C7276F /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918FBC0126BD406D00C7276F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		918FBC0326BD406D00C7276F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				91F9E87026C9DCF200EEA991 /* Date+Extention.swift */,
+				914B70E226CFB0B800E6C8F8 /* String+Extention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				918FBC2726BD638A00C7276F /* PostViewController.swift in Sources */,
+				914B70E326CFB0B800E6C8F8 /* String+Extention.swift in Sources */,
 				9197FB9C26C8F06C0023129D /* TabBarViewController.swift in Sources */,
 				918FBC0226BD406D00C7276F /* AppDelegate.swift in Sources */,
 				918FBC2026BD509B00C7276F /* ListTableViewCell.swift in Sources */,

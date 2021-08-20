@@ -24,10 +24,11 @@ class DateSelectViewController: UIViewController {
         cancelButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
         //　カレンダーの設定
         CommonDate.layoutCalendar(calendar:self.calendar)
+        // カレンダーの初期日付を設定
         calendarSelect()
     }
     
-    // 初期日付を設定
+    // 初期選択日付を設定
     private func calendarSelect(){
         guard let task = self.task else { return }
         let year = Int(String(task.date.prefix(4)))
@@ -39,6 +40,7 @@ class DateSelectViewController: UIViewController {
         let day = Int(String(task.date.suffix(2)))
         let calendar = Calendar.current
         let selectDate = calendar.date(from: DateComponents(year: year, month: month, day: day))
+        // カレンダーへ初期選択日付を設定
         self.calendar.select(selectDate)
     }
     

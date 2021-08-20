@@ -25,6 +25,6 @@ class ListTableViewCell: UITableViewCell {
     func setData(_ task:Task) {
         self.titleLabel.text = task.title
         self.contentLabel.text = task.content
-        self.dateLabel.text = task.date
+        self.dateLabel.text = task.date.dateJpFormat()
     }
 }

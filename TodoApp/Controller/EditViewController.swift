@@ -22,11 +22,11 @@ class EditViewController: UIViewController {
     }
     
     // 画面レイアウト
-   func displayLayout() {
+    func displayLayout() {
         guard let task = self.task else { return }
         self.titleTextField.text = task.title
         self.contentTextView.text = task.content
-        dateButton.setTitle(task.date, for: UIControl.State.normal)
+        dateButton.setTitle(task.date.dateJpFormat(), for: UIControl.State.normal)
     }    
     
     // 再投稿
