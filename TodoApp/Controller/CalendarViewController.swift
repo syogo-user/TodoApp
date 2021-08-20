@@ -14,7 +14,6 @@ class CalendarViewController: UIViewController {
 
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
-    private let weekList = ["日", "月", "火", "水", "木", "金", "土"]
     private let cellId = "cellId"
     private var selectDate = Date().dateFormat()
     var taskList :[Task] = []
@@ -23,12 +22,14 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        calendar.backgroundColor = .clear
         calendar.dataSource = self
         calendar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         let nib = UINib(nibName: "ListTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
+        tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,26 +37,9 @@ class CalendarViewController: UIViewController {
         // カレンダーのページを本日に設定
         calendar.currentPage = Date()
         //　カレンダーの設定
-        layoutCalendar()
+        CommonDate.layoutCalendar(calendar:self.calendar)
         //　タスク一覧を取得
         taskRequest()
-    }
-    
-    private func layoutCalendar(){
-        // カレンダー曜日設定
-        for (index,weekday) in calendar.calendarWeekdayView.weekdayLabels.enumerated() {
-            weekday.text = weekList[index]
-            if weekList[index] == weekList[0] {
-                // 日曜
-                weekday.textColor = UIColor.red
-            } else if weekList[index] == weekList[6] {
-                // 土曜
-                weekday.textColor = UIColor.blue
-            } else {
-                // 平日
-                weekday.textColor = UIColor.black
-            }
-        }
     }
     
     //タスクの一覧を取得

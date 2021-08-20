@@ -27,7 +27,7 @@ class EditViewController: UIViewController {
     }
     
     // 再投稿
-    @objc private func putTask(){
+    @objc private func putTask() {
         guard let task = self.task else { return }
         let putTask = Task(taskId: task.taskId, title: self.titleTextField.text! , content: self.contentTextView.text, uid: task.uid, date: task.date, order: task.order)
         API.shared.putTask(method: .put, type: Task.self, task: putTask) { _ in

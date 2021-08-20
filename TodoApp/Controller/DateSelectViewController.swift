@@ -21,7 +21,8 @@ class DateSelectViewController: UIViewController {
         calendar.delegate = self
         decisionButton.addTarget(self, action: #selector(decision), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
-        
+        //　カレンダーの設定
+        CommonDate.layoutCalendar(calendar:self.calendar)
     }
     
     // 日付決定
