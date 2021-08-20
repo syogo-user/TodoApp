@@ -137,6 +137,14 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setData(taskList[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 編集画面へ遷移
+        let listStoryboard =  UIStoryboard(name: "List", bundle: nil)
+        let editVC = listStoryboard.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
+        editVC.task = taskList[indexPath.row]
+        self.navigationController?.pushViewController(editVC, animated: true)
+    }
 
 
 }
