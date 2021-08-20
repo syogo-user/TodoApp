@@ -25,7 +25,8 @@ class ListViewController: UIViewController {
         taskAddButton.setImage(UIImage(systemName:"plus"), for: .normal)
         taskAddButton.tintColor = .white
         let nib = UINib(nibName: "ListTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: cellId)        
+        tableView.register(nib, forCellReuseIdentifier: cellId)
+        tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {

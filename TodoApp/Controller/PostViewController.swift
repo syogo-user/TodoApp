@@ -28,6 +28,7 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
         self.view.addGestureRecognizer(tapGesture)
         postButton.addTarget(self, action: #selector(postTask), for: .touchUpInside)
         dateButton.addTarget(self, action: #selector(dateSelect), for: .touchUpInside)
+        inputTitleTextField.borderStyle = .none
     }
     
     override func viewDidAppear(_ animated: Bool) {

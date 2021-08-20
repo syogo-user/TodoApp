@@ -182,7 +182,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LmJ-a5-170" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-737" y="360"/>
+            <point key="canvasLocation" x="-327" y="387"/>
         </scene>
         <!--Calendar-->
         <scene sceneID="G03-An-t4G">
@@ -192,7 +192,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oBL-zU-Kiu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="354"/>
+            <point key="canvasLocation" x="189" y="387"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7A8-VP-T2d">
