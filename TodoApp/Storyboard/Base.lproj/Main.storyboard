@@ -205,6 +205,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7R1-eR-MI0">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.68484627460000003" green="0.86206820100000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.66845135479999995" green="0.87697610209999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <connections>
                         <segue destination="LRT-CJ-FML" kind="relationship" relationship="rootViewController" id="Vlt-3b-cRX"/>
@@ -222,7 +224,9 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ert-ZP-KdB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.68484627460000003" green="0.86206820100000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="PN8-Q5-IJ3" kind="relationship" relationship="viewControllers" id="iI5-KY-EFR"/>

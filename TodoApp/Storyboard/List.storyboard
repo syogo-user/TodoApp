@@ -225,7 +225,7 @@
                                     </stackView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X1j-72-jad">
                                         <rect key="frame" x="0.0" y="50" width="374" height="40"/>
-                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="TvI-BV-MVY"/>
                                         </constraints>
@@ -243,7 +243,7 @@
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wjm-EA-GMR">
                                         <rect key="frame" x="0.0" y="140" width="374" height="200"/>
-                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="7yi-U9-V4t"/>
                                         </constraints>
@@ -255,7 +255,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hw3-RK-QPj"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.68484627460000003" green="0.86206820100000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="pDS-vI-3jm" firstAttribute="leading" secondItem="Hw3-RK-QPj" secondAttribute="leading" constant="20" id="7y6-l0-yNM"/>
                             <constraint firstItem="pDS-vI-3jm" firstAttribute="top" secondItem="Hw3-RK-QPj" secondAttribute="top" constant="20" id="Qdx-4e-Ny2"/>
