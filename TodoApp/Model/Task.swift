@@ -12,7 +12,7 @@ struct TaskList {
     var tasks : [Task] = []
 }
 
-struct Task: Decodable {
+struct Task: Decodable, Equatable {
     var taskId: String = ""
     var title: String
     var content: String

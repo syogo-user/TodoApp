@@ -86,12 +86,20 @@ PODS:
   - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.6.1)
+  - Mockingjay (3.0.0-alpha.1):
+    - Mockingjay/Core (= 3.0.0-alpha.1)
+    - Mockingjay/XCTest (= 3.0.0-alpha.1)
+  - Mockingjay/Core (3.0.0-alpha.1):
+    - URITemplate (~> 3.0)
+  - Mockingjay/XCTest (3.0.0-alpha.1):
+    - Mockingjay/Core
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - URITemplate (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.4)
@@ -99,6 +107,7 @@ DEPENDENCIES:
   - Firebase
   - Firebase/Auth
   - FSCalendar
+  - Mockingjay (= 3.0.0-alpha.1)
 
 SPEC REPOS:
   trunk:
@@ -115,8 +124,10 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - GTMSessionFetcher
+    - Mockingjay
     - nanopb
     - PromisesObjC
+    - URITemplate
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
@@ -132,9 +143,11 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
   GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
+  Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
 
-PODFILE CHECKSUM: 385f409b9a041c873b8cc3488748934f2a5828db
+PODFILE CHECKSUM: 9c58045ff9dac0296f3aae5192fea7b5987a560b
 
 COCOAPODS: 1.10.2

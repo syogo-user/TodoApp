@@ -9,6 +9,24 @@
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>
+		<key>TodoAppTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>918FBBFD26BD406D00C7276F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>91E3984326D1FC7000F410C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>

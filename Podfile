@@ -11,4 +11,12 @@ target 'TodoApp' do
    pod 'Firebase/Auth'
    pod 'FSCalendar'
    pod 'CalculateCalendarLogic'
+   
+   target 'TodoAppTests' do
+     inherit! :search_paths
+     # Pods for testing
+     pod 'Mockingjay','3.0.0-alpha.1'
+   end
+   
 end
+
