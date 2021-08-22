@@ -30,13 +30,13 @@ class CalendarViewController: UIViewController {
         let nib = UINib(nibName: "ListTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.separatorStyle = .none
-        let settingBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "figure.walk"), style: .plain, target: self, action: #selector(logoutMenu))
-        tabBarController?.navigationItem.rightBarButtonItems = [settingBarButtonItem]
-        tabBarController?.title = "Myカレンダー"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.title = "Myカレンダー"
+        let settingBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "figure.walk"), style: .plain, target: self, action: #selector(logoutMenu))
+        tabBarController?.navigationItem.rightBarButtonItems = [settingBarButtonItem]
         // カレンダーのページを本日に設定
         calendar.currentPage = Date()
         //　カレンダーの設定

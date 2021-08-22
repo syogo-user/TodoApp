@@ -26,11 +26,12 @@ class ListViewController: UIViewController {
         let nib = UINib(nibName: "ListTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.separatorStyle = .none
-        tabBarController?.title = "タスク一覧"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.title = "タスク一覧"
+        tabBarController?.navigationItem.rightBarButtonItems = []
         guard let _ = Auth.auth().currentUser else { return }
         // タスクの一覧を取得
         taskRequest()
