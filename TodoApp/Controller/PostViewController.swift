@@ -73,7 +73,7 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
         // ログインuserIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let newTask = Task(taskId: "", title: inputTitleTextField.text! , content: inputContentView.text, uid: uid, date: selectDate, order: maxOrderNo + 1)
-        API.shared.createTask(method: .post, type: Task.self, task:newTask) { _ in
+        API.shared.createTask(type: Task.self, task:newTask) { _ in
             // 登録/更新 完了後に画面を閉じる
             self.dissmiss()
         }

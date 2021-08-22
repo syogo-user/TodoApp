@@ -51,7 +51,7 @@ class ListViewController: UIViewController {
         // ログインUIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // タスク一覧データを取得
-        API.shared.getTasks(uid:uid,method:.get, type: TaskList.self) { tasks in
+        API.shared.getTasks(uid:uid, type: TaskList.self) { tasks in
             guard let taskList = tasks else { return }
             self.taskList =  taskList.tasks
             //日付順に入れ替える
@@ -100,7 +100,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     // 削除ボタンが押されて時に呼ばれる
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // 削除
-        API.shared.deleteTask(method: .delete, deleteTaskId: taskList[indexPath.row].taskId,type: Task.self) { _ in
+        API.shared.deleteTask(deleteTaskId: taskList[indexPath.row].taskId,type: Task.self) { _ in
             // タスク削除後に一覧を再取得
             self.taskRequest()
         }

@@ -12,18 +12,19 @@ class API {
     static let shared = API()
     private let baseUrl = "https://todoapp-7f440-default-rtdb.firebaseio.com/"
     // タスク一覧を取得
-    func getTasks<T: Decodable>(uid: String, method: HTTPMethod, type: T.Type, completion: @escaping (T?) -> Void) {
+    func getTasks<T: Decodable>(uid: String, type: T.Type, completion: @escaping (T?) -> Void) {
         let url = baseUrl + "tasks.json"
         let parameters = [
             "orderBy": #""uid""#,
             "equalTo": #""\#(uid)""#
         ]
+        let method = HTTPMethod.get
         let encoding: ParameterEncoding = URLEncoding(destination:.queryString)
         request(url: url, method: method, parameter: parameters, encoding: encoding, type: type, completion: completion)
     }
     
     // タスクの作成
-    func createTask<T: Decodable>(method: HTTPMethod, type: T.Type, task:Task, completion: @escaping (T?) -> Void) {
+    func createTask<T: Decodable>(type: T.Type, task:Task, completion: @escaping (T?) -> Void) {
         let url = baseUrl + "tasks.json"
         let parameters: [String:Any] = [
             "title": task.title,
@@ -32,19 +33,21 @@ class API {
             "date": task.date,
             "order": task.order
         ]
+        let method = HTTPMethod.post
         let encoding: ParameterEncoding = JSONEncoding.default
         request(url: url, method: method, parameter: parameters, encoding: encoding, type: type, completion: completion)
     }
     
     // タスクの削除
-    func deleteTask<T: Decodable>(method: HTTPMethod , deleteTaskId: String, type: T.Type, completion: @escaping (T?) -> Void) {
+    func deleteTask<T: Decodable>(deleteTaskId: String, type: T.Type, completion: @escaping (T?) -> Void) {
         let url = baseUrl + "tasks/" + deleteTaskId + ".json"
         let encoding: ParameterEncoding = JSONEncoding.default
+        let method = HTTPMethod.delete
         request(url:url, method: method, parameter: nil, encoding: encoding, type: type, completion: completion)
     }
     
     // タスクの再投稿
-    func putTask<T: Decodable>(method: HTTPMethod, type: T.Type, task:Task, completion: @escaping (T?) -> Void) {
+    func putTask<T: Decodable>(type: T.Type, task:Task, completion: @escaping (T?) -> Void) {
         let url = baseUrl + "tasks/" + task.taskId + ".json"
         let parameters: [String:Any] = [
             "title": task.title,
@@ -53,6 +56,7 @@ class API {
             "date": task.date,
             "order": task.order
         ]
+        let method = HTTPMethod.put
         let encoding: ParameterEncoding = JSONEncoding.default
         request(url: url, method: method, parameter: parameters, encoding: encoding, type: type, completion: completion)
     }

@@ -52,7 +52,7 @@ class CalendarViewController: UIViewController {
         // ログインUIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // タスク一覧データを取得
-        API.shared.getTasks(uid:uid,method:.get, type: TaskList.self) { tasks in
+        API.shared.getTasks(uid:uid, type: TaskList.self) { tasks in
             guard let taskList = tasks else { return }
             self.calendarTaskList = taskList.tasks
             // カレンダーにて選択した日付のタスクのみを抽出

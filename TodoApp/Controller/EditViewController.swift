@@ -36,7 +36,7 @@ class EditViewController: UIViewController {
     @objc private func putTask() {
         guard let task = self.task else { return }
         let putTask = Task(taskId: task.taskId, title: self.titleTextField.text! , content: self.contentTextView.text, uid: task.uid, date: task.date, order: task.order)
-        API.shared.putTask(method: .put, type: Task.self, task: putTask) { _ in
+        API.shared.putTask(type: Task.self, task: putTask) { _ in
             // 画面を戻る
             self.navigationController?.popViewController(animated: true)
         }
