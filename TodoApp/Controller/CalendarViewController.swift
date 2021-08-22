@@ -31,7 +31,8 @@ class CalendarViewController: UIViewController {
         tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.separatorStyle = .none
         let settingBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "figure.walk"), style: .plain, target: self, action: #selector(logoutMenu))
-        self.navigationItem.rightBarButtonItems = [settingBarButtonItem]
+        tabBarController?.navigationItem.rightBarButtonItems = [settingBarButtonItem]
+        tabBarController?.title = "Myカレンダー"
     }
     
     override func viewWillAppear(_ animated: Bool) {

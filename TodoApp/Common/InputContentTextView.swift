@@ -1,5 +1,5 @@
 //
-//  PlaceholderTextView.swift
+//  InputContentTextView.swift
 //  TodoApp
 //
 //  Created by 小野寺祥吾 on 2021/08/20.
@@ -18,7 +18,7 @@ import UIKit
 
     private lazy var placeHolderLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 10.0, y: 7.0, width: 0.0, height: 0.0))
-        label.lineBreakMode = .byTruncatingTail // 折り返しの種類
+        label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 0
         label.font = self.font
         label.textColor = .lightGray

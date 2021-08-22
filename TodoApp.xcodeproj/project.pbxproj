@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		914B70E326CFB0B800E6C8F8 /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B70E226CFB0B800E6C8F8 /* String+Extention.swift */; };
-		914B70E626CFCB6300E6C8F8 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B70E526CFCB6300E6C8F8 /* PlaceholderTextView.swift */; };
+		914B70E626CFCB6300E6C8F8 /* InputContentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B70E526CFCB6300E6C8F8 /* InputContentTextView.swift */; };
 		914B70E926CFDF6F00E6C8F8 /* InputTitleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B70E826CFDF6F00E6C8F8 /* InputTitleTextField.swift */; };
 		918FBC0226BD406D00C7276F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FBC0126BD406D00C7276F /* AppDelegate.swift */; };
 		918FBC0426BD406D00C7276F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FBC0326BD406D00C7276F /* SceneDelegate.swift */; };
@@ -39,7 +39,7 @@
 		69C73DBCB475EDE977C2BCFA /* Pods-TodoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.debug.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		6B3DCD4AA100272637902B75 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
 		914B70E226CFB0B800E6C8F8 /* String+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extention.swift"; sourceTree = "<group>"; };
-		914B70E526CFCB6300E6C8F8 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
+		914B70E526CFCB6300E6C8F8 /* InputContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentTextView.swift; sourceTree = "<group>"; };
 		914B70E826CFDF6F00E6C8F8 /* InputTitleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTitleTextField.swift; sourceTree = "<group>"; };
 		918FBBFE26BD406D00C7276F /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918FBC0126BD406D00C7276F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				91A3AA5826CB28DA003678F3 /* CommonDate.swift */,
-				914B70E526CFCB6300E6C8F8 /* PlaceholderTextView.swift */,
+				914B70E526CFCB6300E6C8F8 /* InputContentTextView.swift */,
 				914B70E826CFDF6F00E6C8F8 /* InputTitleTextField.swift */,
 			);
 			path = Common;
@@ -328,7 +328,7 @@
 				918FBC0226BD406D00C7276F /* AppDelegate.swift in Sources */,
 				918FBC2026BD509B00C7276F /* ListTableViewCell.swift in Sources */,
 				918FBC2426BD50D800C7276F /* Task.swift in Sources */,
-				914B70E626CFCB6300E6C8F8 /* PlaceholderTextView.swift in Sources */,
+				914B70E626CFCB6300E6C8F8 /* InputContentTextView.swift in Sources */,
 				91E5A85F26C0C7EC00AD927C /* AccountCreateViewController.swift in Sources */,
 				91A3AA6526CE6EBF003678F3 /* DateSelectViewController.swift in Sources */,
 				91E5A85C26C0000700AD927C /* LoginViewController.swift in Sources */,

@@ -98,9 +98,9 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
     // 画面を閉じる
     @objc private func dissmiss() {
         //前画面でタスクの一覧を取得
-        let tabVC = self.presentingViewController as! TabBarController
-        let navVC =  tabVC.selectedViewController as! UINavigationController
-        let listVC = navVC.topViewController as! ListViewController
+        guard let navVC =  self.presentingViewController as? UINavigationController else { return }
+        guard let tabVC = navVC.topViewController as? TabBarController else { return }
+        guard let listVC = tabVC.selectedViewController as? ListViewController  else { return }
         listVC.taskRequest()
         
         self.dismiss(animated: true, completion: nil)
