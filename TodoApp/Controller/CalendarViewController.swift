@@ -41,7 +41,7 @@ class CalendarViewController: UIViewController {
         // カレンダーのページを本日に設定
         self.calendar.currentPage = Date()
         //　カレンダーの設定
-        CommonDate.layoutCalendar(calendar:self.calendar)
+        self.calendar.layoutCalendar()
         //　タスク一覧を取得
         taskRequest()
     }
@@ -104,11 +104,11 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
     // 土日の文字色を変える
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
         // 祝日判定をする（祝日は赤色で表示する）
-        if CommonDate.judgeHoliday(date) {
+        if calendar.judgeHoliday(date) {
             return UIColor.red
         }
         // 土日の判定を行う（土曜日は青色、日曜日は赤色で表示する）
-        let weekday = CommonDate.getWeekIdx(date)
+        let weekday = calendar.getWeekIdx(date)
         if weekday == 0 {
             // 日曜日
             return UIColor.red

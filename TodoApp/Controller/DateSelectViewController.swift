@@ -22,7 +22,8 @@ class DateSelectViewController: UIViewController {
         self.decisionButton.addTarget(self, action: #selector(decision), for: .touchUpInside)
         self.cancelButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
         //　カレンダーの曜日設定
-        CommonDate.layoutCalendar(calendar:self.calendar)
+//        CommonDate.layoutCalendar(calendar:self.calendar)
+        self.calendar.layoutCalendar()
         // カレンダーの初期日付を設定
         calendarSelect()
     }
@@ -83,11 +84,11 @@ extension DateSelectViewController: FSCalendarDelegate, FSCalendarDataSource, FS
     // 土日の文字色を変える
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
         // 祝日判定をする（祝日は赤色で表示する）
-        if CommonDate.judgeHoliday(date) {
+        if calendar.judgeHoliday(date) {
             return UIColor.red
         }
         // 土日の判定を行う（土曜日は青色、日曜日は赤色で表示する）
-        let weekday = CommonDate.getWeekIdx(date)
+        let weekday = calendar.getWeekIdx(date)
         if weekday == 0 {
             // 日曜日
             return UIColor.red
