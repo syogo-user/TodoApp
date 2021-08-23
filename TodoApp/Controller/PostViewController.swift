@@ -6,6 +6,7 @@
 //
 import Firebase
 import UIKit
+import SVProgressHUD
 
 class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
     @IBOutlet weak var inputTitleTextField: UITextField!
@@ -18,25 +19,25 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.inputTitleTextField.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dissmiss))
         tapGesture.cancelsTouchesInView = false
         tapGesture.delegate = self
         self.view.addGestureRecognizer(tapGesture)
         self.postButton.addTarget(self, action: #selector(postTask), for: .touchUpInside)
         self.dateButton.addTarget(self, action: #selector(dateSelect), for: .touchUpInside)
+        self.inputTitleTextField.delegate = self
         self.inputTitleTextField.borderStyle = .none
         self.inputContentView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
         self.inputContentView.sizeToFit()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         setDateButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //テキストエリアにカーソルを設定しキーボードを起動
-        inputTitleTextField.becomeFirstResponder()
+        self.inputTitleTextField.becomeFirstResponder()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -66,14 +67,17 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
         
     // タスクを登録する
     @objc private func postTask() {
-        if (inputTitleTextField.text == nil || inputContentView.text.isEmpty) {
-            // TODO エラーのメッセージを出力
+        // 入力チェック
+        if validate() {
             return
         }
+        // ローディング表示
+        SVProgressHUD.show()
         // ログインuserIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let newTask = Task(taskId: "", title: inputTitleTextField.text! , content: inputContentView.text, uid: uid, date: selectDate, order: maxOrderNo + 1)
+        let newTask = Task(taskId: "", title: self.inputTitleTextField.text! , content: self.inputContentView.text, uid: uid, date: self.selectDate, order: self.maxOrderNo + 1)
         API.shared.createTask(type: Task.self, task:newTask) { _ in
+            SVProgressHUD.dismiss()
             // 登録/更新 完了後に画面を閉じる
             self.dissmiss()
         }
@@ -86,15 +90,6 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
         self.present(dateSelectVC,animated: true, completion: nil)
     }
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        guard let view = touch.view else { return false}
-        // inputStackViewもしくはそのsubViewはgestureRecognizerを反応させない
-        if (view.isDescendant(of: inputStackView)) {
-            return false
-        }
-        return true
-    }
-    
     // 画面を閉じる
     @objc private func dissmiss() {
         //前画面でタスクの一覧を取得
@@ -102,13 +97,31 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
         guard let tabVC = navVC.topViewController as? TabBarController else { return }
         guard let listVC = tabVC.selectedViewController as? ListViewController  else { return }
         listVC.taskRequest()
-        
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // 入力チェック
+    private func validate() -> Bool {
+        if self.inputTitleTextField.text!.isEmpty || self.inputContentView.text.isEmpty {
+            SVProgressHUD.showError(withStatus: Const.Message6)
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        guard let view = touch.view else { return false}
+        // inputStackViewもしくはそのsubViewはgestureRecognizerを反応させない
+        if (view.isDescendant(of: self.inputStackView)) {
+            return false
+        }
+        return true
     }
      
     // 日付をボタンに設定
     func setDateButton() {
-        dateButton.setTitle(selectDate.dateJpFormat(), for: .normal)
+        self.dateButton.setTitle(selectDate.dateJpFormat(), for: .normal)
     }
 }
 

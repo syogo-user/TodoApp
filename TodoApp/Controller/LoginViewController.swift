@@ -7,6 +7,8 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
+
 class LoginViewController: UIViewController {
     @IBOutlet weak var mailAddressTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -15,24 +17,26 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mailAddressTextField.attributedPlaceholder = NSAttributedString(string: "メールアドレス", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: "パスワード", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
-        createAccountButton.addTarget(self, action: #selector(createAccount), for: .touchUpInside)
+        self.mailAddressTextField.attributedPlaceholder = NSAttributedString(string: "メールアドレス", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "パスワード", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        self.loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
+        self.createAccountButton.addTarget(self, action: #selector(createAccount), for: .touchUpInside)
     }
     
     @objc private func login() {
         guard let address = mailAddressTextField.text, let password = passwordTextField.text else { return }
-        // アドレスとパスワード名のいずれかでも入力されていない時は何もしない
-        if address.isEmpty || password.isEmpty {
-            // TODO メッセージ表示
+        // 入力チェック
+        if validate(address: address, password: password) {
             return
         }
+        // ローディング表示
+        SVProgressHUD.show()
         Auth.auth().signIn(withEmail: address, password: password) { authResult, error in
-            if error != nil {
-                // TODO エラーメッセージ表示
+            if let error = error {
+                SVProgressHUD.showError(withStatus: Const.Message8 + "\(error)")
                 return
             }
+            SVProgressHUD.dismiss()
             // 画面を閉じる
             self.dismiss(animated: true, completion: nil)
         }
@@ -46,4 +50,25 @@ class LoginViewController: UIViewController {
         accountCreateViewController.modalPresentationStyle = .fullScreen
         self.present(accountCreateViewController, animated: true, completion: nil)
     }
+        
+    private func validate(address: String, password: String) -> Bool {
+        // 空欄チェック
+        if address.isEmpty || password.isEmpty {
+            SVProgressHUD.showError(withStatus: Const.Message5)
+            return true
+        }
+        //メールアドレスチェック
+        if !address.mailAddressFormatCheck() {
+            SVProgressHUD.showError(withStatus: Const.Message2)
+            return true
+        }
+        // パスワード文字数
+        if password.count < 6 {
+            SVProgressHUD.showError(withStatus: Const.Message3)
+            return true
+        }
+        // エラーがない場合 falseを返却
+        return false
+    }
+
 }

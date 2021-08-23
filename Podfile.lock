@@ -99,6 +99,7 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - SVProgressHUD (2.2.5)
   - URITemplate (3.0.0)
 
 DEPENDENCIES:
@@ -108,6 +109,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - FSCalendar
   - Mockingjay (= 3.0.0-alpha.1)
+  - SVProgressHUD
 
 SPEC REPOS:
   trunk:
@@ -127,6 +129,7 @@ SPEC REPOS:
     - Mockingjay
     - nanopb
     - PromisesObjC
+    - SVProgressHUD
     - URITemplate
 
 SPEC CHECKSUMS:
@@ -146,8 +149,9 @@ SPEC CHECKSUMS:
   Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
 
-PODFILE CHECKSUM: 9c58045ff9dac0296f3aae5192fea7b5987a560b
+PODFILE CHECKSUM: 46515b57c4558c92e59541c2f6fe4ba21e60d8de
 
 COCOAPODS: 1.10.2

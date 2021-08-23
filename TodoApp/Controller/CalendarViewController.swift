@@ -9,6 +9,7 @@ import UIKit
 import FirebaseAuth
 import FSCalendar
 import CalculateCalendarLogic
+import SVProgressHUD
 
 class CalendarViewController: UIViewController {
 
@@ -22,23 +23,23 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendar.backgroundColor = .clear
-        calendar.dataSource = self
-        calendar.delegate = self
-        tableView.delegate = self
-        tableView.dataSource = self
+        self.calendar.backgroundColor = .clear
+        self.calendar.dataSource = self
+        self.calendar.delegate = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         let nib = UINib(nibName: "ListTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: cellId)
-        tableView.separatorStyle = .none
+        self.tableView.register(nib, forCellReuseIdentifier: cellId)
+        self.tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.title = "Myカレンダー"
         let settingBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "figure.walk"), style: .plain, target: self, action: #selector(logoutMenu))
         tabBarController?.navigationItem.rightBarButtonItems = [settingBarButtonItem]
+        tabBarController?.title = "Myカレンダー"
         // カレンダーのページを本日に設定
-        calendar.currentPage = Date()
+        self.calendar.currentPage = Date()
         //　カレンダーの設定
         CommonDate.layoutCalendar(calendar:self.calendar)
         //　タスク一覧を取得
@@ -47,8 +48,9 @@ class CalendarViewController: UIViewController {
     
     //タスクの一覧を取得
     private func taskRequest() {
-        taskList = []
+        self.taskList = []
         self.tableView.reloadData()
+        SVProgressHUD.show()
         // ログインUIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // タスク一覧データを取得
@@ -63,13 +65,15 @@ class CalendarViewController: UIViewController {
                 //メインスレッドにて実施
                 self.calendar.reloadData()
                 self.tableView.reloadData()
+                SVProgressHUD.dismiss()
             }
         }
     }
         
     @objc private func logoutMenu() {
-        let dialog = UIAlertController(title: "ログアウトしてもよろしいでしょうか？", message: nil, preferredStyle: .actionSheet)
+        let dialog = UIAlertController(title: Const.Message7, message: nil, preferredStyle: .actionSheet)
         dialog.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            SVProgressHUD.show()
             // ログアウト
             try! Auth.auth().signOut()
             // ログイン画面を表示する
@@ -79,6 +83,7 @@ class CalendarViewController: UIViewController {
             self.present(loginVC, animated: true, completion: nil)
             // 左タブを選択
             self.tabBarController?.selectedIndex = 0
+            SVProgressHUD.dismiss()
         }))
         dialog.addAction(UIAlertAction(title: "キャンセル", style: .default, handler: nil))
         self.present(dialog,animated: true,completion: nil)
@@ -89,7 +94,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
     // 日付選択時の処理
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         // 選択日付のタスクを取得
-        selectDate = date.dateFormat()
+        self.selectDate = date.dateFormat()
         self.taskList = self.calendarTaskList.filter({ (task) -> Bool in
             task.date == self.selectDate
         })
@@ -130,7 +135,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return taskList.count
+        return self.taskList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

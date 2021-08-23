@@ -9,7 +9,6 @@ import UIKit
 import FSCalendar
 
 class DateSelectViewController: UIViewController {
-
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var decisionButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -18,11 +17,11 @@ class DateSelectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendar.dataSource = self
-        calendar.delegate = self
-        decisionButton.addTarget(self, action: #selector(decision), for: .touchUpInside)
-        cancelButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
-        //　カレンダーの設定
+        self.calendar.dataSource = self
+        self.calendar.delegate = self
+        self.decisionButton.addTarget(self, action: #selector(decision), for: .touchUpInside)
+        self.cancelButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
+        //　カレンダーの曜日設定
         CommonDate.layoutCalendar(calendar:self.calendar)
         // カレンダーの初期日付を設定
         calendarSelect()
@@ -49,7 +48,7 @@ class DateSelectViewController: UIViewController {
         if presentingViewController is PostViewController {
             // 投稿画面へ戻る場合
             guard let postVC = presentingViewController as? PostViewController else { return }
-            postVC.selectDate = selectDate
+            postVC.selectDate = self.selectDate
             postVC.setDateButton()
         } else {
             // 編集画面へ戻る場合

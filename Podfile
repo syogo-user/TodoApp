@@ -11,6 +11,7 @@ target 'TodoApp' do
    pod 'Firebase/Auth'
    pod 'FSCalendar'
    pod 'CalculateCalendarLogic'
+   pod 'SVProgressHUD'
    
    target 'TodoAppTests' do
      inherit! :search_paths

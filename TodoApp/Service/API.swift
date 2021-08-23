@@ -7,10 +7,12 @@
 
 import Foundation
 import Alamofire
+import SVProgressHUD
 
 class API {
-    static let shared = API()
     private let baseUrl = "https://todoapp-7f440-default-rtdb.firebaseio.com/"
+    static let shared = API()
+    
     // タスク一覧を取得
     func getTasks<T: Decodable>(uid: String, type: T.Type, completion: @escaping (T?) -> Void) {
         let url = baseUrl + "tasks.json"
@@ -68,16 +70,19 @@ class API {
             guard let statusCode = response.response?.statusCode else { return }
             var value: T?
             if statusCode / 100 == 2 {
-                // リクエストコードが200番台(リクエスト成功)
+                // ステータスコードが200番台(リクエスト成功)
                 if method == .get {
                     do {
                         guard let data = response.data else { return }
                         let decorder = JSONDecoder()
                         value = try decorder.decode(T.self, from: data)
                     } catch {
-                        print("Jsonの変換に失敗しました:", error)
+                        SVProgressHUD.showError(withStatus: Const.Message11 + "\(error)")
                     }
                 }
+            } else {
+                // ステータスコードが200番台以外(リクエスト失敗)
+                SVProgressHUD.showError(withStatus: Const.Message12 + "\(statusCode)")
             }
             // コールバック
             completion(value)

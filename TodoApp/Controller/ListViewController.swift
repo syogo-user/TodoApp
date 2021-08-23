@@ -6,6 +6,7 @@
 //
 import Firebase
 import UIKit
+import SVProgressHUD
 
 class ListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -16,22 +17,22 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        taskAddButton.layer.cornerRadius = taskAddButton.bounds.width / 2
-        taskAddButton.backgroundColor = .darkGray
-        tableView.delegate = self
-        tableView.dataSource = self
-        taskAddButton.addTarget(self, action: #selector(taskAdd), for: .touchUpInside)
-        taskAddButton.setImage(UIImage(systemName:"plus"), for: .normal)
-        taskAddButton.tintColor = .white
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.taskAddButton.layer.cornerRadius = taskAddButton.bounds.width / 2
+        self.taskAddButton.backgroundColor = .darkGray
+        self.taskAddButton.addTarget(self, action: #selector(taskAdd), for: .touchUpInside)
+        self.taskAddButton.setImage(UIImage(systemName:"plus"), for: .normal)
+        self.taskAddButton.tintColor = .white
         let nib = UINib(nibName: "ListTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: cellId)
-        tableView.separatorStyle = .none
+        self.tableView.register(nib, forCellReuseIdentifier: cellId)
+        self.tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.title = "タスク一覧"
         tabBarController?.navigationItem.rightBarButtonItems = []
+        tabBarController?.title = "タスク一覧"
         guard let _ = Auth.auth().currentUser else { return }
         // タスクの一覧を取得
         taskRequest()
@@ -50,6 +51,7 @@ class ListViewController: UIViewController {
         self.tableView.reloadData()
         // ログインUIDを取得
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        SVProgressHUD.show()
         // タスク一覧データを取得
         API.shared.getTasks(uid:uid, type: TaskList.self) { tasks in
             guard let taskList = tasks else { return }
@@ -67,6 +69,7 @@ class ListViewController: UIViewController {
             DispatchQueue.main.async {
                 //メインスレッドにて実施
                 self.tableView.reloadData()
+                SVProgressHUD.dismiss()
             }
         }
     }    
@@ -75,12 +78,12 @@ class ListViewController: UIViewController {
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskList.count 
+        return self.taskList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ListTableViewCell
-        cell.setData(taskList[indexPath.row])
+        cell.setData(self.taskList[indexPath.row])
         // セル選択時白色
         let selectionView = UIView()
         selectionView.backgroundColor = UIColor.white
@@ -100,9 +103,11 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     // 削除ボタンが押されて時に呼ばれる
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // 削除
+        SVProgressHUD.show()
         API.shared.deleteTask(deleteTaskId: taskList[indexPath.row].taskId,type: Task.self) { _ in
             // タスク削除後に一覧を再取得
             self.taskRequest()
+            SVProgressHUD.dismiss()
         }
     }
     

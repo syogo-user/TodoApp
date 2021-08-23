@@ -124,6 +124,7 @@
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="メールアドレス" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rPx-XD-U5a">
                                         <rect key="frame" x="0.0" y="67" width="304" height="40"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="login_email_testfield"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="kh9-4d-CPr"/>
                                         </constraints>
@@ -133,6 +134,7 @@
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SOY-TA-1KA">
                                         <rect key="frame" x="0.0" y="127" width="304" height="40"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="login_password_testfield"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="DDi-7q-Bri"/>
                                         </constraints>
@@ -142,6 +144,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiC-es-tLh">
                                         <rect key="frame" x="0.0" y="187" width="304" height="36.5"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="login_button"/>
                                         <state key="normal" title="ログイン">
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>

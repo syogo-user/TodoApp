@@ -7,6 +7,8 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
+
 class AccountCreateViewController: UIViewController {
     @IBOutlet weak var mailAddressTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -19,14 +21,17 @@ class AccountCreateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        newAccountCreateButton.addTarget(self, action: #selector(createAccount), for: .touchUpInside)
-        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-        
-        if !mailAddress.isEmpty {
+        self.newAccountCreateButton.addTarget(self, action: #selector(createAccount), for: .touchUpInside)
+        self.cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        setDisplay()
+    }
+    
+    private func setDisplay() {
+        if !self.mailAddress.isEmpty {
             // 画面遷移時メールアドレスが入力されている場合
             self.mailAddressTextField.text = mailAddress
         }
-        if !password.isEmpty {
+        if !self.password.isEmpty {
             // 画面遷移時パスワードが入力されている場合
             self.passwordTextField.text = password
         }
@@ -36,10 +41,15 @@ class AccountCreateViewController: UIViewController {
     @objc private func createAccount() {
         guard let address = mailAddressTextField.text, let password = passwordTextField.text,
               let passwordCheck = passwordCheckTextField.text, let displayName = nickNameTextField.text else { return }
-            
+        // 入力チェック
+        if validate(address: address, password: password, passwordCheck: passwordCheck, displayName: displayName) {
+            return
+        }
+        // ローディング表示
+        SVProgressHUD.show()
         Auth.auth().createUser(withEmail: address, password: password) { authResult, error in
-            if error != nil {
-                // TODO エラーメッセージ
+            if let error = error {
+                SVProgressHUD.showError(withStatus: Const.Message9 + "\(error)")
                 return
             }            
             // 表示名を設定する
@@ -50,20 +60,46 @@ class AccountCreateViewController: UIViewController {
                 let trimDisplayName = displayName.trimmingCharacters(in: .whitespaces)
                 changeRequest.displayName = trimDisplayName
                 changeRequest.commitChanges { error in
-                    if error != nil {
-                        // プロフィールの更新でエラーが発生
-                        // TODO
+                    if let error = error {
+                        SVProgressHUD.showError(withStatus: Const.Message10 + "\(error)")
                         return
                     }
+                    SVProgressHUD.dismiss()
                     // 画面を閉じて画面に戻る
                     self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
                 }
             }
         }
     }
-    
+
     // キャンセル
     @objc private func cancel() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // 入力チェック
+    private func validate(address: String, password: String, passwordCheck: String, displayName: String) -> Bool {
+        // 空欄チェック
+        if address.isEmpty || password.isEmpty || passwordCheck.isEmpty || displayName.isEmpty {
+            SVProgressHUD.showError(withStatus: Const.Message1)
+            return true
+        }
+        //メールアドレスチェック
+        if !address.mailAddressFormatCheck() {
+            SVProgressHUD.showError(withStatus: Const.Message2)
+            return true
+        }
+        // パスワード文字数
+        if password.count < 6 || passwordCheck.count < 6 {
+            SVProgressHUD.showError(withStatus: Const.Message3)
+            return true
+        }
+        // パスワードの一致
+        if password != passwordCheck {
+            SVProgressHUD.showError(withStatus: Const.Message4)
+            return true
+        }                        
+        // エラーがない場合 falseを返却
+        return false
     }
 }
