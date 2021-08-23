@@ -13,6 +13,7 @@ extension Date {
     func dateFormat() -> String {
         var strDate:String = ""
         let format  = DateFormatter()
+        format.locale = Locale(identifier: "ja_JP")
         format.dateFormat = "yyyyMMdd"
         strDate = format.string(from:self)
         return strDate
