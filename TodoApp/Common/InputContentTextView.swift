@@ -34,8 +34,7 @@ import UIKit
     override func awakeFromNib() {
         super.awakeFromNib()
         changeVisiblePlaceHolder()
-        NotificationCenter.default.addObserver(self, selector: #selector(textChanged),
-                                               name: UITextView.textDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textChanged), name: UITextView.textDidChangeNotification, object: nil)
     }
 
     private func changeVisiblePlaceHolder() {
