@@ -77,7 +77,7 @@ class API {
                         let decorder = JSONDecoder()
                         value = try decorder.decode(T.self, from: data)
                     } catch {
-                        SVProgressHUD.showError(withStatus: Const.Message11 + "\(error)")
+                        SVProgressHUD.showError(withStatus: Const.Message11)
                     }
                 }
             } else {

@@ -32,8 +32,8 @@ class LoginViewController: UIViewController {
         // ローディング表示
         SVProgressHUD.show()
         Auth.auth().signIn(withEmail: address, password: password) { authResult, error in
-            if let error = error {
-                SVProgressHUD.showError(withStatus: Const.Message8 + "\(error)")
+            if error != nil {
+                SVProgressHUD.showError(withStatus: Const.Message8)
                 return
             }
             SVProgressHUD.dismiss()
@@ -55,16 +55,19 @@ class LoginViewController: UIViewController {
         // 空欄チェック
         if address.isEmpty || password.isEmpty {
             SVProgressHUD.showError(withStatus: Const.Message5)
+            SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         //メールアドレスチェック
         if !address.mailAddressFormatCheck() {
             SVProgressHUD.showError(withStatus: Const.Message2)
+            SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // パスワード文字数
         if password.count < 6 {
             SVProgressHUD.showError(withStatus: Const.Message3)
+            SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // エラーがない場合 falseを返却

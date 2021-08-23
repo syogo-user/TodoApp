@@ -62,6 +62,7 @@ class EditViewController: UIViewController {
     private func validate() -> Bool {
         if self.titleTextField.text!.isEmpty || self.contentTextView.text.isEmpty {
             SVProgressHUD.showError(withStatus: Const.Message6)
+            SVProgressHUD.dismiss(withDelay: 1)
             return true
         } else {
             return false

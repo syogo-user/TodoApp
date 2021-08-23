@@ -15,9 +15,9 @@ class Const {
     static let Message5  = "メールアドレスとパスワードは必須入力です"
     static let Message6  = "タイトルとメモは必須入力です"
     static let Message7  = "ログアウトしてもよろしいでしょうか？"
-    static let Message8  = "ログインに失敗しました\n"
-    static let Message9  = "ユーザの作成に失敗しました\n"
-    static let Message10  = "ニックネームの設定に失敗しました\n"
-    static let Message11  = "Jsonの変換に失敗しました\n"
+    static let Message8  = "ログインに失敗しました"
+    static let Message9  = "ユーザの作成に失敗しました"
+    static let Message10  = "ニックネームの設定に失敗しました"
+    static let Message11  = "Jsonの変換に失敗しました"
     static let Message12  = "リクエストに失敗しました\nステータスコード:"
 }

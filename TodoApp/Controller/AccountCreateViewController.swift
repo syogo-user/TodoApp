@@ -48,8 +48,8 @@ class AccountCreateViewController: UIViewController {
         // ローディング表示
         SVProgressHUD.show()
         Auth.auth().createUser(withEmail: address, password: password) { authResult, error in
-            if let error = error {
-                SVProgressHUD.showError(withStatus: Const.Message9 + "\(error)")
+            if error != nil {
+                SVProgressHUD.showError(withStatus: Const.Message9)
                 return
             }            
             // 表示名を設定する
@@ -60,8 +60,8 @@ class AccountCreateViewController: UIViewController {
                 let trimDisplayName = displayName.trimmingCharacters(in: .whitespaces)
                 changeRequest.displayName = trimDisplayName
                 changeRequest.commitChanges { error in
-                    if let error = error {
-                        SVProgressHUD.showError(withStatus: Const.Message10 + "\(error)")
+                    if error != nil {
+                        SVProgressHUD.showError(withStatus: Const.Message10)
                         return
                     }
                     SVProgressHUD.dismiss()
@@ -82,21 +82,25 @@ class AccountCreateViewController: UIViewController {
         // 空欄チェック
         if address.isEmpty || password.isEmpty || passwordCheck.isEmpty || displayName.isEmpty {
             SVProgressHUD.showError(withStatus: Const.Message1)
+            SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         //メールアドレスチェック
         if !address.mailAddressFormatCheck() {
             SVProgressHUD.showError(withStatus: Const.Message2)
+            SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // パスワード文字数
         if password.count < 6 || passwordCheck.count < 6 {
             SVProgressHUD.showError(withStatus: Const.Message3)
+            SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // パスワードの一致
         if password != passwordCheck {
             SVProgressHUD.showError(withStatus: Const.Message4)
+            SVProgressHUD.dismiss(withDelay: 1)
             return true
         }                        
         // エラーがない場合 falseを返却
