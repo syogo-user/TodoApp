@@ -22,7 +22,6 @@ class DateSelectViewController: UIViewController {
         self.decisionButton.addTarget(self, action: #selector(decision), for: .touchUpInside)
         self.cancelButton.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
         //　カレンダーの曜日設定
-//        CommonDate.layoutCalendar(calendar:self.calendar)
         self.calendar.layoutCalendar()
         // カレンダーの初期日付を設定
         calendarSelect()

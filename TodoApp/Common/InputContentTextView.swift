@@ -44,6 +44,5 @@ import UIKit
     @objc private func textChanged(notification: NSNotification?) {
         changeVisiblePlaceHolder()
     }
-
 }
 

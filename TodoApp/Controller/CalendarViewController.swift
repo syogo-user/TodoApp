@@ -155,6 +155,4 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         editVC.task = taskList[indexPath.row]
         self.navigationController?.pushViewController(editVC, animated: true)
     }
-
-
 }
