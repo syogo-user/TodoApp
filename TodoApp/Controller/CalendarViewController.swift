@@ -19,8 +19,7 @@ class CalendarViewController: UIViewController {
     private var selectDate = Date().dateFormat()
     var taskList :[Task] = []
     var calendarTaskList:[Task] = []
-
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.calendar.backgroundColor = .clear
@@ -46,7 +45,7 @@ class CalendarViewController: UIViewController {
         taskRequest()
     }
     
-    //タスクの一覧を取得
+    // タスクの一覧を取得
     private func taskRequest() {
         self.taskList = []
         self.tableView.reloadData()
@@ -62,7 +61,7 @@ class CalendarViewController: UIViewController {
                 task.date == self.selectDate
             })
             DispatchQueue.main.async {
-                //メインスレッドにて実施
+                // メインスレッドにて実施
                 self.calendar.reloadData()
                 self.tableView.reloadData()
                 SVProgressHUD.dismiss()

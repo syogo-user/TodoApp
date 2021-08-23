@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
-        //メールアドレスチェック
+        // メールアドレスチェック
         if !address.mailAddressFormatCheck() {
             SVProgressHUD.showError(withStatus: Const.Message2)
             SVProgressHUD.dismiss(withDelay: 1)

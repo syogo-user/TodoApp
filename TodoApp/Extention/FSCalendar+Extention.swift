@@ -13,7 +13,7 @@ extension FSCalendar {
     
     // 祝日判定を行い結果を返すメソッド(True:祝日)
     func judgeHoliday(_ date : Date) -> Bool {
-         //祝日判定用のカレンダークラスのインスタンス
+         // 祝日判定用のカレンダークラスのインスタンス
          let tmpCalendar = Calendar(identifier: .gregorian)
          // 祝日判定を行う日にちの年、月、日を取得
          let year = tmpCalendar.component(.year, from: date)
