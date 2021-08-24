@@ -8,16 +8,16 @@
 import Foundation
 
 class Const {
-    static let Message1  = "メールアドレス、パスワード、ニックネームは必須入力です"
-    static let Message2  = "正しいメールアドレスを入力してください"
-    static let Message3  = "パスワードは6桁以上で入力してください"
-    static let Message4  = "パスワードが一致しません"
-    static let Message5  = "メールアドレスとパスワードは必須入力です"
-    static let Message6  = "タイトルとメモは必須入力です"
-    static let Message7  = "ログアウトしてもよろしいでしょうか？"
-    static let Message8  = "ログインに失敗しました"
-    static let Message9  = "ユーザの作成に失敗しました"
-    static let Message10  = "ニックネームの設定に失敗しました"
-    static let Message11  = "Jsonの変換に失敗しました"
-    static let Message12  = "リクエストに失敗しました\nステータスコード:"
+    static let message1  = "メールアドレス、パスワード、ニックネームは必須入力です"
+    static let message2  = "正しいメールアドレスを入力してください"
+    static let message3  = "パスワードは6桁以上で入力してください"
+    static let message4  = "パスワードが一致しません"
+    static let message5  = "メールアドレスとパスワードは必須入力です"
+    static let message6  = "タイトルとメモは必須入力です"
+    static let message7  = "ログアウトしてもよろしいでしょうか？"
+    static let message8  = "ログインに失敗しました"
+    static let message9  = "ユーザの作成に失敗しました"
+    static let message10  = "ニックネームの設定に失敗しました"
+    static let message11  = "Jsonの変換に失敗しました"
+    static let message12  = "リクエストに失敗しました\nステータスコード:"
 }

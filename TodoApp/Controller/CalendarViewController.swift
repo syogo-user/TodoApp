@@ -70,7 +70,7 @@ class CalendarViewController: UIViewController {
     }
         
     @objc private func logoutMenu() {
-        let dialog = UIAlertController(title: Const.Message7, message: nil, preferredStyle: .actionSheet)
+        let dialog = UIAlertController(title: Const.message7, message: nil, preferredStyle: .actionSheet)
         dialog.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             SVProgressHUD.show()
             // ログアウト

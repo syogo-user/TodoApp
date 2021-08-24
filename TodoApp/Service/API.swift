@@ -77,12 +77,12 @@ class API {
                         let decorder = JSONDecoder()
                         value = try decorder.decode(T.self, from: data)
                     } catch {
-                        SVProgressHUD.showError(withStatus: Const.Message11)
+                        SVProgressHUD.showError(withStatus: Const.message11)
                     }
                 }
             } else {
                 // ステータスコードが200番台以外(リクエスト失敗)
-                SVProgressHUD.showError(withStatus: Const.Message12 + "\(statusCode)")
+                SVProgressHUD.showError(withStatus: Const.message12 + "\(statusCode)")
             }
             // コールバック
             completion(value)

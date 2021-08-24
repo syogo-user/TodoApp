@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         SVProgressHUD.show()
         Auth.auth().signIn(withEmail: address, password: password) { authResult, error in
             if error != nil {
-                SVProgressHUD.showError(withStatus: Const.Message8)
+                SVProgressHUD.showError(withStatus: Const.message8)
                 return
             }
             SVProgressHUD.dismiss()
@@ -55,19 +55,19 @@ class LoginViewController: UIViewController {
         let check = Check()
         // 空欄チェック
         if check.isEmpty(inputArray: address, password) {
-            SVProgressHUD.showError(withStatus: Const.Message5)
+            SVProgressHUD.showError(withStatus: Const.message5)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // メールアドレスチェック
         if check.mailAddressFormatCheck(address: address) {
-            SVProgressHUD.showError(withStatus: Const.Message2)
+            SVProgressHUD.showError(withStatus: Const.message2)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // パスワード文字数
         if check.charaMinCountCheck(str: password, minCount: 6) {
-            SVProgressHUD.showError(withStatus: Const.Message3)
+            SVProgressHUD.showError(withStatus: Const.message3)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }

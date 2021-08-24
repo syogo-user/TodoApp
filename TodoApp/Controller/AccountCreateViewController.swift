@@ -49,7 +49,7 @@ class AccountCreateViewController: UIViewController {
         SVProgressHUD.show()
         Auth.auth().createUser(withEmail: address, password: password) { authResult, error in
             if error != nil {
-                SVProgressHUD.showError(withStatus: Const.Message9)
+                SVProgressHUD.showError(withStatus: Const.message9)
                 return
             }            
             // 表示名を設定する
@@ -61,7 +61,7 @@ class AccountCreateViewController: UIViewController {
                 changeRequest.displayName = trimDisplayName
                 changeRequest.commitChanges { error in
                     if error != nil {
-                        SVProgressHUD.showError(withStatus: Const.Message10)
+                        SVProgressHUD.showError(withStatus: Const.message10)
                         return
                     }
                     SVProgressHUD.dismiss()
@@ -82,25 +82,25 @@ class AccountCreateViewController: UIViewController {
         let check = Check()
         // 空欄チェック
         if check.isEmpty(inputArray: address, password, passwordCheck, displayName) {
-            SVProgressHUD.showError(withStatus: Const.Message1)
+            SVProgressHUD.showError(withStatus: Const.message1)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         //メールアドレスチェック
         if check.mailAddressFormatCheck(address: address) {
-            SVProgressHUD.showError(withStatus: Const.Message2)
+            SVProgressHUD.showError(withStatus: Const.message2)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // パスワード文字数
         if check.charaMinCountCheck(str: password, minCount: 6) || check.charaMinCountCheck(str: passwordCheck, minCount: 6) {
-            SVProgressHUD.showError(withStatus: Const.Message3)
+            SVProgressHUD.showError(withStatus: Const.message3)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // パスワードの一致
         if check.isNotEqual(str1: password, str2: passwordCheck) {
-            SVProgressHUD.showError(withStatus: Const.Message4)
+            SVProgressHUD.showError(withStatus: Const.message4)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }

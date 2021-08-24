@@ -104,7 +104,7 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
     private func validate() -> Bool {
         let check = Check()
         if check.isEmpty(inputArray: self.inputTitleTextField.text!, self.inputContentView.text) {
-            SVProgressHUD.showError(withStatus: Const.Message6)
+            SVProgressHUD.showError(withStatus: Const.message6)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
