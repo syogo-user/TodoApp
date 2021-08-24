@@ -52,20 +52,21 @@ class LoginViewController: UIViewController {
     }
         
     private func validate(address: String, password: String) -> Bool {
+        let check = Check()
         // 空欄チェック
-        if address.isEmpty || password.isEmpty {
+        if check.isEmpty(inputArray: address, password) {
             SVProgressHUD.showError(withStatus: Const.Message5)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // メールアドレスチェック
-        if !address.mailAddressFormatCheck() {
+        if check.mailAddressFormatCheck(address: address) {
             SVProgressHUD.showError(withStatus: Const.Message2)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // パスワード文字数
-        if password.count < 6 {
+        if check.charaMinCountCheck(str: password, minCount: 6) {
             SVProgressHUD.showError(withStatus: Const.Message3)
             SVProgressHUD.dismiss(withDelay: 1)
             return true

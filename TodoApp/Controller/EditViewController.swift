@@ -60,12 +60,12 @@ class EditViewController: UIViewController {
     
     // 入力チェック
     private func validate() -> Bool {
-        if self.titleTextField.text!.isEmpty || self.contentTextView.text.isEmpty {
+        let check = Check()
+        if check.isEmpty(inputArray: self.titleTextField.text!, self.contentTextView.text) {
             SVProgressHUD.showError(withStatus: Const.Message6)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
-        } else {
-            return false
-        }
+        }        
+        return false
     }
 }

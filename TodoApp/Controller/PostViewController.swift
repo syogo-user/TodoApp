@@ -102,13 +102,14 @@ class PostViewController: UIViewController ,UIGestureRecognizerDelegate {
     
     // 入力チェック
     private func validate() -> Bool {
-        if self.inputTitleTextField.text!.isEmpty || self.inputContentView.text.isEmpty {
+        let check = Check()
+        if check.isEmpty(inputArray: self.inputTitleTextField.text!, self.inputContentView.text) {
             SVProgressHUD.showError(withStatus: Const.Message6)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
-        } else {
-            return false
         }
+        // エラーがなければfalse
+        return false
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {

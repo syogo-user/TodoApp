@@ -19,14 +19,4 @@ extension String {
         let str = "\(year)年\(month)月\(day)日"
         return str
     }
-    
-    // アドレス書式
-    func mailAddressFormatCheck() -> Bool {
-        // [大文字小文字英数字と._%+-]@[大文字小文字英数字.-].[2文字から4文字の大文字小文字英数字]
-        let emailRegEx = "[A-Z0-9a-z._+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        let result = emailTest.evaluate(with: self)
-        // 正：true　誤：false
-        return result
-    }
 }

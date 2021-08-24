@@ -79,30 +79,31 @@ class AccountCreateViewController: UIViewController {
     
     // 入力チェック
     private func validate(address: String, password: String, passwordCheck: String, displayName: String) -> Bool {
+        let check = Check()
         // 空欄チェック
-        if address.isEmpty || password.isEmpty || passwordCheck.isEmpty || displayName.isEmpty {
+        if check.isEmpty(inputArray: address, password, passwordCheck, displayName) {
             SVProgressHUD.showError(withStatus: Const.Message1)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         //メールアドレスチェック
-        if !address.mailAddressFormatCheck() {
+        if check.mailAddressFormatCheck(address: address) {
             SVProgressHUD.showError(withStatus: Const.Message2)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // パスワード文字数
-        if password.count < 6 || passwordCheck.count < 6 {
+        if check.charaMinCountCheck(str: password, minCount: 6) || check.charaMinCountCheck(str: passwordCheck, minCount: 6) {
             SVProgressHUD.showError(withStatus: Const.Message3)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
         }
         // パスワードの一致
-        if password != passwordCheck {
+        if check.isNotEqual(str1: password, str2: passwordCheck) {
             SVProgressHUD.showError(withStatus: Const.Message4)
             SVProgressHUD.dismiss(withDelay: 1)
             return true
-        }                        
+        }
         // エラーがない場合 falseを返却
         return false
     }
