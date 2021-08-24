@@ -34,7 +34,7 @@ class CalendarViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let settingBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "figure.walk"), style: .plain, target: self, action: #selector(logoutMenu))
+        let settingBarButtonItem = UIBarButtonItem(title: "ログアウト", style: .plain, target: self, action: #selector(logoutMenu))
         tabBarController?.navigationItem.rightBarButtonItems = [settingBarButtonItem]
         tabBarController?.title = "Myカレンダー"
         // カレンダーのページを本日に設定
