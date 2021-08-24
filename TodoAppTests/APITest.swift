@@ -44,8 +44,8 @@ class APITest: XCTestCase {
             ]
         ]
         
-        // スタブの定義　リクエストに対して常にbodyが返却される
-        stub(everything,json(body))
+        // スタブの定義　リクエストに対して以下のURLにマッチしたときにbodyが返却される
+        stub(http(.get,uri:"/tasks.json"),json(body))
         // APIが完了するまで待機
         let exp  = expectation(description: "wait for complete api")
         
