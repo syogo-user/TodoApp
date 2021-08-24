@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		911AF10A26D238F800147DA8 /* LoginViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911AF10926D238F800147DA8 /* LoginViewControllerTest.swift */; };
 		913CF33326D39F5400B6F0C9 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913CF33226D39F5400B6F0C9 /* Const.swift */; };
 		914B70E326CFB0B800E6C8F8 /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B70E226CFB0B800E6C8F8 /* String+Extention.swift */; };
 		914B70E626CFCB6300E6C8F8 /* InputContentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914B70E526CFCB6300E6C8F8 /* InputContentTextView.swift */; };
@@ -76,7 +75,6 @@
 		69C73DBCB475EDE977C2BCFA /* Pods-TodoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.debug.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		6B3DCD4AA100272637902B75 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
 		8A9AD66CEA8AB21AC7993BC9 /* Pods-TodoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoAppTests.release.xcconfig"; path = "Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		911AF10926D238F800147DA8 /* LoginViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTest.swift; sourceTree = "<group>"; };
 		913CF33226D39F5400B6F0C9 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		914B70E226CFB0B800E6C8F8 /* String+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extention.swift"; sourceTree = "<group>"; };
 		914B70E526CFCB6300E6C8F8 /* InputContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentTextView.swift; sourceTree = "<group>"; };
@@ -243,7 +241,6 @@
 				91E3984626D1FC7000F410C6 /* TodoAppTests.swift */,
 				91A0CDCF26D207AA00BF0D3B /* APITest.swift */,
 				91E3984826D1FC7000F410C6 /* Info.plist */,
-				911AF10926D238F800147DA8 /* LoginViewControllerTest.swift */,
 				919BF77026D5287400224219 /* CheckTests.swift */,
 			);
 			path = TodoAppTests;
@@ -506,7 +503,6 @@
 				91A0CDD626D2088F00BF0D3B /* PostViewController.swift in Sources */,
 				91A0CDE926D208B700BF0D3B /* DateSelectViewController.swift in Sources */,
 				91E3985026D1FDE600F410C6 /* ListViewController.swift in Sources */,
-				911AF10A26D238F800147DA8 /* LoginViewControllerTest.swift in Sources */,
 				919BF77126D5287400224219 /* CheckTests.swift in Sources */,
 				919BF76B26D46A8F00224219 /* Check.swift in Sources */,
 				91A0CDB426D2032D00BF0D3B /* API.swift in Sources */,
