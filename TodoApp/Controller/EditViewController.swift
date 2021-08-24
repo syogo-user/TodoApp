@@ -20,7 +20,7 @@ class EditViewController: UIViewController {
         self.contentTextView.layer.borderColor = UIColor.darkGray.cgColor
         self.contentTextView.layer.borderWidth = 0.2
         self.contentTextView.layer.cornerRadius = 5
-        let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(putTask))
+        let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(putTask))
         self.navigationItem.rightBarButtonItems = [editBarButtonItem]
         displayLayout()
     }
