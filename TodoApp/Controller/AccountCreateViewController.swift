@@ -23,7 +23,9 @@ class AccountCreateViewController: UIViewController {
         super.viewDidLoad()
         self.newAccountCreateButton.addTarget(self, action: #selector(createAccount), for: .touchUpInside)
         self.cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-        setDisplay()
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+        setDisplay()        
     }
     
     private func setDisplay() {
@@ -75,6 +77,10 @@ class AccountCreateViewController: UIViewController {
     // キャンセル
     @objc private func cancel() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     // 入力チェック

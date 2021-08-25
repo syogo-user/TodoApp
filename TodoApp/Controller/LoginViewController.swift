@@ -21,6 +21,8 @@ class LoginViewController: UIViewController {
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "パスワード", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         self.loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
         self.createAccountButton.addTarget(self, action: #selector(createAccount), for: .touchUpInside)
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     @objc private func login() {
@@ -49,6 +51,10 @@ class LoginViewController: UIViewController {
         accountCreateViewController.password = self.passwordTextField.text ?? ""
         accountCreateViewController.modalPresentationStyle = .fullScreen
         self.present(accountCreateViewController, animated: true, completion: nil)
+    }
+    
+    @objc private func dismissKeyboard() {
+        self.view.endEditing(true)
     }
         
     private func validate(address: String, password: String) -> Bool {
