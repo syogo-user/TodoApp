@@ -71,7 +71,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タイトル" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oBR-bq-c1Y" customClass="InputTitleTextField" customModule="TodoApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="414" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="10" width="414" height="34"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -82,7 +82,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8tr-0w-SkD" customClass="InputContentTextView" customModule="TodoApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="51.5" width="414" height="73.5"/>
+                                        <rect key="frame" x="0.0" y="49" width="414" height="76"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -141,29 +141,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UNl-Ru-MnV">
-                                <rect key="frame" x="50" y="248" width="314" height="400"/>
+                                <rect key="frame" x="40" y="243" width="334" height="410"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CQ-7B-7S9" customClass="FSCalendar">
-                                        <rect key="frame" x="0.0" y="0.0" width="314" height="370"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="370"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="370" id="dfe-Jl-T5I"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3G5-p8-mgb">
-                                        <rect key="frame" x="0.0" y="370" width="314" height="30"/>
+                                        <rect key="frame" x="0.0" y="370" width="334" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLj-7n-pH5">
-                                                <rect key="frame" x="0.0" y="0.0" width="157" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="167" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="dfw-Zw-rf9"/>
+                                                    <constraint firstAttribute="height" constant="40" id="dfw-Zw-rf9"/>
                                                 </constraints>
                                                 <state key="normal" title="キャンセル"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFY-uQ-veo">
-                                                <rect key="frame" x="157" y="0.0" width="157" height="30"/>
+                                                <rect key="frame" x="167" y="0.0" width="167" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="2eU-aq-7v0"/>
+                                                    <constraint firstAttribute="height" constant="40" id="2eU-aq-7v0"/>
                                                 </constraints>
                                                 <state key="normal" title="決定"/>
                                             </button>
@@ -176,8 +176,8 @@
                         <viewLayoutGuide key="safeArea" id="nQF-ou-fd3"/>
                         <color key="backgroundColor" white="0.0" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nQF-ou-fd3" firstAttribute="trailing" secondItem="UNl-Ru-MnV" secondAttribute="trailing" constant="50" id="S8I-Kj-ElZ"/>
-                            <constraint firstItem="UNl-Ru-MnV" firstAttribute="leading" secondItem="nQF-ou-fd3" secondAttribute="leading" constant="50" id="jyZ-q6-75H"/>
+                            <constraint firstItem="nQF-ou-fd3" firstAttribute="trailing" secondItem="UNl-Ru-MnV" secondAttribute="trailing" constant="40" id="S8I-Kj-ElZ"/>
+                            <constraint firstItem="UNl-Ru-MnV" firstAttribute="leading" secondItem="nQF-ou-fd3" secondAttribute="leading" constant="40" id="jyZ-q6-75H"/>
                             <constraint firstItem="UNl-Ru-MnV" firstAttribute="centerY" secondItem="SVM-NR-Hac" secondAttribute="centerY" id="rdJ-W8-9tB"/>
                         </constraints>
                     </view>
@@ -276,7 +276,7 @@
     </scenes>
     <designables>
         <designable name="oBR-bq-c1Y">
-            <size key="intrinsicContentSize" width="85.5" height="36.5"/>
+            <size key="intrinsicContentSize" width="91.5" height="34"/>
         </designable>
     </designables>
     <resources>
