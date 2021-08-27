@@ -71,7 +71,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タイトル" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oBR-bq-c1Y" customClass="InputTitleTextField" customModule="TodoApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="414" height="34"/>
+                                        <rect key="frame" x="0.0" y="10" width="414" height="36.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -82,7 +82,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8tr-0w-SkD" customClass="InputContentTextView" customModule="TodoApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="49" width="414" height="76"/>
+                                        <rect key="frame" x="0.0" y="51.5" width="414" height="73.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -149,6 +149,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="370" id="dfe-Jl-T5I"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="headerDateFormat" value="yyyy年MM月"/>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3G5-p8-mgb">
                                         <rect key="frame" x="0.0" y="370" width="334" height="40"/>
@@ -276,7 +279,7 @@
     </scenes>
     <designables>
         <designable name="oBR-bq-c1Y">
-            <size key="intrinsicContentSize" width="91.5" height="34"/>
+            <size key="intrinsicContentSize" width="85.5" height="36.5"/>
         </designable>
     </designables>
     <resources>
