@@ -100,6 +100,10 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         return .delete
     }
     
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "削除"
+    }
+    
     // 削除ボタンが押されて時に呼ばれる
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // 削除
