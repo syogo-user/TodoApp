@@ -30,15 +30,6 @@ extension FSCalendar {
         return tmpCalendar.component(.weekday, from: date) - 1
     }
     
-    // 年月日を取得
-    func getDay(_ date:Date) -> (Int,Int,Int) {
-        let tmpCalendar = Calendar(identifier: .gregorian)
-        let year = tmpCalendar.component(.year, from: date)
-        let month = tmpCalendar.component(.month, from: date)
-        let day = tmpCalendar.component(.day, from: date)
-        return (year,month,day)
-    }
-
     // カレンダー曜日設定
     func layoutCalendar() {
         let weekList = ["日", "月", "火", "水", "木", "金", "土"]
