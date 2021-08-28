@@ -50,6 +50,9 @@
 		91A0CE0426D20B6F00BF0D3B /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0CDCF26D207AA00BF0D3B /* APITest.swift */; };
 		91A3AA5426CA9125003678F3 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3AA5326CA9125003678F3 /* CalendarViewController.swift */; };
 		91A3AA6526CE6EBF003678F3 /* DateSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3AA6426CE6EBF003678F3 /* DateSelectViewController.swift */; };
+		91C3FA6526DA49E000098BF4 /* Date+ExtentionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3FA6426DA49E000098BF4 /* Date+ExtentionTests.swift */; };
+		91C3FA6926DA4D0000098BF4 /* FSCalendar+ExtentionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3FA6826DA4D0000098BF4 /* FSCalendar+ExtentionTests.swift */; };
+		91C3FA6D26DA817D00098BF4 /* String+ExtentionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3FA6C26DA817D00098BF4 /* String+ExtentionTests.swift */; };
 		91E3984726D1FC7000F410C6 /* TodoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E3984626D1FC7000F410C6 /* TodoAppTests.swift */; };
 		91E3985026D1FDE600F410C6 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FBC1B26BD412E00C7276F /* ListViewController.swift */; };
 		91E5A84A26BFF8F600AD927C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91E5A84926BFF8F600AD927C /* GoogleService-Info.plist */; };
@@ -101,6 +104,9 @@
 		91A0CDCF26D207AA00BF0D3B /* APITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		91A3AA5326CA9125003678F3 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		91A3AA6426CE6EBF003678F3 /* DateSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectViewController.swift; sourceTree = "<group>"; };
+		91C3FA6426DA49E000098BF4 /* Date+ExtentionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ExtentionTests.swift"; sourceTree = "<group>"; };
+		91C3FA6826DA4D0000098BF4 /* FSCalendar+ExtentionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FSCalendar+ExtentionTests.swift"; sourceTree = "<group>"; };
+		91C3FA6C26DA817D00098BF4 /* String+ExtentionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ExtentionTests.swift"; sourceTree = "<group>"; };
 		91E3984426D1FC7000F410C6 /* TodoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E3984626D1FC7000F410C6 /* TodoAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAppTests.swift; sourceTree = "<group>"; };
 		91E3984826D1FC7000F410C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -240,8 +246,11 @@
 			children = (
 				91E3984626D1FC7000F410C6 /* TodoAppTests.swift */,
 				91A0CDCF26D207AA00BF0D3B /* APITest.swift */,
-				91E3984826D1FC7000F410C6 /* Info.plist */,
 				919BF77026D5287400224219 /* CheckTests.swift */,
+				91C3FA6426DA49E000098BF4 /* Date+ExtentionTests.swift */,
+				91C3FA6C26DA817D00098BF4 /* String+ExtentionTests.swift */,
+				91C3FA6826DA4D0000098BF4 /* FSCalendar+ExtentionTests.swift */,
+				91E3984826D1FC7000F410C6 /* Info.plist */,
 			);
 			path = TodoAppTests;
 			sourceTree = "<group>";
@@ -507,6 +516,7 @@
 				919BF76B26D46A8F00224219 /* Check.swift in Sources */,
 				91A0CDB426D2032D00BF0D3B /* API.swift in Sources */,
 				91A0CDD326D2087B00BF0D3B /* Task.swift in Sources */,
+				91C3FA6926DA4D0000098BF4 /* FSCalendar+ExtentionTests.swift in Sources */,
 				91A0CDF426D208CB00BF0D3B /* SceneDelegate.swift in Sources */,
 				91A0CDFA26D208E900BF0D3B /* String+Extention.swift in Sources */,
 				91A0CDED26D208C000BF0D3B /* InputContentTextView.swift in Sources */,
@@ -514,6 +524,8 @@
 				91E3984726D1FC7000F410C6 /* TodoAppTests.swift in Sources */,
 				91A0CDF326D208C800BF0D3B /* AppDelegate.swift in Sources */,
 				91A0CE0426D20B6F00BF0D3B /* APITest.swift in Sources */,
+				91C3FA6D26DA817D00098BF4 /* String+ExtentionTests.swift in Sources */,
+				91C3FA6526DA49E000098BF4 /* Date+ExtentionTests.swift in Sources */,
 				91A0CDF026D208C300BF0D3B /* InputTitleTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
