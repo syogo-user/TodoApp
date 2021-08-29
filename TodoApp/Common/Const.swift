@@ -18,6 +18,6 @@ class Const {
     static let message8  = "ログインに失敗しました"
     static let message9  = "ユーザの作成に失敗しました"
     static let message10  = "ニックネームの設定に失敗しました"
-    static let message11  = "Jsonの変換に失敗しました"
+    static let message11  = "jsonの変換に失敗しました"
     static let message12  = "リクエストに失敗しました\nステータスコード:"
 }
