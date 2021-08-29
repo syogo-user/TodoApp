@@ -10,12 +10,12 @@ import Alamofire
 import SVProgressHUD
 
 class API {
-    private let baseUrl = "https://todoapp-7f440-default-rtdb.firebaseio.com/"
     static let shared = API()
-    
+    private let baseUrl = "https://todoapp-7f440-default-rtdb.firebaseio.com/"
+        
     // タスク一覧を取得
     func getTasks<T: Decodable>(uid: String, type: T.Type, completion: @escaping (T?) -> Void) {
-        let url = baseUrl + "tasks.json"
+        let url = baseUrl + "tasks.json" + "?auth=\(AuthKey.authKey)"
         let parameters = [
             "orderBy": #""uid""#,
             "equalTo": #""\#(uid)""#
@@ -27,7 +27,7 @@ class API {
     
     // タスクの作成
     func createTask<T: Decodable>(type: T.Type, task:Task, completion: @escaping (T?) -> Void) {
-        let url = baseUrl + "tasks.json"
+        let url = baseUrl + "tasks.json" + "?auth=\(AuthKey.authKey)"
         let parameters: [String:Any] = [
             "title": task.title,
             "content": task.content,
@@ -42,7 +42,7 @@ class API {
     
     // タスクの削除
     func deleteTask<T: Decodable>(deleteTaskId: String, type: T.Type, completion: @escaping (T?) -> Void) {
-        let url = baseUrl + "tasks/" + deleteTaskId + ".json"
+        let url = baseUrl + "tasks/" + deleteTaskId + ".json" + "?auth=\(AuthKey.authKey)"
         let encoding: ParameterEncoding = JSONEncoding.default
         let method = HTTPMethod.delete
         request(url:url, method: method, parameter: nil, encoding: encoding, type: type, completion: completion)
@@ -50,7 +50,7 @@ class API {
     
     // タスクの再投稿
     func putTask<T: Decodable>(type: T.Type, task:Task, completion: @escaping (T?) -> Void) {
-        let url = baseUrl + "tasks/" + task.taskId + ".json"
+        let url = baseUrl + "tasks/" + task.taskId + ".json" + "?auth=\(AuthKey.authKey)"
         let parameters: [String:Any] = [
             "title": task.title,
             "content": task.content,

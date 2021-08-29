@@ -50,6 +50,8 @@
 		91A0CE0426D20B6F00BF0D3B /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0CDCF26D207AA00BF0D3B /* APITest.swift */; };
 		91A3AA5426CA9125003678F3 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3AA5326CA9125003678F3 /* CalendarViewController.swift */; };
 		91A3AA6526CE6EBF003678F3 /* DateSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A3AA6426CE6EBF003678F3 /* DateSelectViewController.swift */; };
+		91B233CF26DB71F300856630 /* AuthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B233CE26DB71F300856630 /* AuthKey.swift */; };
+		91B233D426DB72BA00856630 /* AuthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B233CE26DB71F300856630 /* AuthKey.swift */; };
 		91C3FA6526DA49E000098BF4 /* Date+ExtentionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3FA6426DA49E000098BF4 /* Date+ExtentionTests.swift */; };
 		91C3FA6926DA4D0000098BF4 /* FSCalendar+ExtentionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3FA6826DA4D0000098BF4 /* FSCalendar+ExtentionTests.swift */; };
 		91C3FA6D26DA817D00098BF4 /* String+ExtentionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3FA6C26DA817D00098BF4 /* String+ExtentionTests.swift */; };
@@ -104,6 +106,7 @@
 		91A0CDCF26D207AA00BF0D3B /* APITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		91A3AA5326CA9125003678F3 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		91A3AA6426CE6EBF003678F3 /* DateSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectViewController.swift; sourceTree = "<group>"; };
+		91B233CE26DB71F300856630 /* AuthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthKey.swift; sourceTree = "<group>"; };
 		91C3FA6426DA49E000098BF4 /* Date+ExtentionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ExtentionTests.swift"; sourceTree = "<group>"; };
 		91C3FA6826DA4D0000098BF4 /* FSCalendar+ExtentionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FSCalendar+ExtentionTests.swift"; sourceTree = "<group>"; };
 		91C3FA6C26DA817D00098BF4 /* String+ExtentionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ExtentionTests.swift"; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 				9197FB9926C8EA7F0023129D /* Storyboard */,
 				918FBC0126BD406D00C7276F /* AppDelegate.swift */,
 				918FBC0326BD406D00C7276F /* SceneDelegate.swift */,
+				91B233CE26DB71F300856630 /* AuthKey.swift */,
 				918FBC0A26BD406E00C7276F /* Assets.xcassets */,
 				91E5A84926BFF8F600AD927C /* GoogleService-Info.plist */,
 				918FBC0F26BD406E00C7276F /* Info.plist */,
@@ -492,6 +496,7 @@
 				914B70E926CFDF6F00E6C8F8 /* InputTitleTextField.swift in Sources */,
 				91F9E85D26C90D7100EEA991 /* EditViewController.swift in Sources */,
 				91F9E87126C9DCF200EEA991 /* Date+Extention.swift in Sources */,
+				91B233CF26DB71F300856630 /* AuthKey.swift in Sources */,
 				919BF76A26D46A8F00224219 /* Check.swift in Sources */,
 				918FBC2C26BE724B00C7276F /* API.swift in Sources */,
 			);
@@ -507,6 +512,7 @@
 				91A0CDDA26D208A500BF0D3B /* TabBarViewController.swift in Sources */,
 				919BF76426D3AD9100224219 /* Const.swift in Sources */,
 				91A0CDE026D208AE00BF0D3B /* AccountCreateViewController.swift in Sources */,
+				91B233D426DB72BA00856630 /* AuthKey.swift in Sources */,
 				919BF76126D3AD8900224219 /* FSCalendar+Extention.swift in Sources */,
 				91A0CDD926D2089E00BF0D3B /* ListTableViewCell.swift in Sources */,
 				91A0CDD626D2088F00BF0D3B /* PostViewController.swift in Sources */,
