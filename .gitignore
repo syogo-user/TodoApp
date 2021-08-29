@@ -1,3 +1,4 @@
 Pods/*
 TodoApp.xcworkspace
 TodoApp/GoogleService-Info.plist
+TodoApp/AuthKey.swift
