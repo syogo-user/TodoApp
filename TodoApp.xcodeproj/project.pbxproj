@@ -176,8 +176,8 @@
 				918FBC0126BD406D00C7276F /* AppDelegate.swift */,
 				918FBC0326BD406D00C7276F /* SceneDelegate.swift */,
 				91B233CE26DB71F300856630 /* AuthKey.swift */,
-				918FBC0A26BD406E00C7276F /* Assets.xcassets */,
 				91E5A84926BFF8F600AD927C /* GoogleService-Info.plist */,
+				918FBC0A26BD406E00C7276F /* Assets.xcassets */,
 				918FBC0F26BD406E00C7276F /* Info.plist */,
 			);
 			path = TodoApp;
