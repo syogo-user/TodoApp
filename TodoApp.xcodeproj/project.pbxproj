@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1107DA970E5914BB89B2054F /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = C42AFA19F5E0A7053707FFE1 /* amplifyconfiguration.json */; };
+		3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 698F70E34828384BED2B116E /* awsconfiguration.json */; };
+		915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06EE29BA1C2200685156 /* SignInViewController.swift */; };
+		915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06F129BA1CC700685156 /* BaseViewController.swift */; };
+		915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 915F06F329BA1D3900685156 /* SignIn.storyboard */; };
+		91C7608D29BC2E3F003BE148 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 91C7608C29BC2E3F003BE148 /* AWSCognitoAuthPlugin */; };
+		91C7608F29BC2E3F003BE148 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 91C7608E29BC2E3F003BE148 /* Amplify */; };
+		91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7609029BC3002003BE148 /* SignInViewModel.swift */; };
+		91C7609329BC3213003BE148 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7609229BC3213003BE148 /* UserUseCase.swift */; };
 		91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A2D29B7791600DA4EAE /* AppDelegate.swift */; };
 		91E41A3029B7791600DA4EAE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A2F29B7791600DA4EAE /* SceneDelegate.swift */; };
 		91E41A3229B7791600DA4EAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A3129B7791600DA4EAE /* ViewController.swift */; };
@@ -36,6 +45,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		698F70E34828384BED2B116E /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		915F06EE29BA1C2200685156 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		915F06F129BA1CC700685156 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		915F06F329BA1D3900685156 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		91C7609029BC3002003BE148 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		91C7609229BC3213003BE148 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		91E41A2A29B7791600DA4EAE /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E41A2D29B7791600DA4EAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91E41A2F29B7791600DA4EAE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +64,7 @@
 		91E41A4A29B7791800DA4EAE /* TodoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E41A4E29B7791800DA4EAE /* TodoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAppUITests.swift; sourceTree = "<group>"; };
 		91E41A5029B7791800DA4EAE /* TodoAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C42AFA19F5E0A7053707FFE1 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91C7608D29BC2E3F003BE148 /* AWSCognitoAuthPlugin in Frameworks */,
+				91C7608F29BC2E3F003BE148 /* Amplify in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +94,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C854CED295BD5F676F652FF /* AmplifyConfig */ = {
+			isa = PBXGroup;
+			children = (
+				698F70E34828384BED2B116E /* awsconfiguration.json */,
+				C42AFA19F5E0A7053707FFE1 /* amplifyconfiguration.json */,
+			);
+			name = AmplifyConfig;
+			sourceTree = "<group>";
+		};
+		915F06E829BA1B7100685156 /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Infra;
+			sourceTree = "<group>";
+		};
+		915F06E929BA1B7800685156 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				91C7609229BC3213003BE148 /* UserUseCase.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		915F06EA29BA1B8900685156 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				915F06F029BA1CB600685156 /* Common */,
+				915F06ED29BA1BC600685156 /* SignIn */,
+				915F06EB29BA1BA200685156 /* View */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		915F06EB29BA1BA200685156 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				915F06F329BA1D3900685156 /* SignIn.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		915F06ED29BA1BC600685156 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				915F06EE29BA1C2200685156 /* SignInViewController.swift */,
+				91C7609029BC3002003BE148 /* SignInViewModel.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		915F06F029BA1CB600685156 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				915F06F129BA1CC700685156 /* BaseViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		91E41A2129B7791600DA4EAE = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +160,7 @@
 				91E41A4329B7791800DA4EAE /* TodoAppTests */,
 				91E41A4D29B7791800DA4EAE /* TodoAppUITests */,
 				91E41A2B29B7791600DA4EAE /* Products */,
+				1C854CED295BD5F676F652FF /* AmplifyConfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +177,9 @@
 		91E41A2C29B7791600DA4EAE /* TodoApp */ = {
 			isa = PBXGroup;
 			children = (
+				915F06EA29BA1B8900685156 /* Presentation */,
+				915F06E929BA1B7800685156 /* Domain */,
+				915F06E829BA1B7100685156 /* Infra */,
 				91E41A2D29B7791600DA4EAE /* AppDelegate.swift */,
 				91E41A2F29B7791600DA4EAE /* SceneDelegate.swift */,
 				91E41A3129B7791600DA4EAE /* ViewController.swift */,
@@ -143,6 +224,10 @@
 			dependencies = (
 			);
 			name = TodoApp;
+			packageProductDependencies = (
+				91C7608C29BC2E3F003BE148 /* AWSCognitoAuthPlugin */,
+				91C7608E29BC2E3F003BE148 /* Amplify */,
+			);
 			productName = TodoApp;
 			productReference = 91E41A2A29B7791600DA4EAE /* TodoApp.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +300,9 @@
 				Base,
 			);
 			mainGroup = 91E41A2129B7791600DA4EAE;
+			packageReferences = (
+				91C7608B29BC2E3F003BE148 /* XCRemoteSwiftPackageReference "amplify-swift" */,
+			);
 			productRefGroup = 91E41A2B29B7791600DA4EAE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -234,6 +322,9 @@
 				91E41A3A29B7791800DA4EAE /* LaunchScreen.storyboard in Resources */,
 				91E41A3729B7791800DA4EAE /* Assets.xcassets in Resources */,
 				91E41A3529B7791600DA4EAE /* Main.storyboard in Resources */,
+				3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */,
+				915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */,
+				1107DA970E5914BB89B2054F /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +349,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */,
+				91C7609329BC3213003BE148 /* UserUseCase.swift in Sources */,
+				915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */,
+				91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */,
 				91E41A3229B7791600DA4EAE /* ViewController.swift in Sources */,
 				91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */,
 				91E41A3029B7791600DA4EAE /* SceneDelegate.swift in Sources */,
@@ -596,6 +691,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		91C7608B29BC2E3F003BE148 /* XCRemoteSwiftPackageReference "amplify-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		91C7608C29BC2E3F003BE148 /* AWSCognitoAuthPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91C7608B29BC2E3F003BE148 /* XCRemoteSwiftPackageReference "amplify-swift" */;
+			productName = AWSCognitoAuthPlugin;
+		};
+		91C7608E29BC2E3F003BE148 /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91C7608B29BC2E3F003BE148 /* XCRemoteSwiftPackageReference "amplify-swift" */;
+			productName = Amplify;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 91E41A2229B7791600DA4EAE /* Project object */;
 }
