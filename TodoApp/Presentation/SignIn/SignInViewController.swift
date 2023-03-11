@@ -30,19 +30,19 @@ class SignInViewController: BaseViewController {
         
     @IBAction private func googleSignIn(_ sender: Any) {
         Task {
-            await socialSignInWithWebUI()
+            await socialSignInWithWebUI(provider: .google)
         }
     }
     
     @IBAction private func appleSignIn(_ sender: Any) {
         Task {
-            await socialSignInWithWebUI()
+            await socialSignInWithWebUI(provider: .apple)
         }
     }
     
     @IBAction private func logout(_ sender: Any) {
         Task {
-           await viewModel.signOutLocally()
+            await viewModel.signOutLocally()
         }
     }
     
@@ -53,9 +53,9 @@ class SignInViewController: BaseViewController {
     }
     
     // TODO: 後で適切な場所に移動
-    private func socialSignInWithWebUI() async {
+    private func socialSignInWithWebUI(provider :AuthProvider) async {
         do {
-            let signInResult = try await Amplify.Auth.signInWithWebUI(for: .google, presentationAnchor: self.view.window!)
+            let signInResult = try await Amplify.Auth.signInWithWebUI(for: provider, presentationAnchor: self.view.window!)
             if signInResult.isSignedIn {
                 print("Sign in succeeded")
             }
