@@ -26,6 +26,7 @@ class SignInViewController: BaseViewController {
     }
     
     @IBAction private func createAccount(_ sender: Any) {
+        self.toAccount()
     }
         
     @IBAction private func googleSignIn(_ sender: Any) {
@@ -39,19 +40,7 @@ class SignInViewController: BaseViewController {
             await socialSignInWithWebUI(provider: .apple)
         }
     }
-    
-    @IBAction private func logout(_ sender: Any) {
-        Task {
-            await viewModel.signOutLocally()
-        }
-    }
-    
-    @IBAction private func currentToken(_ sender: Any) {
-        Task {
-            await viewModel.fetchCurrentAuthSession()
-        }
-    }
-    
+
     // TODO: 後で適切な場所に移動
     private func socialSignInWithWebUI(provider :AuthProvider) async {
         do {

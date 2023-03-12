@@ -6,6 +6,7 @@ target 'TodoApp' do
   use_frameworks!
 
   # Pods for TodoApp
+  pod 'R.swift', '5.1.0'
 
   target 'TodoAppTests' do
     inherit! :search_paths
