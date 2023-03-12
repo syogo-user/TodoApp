@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Setting-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="SettingViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SOr-Rj-7nV">
+                                <rect key="frame" x="50" y="84" width="293" height="70"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2fV-yH-8lc">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="2fV-yH-8lc" secondAttribute="height" multiplier="1:1" id="hE8-Rl-huG"/>
+                                            <constraint firstAttribute="height" constant="70" id="ktI-RB-Kaw"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdo-Sf-aRh">
+                                        <rect key="frame" x="86" y="0.0" width="207" height="70"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86i-la-gtW">
+                                <rect key="frame" x="132.66666666666666" y="409" width="127.99999999999997" height="34.333333333333314"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="サインアウト"/>
+                                <connections>
+                                    <action selector="signOut:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8sn-rf-AE7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpw-JL-tRc">
+                                <rect key="frame" x="132.66666666666666" y="493.33333333333331" width="127.99999999999997" height="34.333333333333314"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="トークン確認"/>
+                                <connections>
+                                    <action selector="currentToken:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="UZm-pM-Cmb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="SOr-Rj-7nV" secondAttribute="trailing" constant="50" id="2v3-1b-jre"/>
+                            <constraint firstItem="Bpw-JL-tRc" firstAttribute="top" secondItem="86i-la-gtW" secondAttribute="bottom" constant="50" id="Hoe-2k-swc"/>
+                            <constraint firstItem="86i-la-gtW" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="QaP-B6-9La"/>
+                            <constraint firstItem="SOr-Rj-7nV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="QbN-x9-USS"/>
+                            <constraint firstItem="86i-la-gtW" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="grz-jd-1cg"/>
+                            <constraint firstItem="Bpw-JL-tRc" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="gwM-r5-9Hg"/>
+                            <constraint firstItem="SOr-Rj-7nV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="25" id="rfS-f1-Nv4"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Setting" image="person" catalog="system" id="OTA-Zj-AeG"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="emailLabel" destination="Rdo-Sf-aRh" id="Spv-Mq-Ygd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138.1679389312977" y="-2.1126760563380285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="person" catalog="system" width="128" height="121"/>
+    </resources>
+</document>
