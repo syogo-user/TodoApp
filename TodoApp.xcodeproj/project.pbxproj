@@ -22,9 +22,19 @@
 		91A033BE29BDC8A50019D5A9 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033BD29BDC8A50019D5A9 /* TabBarViewModel.swift */; };
 		91A033C029BDCAB50019D5A9 /* List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A033BF29BDCAB50019D5A9 /* List.storyboard */; };
 		91A033C229BDCACE0019D5A9 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A033C129BDCACE0019D5A9 /* Setting.storyboard */; };
-		91A033C529BDEED20019D5A9 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C429BDEED20019D5A9 /* TaskListViewController.swift */; };
+		91A033C529BDEED20019D5A9 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C429BDEED20019D5A9 /* TodoListViewController.swift */; };
 		91A033C829BDEF200019D5A9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C729BDEF200019D5A9 /* SettingViewController.swift */; };
 		91A033CA29BDF6920019D5A9 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C929BDF6920019D5A9 /* SettingViewModel.swift */; };
+		91A033D129BF675B0019D5A9 /* DatabaseDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033D029BF675B0019D5A9 /* DatabaseDefinition.swift */; };
+		91A033D329BF67B10019D5A9 /* MainDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033D229BF67B10019D5A9 /* MainDatabase.swift */; };
+		91A033D729BF68570019D5A9 /* UserInfoDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033D629BF68570019D5A9 /* UserInfoDao.swift */; };
+		91A033D929BF6E540019D5A9 /* UserLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033D829BF6E540019D5A9 /* UserLocalStore.swift */; };
+		91A033DB29BF6F6B0019D5A9 /* UserInfoRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033DA29BF6F6B0019D5A9 /* UserInfoRecord.swift */; };
+		91A033DE29BF735B0019D5A9 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033DD29BF735B0019D5A9 /* DatabaseError.swift */; };
+		91A033E029BF738A0019D5A9 /* DatabaseQueueFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033DF29BF738A0019D5A9 /* DatabaseQueueFactory.swift */; };
+		91A033E229BF7A680019D5A9 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033E129BF7A680019D5A9 /* UserRepository.swift */; };
+		91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC1A6529C0B08D00500A62 /* VMResult.swift */; };
+		91BC1A6929C0C29000500A62 /* UserInfoAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */; };
 		91C7608D29BC2E3F003BE148 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 91C7608C29BC2E3F003BE148 /* AWSCognitoAuthPlugin */; };
 		91C7608F29BC2E3F003BE148 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 91C7608E29BC2E3F003BE148 /* Amplify */; };
 		91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7609029BC3002003BE148 /* SignInViewModel.swift */; };
@@ -77,9 +87,19 @@
 		91A033BD29BDC8A50019D5A9 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		91A033BF29BDCAB50019D5A9 /* List.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
 		91A033C129BDCACE0019D5A9 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
-		91A033C429BDEED20019D5A9 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
+		91A033C429BDEED20019D5A9 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		91A033C729BDEF200019D5A9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		91A033C929BDF6920019D5A9 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		91A033D029BF675B0019D5A9 /* DatabaseDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDefinition.swift; sourceTree = "<group>"; };
+		91A033D229BF67B10019D5A9 /* MainDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDatabase.swift; sourceTree = "<group>"; };
+		91A033D629BF68570019D5A9 /* UserInfoDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDao.swift; sourceTree = "<group>"; };
+		91A033D829BF6E540019D5A9 /* UserLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocalStore.swift; sourceTree = "<group>"; };
+		91A033DA29BF6F6B0019D5A9 /* UserInfoRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRecord.swift; sourceTree = "<group>"; };
+		91A033DD29BF735B0019D5A9 /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
+		91A033DF29BF738A0019D5A9 /* DatabaseQueueFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseQueueFactory.swift; sourceTree = "<group>"; };
+		91A033E129BF7A680019D5A9 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		91BC1A6529C0B08D00500A62 /* VMResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMResult.swift; sourceTree = "<group>"; };
+		91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoAttribute.swift; sourceTree = "<group>"; };
 		91C7609029BC3002003BE148 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		91C7609229BC3213003BE148 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		91E41A2A29B7791600DA4EAE /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +186,9 @@
 		915F06E829BA1B7100685156 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
+				91A033CD29BF66290019D5A9 /* Store */,
+				91A033CC29BF66230019D5A9 /* Repository */,
+				91A033CB29BF65FF0019D5A9 /* DB */,
 			);
 			path = Infra;
 			sourceTree = "<group>";
@@ -173,6 +196,7 @@
 		915F06E929BA1B7800685156 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				91BC1A6729C0C28000500A62 /* Entity */,
 				91C7609229BC3213003BE148 /* UserUseCase.swift */,
 			);
 			path = Domain;
@@ -182,7 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				91A033C629BDEF0D0019D5A9 /* Setting */,
-				91A033C329BDEEB20019D5A9 /* TaskList */,
+				91A033C329BDEEB20019D5A9 /* TodoList */,
 				91A033B829BDC4640019D5A9 /* TabBar */,
 				91A0333029BC9AEE0019D5A9 /* SignUp */,
 				915F06F029BA1CB600685156 /* Common */,
@@ -217,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				915F06F129BA1CC700685156 /* BaseViewController.swift */,
+				91BC1A6529C0B08D00500A62 /* VMResult.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -240,12 +265,12 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		91A033C329BDEEB20019D5A9 /* TaskList */ = {
+		91A033C329BDEEB20019D5A9 /* TodoList */ = {
 			isa = PBXGroup;
 			children = (
-				91A033C429BDEED20019D5A9 /* TaskListViewController.swift */,
+				91A033C429BDEED20019D5A9 /* TodoListViewController.swift */,
 			);
-			path = TaskList;
+			path = TodoList;
 			sourceTree = "<group>";
 		};
 		91A033C629BDEF0D0019D5A9 /* Setting */ = {
@@ -255,6 +280,67 @@
 				91A033C929BDF6920019D5A9 /* SettingViewModel.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		91A033CB29BF65FF0019D5A9 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				91A033DC29BF73490019D5A9 /* Utility */,
+				91A033CF29BF66460019D5A9 /* DAO */,
+				91A033CE29BF663E0019D5A9 /* Record */,
+				91A033D029BF675B0019D5A9 /* DatabaseDefinition.swift */,
+				91A033D229BF67B10019D5A9 /* MainDatabase.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		91A033CC29BF66230019D5A9 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				91A033E129BF7A680019D5A9 /* UserRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		91A033CD29BF66290019D5A9 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				91A033D829BF6E540019D5A9 /* UserLocalStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		91A033CE29BF663E0019D5A9 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				91A033DA29BF6F6B0019D5A9 /* UserInfoRecord.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		91A033CF29BF66460019D5A9 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				91A033D629BF68570019D5A9 /* UserInfoDao.swift */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		91A033DC29BF73490019D5A9 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				91A033DD29BF735B0019D5A9 /* DatabaseError.swift */,
+				91A033DF29BF738A0019D5A9 /* DatabaseQueueFactory.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		91BC1A6729C0C28000500A62 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		91E41A2129B7791600DA4EAE = {
@@ -584,16 +670,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91A033DB29BF6F6B0019D5A9 /* UserInfoRecord.swift in Sources */,
+				91A033D129BF675B0019D5A9 /* DatabaseDefinition.swift in Sources */,
 				915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */,
+				91A033DE29BF735B0019D5A9 /* DatabaseError.swift in Sources */,
 				91C7609329BC3213003BE148 /* UserUseCase.swift in Sources */,
+				91A033D329BF67B10019D5A9 /* MainDatabase.swift in Sources */,
 				91A0333229BC9B040019D5A9 /* SignUpViewController.swift in Sources */,
 				915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */,
+				91BC1A6929C0C29000500A62 /* UserInfoAttribute.swift in Sources */,
+				91A033D929BF6E540019D5A9 /* UserLocalStore.swift in Sources */,
 				91A0333429BC9BB50019D5A9 /* SignUpViewModel.swift in Sources */,
 				91A033C829BDEF200019D5A9 /* SettingViewController.swift in Sources */,
+				91A033E029BF738A0019D5A9 /* DatabaseQueueFactory.swift in Sources */,
 				91A033BC29BDC4D50019D5A9 /* TabBarRouter.swift in Sources */,
 				91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */,
-				91A033C529BDEED20019D5A9 /* TaskListViewController.swift in Sources */,
+				91A033E229BF7A680019D5A9 /* UserRepository.swift in Sources */,
+				91A033D729BF68570019D5A9 /* UserInfoDao.swift in Sources */,
+				91A033C529BDEED20019D5A9 /* TodoListViewController.swift in Sources */,
 				91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */,
+				91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */,
 				91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */,
 				91A033CA29BDF6920019D5A9 /* SettingViewModel.swift in Sources */,
 				91A033BA29BDC4760019D5A9 /* TabBarController.swift in Sources */,

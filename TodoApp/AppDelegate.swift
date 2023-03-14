@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import RxSwift
 import Amplify
 import AWSCognitoAuthPlugin
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    private var disposeBag = DisposeBag()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // ローカルDBのセットアップ
+        MainDatabase.shared.open().subscribe().disposed(by: disposeBag)
 
         do {
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
