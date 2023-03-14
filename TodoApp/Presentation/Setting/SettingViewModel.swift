@@ -7,17 +7,29 @@
 
 import Amplify
 import AWSCognitoAuthPlugin
+import RxSwift
+import RxCocoa
+import Foundation
 
 protocol SettingViewModel {
+    /// Eメール
+    var userEmail: Signal<VMResult<UserInfoAttribute>?> { get }
     /// サインアウト
     func signOutLocally() async
     /// セッション情報を取得
     func fetchCurrentAuthSession() async
+    /// ユーザ情報取得
+    func loadUser()
+    /// ユーザ情報削除
+    func deleteLocalUser(userId: String)
 }
 
 class SettingViewModelImpl: SettingViewModel {
+    private var disposeBag = DisposeBag()
     private let usecase: UserUseCase = UserUseCaseImpl()
-    
+    private let userInfoRelay = BehaviorRelay<VMResult<UserInfoAttribute>?>(value: nil)
+    lazy var userEmail = userInfoRelay.asSignal(onErrorSignalWith: .empty())
+
     func signOutLocally() async {
         let result = await Amplify.Auth.signOut()
         guard let signOutResult = result as? AWSCognitoSignOutResult
@@ -52,5 +64,21 @@ class SettingViewModelImpl: SettingViewModel {
 
     func fetchCurrentAuthSession() async {
         await usecase.fetchCurrentAuthSession()
+    }
+
+    func loadUser() {
+        usecase.loadLocalUser()
+            .map { result -> VMResult<UserInfoAttribute> in
+                let userInfo = UserInfoAttribute(userId: result.userId, email: result.email)
+                return VMResult(data: userInfo)
+            }
+            .asSignal(onErrorRecover: { .just(.failure($0))})
+            .startWith(.loading())
+            .emit(to: userInfoRelay)
+            .disposed(by: disposeBag)
+    }
+
+    func deleteLocalUser(userId: String) {
+        usecase.deleteLocalUser(userId: userId)
     }
 }

@@ -1,20 +1,52 @@
 PODS:
+  - APIKit (5.4.0)
+  - GRDB.swift (4.14.0):
+    - GRDB.swift/standard (= 4.14.0)
+  - GRDB.swift/standard (4.14.0)
   - R.swift (5.1.0):
     - R.swift.Library (~> 5.1.0)
   - R.swift.Library (5.1.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxGRDB (0.18.0):
+    - RxGRDB/default (= 0.18.0)
+    - RxSwift (~> 5.0)
+  - RxGRDB/default (0.18.0):
+    - GRDB.swift (~> 4.1)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.3):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
 
 DEPENDENCIES:
+  - APIKit
   - R.swift (= 5.1.0)
+  - RxCocoa (= 5.1.1)
+  - RxGRDB (= 0.18.0)
+  - RxSwift (= 5.1.1)
 
 SPEC REPOS:
   trunk:
+    - APIKit
+    - GRDB.swift
     - R.swift
     - R.swift.Library
+    - RxCocoa
+    - RxGRDB
+    - RxRelay
+    - RxSwift
 
 SPEC CHECKSUMS:
+  APIKit: 0680e86d2e8abd5bc42e64963f5f89d209eb9271
+  GRDB.swift: 8cc3ab7c8b8b4ac1761deb8dca4b51c1c9d429f8
   R.swift: 8cbc4fc69b740305b6a17c8a8ed968eb788962d9
   R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxGRDB: 41dfd8f987aad7a7bdd7c420319d3eb23ee383f3
+  RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: 2666ef606cb0a27e72f931ff69d6434e15cfb702
+PODFILE CHECKSUM: 298618d3e5ae09027de20a4340ea260a2eacd208
 
 COCOAPODS: 1.12.0

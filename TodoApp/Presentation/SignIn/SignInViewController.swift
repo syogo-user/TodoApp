@@ -42,16 +42,18 @@ class SignInViewController: BaseViewController {
     }
 
     // TODO: 後で適切な場所に移動
-    private func socialSignInWithWebUI(provider :AuthProvider) async {
+    func socialSignInWithWebUI(provider :AuthProvider) async {
         do {
             let signInResult = try await Amplify.Auth.signInWithWebUI(for: provider, presentationAnchor: self.view.window!)
+
             if signInResult.isSignedIn {
-                print("Sign in succeeded")
+                print("Sign in succeeded")            
+                self.viewModel.setUserInfo()
             }
         } catch let error as AuthError {
             print("Sign in failed \(error)")
         } catch {
             print("Unexpected error: \(error)")
         }
-    }
+    }    
 }

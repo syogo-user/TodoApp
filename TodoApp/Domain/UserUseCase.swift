@@ -7,6 +7,7 @@
 
 import Amplify
 import AWSPluginsCore
+import RxSwift
 
 protocol UserUseCase {
     /// サインアップ
@@ -17,9 +18,18 @@ protocol UserUseCase {
     func fetchCurrentAuthSession() async
     /// ログイン中かどうか判定
     func isSignIn() async -> Bool
+    /// ユーザ情報を取得
+    func fetchUserInfo() async -> [AuthUserAttribute]?
+    /// ユーザ情報取得
+    func loadLocalUser() -> Single<UserInfoRecord>
+    /// ユーザ情報を登録
+    func insertLocalUser(userId: String, email: String)
+    /// ユーザ情報を削除
+    func deleteLocalUser(userId: String) 
 }
 
 class UserUseCaseImpl: UserUseCase {
+    private var repository: UserRepository = UserRepositoryImpl()
 
     func signUp(userName: String, password: String, email: String) async {
         let userAttributes = [AuthUserAttribute(.email, value: email)]
@@ -83,5 +93,30 @@ class UserUseCaseImpl: UserUseCase {
             print("Unexpected error: \(error)")
             return false
         }
+    }
+
+    func fetchUserInfo() async -> [AuthUserAttribute]? {
+        do {
+            let user = try await Amplify.Auth.fetchUserAttributes()
+            dump(user)
+            return user
+        } catch let error as AuthError {
+            print("Fetch session failed with error \(error)")
+        } catch {
+            print("Unexpected error: \(error)")
+        }
+        return nil
+    }
+
+    func loadLocalUser() -> Single<UserInfoRecord> {
+        repository.loadLocalUser()
+    }
+
+    func insertLocalUser(userId: String, email: String) {
+        repository.insertLocalUser(userId: userId, email: email)
+    }
+
+    func deleteLocalUser(userId: String) {
+        repository.deleteLocalUser(userId: userId)
     }
 }

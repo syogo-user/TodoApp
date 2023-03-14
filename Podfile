@@ -7,7 +7,11 @@ target 'TodoApp' do
 
   # Pods for TodoApp
   pod 'R.swift', '5.1.0'
-
+  pod 'RxGRDB', '0.18.0'
+  pod 'RxSwift', '5.1.1'
+  pod 'RxCocoa', '5.1.1'
+  pod 'APIKit'
+  
   target 'TodoAppTests' do
     inherit! :search_paths
     # Pods for testing
