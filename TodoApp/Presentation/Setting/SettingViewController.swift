@@ -19,37 +19,76 @@ class SettingViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.loadUser()
-        bindViewModelEvent()
+        do {
+            try viewModel.loadUser()
+        } catch {
+            self.handlerError(error: error) {
+                // ダイアログ表示
+
+            }
+        }
     }
 
     @IBAction func signOut(_ sender: Any) {
         Task {
-            await viewModel.signOutLocally()
-            guard let userId = userInfo?.userId else { return }
-            viewModel.deleteLocalUser(userId: userId)
+            do {
+                try await viewModel.signOutLocally()
+                viewModel.deleteLocalUser()
+                // 左タブを選択
+                self.tabBarController?.selectedIndex = 0
+                toSignIn()
+            } catch {
+                self.handlerError(error: error) {
+
+                }
+            }
         }
     }
 
     // TODO: 後で削除
     @IBAction private func currentToken(_ sender: Any) {
         Task {
-            await viewModel.fetchCurrentAuthSession()
+            do {
+                let token = try await viewModel.fetchCurrentAuthToken()
+                print("token:\(token)")
+            } catch {
+                self.handlerError(error: DomainError.authError) {
+                    tokenErrorDialog() {
+                        self.signOut()
+                    }
+                }
+            }
         }
     }
 
-    private func bindViewModelEvent() {
-        viewModel.userEmail
-            .emit(onNext: { [unowned self] result in
-                guard let result = result, result.isCompleted else { return }
-                if let error = result.error {
-                    self.handlerError(error: error)
+    private func signOut() {
+        Task {
+            do {
+                // サインアウト
+                try await viewModel.signOutLocally()
+                viewModel.deleteLocalUser()
+                toSignIn()
+            } catch {
+                self.handlerError(error: DomainError.localDBError) {
+                    localDbErrorDialog()
                 }
-                if let userInfo = result.data {
-                    self.userInfo = userInfo
-                    print("userId:\(self.userInfo?.userId),email:\(self.userInfo?.email)")
-                }
-            })
-            .disposed(by: disposeBag)
+            }
+        }
+    }
+
+    private func tokenErrorDialog(completion: (() -> Void)? = nil) {
+        let dialog = UIAlertController(title: R.string.localizable.tokenErrorDialogTitle(), message: R.string.localizable.tokenErrorDialogMessage(), preferredStyle: .alert)
+        dialog.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: { action in
+            completion?()
+        }))
+        self.present(dialog,animated: true,completion: nil)
+    }
+
+    private func localDbErrorDialog(completion: (() -> Void)? = nil) {
+        let dialog = UIAlertController(title: R.string.localizable.localDBErrorDialogTitle(), message: R.string.localizable.localDBErrorDialogMessage(), preferredStyle: .alert)
+        dialog.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: { action in
+            completion?()
+        }))
+        self.present(dialog,animated: true,completion: nil)
     }
 }

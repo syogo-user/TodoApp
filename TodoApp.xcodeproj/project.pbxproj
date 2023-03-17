@@ -13,6 +13,7 @@
 		915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06EE29BA1C2200685156 /* SignInViewController.swift */; };
 		915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06F129BA1CC700685156 /* BaseViewController.swift */; };
 		915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 915F06F329BA1D3900685156 /* SignIn.storyboard */; };
+		919A407329C3541000D63E44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 919A407229C3541000D63E44 /* Localizable.strings */; };
 		91A0333229BC9B040019D5A9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0333129BC9B040019D5A9 /* SignUpViewController.swift */; };
 		91A0333429BC9BB50019D5A9 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0333329BC9BB50019D5A9 /* SignUpViewModel.swift */; };
 		91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */; };
@@ -39,6 +40,8 @@
 		91C7608F29BC2E3F003BE148 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 91C7608E29BC2E3F003BE148 /* Amplify */; };
 		91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7609029BC3002003BE148 /* SignInViewModel.swift */; };
 		91C7609329BC3213003BE148 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7609229BC3213003BE148 /* UserUseCase.swift */; };
+		91CFFD8629C1FE420086B5E2 /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CFFD8529C1FE420086B5E2 /* SettingRouter.swift */; };
+		91CFFD8B29C22A0D0086B5E2 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CFFD8A29C22A0D0086B5E2 /* DomainError.swift */; };
 		91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A2D29B7791600DA4EAE /* AppDelegate.swift */; };
 		91E41A3029B7791600DA4EAE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A2F29B7791600DA4EAE /* SceneDelegate.swift */; };
 		91E41A3529B7791600DA4EAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91E41A3329B7791600DA4EAE /* Main.storyboard */; };
@@ -78,6 +81,7 @@
 		915F06EE29BA1C2200685156 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		915F06F129BA1CC700685156 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		915F06F329BA1D3900685156 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		919A407229C3541000D63E44 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		91A0333129BC9B040019D5A9 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		91A0333329BC9BB50019D5A9 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 		91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoAttribute.swift; sourceTree = "<group>"; };
 		91C7609029BC3002003BE148 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		91C7609229BC3213003BE148 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
+		91CFFD8529C1FE420086B5E2 /* SettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
+		91CFFD8A29C22A0D0086B5E2 /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		91E41A2A29B7791600DA4EAE /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E41A2D29B7791600DA4EAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91E41A2F29B7791600DA4EAE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +202,7 @@
 		915F06E929BA1B7800685156 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				91CFFD8929C229FF0086B5E2 /* Error */,
 				91BC1A6729C0C28000500A62 /* Entity */,
 				91C7609229BC3213003BE148 /* UserUseCase.swift */,
 			);
@@ -277,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				91A033C729BDEF200019D5A9 /* SettingViewController.swift */,
+				91CFFD8529C1FE420086B5E2 /* SettingRouter.swift */,
 				91A033C929BDF6920019D5A9 /* SettingViewModel.swift */,
 			);
 			path = Setting;
@@ -343,6 +351,14 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		91CFFD8929C229FF0086B5E2 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				91CFFD8A29C22A0D0086B5E2 /* DomainError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		91E41A2129B7791600DA4EAE = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +394,7 @@
 				91E41A3629B7791800DA4EAE /* Assets.xcassets */,
 				91E41A3829B7791800DA4EAE /* LaunchScreen.storyboard */,
 				91E41A3B29B7791800DA4EAE /* Info.plist */,
+				919A407229C3541000D63E44 /* Localizable.strings */,
 			);
 			path = TodoApp;
 			sourceTree = "<group>";
@@ -520,6 +537,7 @@
 				91A033C029BDCAB50019D5A9 /* List.storyboard in Resources */,
 				91E41A3729B7791800DA4EAE /* Assets.xcassets in Resources */,
 				91E41A3529B7791600DA4EAE /* Main.storyboard in Resources */,
+				919A407329C3541000D63E44 /* Localizable.strings in Resources */,
 				3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */,
 				915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */,
 				1107DA970E5914BB89B2054F /* amplifyconfiguration.json in Resources */,
@@ -686,8 +704,10 @@
 				91A033BC29BDC4D50019D5A9 /* TabBarRouter.swift in Sources */,
 				91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */,
 				91A033E229BF7A680019D5A9 /* UserRepository.swift in Sources */,
+				91CFFD8B29C22A0D0086B5E2 /* DomainError.swift in Sources */,
 				91A033D729BF68570019D5A9 /* UserInfoDao.swift in Sources */,
 				91A033C529BDEED20019D5A9 /* TodoListViewController.swift in Sources */,
+				91CFFD8629C1FE420086B5E2 /* SettingRouter.swift in Sources */,
 				91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */,
 				91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */,
 				91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */,

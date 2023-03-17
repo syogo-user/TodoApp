@@ -32,6 +32,7 @@ class SignInViewController: BaseViewController {
     @IBAction private func googleSignIn(_ sender: Any) {
         Task {
             await socialSignInWithWebUI(provider: .google)
+
         }
     }
     
@@ -49,6 +50,7 @@ class SignInViewController: BaseViewController {
             if signInResult.isSignedIn {
                 print("Sign in succeeded")            
                 self.viewModel.setUserInfo()
+                self.dismiss(animated: true)
             }
         } catch let error as AuthError {
             print("Sign in failed \(error)")

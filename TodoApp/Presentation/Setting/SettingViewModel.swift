@@ -12,73 +12,33 @@ import RxCocoa
 import Foundation
 
 protocol SettingViewModel {
-    /// Eメール
-    var userEmail: Signal<VMResult<UserInfoAttribute>?> { get }
     /// サインアウト
-    func signOutLocally() async
-    /// セッション情報を取得
-    func fetchCurrentAuthSession() async
+    func signOutLocally() async throws
+    /// トークン情報を取得
+    func fetchCurrentAuthToken() async throws -> String
     /// ユーザ情報取得
-    func loadUser()
+    func loadUser() throws
     /// ユーザ情報削除
-    func deleteLocalUser(userId: String)
+    func deleteLocalUser()
 }
 
 class SettingViewModelImpl: SettingViewModel {
     private var disposeBag = DisposeBag()
     private let usecase: UserUseCase = UserUseCaseImpl()
-    private let userInfoRelay = BehaviorRelay<VMResult<UserInfoAttribute>?>(value: nil)
-    lazy var userEmail = userInfoRelay.asSignal(onErrorSignalWith: .empty())
 
-    func signOutLocally() async {
-        let result = await Amplify.Auth.signOut()
-        guard let signOutResult = result as? AWSCognitoSignOutResult
-        else {
-            print("Signout failed")
-            return
-        }
-
-        print("Local signout successful: \(signOutResult.signedOutLocally)")
-        switch signOutResult {
-        case .complete:
-            print("Signed out successfully")
-
-        case let .partial(revokeTokenError, globalSignOutError, hostedUIError):
-
-            if let hostedUIError = hostedUIError {
-                print("HostedUI error  \(String(describing: hostedUIError))")
-            }
-
-            if let globalSignOutError = globalSignOutError {
-                print("GlobalSignOut error  \(String(describing: globalSignOutError))")
-            }
-
-            if let revokeTokenError = revokeTokenError {
-                print("Revoke token error  \(String(describing: revokeTokenError))")
-            }
-
-        case .failed(let error):
-            print("SignOut failed with \(error)")
-        }
+    func signOutLocally() async throws {
+       try await usecase.signOut()
     }
 
-    func fetchCurrentAuthSession() async {
-        await usecase.fetchCurrentAuthSession()
+    func fetchCurrentAuthToken() async throws -> String {
+       try await usecase.fetchCurrentAuthToken()
     }
 
-    func loadUser() {
-        usecase.loadLocalUser()
-            .map { result -> VMResult<UserInfoAttribute> in
-                let userInfo = UserInfoAttribute(userId: result.userId, email: result.email)
-                return VMResult(data: userInfo)
-            }
-            .asSignal(onErrorRecover: { .just(.failure($0))})
-            .startWith(.loading())
-            .emit(to: userInfoRelay)
-            .disposed(by: disposeBag)
+    func loadUser() throws {
+       let userInfo = try usecase.loadLocalUser()
     }
 
-    func deleteLocalUser(userId: String) {
-        usecase.deleteLocalUser(userId: userId)
+    func deleteLocalUser() {
+        usecase.deleteLocalUser()
     }
 }
