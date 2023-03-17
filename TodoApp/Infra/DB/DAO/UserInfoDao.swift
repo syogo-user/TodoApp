@@ -7,30 +7,28 @@
 
 import Foundation
 import GRDB
-import RxGRDB
 import RxSwift
 
 protocol UserInfoDao {
     /// ユーザ情報を取得
-    func loadLocalUserInfo() -> Single<UserInfoRecord>
+    func loadLocalUserInfo() throws -> UserInfoRecord
     /// ローカルにユーザを追加する
     func insertLocalUserInfo(userInfo: UserInfoRecord)
     ///  ローカルのユーザ情報を削除する
-    func deleteLocalUserInfo(userId: String)
+    func deleteLocalUserInfo()
 }
 
 class UserInfoDaoImpl: UserInfoDao {
-    func loadLocalUserInfo() -> Single<UserInfoRecord> {
-        MainDatabase.shared.dbQueue()
-            .flatMap { dbQueue in
-                dbQueue.rx.read { db in
-                    guard let userInfoRecord = try UserInfoRecord.fetchOne(db) else {
-                        // TODO: エラークラスを作成する
-                        throw NSError(domain: "fetchError", code: 0, userInfo: nil)
-                    }
-                    return userInfoRecord
-                }
+
+    func loadLocalUserInfo() throws -> UserInfoRecord {
+        let dbQueue: DatabaseQueue = try MainDatabase.shared.dbQueue()
+        let userInfoRecord = try dbQueue.read { db in
+            guard let userInfo = try UserInfoRecord.fetchOne(db) else {
+                throw DomainError.localDBError
             }
+            return userInfo
+        }
+        return userInfoRecord
     }
 
     func insertLocalUserInfo(userInfo: UserInfoRecord) {
@@ -44,12 +42,11 @@ class UserInfoDaoImpl: UserInfoDao {
         }
     }
 
-    func deleteLocalUserInfo(userId: String) {
+    func deleteLocalUserInfo() {
         do {
             let dbQueue: DatabaseQueue = try MainDatabase.shared.dbQueue()
             let _ = try dbQueue.write { db in
-                // 指定されたuserIdを持つレコードを削除する
-                try UserInfoRecord.deleteOne(db, key: userId)
+                try UserInfoRecord.deleteAll(db)
             }
         } catch {
             // エラー処理を行う

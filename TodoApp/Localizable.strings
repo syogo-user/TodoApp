@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  TodoApp
+
+  Created by 小野寺祥吾 on 2023/03/16.
+  
+*/
+// MARK: - ErrorDialogTitle
+"apiResultErrorDialogTitle" = "APIエラー";
+"localDBErrorDialogTitle" = "DBエラー";
+"tokenErrorDialogTitle" = "トークンエラー";
+"signInErrorDialogTitle" = "ログインエラー";
+"signOutErrorDialogTitle" = "ログアウトエラー";
+"updateTaskErrorDialogTitle" = "更新エラー";
+"networkErrorDialogTitle" = "ネットワークエラー";
+"unknownErrorDialogTitle" = "不明なエラー";
+
+// MARK: - ErrorDialogMessage
+"apiReusltErrorDialogMessage" = "APIの処理に失敗しました。\nもう一度実行してください。";
+"localDBErrorDialogMessage" = "ローカルDBへの取得または更新処理が失敗しました。\nログインし直してください。";
+"tokenErrorDialogMessage" = "トークンの取得に失敗しました。\nログアウト後に、もう一度ログインし直してください。";
+"signInErrorDialogMessage" = "ログインに失敗しました。\n入力内容をご確認のうえ、再度ログインください。";
+"signOutErrorDialogMessage" = "ログアウトに失敗しました。\nもう一度実行してください。";
+"updateTodoErrorDialogMessage" = "タスクの更新に失敗しました。\n一覧を更新してください。";
+"networkErrorDialogMessage" = "ネットワークに接続してください。";
+"unknownErrorDialogMessage" = "処理に失敗しました。\nお時間をあけてから、もう一度お試しください。";
+
+
+// MARK: - Common
+"ok" = "OK";
+"cancel" = "キャンセル";

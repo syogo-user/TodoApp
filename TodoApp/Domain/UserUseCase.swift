@@ -7,6 +7,7 @@
 
 import Amplify
 import AWSPluginsCore
+import AWSCognitoAuthPlugin
 import RxSwift
 
 protocol UserUseCase {
@@ -14,18 +15,20 @@ protocol UserUseCase {
     func signUp(userName: String, password: String, email: String) async
     /// 認証コード確認
     func confirmSignUp(for username: String, with confirmationCode: String) async
-    /// 現在のセッション情報を取得
-    func fetchCurrentAuthSession() async
+    /// トークンを取得
+    func fetchCurrentAuthToken() async throws -> String
     /// ログイン中かどうか判定
     func isSignIn() async -> Bool
+    /// サインアウト
+    func signOut() async throws
     /// ユーザ情報を取得
     func fetchUserInfo() async -> [AuthUserAttribute]?
     /// ユーザ情報取得
-    func loadLocalUser() -> Single<UserInfoRecord>
+    func loadLocalUser() throws -> UserInfoAttribute
     /// ユーザ情報を登録
     func insertLocalUser(userId: String, email: String)
     /// ユーザ情報を削除
-    func deleteLocalUser(userId: String) 
+    func deleteLocalUser() 
 }
 
 class UserUseCaseImpl: UserUseCase {
@@ -66,19 +69,12 @@ class UserUseCaseImpl: UserUseCase {
         }
     }
 
-    func fetchCurrentAuthSession() async {
-        do {
-            let session = try await Amplify.Auth.fetchAuthSession()
-            print("Is user signed in - \(session.isSignedIn)")
-            if let cognitoTokenProvider = session as? AuthCognitoTokensProvider {
-                let tokens = try cognitoTokenProvider.getCognitoTokens().get()
-                print("tokens:\(tokens.idToken)")
-            }
-        } catch let error as AuthError {
-            print("Fetch session failed with error \(error)")
-        } catch {
-            print("Unexpected error: \(error)")
+    func fetchCurrentAuthToken() async throws -> String {
+        guard let cognitoTokenProvider = try await Amplify.Auth.fetchAuthSession() as? AuthCognitoTokensProvider else {
+            throw DomainError.authError
         }
+        let token = try cognitoTokenProvider.getCognitoTokens().get()
+        return token.idToken
     }
 
     func isSignIn() async -> Bool {
@@ -95,6 +91,28 @@ class UserUseCaseImpl: UserUseCase {
         }
     }
 
+    func signOut() async throws {
+        let auth = Amplify.Auth
+        let result = await Amplify.Auth.signOut()
+        guard let signOutResult = result as? AWSCognitoSignOutResult
+        else {
+            print("Signout failed")
+            return
+        }
+
+        print("Local signout successful: \(signOutResult.signedOutLocally)")
+        switch signOutResult {
+        case .complete:
+            print("Signed out successfully")
+
+        case let .partial(revokeTokenError, globalSignOutError, hostedUIError):
+            throw DomainError.authError
+        case .failed(let error):
+            print("SignOut failed with \(error)")
+            throw DomainError.authError
+        }
+    }
+    
     func fetchUserInfo() async -> [AuthUserAttribute]? {
         do {
             let user = try await Amplify.Auth.fetchUserAttributes()
@@ -108,15 +126,17 @@ class UserUseCaseImpl: UserUseCase {
         return nil
     }
 
-    func loadLocalUser() -> Single<UserInfoRecord> {
-        repository.loadLocalUser()
+    func loadLocalUser() throws -> UserInfoAttribute {
+        let user = try repository.loadLocalUser()
+        return UserInfoAttribute(userId: user.userId, email: user.email)
     }
 
     func insertLocalUser(userId: String, email: String) {
         repository.insertLocalUser(userId: userId, email: email)
     }
 
-    func deleteLocalUser(userId: String) {
-        repository.deleteLocalUser(userId: userId)
+    func deleteLocalUser() {
+        repository.deleteLocalUser()
     }
+    
 }
