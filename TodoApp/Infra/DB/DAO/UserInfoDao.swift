@@ -7,7 +7,6 @@
 
 import Foundation
 import GRDB
-import RxSwift
 
 protocol UserInfoDao {
     /// ユーザ情報を取得

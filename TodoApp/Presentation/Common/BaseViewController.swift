@@ -22,7 +22,7 @@ class BaseViewController: UIViewController {
             print("ローカルDBの更新に失敗しました。再度サインインをお願いします。")
         case DomainError.unownedError:
             print("処理に失敗しました。")
-        case DomainError.unacceptableAPIResultError(_):
+        case DomainError.unacceptableResultCode(_):
             print("")
         default:
             break
