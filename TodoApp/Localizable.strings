@@ -11,7 +11,7 @@
 "tokenErrorDialogTitle" = "トークンエラー";
 "signInErrorDialogTitle" = "ログインエラー";
 "signOutErrorDialogTitle" = "ログアウトエラー";
-"updateTaskErrorDialogTitle" = "更新エラー";
+"updateTodoErrorDialogTitle" = "更新エラー";
 "networkErrorDialogTitle" = "ネットワークエラー";
 "unknownErrorDialogTitle" = "不明なエラー";
 

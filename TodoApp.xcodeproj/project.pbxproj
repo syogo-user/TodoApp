@@ -23,7 +23,7 @@
 		91A033BE29BDC8A50019D5A9 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033BD29BDC8A50019D5A9 /* TabBarViewModel.swift */; };
 		91A033C029BDCAB50019D5A9 /* List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A033BF29BDCAB50019D5A9 /* List.storyboard */; };
 		91A033C229BDCACE0019D5A9 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A033C129BDCACE0019D5A9 /* Setting.storyboard */; };
-		91A033C529BDEED20019D5A9 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C429BDEED20019D5A9 /* TodoListViewController.swift */; };
+		91A033C529BDEED20019D5A9 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C429BDEED20019D5A9 /* TaskListViewController.swift */; };
 		91A033C829BDEF200019D5A9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C729BDEF200019D5A9 /* SettingViewController.swift */; };
 		91A033CA29BDF6920019D5A9 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C929BDF6920019D5A9 /* SettingViewModel.swift */; };
 		91A033D129BF675B0019D5A9 /* DatabaseDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033D029BF675B0019D5A9 /* DatabaseDefinition.swift */; };
@@ -34,6 +34,25 @@
 		91A033DE29BF735B0019D5A9 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033DD29BF735B0019D5A9 /* DatabaseError.swift */; };
 		91A033E029BF738A0019D5A9 /* DatabaseQueueFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033DF29BF738A0019D5A9 /* DatabaseQueueFactory.swift */; };
 		91A033E229BF7A680019D5A9 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033E129BF7A680019D5A9 /* UserRepository.swift */; };
+		91A0889B29C49D7D000BF175 /* TaskRemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0889A29C49D7D000BF175 /* TaskRemoteStore.swift */; };
+		91A0889F29C49EC8000BF175 /* SessionExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0889E29C49EC8000BF175 /* SessionExtention.swift */; };
+		91A088A129C49F17000BF175 /* URLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088A029C49F17000BF175 /* URLSessionConfiguration.swift */; };
+		91A088A529C49FF8000BF175 /* TaskListAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088A429C49FF8000BF175 /* TaskListAPI.swift */; };
+		91A088A829C4A147000BF175 /* APIRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088A729C4A147000BF175 /* APIRoutes.swift */; };
+		91A088AA29C4A1CC000BF175 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088A929C4A1CC000BF175 /* APIRequest.swift */; };
+		91A088AC29C4A255000BF175 /* DecodableDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088AB29C4A255000BF175 /* DecodableDataParser.swift */; };
+		91A088AE29C4A26F000BF175 /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088AD29C4A26F000BF175 /* APIResult.swift */; };
+		91A088B029C4A3A0000BF175 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088AF29C4A3A0000BF175 /* Constant.swift */; };
+		91A088B229C4A3D5000BF175 /* AddTaskAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088B129C4A3D5000BF175 /* AddTaskAPI.swift */; };
+		91A088B429C4B484000BF175 /* UpdateTaskAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088B329C4B484000BF175 /* UpdateTaskAPI.swift */; };
+		91A088B629C4B67F000BF175 /* DeleteTaskAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088B529C4B67F000BF175 /* DeleteTaskAPI.swift */; };
+		91A088B829C4B966000BF175 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088B729C4B966000BF175 /* Environment.swift */; };
+		91A088BB29C550E4000BF175 /* TaskUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088BA29C550E4000BF175 /* TaskUseCase.swift */; };
+		91A088BD29C552BC000BF175 /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088BC29C552BC000BF175 /* TaskRepository.swift */; };
+		91A088BF29C558E7000BF175 /* TaskInfoRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088BE29C558E7000BF175 /* TaskInfoRecord.swift */; };
+		91A088C129C559E6000BF175 /* TaskLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088C029C559E6000BF175 /* TaskLocalStore.swift */; };
+		91A088C329C58151000BF175 /* TaskInfoDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088C229C58151000BF175 /* TaskInfoDao.swift */; };
+		91A088C529C594CC000BF175 /* TaskInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088C429C594CC000BF175 /* TaskInfo.swift */; };
 		91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC1A6529C0B08D00500A62 /* VMResult.swift */; };
 		91BC1A6929C0C29000500A62 /* UserInfoAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */; };
 		91C7608D29BC2E3F003BE148 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 91C7608C29BC2E3F003BE148 /* AWSCognitoAuthPlugin */; };
@@ -91,7 +110,7 @@
 		91A033BD29BDC8A50019D5A9 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		91A033BF29BDCAB50019D5A9 /* List.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
 		91A033C129BDCACE0019D5A9 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
-		91A033C429BDEED20019D5A9 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		91A033C429BDEED20019D5A9 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		91A033C729BDEF200019D5A9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		91A033C929BDF6920019D5A9 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		91A033D029BF675B0019D5A9 /* DatabaseDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDefinition.swift; sourceTree = "<group>"; };
@@ -102,6 +121,25 @@
 		91A033DD29BF735B0019D5A9 /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		91A033DF29BF738A0019D5A9 /* DatabaseQueueFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseQueueFactory.swift; sourceTree = "<group>"; };
 		91A033E129BF7A680019D5A9 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		91A0889A29C49D7D000BF175 /* TaskRemoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRemoteStore.swift; sourceTree = "<group>"; };
+		91A0889E29C49EC8000BF175 /* SessionExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionExtention.swift; sourceTree = "<group>"; };
+		91A088A029C49F17000BF175 /* URLSessionConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionConfiguration.swift; sourceTree = "<group>"; };
+		91A088A429C49FF8000BF175 /* TaskListAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListAPI.swift; sourceTree = "<group>"; };
+		91A088A729C4A147000BF175 /* APIRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRoutes.swift; sourceTree = "<group>"; };
+		91A088A929C4A1CC000BF175 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		91A088AB29C4A255000BF175 /* DecodableDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableDataParser.swift; sourceTree = "<group>"; };
+		91A088AD29C4A26F000BF175 /* APIResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResult.swift; sourceTree = "<group>"; };
+		91A088AF29C4A3A0000BF175 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		91A088B129C4A3D5000BF175 /* AddTaskAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskAPI.swift; sourceTree = "<group>"; };
+		91A088B329C4B484000BF175 /* UpdateTaskAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskAPI.swift; sourceTree = "<group>"; };
+		91A088B529C4B67F000BF175 /* DeleteTaskAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTaskAPI.swift; sourceTree = "<group>"; };
+		91A088B729C4B966000BF175 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		91A088BA29C550E4000BF175 /* TaskUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskUseCase.swift; sourceTree = "<group>"; };
+		91A088BC29C552BC000BF175 /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		91A088BE29C558E7000BF175 /* TaskInfoRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoRecord.swift; sourceTree = "<group>"; };
+		91A088C029C559E6000BF175 /* TaskLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLocalStore.swift; sourceTree = "<group>"; };
+		91A088C229C58151000BF175 /* TaskInfoDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoDao.swift; sourceTree = "<group>"; };
+		91A088C429C594CC000BF175 /* TaskInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfo.swift; sourceTree = "<group>"; };
 		91BC1A6529C0B08D00500A62 /* VMResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMResult.swift; sourceTree = "<group>"; };
 		91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoAttribute.swift; sourceTree = "<group>"; };
 		91C7609029BC3002003BE148 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -192,6 +230,7 @@
 		915F06E829BA1B7100685156 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
+				91A088A229C49FDF000BF175 /* API */,
 				91A033CD29BF66290019D5A9 /* Store */,
 				91A033CC29BF66230019D5A9 /* Repository */,
 				91A033CB29BF65FF0019D5A9 /* DB */,
@@ -202,9 +241,9 @@
 		915F06E929BA1B7800685156 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				91A088B929C550CD000BF175 /* Usecase */,
 				91CFFD8929C229FF0086B5E2 /* Error */,
 				91BC1A6729C0C28000500A62 /* Entity */,
-				91C7609229BC3213003BE148 /* UserUseCase.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -213,7 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				91A033C629BDEF0D0019D5A9 /* Setting */,
-				91A033C329BDEEB20019D5A9 /* TodoList */,
+				91A033C329BDEEB20019D5A9 /* TaskList */,
 				91A033B829BDC4640019D5A9 /* TabBar */,
 				91A0333029BC9AEE0019D5A9 /* SignUp */,
 				915F06F029BA1CB600685156 /* Common */,
@@ -272,12 +311,12 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		91A033C329BDEEB20019D5A9 /* TodoList */ = {
+		91A033C329BDEEB20019D5A9 /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
-				91A033C429BDEED20019D5A9 /* TodoListViewController.swift */,
+				91A033C429BDEED20019D5A9 /* TaskListViewController.swift */,
 			);
-			path = TodoList;
+			path = TaskList;
 			sourceTree = "<group>";
 		};
 		91A033C629BDEF0D0019D5A9 /* Setting */ = {
@@ -306,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				91A033E129BF7A680019D5A9 /* UserRepository.swift */,
+				91A088BC29C552BC000BF175 /* TaskRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -314,6 +354,8 @@
 			isa = PBXGroup;
 			children = (
 				91A033D829BF6E540019D5A9 /* UserLocalStore.swift */,
+				91A0889A29C49D7D000BF175 /* TaskRemoteStore.swift */,
+				91A088C029C559E6000BF175 /* TaskLocalStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -322,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				91A033DA29BF6F6B0019D5A9 /* UserInfoRecord.swift */,
+				91A088BE29C558E7000BF175 /* TaskInfoRecord.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -330,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				91A033D629BF68570019D5A9 /* UserInfoDao.swift */,
+				91A088C229C58151000BF175 /* TaskInfoDao.swift */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -343,10 +387,70 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		91A0889C29C49E8C000BF175 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				91A0889D29C49EB6000BF175 /* Extention */,
+				91A088AF29C4A3A0000BF175 /* Constant.swift */,
+				91A088B729C4B966000BF175 /* Environment.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		91A0889D29C49EB6000BF175 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				91A0889E29C49EC8000BF175 /* SessionExtention.swift */,
+				91A088A029C49F17000BF175 /* URLSessionConfiguration.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		91A088A229C49FDF000BF175 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				91A088A629C4A13B000BF175 /* Common */,
+				91A088A329C49FE7000BF175 /* Task */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		91A088A329C49FE7000BF175 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				91A088A429C49FF8000BF175 /* TaskListAPI.swift */,
+				91A088B329C4B484000BF175 /* UpdateTaskAPI.swift */,
+				91A088B129C4A3D5000BF175 /* AddTaskAPI.swift */,
+				91A088B529C4B67F000BF175 /* DeleteTaskAPI.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		91A088A629C4A13B000BF175 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				91A088A729C4A147000BF175 /* APIRoutes.swift */,
+				91A088A929C4A1CC000BF175 /* APIRequest.swift */,
+				91A088AD29C4A26F000BF175 /* APIResult.swift */,
+				91A088AB29C4A255000BF175 /* DecodableDataParser.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		91A088B929C550CD000BF175 /* Usecase */ = {
+			isa = PBXGroup;
+			children = (
+				91C7609229BC3213003BE148 /* UserUseCase.swift */,
+				91A088BA29C550E4000BF175 /* TaskUseCase.swift */,
+			);
+			path = Usecase;
+			sourceTree = "<group>";
+		};
 		91BC1A6729C0C28000500A62 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
 				91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */,
+				91A088C429C594CC000BF175 /* TaskInfo.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -385,6 +489,7 @@
 		91E41A2C29B7791600DA4EAE /* TodoApp */ = {
 			isa = PBXGroup;
 			children = (
+				91A0889C29C49E8C000BF175 /* Utility */,
 				91A033B629BDAEAA0019D5A9 /* R.generated.swift */,
 				915F06EA29BA1B8900685156 /* Presentation */,
 				915F06E929BA1B7800685156 /* Domain */,
@@ -689,32 +794,51 @@
 			buildActionMask = 2147483647;
 			files = (
 				91A033DB29BF6F6B0019D5A9 /* UserInfoRecord.swift in Sources */,
+				91A088C129C559E6000BF175 /* TaskLocalStore.swift in Sources */,
 				91A033D129BF675B0019D5A9 /* DatabaseDefinition.swift in Sources */,
 				915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */,
 				91A033DE29BF735B0019D5A9 /* DatabaseError.swift in Sources */,
 				91C7609329BC3213003BE148 /* UserUseCase.swift in Sources */,
+				91A088B029C4A3A0000BF175 /* Constant.swift in Sources */,
 				91A033D329BF67B10019D5A9 /* MainDatabase.swift in Sources */,
 				91A0333229BC9B040019D5A9 /* SignUpViewController.swift in Sources */,
 				915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */,
 				91BC1A6929C0C29000500A62 /* UserInfoAttribute.swift in Sources */,
+				91A088B429C4B484000BF175 /* UpdateTaskAPI.swift in Sources */,
 				91A033D929BF6E540019D5A9 /* UserLocalStore.swift in Sources */,
 				91A0333429BC9BB50019D5A9 /* SignUpViewModel.swift in Sources */,
 				91A033C829BDEF200019D5A9 /* SettingViewController.swift in Sources */,
 				91A033E029BF738A0019D5A9 /* DatabaseQueueFactory.swift in Sources */,
+				91A0889F29C49EC8000BF175 /* SessionExtention.swift in Sources */,
+				91A088AA29C4A1CC000BF175 /* APIRequest.swift in Sources */,
 				91A033BC29BDC4D50019D5A9 /* TabBarRouter.swift in Sources */,
 				91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */,
 				91A033E229BF7A680019D5A9 /* UserRepository.swift in Sources */,
+				91A088B229C4A3D5000BF175 /* AddTaskAPI.swift in Sources */,
 				91CFFD8B29C22A0D0086B5E2 /* DomainError.swift in Sources */,
+				91A088C329C58151000BF175 /* TaskInfoDao.swift in Sources */,
 				91A033D729BF68570019D5A9 /* UserInfoDao.swift in Sources */,
-				91A033C529BDEED20019D5A9 /* TodoListViewController.swift in Sources */,
+				91A033C529BDEED20019D5A9 /* TaskListViewController.swift in Sources */,
 				91CFFD8629C1FE420086B5E2 /* SettingRouter.swift in Sources */,
+				91A088B629C4B67F000BF175 /* DeleteTaskAPI.swift in Sources */,
+				91A0889B29C49D7D000BF175 /* TaskRemoteStore.swift in Sources */,
 				91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */,
 				91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */,
+				91A088A829C4A147000BF175 /* APIRoutes.swift in Sources */,
+				91A088A529C49FF8000BF175 /* TaskListAPI.swift in Sources */,
+				91A088AE29C4A26F000BF175 /* APIResult.swift in Sources */,
 				91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */,
+				91A088BB29C550E4000BF175 /* TaskUseCase.swift in Sources */,
+				91A088BD29C552BC000BF175 /* TaskRepository.swift in Sources */,
 				91A033CA29BDF6920019D5A9 /* SettingViewModel.swift in Sources */,
 				91A033BA29BDC4760019D5A9 /* TabBarController.swift in Sources */,
 				91A033B729BDAEAA0019D5A9 /* R.generated.swift in Sources */,
+				91A088B829C4B966000BF175 /* Environment.swift in Sources */,
 				91A033BE29BDC8A50019D5A9 /* TabBarViewModel.swift in Sources */,
+				91A088A129C49F17000BF175 /* URLSessionConfiguration.swift in Sources */,
+				91A088BF29C558E7000BF175 /* TaskInfoRecord.swift in Sources */,
+				91A088C529C594CC000BF175 /* TaskInfo.swift in Sources */,
+				91A088AC29C4A255000BF175 /* DecodableDataParser.swift in Sources */,
 				91E41A3029B7791600DA4EAE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

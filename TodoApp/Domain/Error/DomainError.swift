@@ -15,5 +15,5 @@ enum DomainError: Error {
     /// その他のエラー
     case unownedError
     /// APIのエラー
-    case unacceptableAPIResultError(code: String)
+    case unacceptableResultCode(code: String)
 }
