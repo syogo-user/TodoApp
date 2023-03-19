@@ -11,6 +11,8 @@ import AWSCognitoAuthPlugin
 import RxSwift
 
 protocol UserUseCase {
+    /// サインイン画面を経由したか
+    var isFromSignIn: Bool { get set }
     /// サインアップ
     func signUp(userName: String, password: String, email: String) async
     /// 認証コード確認
@@ -34,6 +36,11 @@ protocol UserUseCase {
 class UserUseCaseImpl: UserUseCase {
     private var repository: UserRepository = UserRepositoryImpl()
 
+    var isFromSignIn: Bool {
+        get { repository.isFromSignIn }
+        set { repository.isFromSignIn = newValue }
+    }
+    
     func signUp(userName: String, password: String, email: String) async {
         let userAttributes = [AuthUserAttribute(.email, value: email)]
         let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
@@ -76,7 +83,7 @@ class UserUseCaseImpl: UserUseCase {
                     let token = try await self.repository.fetchCurrentAuthToken()
                     single(.success("Bearer " + token))
                 } catch {
-                    single(.error(error))
+                    single(.error(DomainError.authError))
                 }
             }
             return Disposables.create()

@@ -14,18 +14,20 @@ protocol SignInViewModel {
     var userInfo: Signal<VMResult<Void>?> { get }
     /// サインイン
     func signIn(userName: String, password: String)
-    // ユーザ情報(ユーザID,ユーザ名)をローカルDBに設定
+    /// ユーザ情報(ユーザID,ユーザ名)をローカルDBに設定
     func setUserInfo()
+    /// サインイン画面を経由したことを設定
+    func setViaSignIn()
 }
 
 class SignInViewModelImpl: SignInViewModel {
-    private let usecase: UserUseCase = UserUseCaseImpl()
-    private var disposeBag = DisposeBag()
+    private var usecase: UserUseCase = UserUseCaseImpl()
+    private let disposeBag = DisposeBag()
 
     /// ユーザの登録通知
     private let userInfoRelay = PublishRelay<VMResult<Void>?>()
     lazy var userInfo = userInfoRelay.asSignal(onErrorSignalWith: .empty())
-
+    
     func signIn(userName: String, password: String) {
         Task {
             do {
@@ -62,9 +64,15 @@ class SignInViewModelImpl: SignInViewModel {
             .disposed(by: disposeBag)
     }
 
+    func setViaSignIn() {
+        usecase.isFromSignIn = true
+    }
+
     private func validate() -> Bool {
         // TODO: バリデーション
         return true
     }
+
+
 
 }

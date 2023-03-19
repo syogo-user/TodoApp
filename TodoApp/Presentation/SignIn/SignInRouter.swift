@@ -14,4 +14,10 @@ extension SignInViewController {
         signUpVC.modalPresentationStyle = .fullScreen
         self.present(signUpVC, animated: true, completion: nil)
     }
+
+    func toTabBar() {
+        guard let tabBarVC = R.storyboard.main.tabBarVC() else { return }
+        tabBarVC.modalPresentationStyle = .fullScreen
+        self.present(tabBarVC, animated: false, completion: nil)
+    }
 }

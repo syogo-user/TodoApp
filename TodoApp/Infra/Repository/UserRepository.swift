@@ -11,6 +11,8 @@ import RxSwift
 import Amplify
 
 protocol UserRepository {
+    /// サインイン画面を経由したか
+    var isFromSignIn: Bool { get set }
     /// トークンの取得
     func fetchCurrentAuthToken() async throws -> String
     /// ユーザ情報の取得
@@ -25,7 +27,12 @@ protocol UserRepository {
 
 class UserRepositoryImpl: UserRepository {
     private let remoteStore: UserRemoteStore = UserRemoteStoreImpl()
-    private let localStore: UserLocalStore = UserLocalStoreImpl()
+    private var localStore: UserLocalStore = UserLocalStoreImpl()
+
+    var isFromSignIn: Bool {
+        get { localStore.isFromSignIn }
+        set { localStore.isFromSignIn = newValue }
+    }
 
     func fetchCurrentAuthToken() async throws -> String {
         try await remoteStore.fetchCurrentAuthToken()

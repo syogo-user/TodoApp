@@ -19,7 +19,7 @@ protocol AddTaskViewModel {
 class AddTaskViewModelImpl: AddTaskViewModel {
     private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
     private let userUseCase: UserUseCase = UserUseCaseImpl()
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     // タスクの登録通知
     private let addTaskInfoRelay = PublishRelay<VMResult<TaskInfo>?>()

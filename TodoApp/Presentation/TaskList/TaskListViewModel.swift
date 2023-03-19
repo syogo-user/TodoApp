@@ -12,23 +12,28 @@ import RxCocoa
 protocol TaskListViewModel {
     var taskInfo: Signal<VMResult<[TaskInfo]>?> { get }
     var taskItems: Driver<[TaskInfoItem]> { get }
-    var deleteTaskInfo: Signal<VMResult<Void>?> { get }
-    var insertLocalTaskInfo: Signal<VMResult<Void>?> { get }
-    var deleteLocalTaskInfo: Signal<VMResult<Void>?> { get }
+    var deleteTaskInfo: Signal<VMResult<Void>> { get }
+    var loadLocalTaskInfo: Signal<VMResult<Void>> { get }
+    var insertLocalTaskInfo: Signal<VMResult<Void>> { get }
+    var deleteLocalTaskInfo: Signal<VMResult<Void>> { get }
     /// タスクリストを取得
     func fetchTaskList()
     /// タスクを削除
     func deleteTask(index: Int)
     /// ローカルDBからタスクリストを取得
-    func loadLocalTaskList() -> Single<[TaskInfoRecord]>
+    func loadLocalTaskList()
     /// タスクIDに変換
     func toTaskId(index: Int) -> String
+    /// サインイン画面を経由したか
+    func isFromSignIn() -> Bool
+    /// サインイン画面を経由したかを設定
+    func setFromSignIn()
 }
 
 class TaskListViewModelImpl: TaskListViewModel {
     private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
-    private let userUseCase: UserUseCase = UserUseCaseImpl()
-    private var disposeBag = DisposeBag()
+    private var userUseCase: UserUseCase = UserUseCaseImpl()
+    private let disposeBag = DisposeBag()
     private var tableViewItems: [TaskInfoItem] = []
     /// タスクの取得通知
     private let taskInfoRelay = PublishRelay<VMResult<[TaskInfo]>?>()
@@ -39,15 +44,19 @@ class TaskListViewModelImpl: TaskListViewModel {
     lazy var taskItems = taskItemsRelay.asDriver()
 
     /// タスクの削除通知
-    private let deleteTaskInfoRelay = PublishRelay<VMResult<Void>?>()
+    private let deleteTaskInfoRelay = PublishRelay<VMResult<Void>>()
     lazy var deleteTaskInfo = deleteTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
+    /// ローカルのタスクリストの取得通知
+    private let loadLocalTaskInfoRelay = PublishRelay<VMResult<Void>>()
+    lazy var loadLocalTaskInfo = loadLocalTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
+
     /// ローカルタスクの登録通知
-    private let insertLocalTaskInfoRelay = PublishRelay<VMResult<Void>?>()
+    private let insertLocalTaskInfoRelay = PublishRelay<VMResult<Void>>()
     lazy var insertLocalTaskInfo = insertLocalTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
     /// ローカルタスクの削除通知
-    private let deleteLocalTaskInfoRelay = PublishRelay<VMResult<Void>?>()
+    private let deleteLocalTaskInfoRelay = PublishRelay<VMResult<Void>>()
     lazy var deleteLocalTaskInfo = deleteLocalTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
     // TODO: ログイン時のみAPIから取得する。それ以外はローカルDBから取得する
@@ -56,22 +65,11 @@ class TaskListViewModelImpl: TaskListViewModel {
             .flatMap { (user, idToken) in
                 self.taskUseCase.fetchTask(userId: user.userId, authorization: idToken)
             }
-            .do(onSuccess: { result in
-                result.forEach { task in
-                    let taskId = task.taskId
-                    let title = task.title
-                    let content = task.content
-                    let scheduledDate = task.scheduledDate
-                    let isCompleted = task.isCompleted
-                    let isFavorite = task.isFavorite
-                    let userId = task.userId
-                    let taskInfoRecord = TaskInfoRecord(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId)
-                    // ローカルDBに追加
+            .do(onSuccess: { taskList in
+                self.tableViewItems = taskList.map {
+                    let taskInfoRecord = TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                     self.insertLocalTask(taskInfo: taskInfoRecord)
-
-                    let taskInfoItem = TaskInfoItem(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId)
-                    self.tableViewItems.insert(taskInfoItem, at: self.tableViewItems.count)
-
+                    return TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
@@ -111,13 +109,34 @@ class TaskListViewModelImpl: TaskListViewModel {
     }
 
     // ローカルからタスク取得
-    func loadLocalTaskList() -> Single<[TaskInfoRecord]> {
+    func loadLocalTaskList() {
         taskUseCase.loadLocalTaskList()
+            .do(onSuccess: { taskList in
+                self.tableViewItems = taskList.map {
+                    TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
+                }
+                self.taskItemsRelay.accept(self.tableViewItems)
+            })
+            .map { taskList -> VMResult<Void> in
+                .success(())
+            }
+            .asSignal(onErrorRecover: { .just(.failure($0))})
+            .startWith(.loading())
+            .emit(to: loadLocalTaskInfoRelay)
+            .disposed(by: disposeBag)
     }
 
     /// indexからタスクIDを取得
     func toTaskId(index: Int) -> String {
         tableViewItems[index].taskId
+    }
+
+    func isFromSignIn() -> Bool {
+        userUseCase.isFromSignIn
+    }
+
+    func setFromSignIn() {
+        userUseCase.isFromSignIn = false
     }
 
     /// ローカルDBにタスクを追加

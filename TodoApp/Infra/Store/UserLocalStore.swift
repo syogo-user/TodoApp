@@ -9,6 +9,8 @@ import Foundation
 import RxSwift
 
 protocol UserLocalStore {
+    /// サインイン画面を経由したか
+    var isFromSignIn: Bool { get set }
     /// ユーザ情報を取得
     func loadLocalUserInfo() -> Single<[UserInfoRecord]>
     /// ユーザ情報を追加
@@ -19,6 +21,14 @@ protocol UserLocalStore {
 
 class UserLocalStoreImpl: UserLocalStore {
     private let dao: UserInfoDao = UserInfoDaoImpl()
+    private enum Key: String {
+        case isFromSignIn = "isFromSignIn"
+    }
+
+    var isFromSignIn: Bool {
+        get { UserDefaults.standard.bool(forKey: Key.isFromSignIn.rawValue)}
+        set { UserDefaults.standard.set(newValue, forKey: Key.isFromSignIn.rawValue)}
+    }
 
     func loadLocalUserInfo() -> Single<[UserInfoRecord]> {
        dao.loadLocalUserInfo()

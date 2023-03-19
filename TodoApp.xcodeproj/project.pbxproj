@@ -18,6 +18,11 @@
 		9136501E29C6AFE600F9BC29 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501D29C6AFE600F9BC29 /* AddTaskViewController.swift */; };
 		9136502029C6AFF000F9BC29 /* AddTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501F29C6AFF000F9BC29 /* AddTaskViewModel.swift */; };
 		9136502229C6BBA300F9BC29 /* UserRemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136502129C6BBA300F9BC29 /* UserRemoteStore.swift */; };
+		9136502629C6E8EC00F9BC29 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136502429C6E8EC00F9BC29 /* TaskTableViewCell.swift */; };
+		9136502729C6E8EC00F9BC29 /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9136502529C6E8EC00F9BC29 /* TaskTableViewCell.xib */; };
+		9136502A29C7304200F9BC29 /* LaunchViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136502929C7304200F9BC29 /* LaunchViewContoller.swift */; };
+		9136502C29C7311600F9BC29 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136502B29C7311600F9BC29 /* LaunchRouter.swift */; };
+		9136502E29C7319700F9BC29 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136502D29C7319700F9BC29 /* LaunchViewModel.swift */; };
 		915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06EE29BA1C2200685156 /* SignInViewController.swift */; };
 		915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06F129BA1CC700685156 /* BaseViewController.swift */; };
 		915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 915F06F329BA1D3900685156 /* SignIn.storyboard */; };
@@ -27,8 +32,6 @@
 		91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */; };
 		91A033B729BDAEAA0019D5A9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033B629BDAEAA0019D5A9 /* R.generated.swift */; };
 		91A033BA29BDC4760019D5A9 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033B929BDC4760019D5A9 /* TabBarController.swift */; };
-		91A033BC29BDC4D50019D5A9 /* TabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033BB29BDC4D50019D5A9 /* TabBarRouter.swift */; };
-		91A033BE29BDC8A50019D5A9 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033BD29BDC8A50019D5A9 /* TabBarViewModel.swift */; };
 		91A033C029BDCAB50019D5A9 /* List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A033BF29BDCAB50019D5A9 /* List.storyboard */; };
 		91A033C229BDCACE0019D5A9 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A033C129BDCACE0019D5A9 /* Setting.storyboard */; };
 		91A033C529BDEED20019D5A9 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C429BDEED20019D5A9 /* TaskListViewController.swift */; };
@@ -113,6 +116,11 @@
 		9136501D29C6AFE600F9BC29 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		9136501F29C6AFF000F9BC29 /* AddTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewModel.swift; sourceTree = "<group>"; };
 		9136502129C6BBA300F9BC29 /* UserRemoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteStore.swift; sourceTree = "<group>"; };
+		9136502429C6E8EC00F9BC29 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		9136502529C6E8EC00F9BC29 /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
+		9136502929C7304200F9BC29 /* LaunchViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewContoller.swift; sourceTree = "<group>"; };
+		9136502B29C7311600F9BC29 /* LaunchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
+		9136502D29C7319700F9BC29 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		915F06EE29BA1C2200685156 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		915F06F129BA1CC700685156 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		915F06F329BA1D3900685156 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
@@ -122,8 +130,6 @@
 		91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
 		91A033B629BDAEAA0019D5A9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		91A033B929BDC4760019D5A9 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		91A033BB29BDC4D50019D5A9 /* TabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRouter.swift; sourceTree = "<group>"; };
-		91A033BD29BDC8A50019D5A9 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		91A033BF29BDCAB50019D5A9 /* List.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
 		91A033C129BDCACE0019D5A9 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		91A033C429BDEED20019D5A9 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
@@ -261,6 +267,25 @@
 			path = AddTask;
 			sourceTree = "<group>";
 		};
+		9136502329C6E89D00F9BC29 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9136502429C6E8EC00F9BC29 /* TaskTableViewCell.swift */,
+				9136502529C6E8EC00F9BC29 /* TaskTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		9136502829C7302B00F9BC29 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				9136502929C7304200F9BC29 /* LaunchViewContoller.swift */,
+				9136502D29C7319700F9BC29 /* LaunchViewModel.swift */,
+				9136502B29C7311600F9BC29 /* LaunchRouter.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
 		915F06E829BA1B7100685156 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,14 +310,15 @@
 		915F06EA29BA1B8900685156 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9136502829C7302B00F9BC29 /* Launch */,
+				91A033B829BDC4640019D5A9 /* TabBar */,
 				91A033C329BDEEB20019D5A9 /* TaskList */,
 				9136501729C6AED900F9BC29 /* UpdateTask */,
 				9136501C29C6AFCE00F9BC29 /* AddTask */,
 				91A033C629BDEF0D0019D5A9 /* Setting */,
-				91A033B829BDC4640019D5A9 /* TabBar */,
+				915F06ED29BA1BC600685156 /* SignIn */,
 				91A0333029BC9AEE0019D5A9 /* SignUp */,
 				915F06F029BA1CB600685156 /* Common */,
-				915F06ED29BA1BC600685156 /* SignIn */,
 				915F06EB29BA1BA200685156 /* View */,
 			);
 			path = Presentation;
@@ -301,10 +327,10 @@
 		915F06EB29BA1BA200685156 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				91E41A3329B7791600DA4EAE /* Main.storyboard */,
 				915F06F329BA1D3900685156 /* SignIn.storyboard */,
 				91A033BF29BDCAB50019D5A9 /* List.storyboard */,
 				91A033C129BDCACE0019D5A9 /* Setting.storyboard */,
-				91E41A3329B7791600DA4EAE /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -341,8 +367,6 @@
 			isa = PBXGroup;
 			children = (
 				91A033B929BDC4760019D5A9 /* TabBarController.swift */,
-				91A033BD29BDC8A50019D5A9 /* TabBarViewModel.swift */,
-				91A033BB29BDC4D50019D5A9 /* TabBarRouter.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -350,6 +374,7 @@
 		91A033C329BDEEB20019D5A9 /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
+				9136502329C6E89D00F9BC29 /* Cell */,
 				91A033C429BDEED20019D5A9 /* TaskListViewController.swift */,
 				9136501329C5B13200F9BC29 /* TaskInfoItem.swift */,
 				9136501129C5B0FE00F9BC29 /* TaskListViewModel.swift */,
@@ -682,6 +707,7 @@
 				91A033C029BDCAB50019D5A9 /* List.storyboard in Resources */,
 				91E41A3729B7791800DA4EAE /* Assets.xcassets in Resources */,
 				91E41A3529B7791600DA4EAE /* Main.storyboard in Resources */,
+				9136502729C6E8EC00F9BC29 /* TaskTableViewCell.xib in Resources */,
 				919A407329C3541000D63E44 /* Localizable.strings in Resources */,
 				3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */,
 				915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */,
@@ -833,6 +859,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9136502629C6E8EC00F9BC29 /* TaskTableViewCell.swift in Sources */,
 				91A033DB29BF6F6B0019D5A9 /* UserInfoRecord.swift in Sources */,
 				91A088C129C559E6000BF175 /* TaskLocalStore.swift in Sources */,
 				9136501E29C6AFE600F9BC29 /* AddTaskViewController.swift in Sources */,
@@ -854,7 +881,7 @@
 				91A033E029BF738A0019D5A9 /* DatabaseQueueFactory.swift in Sources */,
 				91A0889F29C49EC8000BF175 /* SessionExtention.swift in Sources */,
 				91A088AA29C4A1CC000BF175 /* APIRequest.swift in Sources */,
-				91A033BC29BDC4D50019D5A9 /* TabBarRouter.swift in Sources */,
+				9136502E29C7319700F9BC29 /* LaunchViewModel.swift in Sources */,
 				91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */,
 				9136502229C6BBA300F9BC29 /* UserRemoteStore.swift in Sources */,
 				91A033E229BF7A680019D5A9 /* UserRepository.swift in Sources */,
@@ -867,6 +894,7 @@
 				91CFFD8629C1FE420086B5E2 /* SettingRouter.swift in Sources */,
 				91A088B629C4B67F000BF175 /* DeleteTaskAPI.swift in Sources */,
 				91A0889B29C49D7D000BF175 /* TaskRemoteStore.swift in Sources */,
+				9136502A29C7304200F9BC29 /* LaunchViewContoller.swift in Sources */,
 				9136501229C5B0FE00F9BC29 /* TaskListViewModel.swift in Sources */,
 				91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */,
 				91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */,
@@ -881,7 +909,7 @@
 				91A033BA29BDC4760019D5A9 /* TabBarController.swift in Sources */,
 				91A033B729BDAEAA0019D5A9 /* R.generated.swift in Sources */,
 				91A088B829C4B966000BF175 /* Environment.swift in Sources */,
-				91A033BE29BDC8A50019D5A9 /* TabBarViewModel.swift in Sources */,
+				9136502C29C7311600F9BC29 /* LaunchRouter.swift in Sources */,
 				91A088A129C49F17000BF175 /* URLSessionConfiguration.swift in Sources */,
 				91A088BF29C558E7000BF175 /* TaskInfoRecord.swift in Sources */,
 				91A088C529C594CC000BF175 /* TaskInfo.swift in Sources */,
