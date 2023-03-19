@@ -34,7 +34,7 @@ class TaskInfoRecord : Record {
     }
 
     enum Columns {
-        static let taskId = Column("task_id") //TODO: 文字列はどこかに定義したい
+        static let taskId = Column("task_id")
         static let title = Column("title")
         static let content = Column("content")
         static let scheduledDate = Column("scheduled_date")
@@ -55,7 +55,7 @@ class TaskInfoRecord : Record {
     }
 
     required init(row: Row) {
-        self.taskId = row["taskId"]
+        self.taskId = row["task_id"]
         self.title = row["title"]
         self.content = row["content"]
         self.scheduledDate = row["scheduled_date"]

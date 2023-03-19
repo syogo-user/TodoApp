@@ -10,6 +10,14 @@
 		10CE648011B5E37741EFE8A6 /* Pods_TodoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B922F38A60BFF4B57B60A399 /* Pods_TodoApp.framework */; };
 		1107DA970E5914BB89B2054F /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = C42AFA19F5E0A7053707FFE1 /* amplifyconfiguration.json */; };
 		3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 698F70E34828384BED2B116E /* awsconfiguration.json */; };
+		9136501229C5B0FE00F9BC29 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501129C5B0FE00F9BC29 /* TaskListViewModel.swift */; };
+		9136501429C5B13200F9BC29 /* TaskInfoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501329C5B13200F9BC29 /* TaskInfoItem.swift */; };
+		9136501629C5B24300F9BC29 /* TaskListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501529C5B24300F9BC29 /* TaskListRouter.swift */; };
+		9136501929C6AFA000F9BC29 /* UpdateTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501829C6AFA000F9BC29 /* UpdateTaskViewController.swift */; };
+		9136501B29C6AFAA00F9BC29 /* UpdateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501A29C6AFAA00F9BC29 /* UpdateTaskViewModel.swift */; };
+		9136501E29C6AFE600F9BC29 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501D29C6AFE600F9BC29 /* AddTaskViewController.swift */; };
+		9136502029C6AFF000F9BC29 /* AddTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501F29C6AFF000F9BC29 /* AddTaskViewModel.swift */; };
+		9136502229C6BBA300F9BC29 /* UserRemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136502129C6BBA300F9BC29 /* UserRemoteStore.swift */; };
 		915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06EE29BA1C2200685156 /* SignInViewController.swift */; };
 		915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06F129BA1CC700685156 /* BaseViewController.swift */; };
 		915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 915F06F329BA1D3900685156 /* SignIn.storyboard */; };
@@ -97,6 +105,14 @@
 		535E5535F9E17976827D8D1A /* Pods-TodoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoAppTests.release.xcconfig"; path = "Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		698F70E34828384BED2B116E /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		69E705BCDD73A49A82E982CD /* Pods-TodoApp-TodoAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp-TodoAppUITests.release.xcconfig"; path = "Target Support Files/Pods-TodoApp-TodoAppUITests/Pods-TodoApp-TodoAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9136501129C5B0FE00F9BC29 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
+		9136501329C5B13200F9BC29 /* TaskInfoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoItem.swift; sourceTree = "<group>"; };
+		9136501529C5B24300F9BC29 /* TaskListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRouter.swift; sourceTree = "<group>"; };
+		9136501829C6AFA000F9BC29 /* UpdateTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskViewController.swift; sourceTree = "<group>"; };
+		9136501A29C6AFAA00F9BC29 /* UpdateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskViewModel.swift; sourceTree = "<group>"; };
+		9136501D29C6AFE600F9BC29 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		9136501F29C6AFF000F9BC29 /* AddTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewModel.swift; sourceTree = "<group>"; };
+		9136502129C6BBA300F9BC29 /* UserRemoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteStore.swift; sourceTree = "<group>"; };
 		915F06EE29BA1C2200685156 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		915F06F129BA1CC700685156 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		915F06F329BA1D3900685156 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
@@ -227,6 +243,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9136501729C6AED900F9BC29 /* UpdateTask */ = {
+			isa = PBXGroup;
+			children = (
+				9136501829C6AFA000F9BC29 /* UpdateTaskViewController.swift */,
+				9136501A29C6AFAA00F9BC29 /* UpdateTaskViewModel.swift */,
+			);
+			path = UpdateTask;
+			sourceTree = "<group>";
+		};
+		9136501C29C6AFCE00F9BC29 /* AddTask */ = {
+			isa = PBXGroup;
+			children = (
+				9136501D29C6AFE600F9BC29 /* AddTaskViewController.swift */,
+				9136501F29C6AFF000F9BC29 /* AddTaskViewModel.swift */,
+			);
+			path = AddTask;
+			sourceTree = "<group>";
+		};
 		915F06E829BA1B7100685156 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,8 +285,10 @@
 		915F06EA29BA1B8900685156 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				91A033C629BDEF0D0019D5A9 /* Setting */,
 				91A033C329BDEEB20019D5A9 /* TaskList */,
+				9136501729C6AED900F9BC29 /* UpdateTask */,
+				9136501C29C6AFCE00F9BC29 /* AddTask */,
+				91A033C629BDEF0D0019D5A9 /* Setting */,
 				91A033B829BDC4640019D5A9 /* TabBar */,
 				91A0333029BC9AEE0019D5A9 /* SignUp */,
 				915F06F029BA1CB600685156 /* Common */,
@@ -315,6 +351,9 @@
 			isa = PBXGroup;
 			children = (
 				91A033C429BDEED20019D5A9 /* TaskListViewController.swift */,
+				9136501329C5B13200F9BC29 /* TaskInfoItem.swift */,
+				9136501129C5B0FE00F9BC29 /* TaskListViewModel.swift */,
+				9136501529C5B24300F9BC29 /* TaskListRouter.swift */,
 			);
 			path = TaskList;
 			sourceTree = "<group>";
@@ -354,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				91A033D829BF6E540019D5A9 /* UserLocalStore.swift */,
+				9136502129C6BBA300F9BC29 /* UserRemoteStore.swift */,
 				91A0889A29C49D7D000BF175 /* TaskRemoteStore.swift */,
 				91A088C029C559E6000BF175 /* TaskLocalStore.swift */,
 			);
@@ -795,7 +835,9 @@
 			files = (
 				91A033DB29BF6F6B0019D5A9 /* UserInfoRecord.swift in Sources */,
 				91A088C129C559E6000BF175 /* TaskLocalStore.swift in Sources */,
+				9136501E29C6AFE600F9BC29 /* AddTaskViewController.swift in Sources */,
 				91A033D129BF675B0019D5A9 /* DatabaseDefinition.swift in Sources */,
+				9136501929C6AFA000F9BC29 /* UpdateTaskViewController.swift in Sources */,
 				915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */,
 				91A033DE29BF735B0019D5A9 /* DatabaseError.swift in Sources */,
 				91C7609329BC3213003BE148 /* UserUseCase.swift in Sources */,
@@ -808,13 +850,16 @@
 				91A033D929BF6E540019D5A9 /* UserLocalStore.swift in Sources */,
 				91A0333429BC9BB50019D5A9 /* SignUpViewModel.swift in Sources */,
 				91A033C829BDEF200019D5A9 /* SettingViewController.swift in Sources */,
+				9136501629C5B24300F9BC29 /* TaskListRouter.swift in Sources */,
 				91A033E029BF738A0019D5A9 /* DatabaseQueueFactory.swift in Sources */,
 				91A0889F29C49EC8000BF175 /* SessionExtention.swift in Sources */,
 				91A088AA29C4A1CC000BF175 /* APIRequest.swift in Sources */,
 				91A033BC29BDC4D50019D5A9 /* TabBarRouter.swift in Sources */,
 				91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */,
+				9136502229C6BBA300F9BC29 /* UserRemoteStore.swift in Sources */,
 				91A033E229BF7A680019D5A9 /* UserRepository.swift in Sources */,
 				91A088B229C4A3D5000BF175 /* AddTaskAPI.swift in Sources */,
+				9136501429C5B13200F9BC29 /* TaskInfoItem.swift in Sources */,
 				91CFFD8B29C22A0D0086B5E2 /* DomainError.swift in Sources */,
 				91A088C329C58151000BF175 /* TaskInfoDao.swift in Sources */,
 				91A033D729BF68570019D5A9 /* UserInfoDao.swift in Sources */,
@@ -822,9 +867,11 @@
 				91CFFD8629C1FE420086B5E2 /* SettingRouter.swift in Sources */,
 				91A088B629C4B67F000BF175 /* DeleteTaskAPI.swift in Sources */,
 				91A0889B29C49D7D000BF175 /* TaskRemoteStore.swift in Sources */,
+				9136501229C5B0FE00F9BC29 /* TaskListViewModel.swift in Sources */,
 				91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */,
 				91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */,
 				91A088A829C4A147000BF175 /* APIRoutes.swift in Sources */,
+				9136502029C6AFF000F9BC29 /* AddTaskViewModel.swift in Sources */,
 				91A088A529C49FF8000BF175 /* TaskListAPI.swift in Sources */,
 				91A088AE29C4A26F000BF175 /* APIResult.swift in Sources */,
 				91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */,
@@ -839,6 +886,7 @@
 				91A088BF29C558E7000BF175 /* TaskInfoRecord.swift in Sources */,
 				91A088C529C594CC000BF175 /* TaskInfo.swift in Sources */,
 				91A088AC29C4A255000BF175 /* DecodableDataParser.swift in Sources */,
+				9136501B29C6AFAA00F9BC29 /* UpdateTaskViewModel.swift in Sources */,
 				91E41A3029B7791600DA4EAE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

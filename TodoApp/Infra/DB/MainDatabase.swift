@@ -51,6 +51,7 @@ extension DatabaseMigrator {
         var databaseMigrator = DatabaseMigrator()
         databaseMigrator.registerMigration(.v1) { db, version in
             try UserInfoRecord.setupTable(db, version)
+            try TaskInfoRecord.setupTable(db, version)
         }
         return databaseMigrator
     }

@@ -8,21 +8,35 @@
 import Foundation
 import APIKit
 import RxSwift
+import Amplify
 
 protocol UserRepository {
-    /// ユーザ情報を取得
-    func loadLocalUser() throws -> UserInfoRecord
-    /// ユーザ情報を追加
+    /// トークンの取得
+    func fetchCurrentAuthToken() async throws -> String
+    /// ユーザ情報の取得
+    func fetchUserInfo() async throws -> [AuthUserAttribute]?
+    /// ローカルのユーザ情報を取得
+    func loadLocalUser() -> Single<[UserInfoRecord]>
+    /// ローカルにユーザ情報を追加
     func insertLocalUser(userId: String, email: String) -> Void
-    /// ユーザ情報を削除
+    /// ローカルのユーザ情報を削除
     func deleteLocalUser() -> Void
 }
 
 class UserRepositoryImpl: UserRepository {
+    private let remoteStore: UserRemoteStore = UserRemoteStoreImpl()
     private let localStore: UserLocalStore = UserLocalStoreImpl()
 
-    func loadLocalUser() throws -> UserInfoRecord {
-        try localStore.loadLocalUserInfo()
+    func fetchCurrentAuthToken() async throws -> String {
+        try await remoteStore.fetchCurrentAuthToken()
+    }
+
+    func fetchUserInfo() async throws -> [AuthUserAttribute]? {
+        try await remoteStore.fetchUserInfo()
+    }
+
+    func loadLocalUser() -> Single<[UserInfoRecord]> {
+        localStore.loadLocalUserInfo()
     }
 
     func insertLocalUser(userId: String, email: String) -> Void {

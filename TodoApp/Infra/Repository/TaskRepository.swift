@@ -18,13 +18,13 @@ protocol TaskRepository {
 
     func deleteTask(taskId: String, authorization: String) -> Single<DeleteTaskAPI.Response>
     
-    func loadLocalTaskList() throws -> [TaskInfoRecord]
+    func loadLocalTaskList() -> Single<[TaskInfoRecord]>
 
-    func insertLocalTask(taskInfo: TaskInfoRecord) throws
+    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
 
-    func updateLocalTask(taskInfo: TaskInfoRecord) throws
+    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
 
-    func deleteLocalTask(taskId: String) throws
+    func deleteLocalTask(taskId: String) -> Single<Void>
 }
 
 class TaskRepositoryImpl: TaskRepository {
@@ -47,19 +47,19 @@ class TaskRepositoryImpl: TaskRepository {
         remoteStore.deleteTask(taskId: taskId, authorization: authorization)
     }
 
-    func loadLocalTaskList() throws -> [TaskInfoRecord] {
-       try localStore.loadLocalTaskList()
+    func loadLocalTaskList() -> Single<[TaskInfoRecord]> {
+       localStore.loadLocalTaskList()
     }
 
-    func insertLocalTask(taskInfo: TaskInfoRecord) throws {
-       try localStore.insertLocalTask(taskInfo: taskInfo)
+    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
+        localStore.insertLocalTask(taskInfo: taskInfo)
     }
 
-    func updateLocalTask(taskInfo: TaskInfoRecord) throws {
-       try localStore.updateLocalTask(taskInfo: taskInfo)
+    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
+        localStore.updateLocalTask(taskInfo: taskInfo)
     }
 
-    func deleteLocalTask(taskId: String) throws {
-       try localStore.deleteLocalTask(taskId: taskId)
+    func deleteLocalTask(taskId: String) -> Single<Void> {
+       localStore.deleteLocalTask(taskId: taskId)
     }
 }

@@ -16,15 +16,15 @@ protocol UserUseCase {
     /// 認証コード確認
     func confirmSignUp(for username: String, with confirmationCode: String) async
     /// トークンを取得
-    func fetchCurrentAuthToken() async throws -> String
+    func fetchCurrentAuthToken() -> Single<String>
+    /// ユーザ情報を取得
+    func fetchUserInfo() -> Single<[AuthUserAttribute]>
     /// ログイン中かどうか判定
     func isSignIn() async -> Bool
     /// サインアウト
     func signOut() async throws
-    /// ユーザ情報を取得
-    func fetchUserInfo() async -> [AuthUserAttribute]?
     /// ユーザ情報取得
-    func loadLocalUser() throws -> UserInfoAttribute
+    func loadLocalUser() -> Single<UserInfoAttribute>
     /// ユーザ情報を登録
     func insertLocalUser(userId: String, email: String)
     /// ユーザ情報を削除
@@ -69,12 +69,34 @@ class UserUseCaseImpl: UserUseCase {
         }
     }
 
-    func fetchCurrentAuthToken() async throws -> String {
-        guard let cognitoTokenProvider = try await Amplify.Auth.fetchAuthSession() as? AuthCognitoTokensProvider else {
-            throw DomainError.authError
+    func fetchCurrentAuthToken() -> Single<String> {
+        return Single.create { single in
+            Task {
+                do {
+                    let token = try await self.repository.fetchCurrentAuthToken()
+                    single(.success("Bearer " + token))
+                } catch {
+                    single(.error(error))
+                }
+            }
+            return Disposables.create()
         }
-        let token = try cognitoTokenProvider.getCognitoTokens().get()
-        return token.idToken
+    }
+
+    func fetchUserInfo() -> Single<[AuthUserAttribute]> {
+        return Single.create { single in
+            Task {
+                do {
+                    guard let result = try await self.repository.fetchUserInfo() else {
+                        throw DomainError.authError
+                    }
+                    single(.success(result))
+                } catch {
+                    single(.error(error))
+                }
+            }
+            return Disposables.create()
+        }
     }
 
     func isSignIn() async -> Bool {
@@ -92,7 +114,6 @@ class UserUseCaseImpl: UserUseCase {
     }
 
     func signOut() async throws {
-        let auth = Amplify.Auth
         let result = await Amplify.Auth.signOut()
         guard let signOutResult = result as? AWSCognitoSignOutResult
         else {
@@ -112,23 +133,16 @@ class UserUseCaseImpl: UserUseCase {
             throw DomainError.authError
         }
     }
-    
-    func fetchUserInfo() async -> [AuthUserAttribute]? {
-        do {
-            let user = try await Amplify.Auth.fetchUserAttributes()
-            dump(user)
-            return user
-        } catch let error as AuthError {
-            print("Fetch session failed with error \(error)")
-        } catch {
-            print("Unexpected error: \(error)")
-        }
-        return nil
-    }
 
-    func loadLocalUser() throws -> UserInfoAttribute {
-        let user = try repository.loadLocalUser()
-        return UserInfoAttribute(userId: user.userId, email: user.email)
+    func loadLocalUser() -> Single<UserInfoAttribute> {
+        repository.loadLocalUser()
+            .map { user in
+                if user.count != 1 {
+                    throw DomainError.localDBError
+                }
+                guard let user = user.first else { throw DomainError.localDBError }
+                return UserInfoAttribute(userId: user.userId, email: user.email)
+            }
     }
 
     func insertLocalUser(userId: String, email: String) {

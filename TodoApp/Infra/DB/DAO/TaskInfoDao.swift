@@ -7,49 +7,70 @@
 
 import Foundation
 import GRDB
+import RxGRDB
+import RxSwift
 
 protocol TaskInfoDao {
     /// ローカルのタスクを取得
-    func loadLocalTask() throws -> [TaskInfoRecord]
+    func loadLocalTask() -> Single<[TaskInfoRecord]>
     /// ローカルにユーザを追加
-    func insertLocalTask(taskInfo: TaskInfoRecord) throws
+    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
     /// ローカルのタスクを更新
-    func updateLocalTask(taskInfo: TaskInfoRecord) throws
+    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
     ///  ローカルのタスクを削除
-    func deleteLocalTask(taskId: String) throws
+    func deleteLocalTask(taskId: String) -> Single<Void>
 }
 
 class TaskInfoDaoImpl: TaskInfoDao {
 
-    func loadLocalTask() throws -> [TaskInfoRecord] {
-        let dbQueue: DatabaseQueue = try MainDatabase.shared.dbQueue()
-        let taskInfoRecord = try dbQueue.read { db in
-            let taskInfo = try TaskInfoRecord.fetchAll(db)
-//                throw DomainError.localDBError
-//            }
-            return taskInfo
-        }
-        return taskInfoRecord
+    func loadLocalTask() -> Single<[TaskInfoRecord]> {
+        MainDatabase.shared.dbQueue()
+            .flatMap { dbQueue in
+                dbQueue.rx.read { db in
+                    try TaskInfoRecord.fetchAll(db)
+                }
+                .catchError { error in
+                    throw DomainError.localDBError
+                }
+            }
     }
 
-    func insertLocalTask(taskInfo: TaskInfoRecord) throws {
-        let dbQueue: DatabaseQueue = try MainDatabase.shared.dbQueue()
-        try dbQueue.write { db in
-            try taskInfo.insert(db)
-        }
+    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
+         MainDatabase.shared.dbQueue()
+            .flatMap { dbQueue in
+                dbQueue.rx.write { db in
+                    try taskInfo.insert(db)
+                }
+                .andThen(Single.just(()))
+                .catchError { error in
+                    throw DomainError.localDBError
+                }
+            }
     }
 
-    func updateLocalTask(taskInfo: TaskInfoRecord) throws {
-        let dbQueue: DatabaseQueue = try MainDatabase.shared.dbQueue()
-        try dbQueue.write { db in
-            try taskInfo.updateChanges(db)
-        }
+    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
+        MainDatabase.shared.dbQueue()
+           .flatMap { dbQueue in
+               dbQueue.rx.write { db in
+                   try taskInfo.updateChanges(db)
+               }
+               .andThen(Single.just(()))
+               .catchError { error in
+                   throw DomainError.localDBError
+               }
+           }
     }
 
-    func deleteLocalTask(taskId: String) throws {
-        let dbQueue: DatabaseQueue = try MainDatabase.shared.dbQueue()
-        let _ = try dbQueue.write { db in
-            try TaskInfoRecord.deleteOne(db, key: taskId)
-        }
+    func deleteLocalTask(taskId: String) -> Single<Void> {
+        MainDatabase.shared.dbQueue()
+           .flatMap { dbQueue in
+               dbQueue.rx.write { db in
+                   try TaskInfoRecord.deleteOne(db, key: taskId)
+               }
+               .andThen(Single.just(()))
+               .catchError { error in
+                   throw DomainError.localDBError
+               }
+           }
     }
 }

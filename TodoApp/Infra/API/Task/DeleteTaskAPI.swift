@@ -24,9 +24,17 @@ enum DeleteTaskAPI {
     struct Response: Decodable, APIResult {
 
         var message: String
+        let data: Task
 
         private enum CodingKeys: String, CodingKey {
             case message = "message"
+            case data = "data"
+        }
+        struct Task: Decodable {
+            let taskId: String
+            private enum CodingKeys: String, CodingKey {
+                case taskId = "task_id"
+            }
         }
     }
 }
