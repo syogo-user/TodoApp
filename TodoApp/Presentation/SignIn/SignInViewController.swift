@@ -8,6 +8,7 @@
 import UIKit
 import Amplify
 import AWSCognitoAuthPlugin
+import RxSwift
 
 class SignInViewController: BaseViewController {
     
@@ -15,9 +16,11 @@ class SignInViewController: BaseViewController {
     @IBOutlet private weak var passwordTextField: UITextField!
     
     private let viewModel: SignInViewModel = SignInViewModelImpl()
-    
+    private let disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModelValue()
     }
     
     @IBAction private func signIn(_ sender: Any) {
@@ -32,7 +35,6 @@ class SignInViewController: BaseViewController {
     @IBAction private func googleSignIn(_ sender: Any) {
         Task {
             await socialSignInWithWebUI(provider: .google)
-
         }
     }
     
@@ -50,12 +52,29 @@ class SignInViewController: BaseViewController {
             if signInResult.isSignedIn {
                 print("Sign in succeeded")            
                 self.viewModel.setUserInfo()
-                self.dismiss(animated: true)
+
             }
         } catch let error as AuthError {
             print("Sign in failed \(error)")
         } catch {
             print("Unexpected error: \(error)")
         }
-    }    
+    }
+
+    private func bindViewModelValue() {
+        viewModel.userInfo
+            .emit { result in
+                guard let result = result, result.isCompleted else { return }
+                if let error = result.error {
+                    self.handlerError(error: error) {
+
+                    }
+                }
+                self.viewModel.setViaSignIn()
+                self.toTabBar()
+            }
+            .disposed(by: disposeBag)
+    }
+
+
 }

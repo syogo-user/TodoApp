@@ -8,17 +8,8 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-    private let viewModel: TabBarViewModel = TabBarViewModelImpl()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        Task {
-            if await !viewModel.isSignIn() {
-                self.toSignIn()
-            }
-        }
     }
 }

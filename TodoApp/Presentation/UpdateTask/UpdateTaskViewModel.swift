@@ -19,7 +19,7 @@ protocol UpdateTaskViewModel {
 class UpdateTaskViewModelImpl: UpdateTaskViewModel {
     private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
     private let userUseCase: UserUseCase = UserUseCaseImpl()
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     // タスクの更新通知
     private let updateTaskInfoRelay = PublishRelay<VMResult<TaskInfo>?>()

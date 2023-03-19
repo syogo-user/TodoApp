@@ -21,7 +21,7 @@ protocol SettingViewModel {
 }
 
 class SettingViewModelImpl: SettingViewModel {
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     private let usecase: UserUseCase = UserUseCaseImpl()
 
     func signOutLocally() async throws {
