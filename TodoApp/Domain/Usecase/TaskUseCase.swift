@@ -16,15 +16,15 @@ protocol TaskUseCase {
     /// タスク更新
     func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<TaskInfo>
     /// タスク削除
-    func deleteTask(taskId: String, authorization: String) -> Single<Void>
+    func deleteTask(taskId: String, authorization: String) -> Single<String>
     /// ローカルからタスクを取得
-    func loadLocalTaskList() throws-> [TaskInfoRecord]
+    func loadLocalTaskList() -> Single<[TaskInfoRecord]>
     /// ローカルにタスクを登録
-    func insertLocalTask(taskInfo: TaskInfoRecord) throws
+    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
     /// ローカルのタスクを更新
-    func updateLocalTask(taskInfo: TaskInfoRecord) throws
+    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
     /// ローカルのタスクを削除
-    func deleteLocalTask(taskId: String) throws
+    func deleteLocalTask(taskId: String) -> Single<Void>
 }
 
 class TaskUseCaseImpl: TaskUseCase {
@@ -93,30 +93,30 @@ class TaskUseCaseImpl: TaskUseCase {
             }
     }
 
-    func deleteTask(taskId: String, authorization: String) -> Single<Void> {
+    func deleteTask(taskId: String, authorization: String) -> Single<String> {
         repository.deleteTask(taskId: taskId, authorization: authorization)
             .do(onSuccess: { result in
                 guard result.isAcceptable else {
                     throw DomainError.unacceptableResultCode(code: result.message)
                 }
             })
-            .map { message in
-                print("####message:\(message)")
+            .map {
+                $0.data.taskId
             }
     }
 
-    func insertLocalTask(taskInfo: TaskInfoRecord) throws {
-        try repository.insertLocalTask(taskInfo: taskInfo) }
+    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
+        repository.insertLocalTask(taskInfo: taskInfo) }
 
-    func loadLocalTaskList() throws-> [TaskInfoRecord] {
-        try repository.loadLocalTaskList()
+    func loadLocalTaskList() -> Single<[TaskInfoRecord]> {
+        repository.loadLocalTaskList()
     }
 
-    func updateLocalTask(taskInfo: TaskInfoRecord) throws {
-        try repository.updateLocalTask(taskInfo: taskInfo)
+    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
+        repository.updateLocalTask(taskInfo: taskInfo)
     }
 
-    func deleteLocalTask(taskId: String) throws {
-        try repository.deleteLocalTask(taskId: taskId)
+    func deleteLocalTask(taskId: String) -> Single<Void> {
+        repository.deleteLocalTask(taskId: taskId)
     }
 }

@@ -42,24 +42,14 @@
                                     <action selector="signOut:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8sn-rf-AE7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpw-JL-tRc">
-                                <rect key="frame" x="132.66666666666666" y="493.33333333333331" width="127.99999999999997" height="34.333333333333314"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="トークン確認"/>
-                                <connections>
-                                    <action selector="currentToken:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="UZm-pM-Cmb"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="SOr-Rj-7nV" secondAttribute="trailing" constant="50" id="2v3-1b-jre"/>
-                            <constraint firstItem="Bpw-JL-tRc" firstAttribute="top" secondItem="86i-la-gtW" secondAttribute="bottom" constant="50" id="Hoe-2k-swc"/>
                             <constraint firstItem="86i-la-gtW" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="QaP-B6-9La"/>
                             <constraint firstItem="SOr-Rj-7nV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="QbN-x9-USS"/>
                             <constraint firstItem="86i-la-gtW" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="grz-jd-1cg"/>
-                            <constraint firstItem="Bpw-JL-tRc" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="gwM-r5-9Hg"/>
                             <constraint firstItem="SOr-Rj-7nV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="25" id="rfS-f1-Nv4"/>
                         </constraints>
                     </view>

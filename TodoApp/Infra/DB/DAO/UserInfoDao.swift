@@ -7,10 +7,12 @@
 
 import Foundation
 import GRDB
+import RxGRDB
+import RxSwift
 
 protocol UserInfoDao {
     /// ユーザ情報を取得
-    func loadLocalUserInfo() throws -> UserInfoRecord
+    func loadLocalUserInfo() -> Single<[UserInfoRecord]>
     /// ローカルにユーザを追加する
     func insertLocalUserInfo(userInfo: UserInfoRecord)
     ///  ローカルのユーザ情報を削除する
@@ -19,15 +21,16 @@ protocol UserInfoDao {
 
 class UserInfoDaoImpl: UserInfoDao {
 
-    func loadLocalUserInfo() throws -> UserInfoRecord {
-        let dbQueue: DatabaseQueue = try MainDatabase.shared.dbQueue()
-        let userInfoRecord = try dbQueue.read { db in
-            guard let userInfo = try UserInfoRecord.fetchOne(db) else {
-                throw DomainError.localDBError
+    func loadLocalUserInfo() -> Single<[UserInfoRecord]> {
+        MainDatabase.shared.dbQueue()
+            .flatMap { dbQueue in
+                dbQueue.rx.read { db in
+                    try UserInfoRecord.fetchAll(db)
+                }
+                .catchError { error in
+                    throw DomainError.localDBError
+                }
             }
-            return userInfo
-        }
-        return userInfoRecord
     }
 
     func insertLocalUserInfo(userInfo: UserInfoRecord) {

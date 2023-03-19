@@ -7,34 +7,35 @@
 
 import Foundation
 import APIKit
+import RxSwift
 
 protocol TaskLocalStore {
 
-    func loadLocalTaskList() throws -> [TaskInfoRecord]
+    func loadLocalTaskList() -> Single<[TaskInfoRecord]>
 
-    func insertLocalTask(taskInfo: TaskInfoRecord) throws
+    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
 
-    func updateLocalTask(taskInfo: TaskInfoRecord) throws
+    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
 
-    func deleteLocalTask(taskId: String) throws
+    func deleteLocalTask(taskId: String) -> Single<Void>
 }
 
 class TaskLocalStoreImpl: TaskLocalStore {
     private let dao: TaskInfoDao = TaskInfoDaoImpl()
 
-    func loadLocalTaskList() throws -> [TaskInfoRecord] {
-        try dao.loadLocalTask()
+    func loadLocalTaskList() -> Single<[TaskInfoRecord]> {
+        dao.loadLocalTask()
     }
 
-    func insertLocalTask(taskInfo: TaskInfoRecord) throws {
-       try dao.insertLocalTask(taskInfo: taskInfo)
+    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
+        dao.insertLocalTask(taskInfo: taskInfo)
     }
 
-    func updateLocalTask(taskInfo: TaskInfoRecord) throws {
-       try dao.updateLocalTask(taskInfo: taskInfo)
+    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
+       dao.updateLocalTask(taskInfo: taskInfo)
     }
 
-    func deleteLocalTask(taskId: String) throws {
-       try dao.deleteLocalTask(taskId: taskId)
+    func deleteLocalTask(taskId: String) -> Single<Void> {
+       dao.deleteLocalTask(taskId: taskId)
     }
 }

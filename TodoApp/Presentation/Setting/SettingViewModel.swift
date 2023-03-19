@@ -14,8 +14,6 @@ import Foundation
 protocol SettingViewModel {
     /// サインアウト
     func signOutLocally() async throws
-    /// トークン情報を取得
-    func fetchCurrentAuthToken() async throws -> String
     /// ユーザ情報取得
     func loadUser() throws
     /// ユーザ情報削除
@@ -28,10 +26,6 @@ class SettingViewModelImpl: SettingViewModel {
 
     func signOutLocally() async throws {
        try await usecase.signOut()
-    }
-
-    func fetchCurrentAuthToken() async throws -> String {
-       try await usecase.fetchCurrentAuthToken()
     }
 
     func loadUser() throws {

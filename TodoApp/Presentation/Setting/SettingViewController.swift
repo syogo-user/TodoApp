@@ -45,22 +45,6 @@ class SettingViewController: BaseViewController {
         }
     }
 
-    // TODO: 後で削除
-    @IBAction private func currentToken(_ sender: Any) {
-        Task {
-            do {
-                let token = try await viewModel.fetchCurrentAuthToken()
-                print("token:\(token)")
-            } catch {
-                self.handlerError(error: DomainError.authError) {
-                    tokenErrorDialog() {
-                        self.signOut()
-                    }
-                }
-            }
-        }
-    }
-
     private func signOut() {
         Task {
             do {
