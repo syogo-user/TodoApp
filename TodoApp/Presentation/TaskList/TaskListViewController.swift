@@ -11,10 +11,10 @@ import RxSwift
 class TaskListViewController: BaseViewController {
     private var viewModel: TaskListViewModel = TaskListViewModelImpl()
     private let disposeBag = DisposeBag()
-
+    @IBOutlet weak var tableView: UITableView!
     let refreshCtl = UIRefreshControl()
 
-    @IBOutlet weak var tableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModelValue()
@@ -39,6 +39,7 @@ class TaskListViewController: BaseViewController {
 
                     }
                 }
+                self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
 
@@ -48,7 +49,8 @@ class TaskListViewController: BaseViewController {
         tableView.register(R.nib.taskTableViewCell)
         tableView.refreshControl = refreshCtl
         refreshCtl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-
+        tableView.delegate = self
+        
         if viewModel.isFromSignIn() {
             // サーバからデータを取得
             viewModel.fetchTaskList()
@@ -63,45 +65,48 @@ class TaskListViewController: BaseViewController {
         viewModel.fetchTaskList()
         refreshCtl.endRefreshing()
     }
+
+    @IBAction private func add(_ sender: Any) {
+        toAddTask()
+    }
+}
+
+extension TaskListViewController: AddTaskViewControllerDelegate {
+    /// タスクの送信後
+    func didTapSend() {
+        viewModel.loadLocalTaskList()
+    }
 }
 
 extension TaskListViewController: UITableViewDelegate {
-
     /// セクションの高さ
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//
-//    }
-
-//    // スクロール時
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        //一番下に到達したときの挙動
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        20.0
+    }
 
     /// セルの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100.0
+        120.0
     }
 
-//    /// セルタップ
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        // 更新画面に遷移
-//        let taskId = viewModel.toTaskId(index: indexPath.row)
-//        self.toUpdateTask(taskId: taskId)
-//    }
+    /// セルタップ
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        toUpdateTask(taskInfoItem: viewModel.selectItemAt(index: indexPath.row))
+    }
 
-//    /// セルを左から右にスワイプ
-//    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//
-//    }
-//
-    /// セルを右から左にスワイプ
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    /// セルを左から右にスワイプ
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: nil) { _, _, handler in
-//            self.deleteAlert(index: indexPath.row)
             handler(true)
         }
         return UISwipeActionsConfiguration(actions: [action])
     }
 
-
+    /// セルを右から左にスワイプ
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: nil) { _, _, handler in
+            handler(true)
+        }
+        return UISwipeActionsConfiguration(actions: [action])
+    }
 }

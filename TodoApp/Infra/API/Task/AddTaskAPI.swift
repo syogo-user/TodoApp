@@ -35,16 +35,15 @@ enum AddTaskAPI {
         }
 
         var bodyParameters:  BodyParameters? {
-            var data = [String: String]()
+            var data = [String: Any]()
             data[Keys.title.rawValue] = title
             data[Keys.content.rawValue] = content
             data[Keys.scheduledDate.rawValue] = scheduledDate
-            data[Keys.isCompleted.rawValue] = String(isCompleted)
-            data[Keys.isFavorite.rawValue] = String(isFavorite)
+            data[Keys.isCompleted.rawValue] = isCompleted
+            data[Keys.isFavorite.rawValue] = isFavorite
             data[Keys.userId.rawValue] = userId
             return JSONBodyParameters(JSONObject: data)
         }
-
     }
 
     struct Response: Decodable, APIResult {

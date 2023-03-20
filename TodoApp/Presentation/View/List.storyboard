@@ -21,13 +21,28 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="710"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2I-cn-tZI" userLabel="button">
+                                <rect key="frame" x="323" y="699" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.1087265912" green="0.68257404919999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="aUk-kA-bVn"/>
+                                    <constraint firstAttribute="width" constant="50" id="fml-A9-eff"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="タスク"/>
+                                <connections>
+                                    <action selector="add:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Wtv-lI-Y3G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="s5Y-h1-5sP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4eC-mY-sRf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Q2I-cn-tZI" secondAttribute="bottom" constant="20" id="AcH-QQ-0EO"/>
                             <constraint firstItem="s5Y-h1-5sP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="OhP-Kc-ehV"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="s5Y-h1-5sP" secondAttribute="bottom" id="SqC-Za-gUP"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Q2I-cn-tZI" secondAttribute="trailing" constant="20" id="jHM-hW-vpT"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="s5Y-h1-5sP" secondAttribute="trailing" id="vzT-aP-p99"/>
                         </constraints>
                     </view>
@@ -41,7 +56,108 @@
             </objects>
             <point key="canvasLocation" x="56" y="-2"/>
         </scene>
+        <!--Add Task View Controller-->
+        <scene sceneID="4MW-ia-Pt1">
+            <objects>
+                <viewController storyboardIdentifier="addTaskVC" id="VyQ-Zj-3iD" customClass="AddTaskViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wOi-d3-igJ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CJ7-e8-rfZ">
+                                <rect key="frame" x="0.0" y="672" width="393" height="180"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lz3-zO-kLP">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" id="HYO-eM-zGY"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タイトル" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xei-4n-ven" customClass="InputTitleTextField" customModule="TodoApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="5" width="393" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.96489841519999997" blue="0.66302408810000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="JjL-ml-QFc"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="urp-vg-g5w" customClass="InputTextView" customModule="TodoApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.000000000000007" width="393" height="90.666666666666686"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKn-K4-R9R">
+                                        <rect key="frame" x="0.0" y="145.66666666666663" width="393" height="34.333333333333343"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eoh-Ca-0zH">
+                                                <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="日付"/>
+                                                <connections>
+                                                    <action selector="selectDate:" destination="VyQ-Zj-3iD" eventType="touchUpInside" id="WZG-li-CCe"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-m1-1Yk">
+                                                <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="送信"/>
+                                                <connections>
+                                                    <action selector="send:" destination="VyQ-Zj-3iD" eventType="touchUpInside" id="fGK-7V-MtJ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="erD-NT-uy2"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vj2-h5-97d"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vj2-h5-97d" firstAttribute="trailing" secondItem="CJ7-e8-rfZ" secondAttribute="trailing" id="KcA-5c-nNZ"/>
+                            <constraint firstItem="CJ7-e8-rfZ" firstAttribute="leading" secondItem="vj2-h5-97d" secondAttribute="leading" id="f2c-Mq-4rN"/>
+                            <constraint firstAttribute="bottom" secondItem="CJ7-e8-rfZ" secondAttribute="bottom" id="reC-4s-3uk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentTextView" destination="urp-vg-g5w" id="jqI-SJ-Un7"/>
+                        <outlet property="inputAreaStackView" destination="CJ7-e8-rfZ" id="JLz-Tc-j1M"/>
+                        <outlet property="titleTextField" destination="xei-4n-ven" id="0AW-n7-jch"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dlu-OA-Aeq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="55.725190839694655" y="706.33802816901414"/>
+        </scene>
+        <!--Update Task View Controller-->
+        <scene sceneID="UGR-Ro-2tP">
+            <objects>
+                <viewController storyboardIdentifier="updateTaskVC" id="TJy-yz-tGi" customClass="UpdateTaskViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RWK-mZ-FUK">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ZNg-qJ-b2r"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oh0-vE-omT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="877" y="-2"/>
+        </scene>
     </scenes>
+    <designables>
+        <designable name="xei-4n-ven">
+            <size key="intrinsicContentSize" width="85.333333333333329" height="34"/>
+        </designable>
+    </designables>
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="87"/>
         <systemColor name="systemBackgroundColor">
