@@ -22,12 +22,12 @@ protocol TaskListViewModel {
     func deleteTask(index: Int)
     /// ローカルDBからタスクリストを取得
     func loadLocalTaskList()
-    /// タスクIDに変換
-    func toTaskId(index: Int) -> String
     /// サインイン画面を経由したか
     func isFromSignIn() -> Bool
     /// サインイン画面を経由したかを設定
     func setFromSignIn()
+    /// 指定したインデックスのタスクを返却する
+    func selectItemAt(index: Int) -> TaskInfoItem
 }
 
 class TaskListViewModelImpl: TaskListViewModel {
@@ -59,7 +59,6 @@ class TaskListViewModelImpl: TaskListViewModel {
     private let deleteLocalTaskInfoRelay = PublishRelay<VMResult<Void>>()
     lazy var deleteLocalTaskInfo = deleteLocalTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
-    // TODO: ログイン時のみAPIから取得する。それ以外はローカルDBから取得する
     func fetchTaskList() {
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
             .flatMap { (user, idToken) in
@@ -67,9 +66,12 @@ class TaskListViewModelImpl: TaskListViewModel {
             }
             .do(onSuccess: { taskList in
                 self.tableViewItems = taskList.map {
+                     TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
+                }
+                self.sortTask()
+                self.tableViewItems.forEach {
                     let taskInfoRecord = TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                     self.insertLocalTask(taskInfo: taskInfoRecord)
-                    return TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
@@ -97,6 +99,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.tableViewItems.removeAll { task in
                     task.taskId == taskId
                 }
+                self.sortTask()
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .map { taskId -> VMResult<Void> in
@@ -115,6 +118,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.tableViewItems = taskList.map {
                     TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
+                self.sortTask()
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .map { taskList -> VMResult<Void> in
@@ -126,17 +130,33 @@ class TaskListViewModelImpl: TaskListViewModel {
             .disposed(by: disposeBag)
     }
 
-    /// indexからタスクIDを取得
-    func toTaskId(index: Int) -> String {
-        tableViewItems[index].taskId
-    }
-
     func isFromSignIn() -> Bool {
         userUseCase.isFromSignIn
     }
 
     func setFromSignIn() {
         userUseCase.isFromSignIn = false
+    }
+
+    func selectItemAt(index: Int) -> TaskInfoItem {
+        tableViewItems[index]
+    }
+
+    /// インデックスからタスクIDを取得
+    private func toTaskId(index: Int) -> String {
+        selectItemAt(index: index).taskId
+    }
+
+    private func sortTask() {
+        self.tableViewItems.sort{ (task1: TaskInfoItem, task2: TaskInfoItem) -> Bool in
+            if task1.scheduledDate == task2.scheduledDate {
+                // 日付が同じ場合
+                return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
+            } else {
+                // 日付が異なる場合
+                return task1.scheduledDate < task2.scheduledDate
+            }
+        }
     }
 
     /// ローカルDBにタスクを追加

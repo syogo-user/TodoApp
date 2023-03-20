@@ -26,9 +26,7 @@ class TaskTableViewCell: UITableViewCell {
 
     func setUp(taskInfoItem: TaskInfoItem) {
         title.text = taskInfoItem.title
-        contentLabel.text = taskInfoItem.content + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaend"
+        contentLabel.text = taskInfoItem.content
         scheduledDateLabel.text = taskInfoItem.scheduledDate
     }
-
-    
 }

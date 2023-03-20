@@ -10,14 +10,15 @@ import UIKit
 
 extension TaskListViewController {
 
-//    func toAddTask() {
-//        guard let addTask =  R.storyboard.task.addTask() else { return }
-//        self.present(addTask, animated: true)
-//    }
-//
-//    func toUpdateTask(taskId: Int) {
-//        guard let updateTask =  R.storyboard.task.updateTask() else { return }
-//        updateTask.updateTaskId = taskId
-//        self.present(updateTask, animated: true)
-//    }
+    func toAddTask() {
+        guard let addTaskVC = R.storyboard.list.addTaskVC() else { return }
+        addTaskVC.delegate = self
+        self.present(addTaskVC, animated: true)
+    }
+
+    func toUpdateTask(taskInfoItem: TaskInfoItem) {
+        guard let updateTaskVC =  R.storyboard.list.updateTaskVC() else { return }
+        updateTaskVC.updateTask = taskInfoItem
+        self.present(updateTaskVC, animated: true)
+    }
 }

@@ -70,6 +70,8 @@
 		91C7608F29BC2E3F003BE148 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 91C7608E29BC2E3F003BE148 /* Amplify */; };
 		91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7609029BC3002003BE148 /* SignInViewModel.swift */; };
 		91C7609329BC3213003BE148 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7609229BC3213003BE148 /* UserUseCase.swift */; };
+		91CA6F6429C8840000BC03AB /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CA6F6329C8840000BC03AB /* InputTextField.swift */; };
+		91CA6F6629C8848200BC03AB /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CA6F6529C8848200BC03AB /* InputTextView.swift */; };
 		91CFFD8629C1FE420086B5E2 /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CFFD8529C1FE420086B5E2 /* SettingRouter.swift */; };
 		91CFFD8B29C22A0D0086B5E2 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CFFD8A29C22A0D0086B5E2 /* DomainError.swift */; };
 		91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A2D29B7791600DA4EAE /* AppDelegate.swift */; };
@@ -166,6 +168,8 @@
 		91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoAttribute.swift; sourceTree = "<group>"; };
 		91C7609029BC3002003BE148 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		91C7609229BC3213003BE148 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
+		91CA6F6329C8840000BC03AB /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
+		91CA6F6529C8848200BC03AB /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		91CFFD8529C1FE420086B5E2 /* SettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
 		91CFFD8A29C22A0D0086B5E2 /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		91E41A2A29B7791600DA4EAE /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,6 +267,8 @@
 			children = (
 				9136501D29C6AFE600F9BC29 /* AddTaskViewController.swift */,
 				9136501F29C6AFF000F9BC29 /* AddTaskViewModel.swift */,
+				91CA6F6329C8840000BC03AB /* InputTextField.swift */,
+				91CA6F6529C8848200BC03AB /* InputTextView.swift */,
 			);
 			path = AddTask;
 			sourceTree = "<group>";
@@ -885,6 +891,7 @@
 				91C7609129BC3002003BE148 /* SignInViewModel.swift in Sources */,
 				9136502229C6BBA300F9BC29 /* UserRemoteStore.swift in Sources */,
 				91A033E229BF7A680019D5A9 /* UserRepository.swift in Sources */,
+				91CA6F6429C8840000BC03AB /* InputTextField.swift in Sources */,
 				91A088B229C4A3D5000BF175 /* AddTaskAPI.swift in Sources */,
 				9136501429C5B13200F9BC29 /* TaskInfoItem.swift in Sources */,
 				91CFFD8B29C22A0D0086B5E2 /* DomainError.swift in Sources */,
@@ -906,6 +913,7 @@
 				91A088BB29C550E4000BF175 /* TaskUseCase.swift in Sources */,
 				91A088BD29C552BC000BF175 /* TaskRepository.swift in Sources */,
 				91A033CA29BDF6920019D5A9 /* SettingViewModel.swift in Sources */,
+				91CA6F6629C8848200BC03AB /* InputTextView.swift in Sources */,
 				91A033BA29BDC4760019D5A9 /* TabBarController.swift in Sources */,
 				91A033B729BDAEAA0019D5A9 /* R.generated.swift in Sources */,
 				91A088B829C4B966000BF175 /* Environment.swift in Sources */,
