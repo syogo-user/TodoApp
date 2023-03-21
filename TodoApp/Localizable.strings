@@ -25,6 +25,11 @@
 "networkErrorDialogMessage" = "ネットワークに接続してください。";
 "unknownErrorDialogMessage" = "処理に失敗しました。\nお時間をあけてから、もう一度お試しください。";
 
+// MARK: - WarningDialogTitle
+"deleteWarningDialogTitle" = "タスクの削除";
+
+// MARK: - WarningDialogMessage
+"deleteWarningDialogMessage" = "タスクを削除してもよろしいですか？";
 
 // MARK: - Common
 "ok" = "OK";
