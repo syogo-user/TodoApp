@@ -72,6 +72,7 @@
 		91C7609329BC3213003BE148 /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C7609229BC3213003BE148 /* UserUseCase.swift */; };
 		91CA6F6429C8840000BC03AB /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CA6F6329C8840000BC03AB /* InputTextField.swift */; };
 		91CA6F6629C8848200BC03AB /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CA6F6529C8848200BC03AB /* InputTextView.swift */; };
+		91CA6F6929C95C9100BC03AB /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CA6F6829C95C9100BC03AB /* CheckButton.swift */; };
 		91CFFD8629C1FE420086B5E2 /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CFFD8529C1FE420086B5E2 /* SettingRouter.swift */; };
 		91CFFD8B29C22A0D0086B5E2 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CFFD8A29C22A0D0086B5E2 /* DomainError.swift */; };
 		91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A2D29B7791600DA4EAE /* AppDelegate.swift */; };
@@ -170,6 +171,7 @@
 		91C7609229BC3213003BE148 /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		91CA6F6329C8840000BC03AB /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
 		91CA6F6529C8848200BC03AB /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
+		91CA6F6829C95C9100BC03AB /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		91CFFD8529C1FE420086B5E2 /* SettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
 		91CFFD8A29C22A0D0086B5E2 /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		91E41A2A29B7791600DA4EAE /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,6 +356,7 @@
 		915F06F029BA1CB600685156 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				91CA6F6729C95C7900BC03AB /* Button */,
 				915F06F129BA1CC700685156 /* BaseViewController.swift */,
 				91BC1A6529C0B08D00500A62 /* VMResult.swift */,
 			);
@@ -524,6 +527,14 @@
 				91A088C429C594CC000BF175 /* TaskInfo.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		91CA6F6729C95C7900BC03AB /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				91CA6F6829C95C9100BC03AB /* CheckButton.swift */,
+			);
+			path = Button;
 			sourceTree = "<group>";
 		};
 		91CFFD8929C229FF0086B5E2 /* Error */ = {
@@ -923,6 +934,7 @@
 				91A088C529C594CC000BF175 /* TaskInfo.swift in Sources */,
 				91A088AC29C4A255000BF175 /* DecodableDataParser.swift in Sources */,
 				9136501B29C6AFAA00F9BC29 /* UpdateTaskViewModel.swift in Sources */,
+				91CA6F6929C95C9100BC03AB /* CheckButton.swift in Sources */,
 				91E41A3029B7791600DA4EAE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
