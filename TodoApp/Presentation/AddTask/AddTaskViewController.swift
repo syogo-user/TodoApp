@@ -32,11 +32,6 @@ class AddTaskViewController: BaseViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dissmiss))
-        tapGesture.cancelsTouchesInView = false
-        tapGesture.delegate = self
-        self.view.addGestureRecognizer(tapGesture)
-
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -70,6 +65,10 @@ class AddTaskViewController: BaseViewController {
         self.titleTextField.borderStyle = .none
         self.contentTextView.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
         self.contentTextView.sizeToFit()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dissmiss))
+        tapGesture.cancelsTouchesInView = false
+        tapGesture.delegate = self
+        self.view.addGestureRecognizer(tapGesture)
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -79,9 +78,7 @@ class AddTaskViewController: BaseViewController {
         viewModel.addTaskInfo
             .emit(onNext: { [unowned self] result in
 
-
-
-                // この画面を閉じる
+                
                 delegate?.didTapSend()
                 self.dissmiss()
             })

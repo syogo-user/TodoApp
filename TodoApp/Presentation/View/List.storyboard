@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qpg-uM-VdM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--List-->
+        <!--Task List View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="TaskListViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s5Y-h1-5sP">
-                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2I-cn-tZI" userLabel="button">
@@ -46,7 +46,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="s5Y-h1-5sP" secondAttribute="trailing" id="vzT-aP-p99"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="List" image="list.bullet" catalog="system" id="GFi-Zm-ZXE"/>
+                    <navigationItem key="navigationItem" id="31w-Bi-GeP"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="s5Y-h1-5sP" id="6d0-JK-HCd"/>
@@ -54,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="56" y="-2"/>
+            <point key="canvasLocation" x="982.44274809160299" y="-2.1126760563380285"/>
         </scene>
         <!--Add Task View Controller-->
         <scene sceneID="4MW-ia-Pt1">
@@ -144,22 +144,104 @@
                     <view key="view" contentMode="scaleToFill" id="RWK-mZ-FUK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ua3-sA-osE">
+                                <rect key="frame" x="152.66666666666666" y="69" width="88" height="34.333333333333343"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="◯月◯日"/>
+                                <connections>
+                                    <action selector="selectDate:" destination="TJy-yz-tGi" eventType="touchUpInside" id="v7K-tZ-XSV"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UDF-92-dKb">
+                                <rect key="frame" x="20" y="123.33333333333331" width="353" height="45"/>
+                                <color key="backgroundColor" red="1" green="0.96489841519999997" blue="0.66302408810000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="nIg-Tr-FBU"/>
+                                </constraints>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O6A-Gp-Z8r">
+                                <rect key="frame" x="20" y="188.33333333333337" width="353" height="200"/>
+                                <color key="backgroundColor" red="0.73034332229999999" green="0.82693743939999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="3j9-Ld-RRM"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pA-5C-tEl" customClass="CheckButton" customModule="TodoApp" customModuleProvider="target">
+                                <rect key="frame" x="20" y="69" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="66a-ol-ibK"/>
+                                    <constraint firstAttribute="width" constant="30" id="zdk-ev-ZIF"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="complete:" destination="TJy-yz-tGi" eventType="touchUpInside" id="WCk-Dh-7GV"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ZNg-qJ-b2r"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UDF-92-dKb" firstAttribute="leading" secondItem="ZNg-qJ-b2r" secondAttribute="leading" constant="20" id="Dtu-ct-grv"/>
+                            <constraint firstItem="O6A-Gp-Z8r" firstAttribute="trailing" secondItem="UDF-92-dKb" secondAttribute="trailing" id="F7I-v1-NnQ"/>
+                            <constraint firstItem="O6A-Gp-Z8r" firstAttribute="leading" secondItem="UDF-92-dKb" secondAttribute="leading" id="Jyb-mV-aTe"/>
+                            <constraint firstItem="9pA-5C-tEl" firstAttribute="leading" secondItem="ZNg-qJ-b2r" secondAttribute="leading" constant="20" id="OyZ-b2-xmf"/>
+                            <constraint firstItem="ua3-sA-osE" firstAttribute="centerX" secondItem="RWK-mZ-FUK" secondAttribute="centerX" id="g7o-JT-sYD"/>
+                            <constraint firstItem="ua3-sA-osE" firstAttribute="top" secondItem="ZNg-qJ-b2r" secondAttribute="top" constant="10" id="qq4-lA-xzT"/>
+                            <constraint firstItem="ZNg-qJ-b2r" firstAttribute="trailing" secondItem="UDF-92-dKb" secondAttribute="trailing" constant="20" id="riv-ga-2jg"/>
+                            <constraint firstItem="UDF-92-dKb" firstAttribute="top" secondItem="ua3-sA-osE" secondAttribute="bottom" constant="20" id="tzj-ML-S6s"/>
+                            <constraint firstItem="ua3-sA-osE" firstAttribute="top" secondItem="9pA-5C-tEl" secondAttribute="top" id="uhz-B0-3ul"/>
+                            <constraint firstItem="O6A-Gp-Z8r" firstAttribute="top" secondItem="UDF-92-dKb" secondAttribute="bottom" constant="20" id="yLK-TV-7rG"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="60X-s3-05M"/>
+                    <connections>
+                        <outlet property="completeCheckButton" destination="9pA-5C-tEl" id="CEL-Ey-BNp"/>
+                        <outlet property="contentTextView" destination="O6A-Gp-Z8r" id="pv0-dp-JoL"/>
+                        <outlet property="scheduledDateButton" destination="ua3-sA-osE" id="vTw-3u-2pa"/>
+                        <outlet property="titleTextField" destination="UDF-92-dKb" id="G0m-55-cjs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oh0-vE-omT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877" y="-2"/>
+            <point key="canvasLocation" x="2052.6717557251909" y="-2.1126760563380285"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="3b6-ra-2bU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpg-uM-VdM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="List" image="list.bullet" catalog="system" id="GFi-Zm-ZXE"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MGB-Ql-JMR">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="Ns8-mv-kbs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="shj-Vf-4C2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="55.725190839694655" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <designables>
         <designable name="xei-4n-ven">
-            <size key="intrinsicContentSize" width="85.333333333333329" height="34"/>
+            <size key="intrinsicContentSize" width="91.333333333333329" height="34"/>
         </designable>
     </designables>
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="87"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

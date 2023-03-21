@@ -39,10 +39,21 @@ class TaskListViewController: BaseViewController {
 
                     }
                 }
-                self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
 
+        // ローカルタスクの登録通知
+        viewModel.loadLocalTaskInfo
+            .emit(onNext: { result in
+                if (!result.isCompleted) { return }
+                if let error = result.error {
+                    self.handlerError(error: error) {
+
+                    }
+                }
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
 
     private func setUp() {
@@ -74,6 +85,13 @@ class TaskListViewController: BaseViewController {
 extension TaskListViewController: AddTaskViewControllerDelegate {
     /// タスクの送信後
     func didTapSend() {
+        viewModel.loadLocalTaskList()
+    }
+}
+
+extension TaskListViewController: UpdateTaskViewControllerDelegate {
+    /// タスクの更新後
+    func updateComplete() {
         viewModel.loadLocalTaskList()
     }
 }
