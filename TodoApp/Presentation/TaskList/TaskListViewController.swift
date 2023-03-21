@@ -72,6 +72,15 @@ class TaskListViewController: BaseViewController {
         }
     }
 
+    private func deleteWarningDialog(completion: (() -> Void)? = nil) {
+        let dialog = UIAlertController(title: R.string.localizable.deleteWarningDialogTitle(), message: R.string.localizable.deleteWarningDialogMessage(), preferredStyle: .alert)
+        dialog.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: { action in
+            completion?()
+        }))
+        dialog.addAction(UIAlertAction(title: R.string.localizable.cancel(), style: .cancel, handler: nil))
+        self.present(dialog,animated: true,completion: nil)
+    }
+
     @objc private func refresh() {
         viewModel.fetchTaskList()
         refreshCtl.endRefreshing()
@@ -123,6 +132,10 @@ extension TaskListViewController: UITableViewDelegate {
     /// セルを右から左にスワイプ
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: nil) { _, _, handler in
+            self.deleteWarningDialog() {
+                // タスクの削除
+                self.viewModel.deleteTask(index: indexPath.row)
+            }
             handler(true)
         }
         return UISwipeActionsConfiguration(actions: [action])
