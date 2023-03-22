@@ -11,7 +11,7 @@ import RxSwift
 class TaskListViewController: BaseViewController {
     private var viewModel: TaskListViewModel = TaskListViewModelImpl()
     private let disposeBag = DisposeBag()
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     let refreshCtl = UIRefreshControl()
 
 

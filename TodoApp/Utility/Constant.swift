@@ -9,4 +9,5 @@ import Foundation
 
 enum Constants {
     static let requestTimeout: TimeInterval = 30.0
+    static let titleWordLimit: Int = 15
 }
