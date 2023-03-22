@@ -154,16 +154,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ua3-sA-osE">
-                                <rect key="frame" x="152.66666666666666" y="69" width="88" height="34.333333333333343"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="◯月◯日"/>
-                                <connections>
-                                    <action selector="selectDate:" destination="TJy-yz-tGi" eventType="touchUpInside" id="v7K-tZ-XSV"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UDF-92-dKb">
-                                <rect key="frame" x="20" y="123.33333333333331" width="353" height="45"/>
+                                <rect key="frame" x="20" y="129" width="353" height="45"/>
                                 <color key="backgroundColor" red="1" green="0.96489841519999997" blue="0.66302408810000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="nIg-Tr-FBU"/>
@@ -173,7 +165,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O6A-Gp-Z8r">
-                                <rect key="frame" x="20" y="188.33333333333337" width="353" height="200"/>
+                                <rect key="frame" x="20" y="194" width="353" height="200"/>
                                 <color key="backgroundColor" red="0.73034332229999999" green="0.82693743939999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="3j9-Ld-RRM"/>
@@ -183,16 +175,27 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pA-5C-tEl" customClass="CheckButton" customModule="TodoApp" customModuleProvider="target">
-                                <rect key="frame" x="20" y="69" width="30" height="30"/>
+                                <rect key="frame" x="20" y="69" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="66a-ol-ibK"/>
-                                    <constraint firstAttribute="width" constant="30" id="zdk-ev-ZIF"/>
+                                    <constraint firstAttribute="height" constant="40" id="66a-ol-ibK"/>
+                                    <constraint firstAttribute="width" constant="40" id="zdk-ev-ZIF"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="complete:" destination="TJy-yz-tGi" eventType="touchUpInside" id="WCk-Dh-7GV"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="tZt-O7-T3T">
+                                <rect key="frame" x="121.66666666666669" y="69" width="150" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kZU-7f-swd"/>
+                                    <constraint firstAttribute="width" constant="150" id="x0s-aX-iFm"/>
+                                </constraints>
+                                <locale key="locale" localeIdentifier="ja"/>
+                                <connections>
+                                    <action selector="selectDate:" destination="TJy-yz-tGi" eventType="valueChanged" id="Rpr-tk-1lT"/>
+                                </connections>
+                            </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZNg-qJ-b2r"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -200,12 +203,12 @@
                             <constraint firstItem="UDF-92-dKb" firstAttribute="leading" secondItem="ZNg-qJ-b2r" secondAttribute="leading" constant="20" id="Dtu-ct-grv"/>
                             <constraint firstItem="O6A-Gp-Z8r" firstAttribute="trailing" secondItem="UDF-92-dKb" secondAttribute="trailing" id="F7I-v1-NnQ"/>
                             <constraint firstItem="O6A-Gp-Z8r" firstAttribute="leading" secondItem="UDF-92-dKb" secondAttribute="leading" id="Jyb-mV-aTe"/>
+                            <constraint firstItem="UDF-92-dKb" firstAttribute="top" secondItem="tZt-O7-T3T" secondAttribute="bottom" constant="20" id="Loh-SM-GpB"/>
                             <constraint firstItem="9pA-5C-tEl" firstAttribute="leading" secondItem="ZNg-qJ-b2r" secondAttribute="leading" constant="20" id="OyZ-b2-xmf"/>
-                            <constraint firstItem="ua3-sA-osE" firstAttribute="centerX" secondItem="RWK-mZ-FUK" secondAttribute="centerX" id="g7o-JT-sYD"/>
-                            <constraint firstItem="ua3-sA-osE" firstAttribute="top" secondItem="ZNg-qJ-b2r" secondAttribute="top" constant="10" id="qq4-lA-xzT"/>
+                            <constraint firstItem="tZt-O7-T3T" firstAttribute="centerX" secondItem="RWK-mZ-FUK" secondAttribute="centerX" id="QnJ-DG-QQE"/>
+                            <constraint firstItem="tZt-O7-T3T" firstAttribute="top" secondItem="9pA-5C-tEl" secondAttribute="top" id="eF2-YQ-grh"/>
+                            <constraint firstItem="tZt-O7-T3T" firstAttribute="top" secondItem="ZNg-qJ-b2r" secondAttribute="top" constant="10" id="i5P-K4-gxZ"/>
                             <constraint firstItem="ZNg-qJ-b2r" firstAttribute="trailing" secondItem="UDF-92-dKb" secondAttribute="trailing" constant="20" id="riv-ga-2jg"/>
-                            <constraint firstItem="UDF-92-dKb" firstAttribute="top" secondItem="ua3-sA-osE" secondAttribute="bottom" constant="20" id="tzj-ML-S6s"/>
-                            <constraint firstItem="ua3-sA-osE" firstAttribute="top" secondItem="9pA-5C-tEl" secondAttribute="top" id="uhz-B0-3ul"/>
                             <constraint firstItem="O6A-Gp-Z8r" firstAttribute="top" secondItem="UDF-92-dKb" secondAttribute="bottom" constant="20" id="yLK-TV-7rG"/>
                         </constraints>
                     </view>
@@ -213,13 +216,13 @@
                     <connections>
                         <outlet property="completeCheckButton" destination="9pA-5C-tEl" id="CEL-Ey-BNp"/>
                         <outlet property="contentTextView" destination="O6A-Gp-Z8r" id="pv0-dp-JoL"/>
-                        <outlet property="scheduledDateButton" destination="ua3-sA-osE" id="vTw-3u-2pa"/>
+                        <outlet property="scheduledDatePicker" destination="tZt-O7-T3T" id="81l-7w-cpp"/>
                         <outlet property="titleTextField" destination="UDF-92-dKb" id="G0m-55-cjs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oh0-vE-omT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="981" y="-25"/>
+            <point key="canvasLocation" x="980.91603053435108" y="-25.35211267605634"/>
         </scene>
         <!--List-->
         <scene sceneID="3b6-ra-2bU">

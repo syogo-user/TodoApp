@@ -17,11 +17,12 @@ protocol UpdateTaskViewControllerDelegate: AnyObject {
 class UpdateTaskViewController: BaseViewController {
 
     @IBOutlet weak var completeCheckButton: CheckButton!
-    @IBOutlet weak var scheduledDateButton: UIButton!
+    @IBOutlet weak var scheduledDatePicker: UIDatePicker!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
 
     private let viewModel: UpdateTaskViewModel = UpdateTaskViewModelImpl()
+    private let validate: Validate = Validate()
     private let disposeBag = DisposeBag()
     private var selectedDate: String?
     weak var delegate: UpdateTaskViewControllerDelegate?
@@ -61,28 +62,51 @@ class UpdateTaskViewController: BaseViewController {
         titleTextField.text = task.title
         contentTextView.text = task.content
         selectedDate = task.scheduledDate
-        scheduledDateButton.setTitle(selectedDate, for: .normal)
-
+        if let date = selectedDate {
+            self.scheduledDatePicker.date = date.toDate() ?? Date()
+        }
         let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(putTask))
         self.navigationItem.leftBarButtonItems = [editBarButtonItem]
     }
 
     @objc private func putTask() {
-        // TODO: 入力チェック(タイトルが空でないこと、日付が選択されていること)
-
         guard let task = self.updateTask, let title = titleTextField.text, let content = contentTextView.text, let selectedDate = self.selectedDate else { return }
+
+        if (validate.isEmpty(inputArray: title)) {
+            emptyTitleDialog()
+            return
+        }
+        if (validate.isWordLengthOver(word: title, wordLimit: Constants.titleWordLimit)) {
+            overTitleLengthDialog()
+            return
+        }
+
         let isCompleted = completeCheckButton.isChecked
         let taskInfoItem = TaskInfoItem(taskId: task.taskId, title: title, content: content, scheduledDate: selectedDate, isCompleted: isCompleted, isFavorite: task.isFavorite, userId: task.taskId)
         viewModel.updateTask(taskInfoItem: taskInfoItem)
+    }
+
+    private func emptyTitleDialog(completion: (() -> Void)? = nil) {
+        let dialog = UIAlertController(title: R.string.localizable.emptyTitleDialogTitle(), message: R.string.localizable.emptyTitleDialogMessage(), preferredStyle: .alert)
+        dialog.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: { action in
+            completion?()
+        }))
+        self.present(dialog,animated: true,completion: nil)
+    }
+
+    private func overTitleLengthDialog(completion: (() -> Void)? = nil) {
+        let dialog = UIAlertController(title: R.string.localizable.overTitleLengthDialogTitle(), message: R.string.localizable.overTitleLengthDialogMessage(String(Constants.titleWordLimit)), preferredStyle: .alert)
+        dialog.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: { action in
+            completion?()
+        }))
+        self.present(dialog,animated: true,completion: nil)
     }
 
     @IBAction private func complete(_ sender: Any) {
 
     }
 
-    @IBAction private func selectDate(_ sender: Any) {
-        // TODO: 日付
-
+    @IBAction func selectDate(_ sender: Any) {
+        selectedDate = scheduledDatePicker.date.dateFormat()
     }
-    
 }
