@@ -10,6 +10,8 @@
 		10CE648011B5E37741EFE8A6 /* Pods_TodoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B922F38A60BFF4B57B60A399 /* Pods_TodoApp.framework */; };
 		1107DA970E5914BB89B2054F /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = C42AFA19F5E0A7053707FFE1 /* amplifyconfiguration.json */; };
 		3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 698F70E34828384BED2B116E /* awsconfiguration.json */; };
+		911C466C29C9CBC700A9159F /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911C466B29C9CBC700A9159F /* StringExtention.swift */; };
+		911C466E29C9CC9C00A9159F /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911C466D29C9CC9C00A9159F /* DateExtention.swift */; };
 		9136501229C5B0FE00F9BC29 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501129C5B0FE00F9BC29 /* TaskListViewModel.swift */; };
 		9136501429C5B13200F9BC29 /* TaskInfoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501329C5B13200F9BC29 /* TaskInfoItem.swift */; };
 		9136501629C5B24300F9BC29 /* TaskListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501529C5B24300F9BC29 /* TaskListRouter.swift */; };
@@ -47,7 +49,7 @@
 		91A033E229BF7A680019D5A9 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033E129BF7A680019D5A9 /* UserRepository.swift */; };
 		91A0889B29C49D7D000BF175 /* TaskRemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0889A29C49D7D000BF175 /* TaskRemoteStore.swift */; };
 		91A0889F29C49EC8000BF175 /* SessionExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0889E29C49EC8000BF175 /* SessionExtention.swift */; };
-		91A088A129C49F17000BF175 /* URLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088A029C49F17000BF175 /* URLSessionConfiguration.swift */; };
+		91A088A129C49F17000BF175 /* URLSessionConfigurationExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088A029C49F17000BF175 /* URLSessionConfigurationExtention.swift */; };
 		91A088A529C49FF8000BF175 /* TaskListAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088A429C49FF8000BF175 /* TaskListAPI.swift */; };
 		91A088A829C4A147000BF175 /* APIRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088A729C4A147000BF175 /* APIRoutes.swift */; };
 		91A088AA29C4A1CC000BF175 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088A929C4A1CC000BF175 /* APIRequest.swift */; };
@@ -73,6 +75,7 @@
 		91CA6F6429C8840000BC03AB /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CA6F6329C8840000BC03AB /* InputTextField.swift */; };
 		91CA6F6629C8848200BC03AB /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CA6F6529C8848200BC03AB /* InputTextView.swift */; };
 		91CA6F6929C95C9100BC03AB /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CA6F6829C95C9100BC03AB /* CheckButton.swift */; };
+		91CFA3F829C9A43800C7092A /* Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CFA3F729C9A43800C7092A /* Validate.swift */; };
 		91CFFD8629C1FE420086B5E2 /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CFFD8529C1FE420086B5E2 /* SettingRouter.swift */; };
 		91CFFD8B29C22A0D0086B5E2 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CFFD8A29C22A0D0086B5E2 /* DomainError.swift */; };
 		91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A2D29B7791600DA4EAE /* AppDelegate.swift */; };
@@ -111,6 +114,8 @@
 		535E5535F9E17976827D8D1A /* Pods-TodoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoAppTests.release.xcconfig"; path = "Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		698F70E34828384BED2B116E /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		69E705BCDD73A49A82E982CD /* Pods-TodoApp-TodoAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp-TodoAppUITests.release.xcconfig"; path = "Target Support Files/Pods-TodoApp-TodoAppUITests/Pods-TodoApp-TodoAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		911C466B29C9CBC700A9159F /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
+		911C466D29C9CC9C00A9159F /* DateExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		9136501129C5B0FE00F9BC29 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		9136501329C5B13200F9BC29 /* TaskInfoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoItem.swift; sourceTree = "<group>"; };
 		9136501529C5B24300F9BC29 /* TaskListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRouter.swift; sourceTree = "<group>"; };
@@ -148,7 +153,7 @@
 		91A033E129BF7A680019D5A9 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		91A0889A29C49D7D000BF175 /* TaskRemoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRemoteStore.swift; sourceTree = "<group>"; };
 		91A0889E29C49EC8000BF175 /* SessionExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionExtention.swift; sourceTree = "<group>"; };
-		91A088A029C49F17000BF175 /* URLSessionConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionConfiguration.swift; sourceTree = "<group>"; };
+		91A088A029C49F17000BF175 /* URLSessionConfigurationExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionConfigurationExtention.swift; sourceTree = "<group>"; };
 		91A088A429C49FF8000BF175 /* TaskListAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListAPI.swift; sourceTree = "<group>"; };
 		91A088A729C4A147000BF175 /* APIRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRoutes.swift; sourceTree = "<group>"; };
 		91A088A929C4A1CC000BF175 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
@@ -172,6 +177,7 @@
 		91CA6F6329C8840000BC03AB /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
 		91CA6F6529C8848200BC03AB /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		91CA6F6829C95C9100BC03AB /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
+		91CFA3F729C9A43800C7092A /* Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validate.swift; sourceTree = "<group>"; };
 		91CFFD8529C1FE420086B5E2 /* SettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
 		91CFFD8A29C22A0D0086B5E2 /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		91E41A2A29B7791600DA4EAE /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -359,6 +365,7 @@
 				91CA6F6729C95C7900BC03AB /* Button */,
 				915F06F129BA1CC700685156 /* BaseViewController.swift */,
 				91BC1A6529C0B08D00500A62 /* VMResult.swift */,
+				91CFA3F729C9A43800C7092A /* Validate.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -385,9 +392,9 @@
 			children = (
 				9136502329C6E89D00F9BC29 /* Cell */,
 				91A033C429BDEED20019D5A9 /* TaskListViewController.swift */,
-				9136501329C5B13200F9BC29 /* TaskInfoItem.swift */,
 				9136501129C5B0FE00F9BC29 /* TaskListViewModel.swift */,
 				9136501529C5B24300F9BC29 /* TaskListRouter.swift */,
+				9136501329C5B13200F9BC29 /* TaskInfoItem.swift */,
 			);
 			path = TaskList;
 			sourceTree = "<group>";
@@ -475,7 +482,9 @@
 			isa = PBXGroup;
 			children = (
 				91A0889E29C49EC8000BF175 /* SessionExtention.swift */,
-				91A088A029C49F17000BF175 /* URLSessionConfiguration.swift */,
+				91A088A029C49F17000BF175 /* URLSessionConfigurationExtention.swift */,
+				911C466B29C9CBC700A9159F /* StringExtention.swift */,
+				911C466D29C9CC9C00A9159F /* DateExtention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -889,6 +898,7 @@
 				91A033D329BF67B10019D5A9 /* MainDatabase.swift in Sources */,
 				91A0333229BC9B040019D5A9 /* SignUpViewController.swift in Sources */,
 				915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */,
+				91CFA3F829C9A43800C7092A /* Validate.swift in Sources */,
 				91BC1A6929C0C29000500A62 /* UserInfoAttribute.swift in Sources */,
 				91A088B429C4B484000BF175 /* UpdateTaskAPI.swift in Sources */,
 				91A033D929BF6E540019D5A9 /* UserLocalStore.swift in Sources */,
@@ -911,10 +921,12 @@
 				91A033C529BDEED20019D5A9 /* TaskListViewController.swift in Sources */,
 				91CFFD8629C1FE420086B5E2 /* SettingRouter.swift in Sources */,
 				91A088B629C4B67F000BF175 /* DeleteTaskAPI.swift in Sources */,
+				911C466C29C9CBC700A9159F /* StringExtention.swift in Sources */,
 				91A0889B29C49D7D000BF175 /* TaskRemoteStore.swift in Sources */,
 				9136502A29C7304200F9BC29 /* LaunchViewContoller.swift in Sources */,
 				9136501229C5B0FE00F9BC29 /* TaskListViewModel.swift in Sources */,
 				91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */,
+				911C466E29C9CC9C00A9159F /* DateExtention.swift in Sources */,
 				91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */,
 				91A088A829C4A147000BF175 /* APIRoutes.swift in Sources */,
 				9136502029C6AFF000F9BC29 /* AddTaskViewModel.swift in Sources */,
@@ -929,7 +941,7 @@
 				91A033B729BDAEAA0019D5A9 /* R.generated.swift in Sources */,
 				91A088B829C4B966000BF175 /* Environment.swift in Sources */,
 				9136502C29C7311600F9BC29 /* LaunchRouter.swift in Sources */,
-				91A088A129C49F17000BF175 /* URLSessionConfiguration.swift in Sources */,
+				91A088A129C49F17000BF175 /* URLSessionConfigurationExtention.swift in Sources */,
 				91A088BF29C558E7000BF175 /* TaskInfoRecord.swift in Sources */,
 				91A088C529C594CC000BF175 /* TaskInfo.swift in Sources */,
 				91A088AC29C4A255000BF175 /* DecodableDataParser.swift in Sources */,

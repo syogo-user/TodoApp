@@ -7,9 +7,9 @@
 
 import UIKit
 
-@IBDesignable class InputTitleTextField: UITextField {
+class InputTitleTextField: UITextField {
 
-    @IBInspectable var padding: CGPoint = CGPoint(x: 10.0, y: 0.0)
+    var padding: CGPoint = CGPoint(x: 10.0, y: 0.0)
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         // テキストの内側に余白

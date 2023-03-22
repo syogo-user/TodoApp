@@ -31,6 +31,14 @@
 // MARK: - WarningDialogMessage
 "deleteWarningDialogMessage" = "タスクを削除してもよろしいですか？";
 
+// MARK: - ValidateDialogTitle
+"emptyTitleDialogTitle" = "入力エラー";
+"overTitleLengthDialogTitle" = "文字数制限";
+
+// MARK: - ValidateDialogMessage
+"emptyTitleDialogMessage" = "タイトルが空白です";
+"overTitleLengthDialogMessage" = "タイトルは%@文字以内でお願いします";
+
 // MARK: - Common
 "ok" = "OK";
 "cancel" = "キャンセル";

@@ -28,8 +28,13 @@
                                     <constraint firstAttribute="height" constant="50" id="aUk-kA-bVn"/>
                                     <constraint firstAttribute="width" constant="50" id="fml-A9-eff"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="タスク"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="add:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Wtv-lI-Y3G"/>
                                 </connections>
@@ -54,60 +59,63 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="982.44274809160299" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="56" y="-25"/>
         </scene>
         <!--Add Task View Controller-->
-        <scene sceneID="4MW-ia-Pt1">
+        <scene sceneID="Ydi-ai-Xas">
             <objects>
-                <viewController storyboardIdentifier="addTaskVC" id="VyQ-Zj-3iD" customClass="AddTaskViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wOi-d3-igJ">
+                <viewController storyboardIdentifier="addTaskVC" id="zXX-2r-wUg" customClass="AddTaskViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qzc-Tb-ZEg">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CJ7-e8-rfZ">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Hfb-ic-hFj">
                                 <rect key="frame" x="0.0" y="672" width="393" height="180"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lz3-zO-kLP">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lXA-PH-1Am">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="5" id="HYO-eM-zGY"/>
+                                            <constraint firstAttribute="height" constant="5" id="nqd-Px-ID2"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タイトル" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xei-4n-ven" customClass="InputTitleTextField" customModule="TodoApp" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タイトル" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sau-bJ-3qL" customClass="InputTitleTextField" customModule="TodoApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="5" width="393" height="50"/>
                                         <color key="backgroundColor" red="1" green="0.96489841519999997" blue="0.66302408810000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="JjL-ml-QFc"/>
+                                            <constraint firstAttribute="height" constant="50" id="jHx-if-zus"/>
                                         </constraints>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="urp-vg-g5w" customClass="InputTextView" customModule="TodoApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.000000000000007" width="393" height="90.666666666666686"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zST-TB-Z1m" customClass="InputTextView" customModule="TodoApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55" width="393" height="75"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKn-K4-R9R">
-                                        <rect key="frame" x="0.0" y="145.66666666666663" width="393" height="34.333333333333343"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97U-xT-mn3">
+                                        <rect key="frame" x="0.0" y="130" width="393" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eoh-Ca-0zH">
-                                                <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="34.333333333333336"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="日付"/>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="36f-TL-sLm">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+                                                <color key="backgroundColor" red="0.15823707789999999" green="1" blue="0.89846642509999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="xMF-Mp-nMj"/>
+                                                </constraints>
+                                                <locale key="locale" localeIdentifier="ja"/>
                                                 <connections>
-                                                    <action selector="selectDate:" destination="VyQ-Zj-3iD" eventType="touchUpInside" id="WZG-li-CCe"/>
+                                                    <action selector="selectDate:" destination="zXX-2r-wUg" eventType="valueChanged" id="jTH-gA-Rmv"/>
                                                 </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-m1-1Yk">
-                                                <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="34.333333333333336"/>
+                                            </datePicker>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBv-5F-Ch5">
+                                                <rect key="frame" x="150" y="0.0" width="243" height="50"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="送信"/>
                                                 <connections>
-                                                    <action selector="send:" destination="VyQ-Zj-3iD" eventType="touchUpInside" id="fGK-7V-MtJ"/>
+                                                    <action selector="send:" destination="zXX-2r-wUg" eventType="touchUpInside" id="FvW-q4-G0g"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -115,27 +123,28 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="erD-NT-uy2"/>
+                                    <constraint firstAttribute="height" constant="180" id="ghc-JK-hjq"/>
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="vj2-h5-97d"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Vzc-i6-hMV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vj2-h5-97d" firstAttribute="trailing" secondItem="CJ7-e8-rfZ" secondAttribute="trailing" id="KcA-5c-nNZ"/>
-                            <constraint firstItem="CJ7-e8-rfZ" firstAttribute="leading" secondItem="vj2-h5-97d" secondAttribute="leading" id="f2c-Mq-4rN"/>
-                            <constraint firstAttribute="bottom" secondItem="CJ7-e8-rfZ" secondAttribute="bottom" id="reC-4s-3uk"/>
+                            <constraint firstAttribute="bottom" secondItem="Hfb-ic-hFj" secondAttribute="bottom" id="0Nc-fz-QYL"/>
+                            <constraint firstItem="Hfb-ic-hFj" firstAttribute="leading" secondItem="Vzc-i6-hMV" secondAttribute="leading" id="9tM-t3-ol5"/>
+                            <constraint firstItem="Hfb-ic-hFj" firstAttribute="trailing" secondItem="Vzc-i6-hMV" secondAttribute="trailing" id="Vdn-hc-Nat"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentTextView" destination="urp-vg-g5w" id="jqI-SJ-Un7"/>
-                        <outlet property="inputAreaStackView" destination="CJ7-e8-rfZ" id="JLz-Tc-j1M"/>
-                        <outlet property="titleTextField" destination="xei-4n-ven" id="0AW-n7-jch"/>
+                        <outlet property="contentTextView" destination="zST-TB-Z1m" id="gjz-3e-tbT"/>
+                        <outlet property="datePicker" destination="36f-TL-sLm" id="iWV-wc-Q6J"/>
+                        <outlet property="inputAreaStackView" destination="Hfb-ic-hFj" id="yL6-af-RO1"/>
+                        <outlet property="titleTextField" destination="sau-bJ-3qL" id="ekw-hQ-33P"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dlu-OA-Aeq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uhI-Pg-jco" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="55.725190839694655" y="706.33802816901414"/>
+            <point key="canvasLocation" x="56" y="706"/>
         </scene>
         <!--Update Task View Controller-->
         <scene sceneID="UGR-Ro-2tP">
@@ -210,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oh0-vE-omT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2052.6717557251909" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="981" y="-25"/>
         </scene>
         <!--List-->
         <scene sceneID="3b6-ra-2bU">
@@ -229,16 +238,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="shj-Vf-4C2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="55.725190839694655" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="-876" y="-24"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="xei-4n-ven">
-            <size key="intrinsicContentSize" width="91.333333333333329" height="34"/>
-        </designable>
-    </designables>
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="87"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
