@@ -27,6 +27,6 @@ class TaskTableViewCell: UITableViewCell {
     func setUp(taskInfoItem: TaskInfoItem) {
         title.text = taskInfoItem.title
         contentLabel.text = taskInfoItem.content
-        scheduledDateLabel.text = taskInfoItem.scheduledDate
+        scheduledDateLabel.text = taskInfoItem.scheduledDate.dateJpFormat()
     }
 }
