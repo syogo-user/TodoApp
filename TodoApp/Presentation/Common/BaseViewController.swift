@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MBProgressHUD
 
 class BaseViewController: UIViewController {
 
@@ -28,5 +29,20 @@ class BaseViewController: UIViewController {
             break
         }
         onDomainErrorHandler()
+    }
+
+    func setIndicator(show: Bool, animated: Bool = true) {
+        let view: UIView = self.navigationController?.view ?? self.view
+        if show {
+            if let hud = MBProgressHUD.forView(view) {
+                hud.show(animated: animated)
+                hud.minShowTime = Constants.minShowTimeLoading
+            } else {
+                let hudShow = MBProgressHUD.showAdded(to: view, animated: animated)
+                hudShow.minShowTime = Constants.minShowTimeLoading
+            }
+        } else {
+            MBProgressHUD.hide(for: view, animated: animated)
+        }
     }
 }

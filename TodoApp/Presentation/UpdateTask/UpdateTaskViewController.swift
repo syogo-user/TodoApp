@@ -41,6 +41,12 @@ class UpdateTaskViewController: BaseViewController {
     }
 
     private func bindViewModelEvent() {
+        viewModel.isLoading
+            .drive(onNext: { [unowned self] isLoading in
+                self.setIndicator(show: isLoading)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.updateTaskInfo
             .emit(onNext: { [unowned self] result in
                 guard let result = result, result.isCompleted else { return }

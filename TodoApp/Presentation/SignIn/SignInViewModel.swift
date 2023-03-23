@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 protocol SignInViewModel {
+    var isLoading: Driver<Bool> { get }
     var userInfo: Signal<VMResult<Void>?> { get }
     /// サインイン
     func signIn(userName: String, password: String)
@@ -25,9 +26,19 @@ class SignInViewModelImpl: SignInViewModel {
     private let disposeBag = DisposeBag()
 
     /// ユーザの登録通知
-    private let userInfoRelay = PublishRelay<VMResult<Void>?>()
+    private let userInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var userInfo = userInfoRelay.asSignal(onErrorSignalWith: .empty())
-    
+
+    private(set) lazy var isLoading: Driver<Bool> = {
+        Observable.merge(
+            userInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
+        )
+        .map { [unowned self] _ in
+            (self.userInfoRelay.value?.isLoading ?? false)
+        }
+        .asDriver(onErrorJustReturn: false)
+    }()
+
     func signIn(userName: String, password: String) {
         Task {
             do {

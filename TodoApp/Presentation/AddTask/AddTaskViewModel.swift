@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol AddTaskViewModel {
+    var isLoading: Driver<Bool> { get }
     var addTaskInfo: Signal<VMResult<TaskInfo>?> { get }
     var insertLocalTaskInfo: Signal<VMResult<Void>?> { get }
     /// タスクを登録
@@ -22,12 +23,25 @@ class AddTaskViewModelImpl: AddTaskViewModel {
     private let disposeBag = DisposeBag()
 
     // タスクの登録通知
-    private let addTaskInfoRelay = PublishRelay<VMResult<TaskInfo>?>()
+    private let addTaskInfoRelay = BehaviorRelay<VMResult<TaskInfo>?>(value: nil)
     lazy var addTaskInfo: Signal<VMResult<TaskInfo>?> = addTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
     /// ローカルタスクの登録通知
-    private let insertLocalTaskInfoRelay = PublishRelay<VMResult<Void>?>()
+    private let insertLocalTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var insertLocalTaskInfo = insertLocalTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
+
+    private(set) lazy var isLoading: Driver<Bool> = {
+        Observable.merge(
+            addTaskInfo.map { VMResult(data: $0?.data != nil) }.asObservable(),
+            insertLocalTaskInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
+        )
+        .map { [unowned self] _ in
+            (self.addTaskInfoRelay.value?.isLoading ?? false) ||
+            (self.insertLocalTaskInfoRelay.value?.isLoading ?? false)
+        }
+        .asDriver(onErrorJustReturn: false)
+    }()
+
 
     func addTask(title: String, content: String, scheduledDate: String) {
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())

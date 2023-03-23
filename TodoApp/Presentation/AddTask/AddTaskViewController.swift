@@ -86,6 +86,12 @@ class AddTaskViewController: BaseViewController {
     }
 
     private func bindViewModelEvent() {
+        viewModel.isLoading
+            .drive(onNext: { [unowned self] isLoading in
+                self.setIndicator(show: isLoading)
+            })
+            .disposed(by: disposeBag)
+
         viewModel.addTaskInfo
             .emit(onNext: { [unowned self] result in
 

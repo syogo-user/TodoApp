@@ -3,6 +3,7 @@ PODS:
   - GRDB.swift (4.14.0):
     - GRDB.swift/standard (= 4.14.0)
   - GRDB.swift/standard (4.14.0)
+  - MBProgressHUD (1.2.0)
   - R.swift (5.1.0):
     - R.swift.Library (~> 5.1.0)
   - R.swift.Library (5.1.0)
@@ -21,6 +22,7 @@ PODS:
 
 DEPENDENCIES:
   - APIKit
+  - MBProgressHUD
   - R.swift (= 5.1.0)
   - RxCocoa (= 5.1.1)
   - RxGRDB (= 0.18.0)
@@ -30,6 +32,7 @@ SPEC REPOS:
   trunk:
     - APIKit
     - GRDB.swift
+    - MBProgressHUD
     - R.swift
     - R.swift.Library
     - RxCocoa
@@ -40,6 +43,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   APIKit: 0680e86d2e8abd5bc42e64963f5f89d209eb9271
   GRDB.swift: 8cc3ab7c8b8b4ac1761deb8dca4b51c1c9d429f8
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   R.swift: 8cbc4fc69b740305b6a17c8a8ed968eb788962d9
   R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
@@ -47,6 +51,6 @@ SPEC CHECKSUMS:
   RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: 298618d3e5ae09027de20a4340ea260a2eacd208
+PODFILE CHECKSUM: 091789cbc35cb36ddedf31f398168d321633397b
 
 COCOAPODS: 1.12.0

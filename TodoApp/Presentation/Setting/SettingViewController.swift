@@ -23,6 +23,12 @@ class SettingViewController: BaseViewController {
     }
 
     private func bindViewModelValue() {
+        viewModel.isLoading
+            .drive(onNext: { [unowned self] isLoading in
+                self.setIndicator(show: isLoading)
+            })
+            .disposed(by: disposeBag)
+
         viewModel.userInfo
             .emit(onNext: { result in
                 guard let result = result, result.isCompleted else { return }
@@ -40,7 +46,9 @@ class SettingViewController: BaseViewController {
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
                     self.handlerError(error: error) {
+
                     }
+                    return
                 }
                 // 左タブを選択
                 self.tabBarController?.selectedIndex = 0
