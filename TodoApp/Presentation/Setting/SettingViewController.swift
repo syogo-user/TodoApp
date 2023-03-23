@@ -15,50 +15,44 @@ class SettingViewController: BaseViewController {
     @IBOutlet weak var emailLabel: UILabel!
     private let disposeBag = DisposeBag()
     private let viewModel: SettingViewModel = SettingViewModelImpl()
-    private var userInfo: UserInfoAttribute? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        do {
-            try viewModel.loadUser()
-        } catch {
-            self.handlerError(error: error) {
-                // ダイアログ表示
+        viewModel.loadUser()
+        bindViewModelValue()
+    }
 
-            }
-        }
+    private func bindViewModelValue() {
+        viewModel.userInfo
+            .emit(onNext: { result in
+                guard let result = result, result.isCompleted else { return }
+                if let error = result.error {
+                    self.handlerError(error: error) {
+
+                    }
+                }
+                self.emailLabel.text = result.data?.email
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.signOut
+            .emit(onNext: { result in
+                guard let result = result, result.isCompleted else { return }
+                if let error = result.error {
+                    self.handlerError(error: error) {
+                    }
+                }
+                // 左タブを選択
+                self.tabBarController?.selectedIndex = 0
+                self.toSignIn()
+            })
+            .disposed(by: disposeBag)
     }
 
     @IBAction func signOut(_ sender: Any) {
-        Task {
-            do {
-                try await viewModel.signOutLocally()
-                viewModel.deleteLocalUser()
-                // 左タブを選択
-                self.tabBarController?.selectedIndex = 0
-                toSignIn()
-            } catch {
-                self.handlerError(error: error) {
-
-                }
-            }
-        }
+        viewModel.signOutLocally()
     }
 
-    private func signOut() {
-        Task {
-            do {
-                // サインアウト
-                try await viewModel.signOutLocally()
-                viewModel.deleteLocalUser()
-                toSignIn()
-            } catch {
-                self.handlerError(error: DomainError.localDBError) {
-                    localDbErrorDialog()
-                }
-            }
-        }
-    }
 
     private func tokenErrorDialog(completion: (() -> Void)? = nil) {
         let dialog = UIAlertController(title: R.string.localizable.tokenErrorDialogTitle(), message: R.string.localizable.tokenErrorDialogMessage(), preferredStyle: .alert)

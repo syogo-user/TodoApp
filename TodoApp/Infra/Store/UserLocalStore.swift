@@ -14,13 +14,13 @@ protocol UserLocalStore {
     /// ユーザ情報を取得
     func loadLocalUserInfo() -> Single<[UserInfoRecord]>
     /// ユーザ情報を追加
-    func insertLocalUser(userInfo: UserInfoRecord) -> Void
+    func insertLocalUser(userInfo: UserInfoRecord) -> Single<Void>
     /// ユーザ情報を削除
-    func deleteLocalUser() -> Void
+    func deleteLocalUser() -> Single<Void>
 }
 
 class UserLocalStoreImpl: UserLocalStore {
-    private let dao: UserInfoDao = UserInfoDaoImpl()
+    private let accessor: DBAccessor = GRDBAccessor()
     private enum Key: String {
         case isFromSignIn = "isFromSignIn"
     }
@@ -31,14 +31,14 @@ class UserLocalStoreImpl: UserLocalStore {
     }
 
     func loadLocalUserInfo() -> Single<[UserInfoRecord]> {
-       dao.loadLocalUserInfo()
+        accessor.userInfoDao.loadLocalUserInfo()
     }
 
-    func insertLocalUser(userInfo: UserInfoRecord) -> Void {
-        dao.insertLocalUserInfo(userInfo: userInfo)
+    func insertLocalUser(userInfo: UserInfoRecord) -> Single<Void> {
+        accessor.userInfoDao.insertLocalUserInfo(userInfo: userInfo)
     }
 
-    func deleteLocalUser() -> Void {
-        dao.deleteLocalUserInfo()
+    func deleteLocalUser() -> Single<Void> {
+        accessor.userInfoDao.deleteLocalUserInfo()
     }
 }

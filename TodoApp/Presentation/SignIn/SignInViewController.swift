@@ -33,32 +33,11 @@ class SignInViewController: BaseViewController {
     }
         
     @IBAction private func googleSignIn(_ sender: Any) {
-        Task {
-            await socialSignInWithWebUI(provider: .google)
-        }
+        viewModel.socialSigIn(provider: .google)
     }
     
     @IBAction private func appleSignIn(_ sender: Any) {
-        Task {
-            await socialSignInWithWebUI(provider: .apple)
-        }
-    }
-
-    // TODO: 後で適切な場所に移動
-    func socialSignInWithWebUI(provider :AuthProvider) async {
-        do {
-            let signInResult = try await Amplify.Auth.signInWithWebUI(for: provider, presentationAnchor: self.view.window!)
-
-            if signInResult.isSignedIn {
-                print("Sign in succeeded")            
-                self.viewModel.setUserInfo()
-
-            }
-        } catch let error as AuthError {
-            print("Sign in failed \(error)")
-        } catch {
-            print("Unexpected error: \(error)")
-        }
+        viewModel.socialSigIn(provider: .apple)
     }
 
     private func bindViewModelValue() {
@@ -69,6 +48,7 @@ class SignInViewController: BaseViewController {
                     self.handlerError(error: error) {
 
                     }
+                    return
                 }
                 self.viewModel.setViaSignIn()
                 self.toTabBar()

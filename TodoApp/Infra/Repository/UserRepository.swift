@@ -20,9 +20,9 @@ protocol UserRepository {
     /// ローカルのユーザ情報を取得
     func loadLocalUser() -> Single<[UserInfoRecord]>
     /// ローカルにユーザ情報を追加
-    func insertLocalUser(userId: String, email: String) -> Void
+    func insertLocalUser(userId: String, email: String) -> Single<Void>
     /// ローカルのユーザ情報を削除
-    func deleteLocalUser() -> Void
+    func deleteLocalUser() -> Single<Void>
 }
 
 class UserRepositoryImpl: UserRepository {
@@ -46,12 +46,12 @@ class UserRepositoryImpl: UserRepository {
         localStore.loadLocalUserInfo()
     }
 
-    func insertLocalUser(userId: String, email: String) -> Void {
+    func insertLocalUser(userId: String, email: String) -> Single<Void> {
         let userInfo = UserInfoRecord(userId: userId, email: email)
-        localStore.insertLocalUser(userInfo: userInfo)
+        return localStore.insertLocalUser(userInfo: userInfo)
     }
 
-    func deleteLocalUser() -> Void {
+    func deleteLocalUser() -> Single<Void> {
         localStore.deleteLocalUser()
     }
 }

@@ -14,8 +14,8 @@ protocol SignInViewModel {
     var userInfo: Signal<VMResult<Void>?> { get }
     /// サインイン
     func signIn(userName: String, password: String)
-    /// ユーザ情報(ユーザID,ユーザ名)をローカルDBに設定
-    func setUserInfo()
+    /// ソーシャルサインイン
+    func socialSigIn(provider: AuthProvider)
     /// サインイン画面を経由したことを設定
     func setViaSignIn()
 }
@@ -46,16 +46,23 @@ class SignInViewModelImpl: SignInViewModel {
         }
     }
 
-    func setUserInfo() {
-        usecase.fetchUserInfo()
-            .do(onSuccess: { userInfo in
+    func socialSigIn(provider: AuthProvider) {
+        self.usecase.socialSignInWithWebUI(provider: provider)
+            .flatMap { () in
+                self.usecase.fetchUserInfo()
+            }
+            .flatMap { userInfo in
                 let subAttribute = userInfo.filter { $0.key == .sub }.first
                 let emailAttribute = userInfo.filter { $0.key == .email }.first
-                guard let userId = subAttribute?.value else { return }
-                guard let email = emailAttribute?.value else { return }
-                self.usecase.insertLocalUser(userId: userId, email: email)
-            })
-            .map { result -> VMResult<Void> in
+                guard let userId = subAttribute?.value else {
+                    throw DomainError.authError
+                }
+                guard let email = emailAttribute?.value else {
+                    throw DomainError.authError
+                }
+                return self.usecase.insertLocalUser(userId: userId, email: email)
+            }
+            .map {
                 return .success(())
             }
             .asSignal(onErrorRecover: { .just(.failure($0))})
