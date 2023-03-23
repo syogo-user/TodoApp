@@ -12,6 +12,7 @@ import RxCocoa
 import Foundation
 
 protocol SettingViewModel {
+    var isLoading: Driver<Bool> { get }
     var userInfo: Signal<VMResult<UserInfoAttribute>?> { get }
     var signOut: Signal<VMResult<Void>?> { get }
     /// サインアウト
@@ -26,18 +27,30 @@ class SettingViewModelImpl: SettingViewModel {
     private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
 
     /// サインアウトの通知
-    private let signOutRelay = PublishRelay<VMResult<Void>?>()
+    private let signOutRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var signOut = signOutRelay.asSignal(onErrorSignalWith: .empty())
     /// ユーザ情報の取得通知
-    private let userInfoRelay = PublishRelay<VMResult<UserInfoAttribute>?>()
+    private let userInfoRelay = BehaviorRelay<VMResult<UserInfoAttribute>?>(value: nil)
     lazy var userInfo = userInfoRelay.asSignal(onErrorSignalWith: .empty())
+
+    private(set) lazy var isLoading: Driver<Bool> = {
+        Observable.merge(
+            signOut.map { VMResult(data: $0?.data != nil) }.asObservable(),
+            userInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
+        )
+        .map { [unowned self] _ in
+            (self.signOutRelay.value?.isLoading ?? false) ||
+            (self.userInfoRelay.value?.isLoading ?? false)
+        }
+        .asDriver(onErrorJustReturn: false)
+    }()
 
     func signOutLocally() {
         userUseCase.signOut()
             .flatMap {
                 self.taskUseCase.deleteLocalTaskAll()
             }
-            .flatMap {        
+            .flatMap {
                 self.userUseCase.deleteLocalUser()
             }
             .map { result -> VMResult<Void> in

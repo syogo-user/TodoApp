@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol UpdateTaskViewModel {
+    var isLoading: Driver<Bool> { get }
     var updateTaskInfo: Signal<VMResult<TaskInfo>?> { get }
     var updateLocalTaskInfo: Signal<VMResult<Void>?> { get }
 
@@ -22,13 +23,25 @@ class UpdateTaskViewModelImpl: UpdateTaskViewModel {
     private let disposeBag = DisposeBag()
 
     // タスクの更新通知
-    private let updateTaskInfoRelay = PublishRelay<VMResult<TaskInfo>?>()
+    private let updateTaskInfoRelay = BehaviorRelay<VMResult<TaskInfo>?>(value: nil)
     lazy var updateTaskInfo = updateTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
     /// ローカルタスクの更新通知
-    private let updateLocalTaskInfoRelay = PublishRelay<VMResult<Void>?>()
+    private let updateLocalTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var updateLocalTaskInfo = updateLocalTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
-    
+
+    private(set) lazy var isLoading: Driver<Bool> = {
+        Observable.merge(
+            updateTaskInfo.map { VMResult(data: $0?.data != nil) }.asObservable(),
+            updateLocalTaskInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
+        )
+        .map { [unowned self] _ in
+            (self.updateTaskInfoRelay.value?.isLoading ?? false) ||
+            (self.updateLocalTaskInfoRelay.value?.isLoading ?? false)
+        }
+        .asDriver(onErrorJustReturn: false)
+    }()
+
     func updateTask(taskInfoItem: TaskInfoItem) {
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
             .flatMap { (user, idToken) in

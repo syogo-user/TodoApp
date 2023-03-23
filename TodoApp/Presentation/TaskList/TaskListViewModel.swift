@@ -10,12 +10,13 @@ import RxSwift
 import RxCocoa
 
 protocol TaskListViewModel {
+    var isLoading: Driver<Bool> { get }
     var taskInfo: Signal<VMResult<[TaskInfo]>?> { get }
     var taskItems: Driver<[TaskInfoItem]> { get }
-    var deleteTaskInfo: Signal<VMResult<Void>> { get }
-    var loadLocalTaskInfo: Signal<VMResult<Void>> { get }
-    var insertLocalTaskInfo: Signal<VMResult<Void>> { get }
-    var deleteLocalTaskInfo: Signal<VMResult<Void>> { get }
+    var deleteTaskInfo: Signal<VMResult<Void>?> { get }
+    var loadLocalTaskInfo: Signal<VMResult<Void>?> { get }
+    var insertLocalTaskInfo: Signal<VMResult<Void>?> { get }
+    var deleteLocalTaskInfo: Signal<VMResult<Void>?> { get }
     /// タスクリストを取得
     func fetchTaskList()
     /// タスクを削除
@@ -36,7 +37,7 @@ class TaskListViewModelImpl: TaskListViewModel {
     private let disposeBag = DisposeBag()
     private var tableViewItems: [TaskInfoItem] = []
     /// タスクの取得通知
-    private let taskInfoRelay = PublishRelay<VMResult<[TaskInfo]>?>()
+    private let taskInfoRelay = BehaviorRelay<VMResult<[TaskInfo]>?>(value: nil)
     lazy var taskInfo = taskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
     /// タスクの取得(セル用の値)通知
@@ -44,20 +45,38 @@ class TaskListViewModelImpl: TaskListViewModel {
     lazy var taskItems = taskItemsRelay.asDriver()
 
     /// タスクの削除通知
-    private let deleteTaskInfoRelay = PublishRelay<VMResult<Void>>()
+    private let deleteTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var deleteTaskInfo = deleteTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
     /// ローカルのタスクリストの取得通知
-    private let loadLocalTaskInfoRelay = PublishRelay<VMResult<Void>>()
+    private let loadLocalTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var loadLocalTaskInfo = loadLocalTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
     /// ローカルタスクの登録通知
-    private let insertLocalTaskInfoRelay = PublishRelay<VMResult<Void>>()
+    private let insertLocalTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var insertLocalTaskInfo = insertLocalTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
     /// ローカルタスクの削除通知
-    private let deleteLocalTaskInfoRelay = PublishRelay<VMResult<Void>>()
+    private let deleteLocalTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var deleteLocalTaskInfo = deleteLocalTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
+
+    private(set) lazy var isLoading: Driver<Bool> = {
+        Observable.merge(
+            taskInfo.map { VMResult(data: $0?.data != nil) }.asObservable(),
+            deleteTaskInfo.map { VMResult(data: $0?.data != nil) }.asObservable(),
+            loadLocalTaskInfo.map { VMResult(data: $0?.data != nil) }.asObservable(),
+            insertLocalTaskInfo.map { VMResult(data: $0?.data != nil) }.asObservable(),
+            deleteLocalTaskInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
+        )
+        .map { [unowned self] _ in
+            (self.taskInfoRelay.value?.isLoading ?? false) ||
+            (self.deleteTaskInfoRelay.value?.isLoading ?? false) ||
+            (self.loadLocalTaskInfoRelay.value?.isLoading ?? false) ||
+            (self.insertLocalTaskInfoRelay.value?.isLoading ?? false) ||
+            (self.deleteLocalTaskInfoRelay.value?.isLoading ?? false)
+        }
+        .asDriver(onErrorJustReturn: false)
+    }()
 
     func fetchTaskList() {
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())

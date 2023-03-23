@@ -14,7 +14,6 @@ class TaskListViewController: BaseViewController {
     @IBOutlet private weak var tableView: UITableView!
     let refreshCtl = UIRefreshControl()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModelValue()
@@ -22,6 +21,12 @@ class TaskListViewController: BaseViewController {
     }
 
     private func bindViewModelValue() {
+        viewModel.isLoading
+            .drive(onNext: { [unowned self] isLoading in
+                self.setIndicator(show: isLoading)
+            })
+            .disposed(by: disposeBag)
+
         viewModel.taskItems.asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: R.reuseIdentifier.taskListTableViewCell.identifier)) { [weak self] _, element, cell in
                 guard let taskTableViewCell = cell as? TaskTableViewCell else {
@@ -45,7 +50,7 @@ class TaskListViewController: BaseViewController {
         // ローカルタスクの登録通知
         viewModel.loadLocalTaskInfo
             .emit(onNext: { result in
-                if (!result.isCompleted) { return }
+                guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
                     self.handlerError(error: error) {
 

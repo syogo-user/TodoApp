@@ -10,4 +10,5 @@ import Foundation
 enum Constants {
     static let requestTimeout: TimeInterval = 30.0
     static let titleWordLimit: Int = 15
+    static let minShowTimeLoading: TimeInterval = 0.8
 }

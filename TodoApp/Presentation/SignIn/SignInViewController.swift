@@ -41,6 +41,12 @@ class SignInViewController: BaseViewController {
     }
 
     private func bindViewModelValue() {
+        viewModel.isLoading
+            .drive(onNext: { [unowned self] isLoading in
+                self.setIndicator(show: isLoading)
+            })
+            .disposed(by: disposeBag)
+
         viewModel.userInfo
             .emit { result in
                 guard let result = result, result.isCompleted else { return }
