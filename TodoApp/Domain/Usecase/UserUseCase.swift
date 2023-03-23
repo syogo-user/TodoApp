@@ -24,13 +24,15 @@ protocol UserUseCase {
     /// ログイン中かどうか判定
     func isSignIn() async -> Bool
     /// サインアウト
-    func signOut() async throws
+    func signOut() -> Single<Void>
+    /// ソーシャルサインイン
+    func socialSignInWithWebUI(provider :AuthProvider) -> Single<Void>
     /// ユーザ情報取得
     func loadLocalUser() -> Single<UserInfoAttribute>
     /// ユーザ情報を登録
-    func insertLocalUser(userId: String, email: String)
+    func insertLocalUser(userId: String, email: String) -> Single<Void>
     /// ユーザ情報を削除
-    func deleteLocalUser() 
+    func deleteLocalUser() -> Single<Void>
 }
 
 class UserUseCaseImpl: UserUseCase {
@@ -95,7 +97,7 @@ class UserUseCaseImpl: UserUseCase {
             Task {
                 do {
                     guard let result = try await self.repository.fetchUserInfo() else {
-                        throw DomainError.authError
+                        throw DomainError.unownedError
                     }
                     single(.success(result))
                 } catch {
@@ -120,24 +122,48 @@ class UserUseCaseImpl: UserUseCase {
         }
     }
 
-    func signOut() async throws {
-        let result = await Amplify.Auth.signOut()
-        guard let signOutResult = result as? AWSCognitoSignOutResult
-        else {
-            print("Signout failed")
-            return
+    func signOut() -> Single<Void> {
+        return Single.create { single in
+            Task {
+                do {
+                    let result = await Amplify.Auth.signOut()
+                    guard let signOutResult = result as? AWSCognitoSignOutResult else {
+                        print("Signout failed")
+                        return
+                    }
+                    print("Local signout successful: \(signOutResult.signedOutLocally)")
+                    switch signOutResult {
+                    case .complete:
+                        print("Signed out successfully")
+                        single(.success(()))
+                    case .partial:
+                        single(.error(DomainError.unownedError))
+                    case .failed(let error):
+                        print("SignOut failed with \(error)")
+                        single(.error(DomainError.unownedError))
+                    }
+                }
+            }
+            return Disposables.create()
         }
+    }
 
-        print("Local signout successful: \(signOutResult.signedOutLocally)")
-        switch signOutResult {
-        case .complete:
-            print("Signed out successfully")
+    func socialSignInWithWebUI(provider :AuthProvider) -> Single<Void> {
+        return Single.create { single in
+            Task {
+                do {
+                    let signInResult = try await Amplify.Auth.signInWithWebUI(for: provider, presentationAnchor: nil)
 
-        case let .partial(revokeTokenError, globalSignOutError, hostedUIError):
-            throw DomainError.authError
-        case .failed(let error):
-            print("SignOut failed with \(error)")
-            throw DomainError.authError
+                    if signInResult.isSignedIn {
+                        print("Sign in succeeded")
+                        single(.success(()))
+                    }
+                    single(.error(DomainError.authError))
+                } catch {
+                    single(.error(error))
+                }
+            }
+            return Disposables.create()
         }
     }
 
@@ -145,18 +171,18 @@ class UserUseCaseImpl: UserUseCase {
         repository.loadLocalUser()
             .map { user in
                 if user.count != 1 {
-                    throw DomainError.localDBError
+                    throw DomainError.unownedError
                 }
                 guard let user = user.first else { throw DomainError.localDBError }
                 return UserInfoAttribute(userId: user.userId, email: user.email)
             }
     }
 
-    func insertLocalUser(userId: String, email: String) {
+    func insertLocalUser(userId: String, email: String) -> Single<Void> {
         repository.insertLocalUser(userId: userId, email: email)
     }
 
-    func deleteLocalUser() {
+    func deleteLocalUser() -> Single<Void> {
         repository.deleteLocalUser()
     }
     

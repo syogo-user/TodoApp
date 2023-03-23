@@ -18,24 +18,31 @@ protocol TaskLocalStore {
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
 
     func deleteLocalTask(taskId: String) -> Single<Void>
+
+    func deleteLocalTaskAll() -> Single<Void>
 }
 
 class TaskLocalStoreImpl: TaskLocalStore {
-    private let dao: TaskInfoDao = TaskInfoDaoImpl()
+    private let accessor: DBAccessor = GRDBAccessor()
 
     func loadLocalTaskList() -> Single<[TaskInfoRecord]> {
-        dao.loadLocalTask()
+        accessor.taskInfoDao.loadLocalTask()
     }
 
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
-        dao.insertLocalTask(taskInfo: taskInfo)
+        accessor.taskInfoDao.insertLocalTask(taskInfo: taskInfo)
     }
 
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
-       dao.updateLocalTask(taskInfo: taskInfo)
+        accessor.taskInfoDao.updateLocalTask(taskInfo: taskInfo)
     }
 
     func deleteLocalTask(taskId: String) -> Single<Void> {
-       dao.deleteLocalTask(taskId: taskId)
+        accessor.taskInfoDao.deleteLocalTask(taskId: taskId)
     }
+
+    func deleteLocalTaskAll() -> Single<Void> {
+        accessor.taskInfoDao.deleteLocalTaskAll()
+    }
+
 }

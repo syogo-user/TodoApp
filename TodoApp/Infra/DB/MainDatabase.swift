@@ -40,7 +40,7 @@ final class MainDatabase {
         DatabaseQueueFactory.create(definition: Definition())
             .do(onSuccess: { [unowned self] dbQueue in
                 self._dbQueue = dbQueue
-                print("####dbQueue():\(dbQueue.path)")
+                print("####open dbQueue():\(dbQueue.path)")
             })
     }
 }

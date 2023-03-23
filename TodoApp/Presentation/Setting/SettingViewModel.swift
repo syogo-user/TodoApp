@@ -12,27 +12,52 @@ import RxCocoa
 import Foundation
 
 protocol SettingViewModel {
+    var userInfo: Signal<VMResult<UserInfoAttribute>?> { get }
+    var signOut: Signal<VMResult<Void>?> { get }
     /// サインアウト
-    func signOutLocally() async throws
+    func signOutLocally()
     /// ユーザ情報取得
-    func loadUser() throws
-    /// ユーザ情報削除
-    func deleteLocalUser()
+    func loadUser()
 }
 
 class SettingViewModelImpl: SettingViewModel {
     private let disposeBag = DisposeBag()
-    private let usecase: UserUseCase = UserUseCaseImpl()
+    private let userUseCase: UserUseCase = UserUseCaseImpl()
+    private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
 
-    func signOutLocally() async throws {
-       try await usecase.signOut()
+    /// サインアウトの通知
+    private let signOutRelay = PublishRelay<VMResult<Void>?>()
+    lazy var signOut = signOutRelay.asSignal(onErrorSignalWith: .empty())
+    /// ユーザ情報の取得通知
+    private let userInfoRelay = PublishRelay<VMResult<UserInfoAttribute>?>()
+    lazy var userInfo = userInfoRelay.asSignal(onErrorSignalWith: .empty())
+
+    func signOutLocally() {
+        userUseCase.signOut()
+            .flatMap {
+                self.taskUseCase.deleteLocalTaskAll()
+            }
+            .flatMap {        
+                self.userUseCase.deleteLocalUser()
+            }
+            .map { result -> VMResult<Void> in
+                .success(result)
+            }
+            .asSignal(onErrorRecover: { .just(.failure($0))})
+            .startWith(.loading())
+            .emit(to: signOutRelay)
+            .disposed(by: disposeBag)
+
     }
 
-    func loadUser() throws {
-       let userInfo = try usecase.loadLocalUser()
-    }
-
-    func deleteLocalUser() {
-        usecase.deleteLocalUser()
+    func loadUser() {
+       userUseCase.loadLocalUser()
+            .map { result -> VMResult<UserInfoAttribute> in
+                return .success(result)
+            }
+            .asSignal(onErrorRecover: { .just(.failure($0))})
+            .startWith(.loading())
+            .emit(to: userInfoRelay)
+            .disposed(by: disposeBag)
     }
 }

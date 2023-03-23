@@ -28,6 +28,7 @@
 		915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06EE29BA1C2200685156 /* SignInViewController.swift */; };
 		915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06F129BA1CC700685156 /* BaseViewController.swift */; };
 		915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 915F06F329BA1D3900685156 /* SignIn.storyboard */; };
+		9191411129CB6B570072BEA0 /* GRDBAccessorDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9191411029CB6B570072BEA0 /* GRDBAccessorDB.swift */; };
 		919A407329C3541000D63E44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 919A407229C3541000D63E44 /* Localizable.strings */; };
 		91A0333229BC9B040019D5A9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0333129BC9B040019D5A9 /* SignUpViewController.swift */; };
 		91A0333429BC9BB50019D5A9 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0333329BC9BB50019D5A9 /* SignUpViewModel.swift */; };
@@ -132,6 +133,7 @@
 		915F06EE29BA1C2200685156 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		915F06F129BA1CC700685156 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		915F06F329BA1D3900685156 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		9191411029CB6B570072BEA0 /* GRDBAccessorDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDBAccessorDB.swift; sourceTree = "<group>"; };
 		919A407229C3541000D63E44 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		91A0333129BC9B040019D5A9 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		91A0333329BC9BB50019D5A9 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				91A033CE29BF663E0019D5A9 /* Record */,
 				91A033D029BF675B0019D5A9 /* DatabaseDefinition.swift */,
 				91A033D229BF67B10019D5A9 /* MainDatabase.swift */,
+				9191411029CB6B570072BEA0 /* GRDBAccessorDB.swift */,
 			);
 			path = DB;
 			sourceTree = "<group>";
@@ -926,6 +929,7 @@
 				9136502A29C7304200F9BC29 /* LaunchViewContoller.swift in Sources */,
 				9136501229C5B0FE00F9BC29 /* TaskListViewModel.swift in Sources */,
 				91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */,
+				9191411129CB6B570072BEA0 /* GRDBAccessorDB.swift in Sources */,
 				911C466E29C9CC9C00A9159F /* DateExtention.swift in Sources */,
 				91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */,
 				91A088A829C4A147000BF175 /* APIRoutes.swift in Sources */,

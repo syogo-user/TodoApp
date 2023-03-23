@@ -14,44 +14,28 @@ protocol UserInfoDao {
     /// ユーザ情報を取得
     func loadLocalUserInfo() -> Single<[UserInfoRecord]>
     /// ローカルにユーザを追加する
-    func insertLocalUserInfo(userInfo: UserInfoRecord)
+    func insertLocalUserInfo(userInfo: UserInfoRecord) -> Single<Void>
     ///  ローカルのユーザ情報を削除する
-    func deleteLocalUserInfo()
+    func deleteLocalUserInfo() -> Single<Void>
 }
 
-class UserInfoDaoImpl: UserInfoDao {
+class UserInfoDaoImpl: GRDBAccessor, UserInfoDao {
 
     func loadLocalUserInfo() -> Single<[UserInfoRecord]> {
-        MainDatabase.shared.dbQueue()
-            .flatMap { dbQueue in
-                dbQueue.rx.read { db in
-                    try UserInfoRecord.fetchAll(db)
-                }
-                .catchError { error in
-                    throw DomainError.localDBError
-                }
-            }
-    }
-
-    func insertLocalUserInfo(userInfo: UserInfoRecord) {
-        do {
-            let dbQueue: DatabaseQueue = try MainDatabase.shared.dbQueue()
-            try dbQueue.write { db in
-                try userInfo.insert(db)
-            }
-        } catch {
-
+        readFromDBwith { db in
+            try UserInfoRecord.fetchAll(db)
         }
     }
 
-    func deleteLocalUserInfo() {
-        do {
-            let dbQueue: DatabaseQueue = try MainDatabase.shared.dbQueue()
-            let _ = try dbQueue.write { db in
-                try UserInfoRecord.deleteAll(db)
-            }
-        } catch {
-            // エラー処理を行う
+    func insertLocalUserInfo(userInfo: UserInfoRecord) -> Single<Void> {
+        return writeToDBwith { db in
+            try userInfo.insert(db)
+        }
+    }
+
+    func deleteLocalUserInfo() -> Single<Void> {
+        writeToDBwith { db in
+            try UserInfoRecord.deleteAll(db)
         }
     }
 }

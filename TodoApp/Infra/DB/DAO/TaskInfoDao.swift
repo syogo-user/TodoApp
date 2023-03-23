@@ -19,58 +19,39 @@ protocol TaskInfoDao {
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
     ///  ローカルのタスクを削除
     func deleteLocalTask(taskId: String) -> Single<Void>
+    ///  ローカルのタスクをすべて削除
+    func deleteLocalTaskAll() -> Single<Void>
 }
 
-class TaskInfoDaoImpl: TaskInfoDao {
+class TaskInfoDaoImpl: GRDBAccessor, TaskInfoDao {
 
     func loadLocalTask() -> Single<[TaskInfoRecord]> {
-        MainDatabase.shared.dbQueue()
-            .flatMap { dbQueue in
-                dbQueue.rx.read { db in
-                    try TaskInfoRecord.fetchAll(db)
-                }
-                .catchError { error in
-                    throw DomainError.localDBError
-                }
-            }
+        readFromDBwith { db in
+            try TaskInfoRecord.fetchAll(db)
+        }
     }
 
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
-         MainDatabase.shared.dbQueue()
-            .flatMap { dbQueue in
-                dbQueue.rx.write { db in
-                    try taskInfo.insert(db)
-                }
-                .andThen(Single.just(()))
-                .catchError { error in
-                    throw DomainError.localDBError
-                }
-            }
+        writeToDBwith { db in
+            try taskInfo.insert(db)
+        }
     }
 
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
-        MainDatabase.shared.dbQueue()
-           .flatMap { dbQueue in
-               dbQueue.rx.write { db in
-                   try taskInfo.updateChanges(db)
-               }
-               .andThen(Single.just(()))
-               .catchError { error in
-                   throw DomainError.localDBError
-               }
-           }
+        writeToDBwith { db in
+            try taskInfo.updateChanges(db)
+        }
     }
 
     func deleteLocalTask(taskId: String) -> Single<Void> {
-        MainDatabase.shared.dbQueue()
-           .flatMap { dbQueue in
-               dbQueue.rx.write { db in
-                   try TaskInfoRecord.deleteOne(db, key: taskId)
-               }
-               .andThen(Single.just(()))
-               .catchError { error in
-                   throw DomainError.localDBError
-               }
-           }
+        writeToDBwith { db in
+            try TaskInfoRecord.deleteOne(db, key: taskId)
+        }
+    }
+
+    func deleteLocalTaskAll() -> Single<Void> {
+        writeToDBwith { db in
+            try TaskInfoRecord.deleteAll(db)
+        }
     }
 }
