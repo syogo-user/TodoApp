@@ -11,7 +11,7 @@ import RxSwift
 
 protocol UpdateTaskViewControllerDelegate: AnyObject {
     /// 更新したことを通知する
-    func updateComplete()
+    func didUpdateTask()
 }
 
 class UpdateTaskViewController: BaseViewController {
@@ -46,17 +46,18 @@ class UpdateTaskViewController: BaseViewController {
                 self.setIndicator(show: isLoading)
             })
             .disposed(by: disposeBag)
-        
+
         viewModel.updateTaskInfo
             .emit(onNext: { [unowned self] result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
                     self.handlerError(error: error) {
-                        // TODO: エラーの場合ダイアログを表示し、OKなら画面を閉じる。修正するなら閉じない。
+                        
                     }
+                    return
                 }
                 // 更新完了通知
-                delegate?.updateComplete()
+                delegate?.didUpdateTask()
                 // 成功時、画面を閉じる
                 self.navigationController?.popViewController(animated: true)
             })

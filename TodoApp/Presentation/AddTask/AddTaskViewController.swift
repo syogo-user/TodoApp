@@ -10,8 +10,8 @@ import UIKit
 import RxSwift
 
 protocol AddTaskViewControllerDelegate: AnyObject {
-    /// 送信したことを通知する
-    func didTapSend()
+    /// タスクを追加したことを通知する
+    func didAddTask()
 }
 
 class AddTaskViewController: BaseViewController {
@@ -94,9 +94,14 @@ class AddTaskViewController: BaseViewController {
 
         viewModel.addTaskInfo
             .emit(onNext: { [unowned self] result in
+                guard let result = result, result.isCompleted else { return }
+                if let error = result.error {
+                    self.handlerError(error: error) {
 
-                
-                delegate?.didTapSend()
+                    }
+                    return
+                }
+                delegate?.didAddTask()
                 self.dissmiss()
             })
             .disposed(by: disposeBag)

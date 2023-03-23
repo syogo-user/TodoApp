@@ -21,6 +21,8 @@ protocol TaskUseCase {
     func loadLocalTaskList() -> Single<[TaskInfoRecord]>
     /// ローカルにタスクを登録
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
+    /// ローカルにタスクリストを登録
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void> 
     /// ローカルのタスクを更新
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
     /// ローカルのタスクを削除
@@ -108,7 +110,12 @@ class TaskUseCaseImpl: TaskUseCase {
     }
 
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
-        repository.insertLocalTask(taskInfo: taskInfo) }
+        repository.insertLocalTask(taskInfo: taskInfo)
+    }
+
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void> {
+        repository.insertLocalTaskList(taskInfoList: taskInfoList)
+    }
 
     func loadLocalTaskList() -> Single<[TaskInfoRecord]> {
         repository.loadLocalTaskList()

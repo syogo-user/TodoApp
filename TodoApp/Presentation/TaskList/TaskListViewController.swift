@@ -27,6 +27,7 @@ class TaskListViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
 
+        // セル情報
         viewModel.taskItems.asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: R.reuseIdentifier.taskListTableViewCell.identifier)) { [weak self] _, element, cell in
                 guard let taskTableViewCell = cell as? TaskTableViewCell else {
@@ -36,6 +37,7 @@ class TaskListViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
 
+        // タスクの取得結果
         viewModel.taskInfo
             .emit(onNext: { result in
                 guard let result = result, result.isCompleted else { return }
@@ -47,8 +49,8 @@ class TaskListViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
 
-        // ローカルタスクの登録通知
-        viewModel.loadLocalTaskInfo
+        // タスクの削除結果
+        viewModel.deleteTaskInfo
             .emit(onNext: { result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
@@ -56,7 +58,6 @@ class TaskListViewController: BaseViewController {
 
                     }
                 }
-                self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -97,15 +98,15 @@ class TaskListViewController: BaseViewController {
 }
 
 extension TaskListViewController: AddTaskViewControllerDelegate {
-    /// タスクの送信後
-    func didTapSend() {
+    /// タスクの追加後
+    func didAddTask() {
         viewModel.loadLocalTaskList()
     }
 }
 
 extension TaskListViewController: UpdateTaskViewControllerDelegate {
     /// タスクの更新後
-    func updateComplete() {
+    func didUpdateTask() {
         viewModel.loadLocalTaskList()
     }
 }

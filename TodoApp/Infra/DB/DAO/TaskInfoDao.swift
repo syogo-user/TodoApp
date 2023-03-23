@@ -15,6 +15,8 @@ protocol TaskInfoDao {
     func loadLocalTask() -> Single<[TaskInfoRecord]>
     /// ローカルにユーザを追加
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
+    /// ローカルにユーザリストを追加
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void>
     /// ローカルのタスクを更新
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
     ///  ローカルのタスクを削除
@@ -34,6 +36,12 @@ class TaskInfoDaoImpl: GRDBAccessor, TaskInfoDao {
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
         writeToDBwith { db in
             try taskInfo.insert(db)
+        }
+    }
+
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void> {
+        writeToDBwith { db in
+            try taskInfoList.forEach { try $0.insert(db) }
         }
     }
 
