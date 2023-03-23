@@ -30,11 +30,9 @@ class SignInViewModelImpl: SignInViewModel {
     lazy var userInfo = userInfoRelay.asSignal(onErrorSignalWith: .empty())
 
     private(set) lazy var isLoading: Driver<Bool> = {
-        Observable.merge(
-            userInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
-        )
+        userInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
         .map { [unowned self] _ in
-            (self.userInfoRelay.value?.isLoading ?? false)
+            self.userInfoRelay.value?.isLoading ?? false
         }
         .asDriver(onErrorJustReturn: false)
     }()

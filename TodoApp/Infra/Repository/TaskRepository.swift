@@ -22,6 +22,8 @@ protocol TaskRepository {
 
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
 
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void>
+
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
 
     func deleteLocalTask(taskId: String) -> Single<Void>
@@ -55,6 +57,10 @@ class TaskRepositoryImpl: TaskRepository {
 
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
         localStore.insertLocalTask(taskInfo: taskInfo)
+    }
+
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void> {
+        localStore.insertLocalTaskList(taskInfoList: taskInfoList)
     }
 
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
