@@ -97,7 +97,7 @@ class UserUseCaseImpl: UserUseCase {
             Task {
                 do {
                     guard let result = try await self.repository.fetchUserInfo() else {
-                        throw DomainError.unownedError
+                        throw DomainError.authError
                     }
                     single(.success(result))
                 } catch {
@@ -137,10 +137,10 @@ class UserUseCaseImpl: UserUseCase {
                         print("Signed out successfully")
                         single(.success(()))
                     case .partial:
-                        single(.error(DomainError.unownedError))
+                        single(.error(DomainError.authError))
                     case .failed(let error):
                         print("SignOut failed with \(error)")
-                        single(.error(DomainError.unownedError))
+                        single(.error(DomainError.authError))
                     }
                 }
             }
@@ -171,9 +171,9 @@ class UserUseCaseImpl: UserUseCase {
         repository.loadLocalUser()
             .map { user in
                 if user.count != 1 {
-                    throw DomainError.unownedError
+                    throw DomainError.localDbError
                 }
-                guard let user = user.first else { throw DomainError.localDBError }
+                guard let user = user.first else { throw DomainError.localDbError }
                 return UserInfoAttribute(userId: user.userId, email: user.email)
             }
     }

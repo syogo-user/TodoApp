@@ -38,7 +38,7 @@ class TaskUseCaseImpl: TaskUseCase {
         repository.fetchTask(userId: userId, authorization: authorization)
             .do(onSuccess: { result in
                 guard result.isAcceptable else {
-                    throw DomainError.unacceptableResultCode(code: result.message)
+                    throw DomainError.onAPIError(code: result.message)
                 }
             })
             .map { task in
@@ -58,7 +58,7 @@ class TaskUseCaseImpl: TaskUseCase {
         repository.addTask(title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
             .do(onSuccess: { result in
                 guard result.isAcceptable else {
-                    throw DomainError.unacceptableResultCode(code: result.message)
+                    throw DomainError.onAPIError(code: result.message)
                 }
             })
             .map {
@@ -80,7 +80,7 @@ class TaskUseCaseImpl: TaskUseCase {
         repository.updateTask(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
             .do(onSuccess: { result in
                 guard result.isAcceptable else {
-                    throw DomainError.unacceptableResultCode(code: result.message)
+                    throw DomainError.onAPIError(code: result.message)
                 }
             })
             .map {
@@ -101,7 +101,7 @@ class TaskUseCaseImpl: TaskUseCase {
         repository.deleteTask(taskId: taskId, authorization: authorization)
             .do(onSuccess: { result in
                 guard result.isAcceptable else {
-                    throw DomainError.unacceptableResultCode(code: result.message)
+                    throw DomainError.onAPIError(code: result.message)
                 }
             })
             .map {

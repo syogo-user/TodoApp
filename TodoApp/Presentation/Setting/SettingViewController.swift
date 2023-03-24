@@ -33,9 +33,12 @@ class SettingViewController: BaseViewController {
             .emit(onNext: { result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
-                    self.handlerError(error: error) {
-
-                    }
+                    self.handlerError(
+                        error: error,
+                        onLocalDbError: { self.localDbErrorDialog() },
+                        onUnKnowError: { self.unKnowErrorDialog() }
+                    )
+                    return
                 }
                 self.emailLabel.text = result.data?.email
             })
@@ -45,9 +48,12 @@ class SettingViewController: BaseViewController {
             .emit(onNext: { result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
-                    self.handlerError(error: error) {
-
-                    }
+                    self.handlerError(
+                        error: error,
+                        onAuthError: { self.signOutErrorDialog() },
+                        onLocalDbError: { self.localDbErrorDialog() },
+                        onUnKnowError: { self.unKnowErrorDialog() }
+                    )
                     return
                 }
                 // 左タブを選択
@@ -62,19 +68,19 @@ class SettingViewController: BaseViewController {
     }
 
 
-    private func tokenErrorDialog(completion: (() -> Void)? = nil) {
-        let dialog = UIAlertController(title: R.string.localizable.tokenErrorDialogTitle(), message: R.string.localizable.tokenErrorDialogMessage(), preferredStyle: .alert)
-        dialog.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: { action in
-            completion?()
-        }))
-        self.present(dialog,animated: true,completion: nil)
+    private func signOutErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.signOutErrorTitle(),
+            message: R.string.localizable.signOutErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
     }
 
-    private func localDbErrorDialog(completion: (() -> Void)? = nil) {
-        let dialog = UIAlertController(title: R.string.localizable.localDBErrorDialogTitle(), message: R.string.localizable.localDBErrorDialogMessage(), preferredStyle: .alert)
-        dialog.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: { action in
-            completion?()
-        }))
-        self.present(dialog,animated: true,completion: nil)
+    private func localDbErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.localDbErrorTitle(),
+            message: R.string.localizable.localUserDBErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
     }
 }

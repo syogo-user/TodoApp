@@ -51,9 +51,12 @@ class SignInViewController: BaseViewController {
             .emit { result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
-                    self.handlerError(error: error) {
-
-                    }
+                    self.handlerError(
+                        error: error,
+                        onAuthError: { self.signInErrorDialog() },
+                        onLocalDbError: { self.localDbErrorDialog() },
+                        onUnKnowError: { self.unKnowErrorDialog() }
+                    )
                     return
                 }
                 self.viewModel.setViaSignIn()
@@ -62,5 +65,19 @@ class SignInViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
 
+    private func signInErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.signInErrorTitle(),
+            message: R.string.localizable.signInErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
+    }
 
+    private func localDbErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.localDbErrorTitle(),
+            message: R.string.localizable.localUserDBErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
+    }
 }
