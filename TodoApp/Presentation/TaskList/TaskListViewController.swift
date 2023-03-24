@@ -42,9 +42,14 @@ class TaskListViewController: BaseViewController {
             .emit(onNext: { result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
-                    self.handlerError(error: error) {
-
-                    }
+                    self.handlerError(
+                        error: error,
+                        onAuthError: { self.tokenErrorDialog() },
+                        onLocalDbError: { self.localDbErrorDialog() },
+                        onAPIError: { self.fetchTaskErrorDialog() },
+                        onUnKnowError: { self.unKnowErrorDialog() }
+                    )
+                    return
                 }
             })
             .disposed(by: disposeBag)
@@ -54,15 +59,21 @@ class TaskListViewController: BaseViewController {
             .emit(onNext: { result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
-                    self.handlerError(error: error) {
-
-                    }
+                    self.handlerError(
+                        error: error,
+                        onAuthError: { self.tokenErrorDialog() },
+                        onLocalDbError: { self.localDbErrorDialog() },
+                        onAPIError: { self.deleteTaskErrorDialog() },
+                        onUnKnowError: { self.unKnowErrorDialog() }
+                    )
+                    return
                 }
             })
             .disposed(by: disposeBag)
     }
 
     private func setUp() {
+        navigationItem.backButtonDisplayMode = .minimal
         tableView.register(R.nib.taskTableViewCell)
         tableView.refreshControl = refreshCtl
         refreshCtl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -78,8 +89,32 @@ class TaskListViewController: BaseViewController {
         }
     }
 
+    private func fetchTaskErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.fetchTaskErrorTitle(),
+            message: R.string.localizable.fetchTaskErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
+    }
+
+    private func deleteTaskErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.deleteTaskErrorTitle(),
+            message:  R.string.localizable.deleteTaskErrorMessage(),
+            buttonTitle:  R.string.localizable.ok()
+        )
+    }
+
+    private func localDbErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.localDbErrorTitle(),
+            message: R.string.localizable.localTaskDBErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
+    }
+
     private func deleteWarningDialog(completion: (() -> Void)? = nil) {
-        let dialog = UIAlertController(title: R.string.localizable.deleteWarningDialogTitle(), message: R.string.localizable.deleteWarningDialogMessage(), preferredStyle: .alert)
+        let dialog = UIAlertController(title: R.string.localizable.deleteWarningTitle(), message: R.string.localizable.deleteWarningMessage(), preferredStyle: .alert)
         dialog.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: { action in
             completion?()
         }))

@@ -15,20 +15,55 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    func handlerError(error: Error, onDomainErrorHandler: () -> Void) {
+    func handlerError(
+        error: Error,
+        onAuthError: (() -> Void)? = nil,
+        onLocalDbError: (() -> Void)? = nil,
+        onAPIError: (() -> Void)? = nil,
+        onUnKnowError: (() -> Void)
+    ) {
         switch error {
         case DomainError.authError:
             print("認証処理に失敗しました。")
-        case DomainError.localDBError:
+            onAuthError?()
+        case DomainError.localDbError:
             print("ローカルDBの更新に失敗しました。再度サインインをお願いします。")
-        case DomainError.unownedError:
+            onLocalDbError?()
+        case DomainError.onAPIError(_):
+            print("通信処理に失敗しました。")
+            onAPIError?()
+        case DomainError.unKnownError:
             print("処理に失敗しました。")
-        case DomainError.unacceptableResultCode(_):
-            print("")
+            onUnKnowError()
         default:
+            onUnKnowError()
+            print("処理に失敗しました。")
             break
         }
-        onDomainErrorHandler()
+    }
+
+    func showDialog(title: String, message: String, buttonTitle: String, completion: (() -> Void)? = nil) {
+        let dialog = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        dialog.addAction(UIAlertAction(title: buttonTitle, style: .default, handler: { action in
+            completion?()
+        }))
+        self.present(dialog,animated: true,completion: nil)
+    }
+
+    func tokenErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.tokenErrorTitle(),
+            message:  R.string.localizable.tokenErrorMessage(),
+            buttonTitle:  R.string.localizable.ok()
+        )
+    }
+
+    func unKnowErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.unknownErrorTitle(),
+            message:  R.string.localizable.unknownErrorMessage(),
+            buttonTitle:  R.string.localizable.ok()
+        )
     }
 
     func setIndicator(show: Bool, animated: Bool = true) {

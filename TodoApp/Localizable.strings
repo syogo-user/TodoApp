@@ -5,39 +5,44 @@
   Created by 小野寺祥吾 on 2023/03/16.
   
 */
-// MARK: - ErrorDialogTitle
-"apiResultErrorDialogTitle" = "APIエラー";
-"localDBErrorDialogTitle" = "DBエラー";
-"tokenErrorDialogTitle" = "トークンエラー";
-"signInErrorDialogTitle" = "ログインエラー";
-"signOutErrorDialogTitle" = "ログアウトエラー";
-"updateTodoErrorDialogTitle" = "更新エラー";
-"networkErrorDialogTitle" = "ネットワークエラー";
-"unknownErrorDialogTitle" = "不明なエラー";
+// MARK: - ErrorTitle
+"localDbErrorTitle" = "DBエラー";
+"signInErrorTitle" = "ログインエラー";
+"signOutErrorTitle" = "ログアウトエラー";
+"tokenErrorTitle" = "トークンエラー";
+"fetchTaskErrorTitle" = "取得エラー";
+"addTaskErrorTitle" = "登録エラー";
+"updateTaskErrorTitle" = "更新エラー";
+"deleteTaskErrorTitle" = "削除エラー";
+"networkErrorTitle" = "ネットワークエラー";
+"unknownErrorTitle" = "不明なエラー";
 
-// MARK: - ErrorDialogMessage
-"apiReusltErrorDialogMessage" = "APIの処理に失敗しました。\nもう一度実行してください。";
-"localDBErrorDialogMessage" = "ローカルDBへの取得または更新処理が失敗しました。\nログインし直してください。";
-"tokenErrorDialogMessage" = "トークンの取得に失敗しました。\nログアウト後に、もう一度ログインし直してください。";
-"signInErrorDialogMessage" = "ログインに失敗しました。\n入力内容をご確認のうえ、再度ログインください。";
-"signOutErrorDialogMessage" = "ログアウトに失敗しました。\nもう一度実行してください。";
-"updateTodoErrorDialogMessage" = "タスクの更新に失敗しました。\n一覧を更新してください。";
-"networkErrorDialogMessage" = "ネットワークに接続してください。";
-"unknownErrorDialogMessage" = "処理に失敗しました。\nお時間をあけてから、もう一度お試しください。";
+// MARK: - ErrorMessage
+"localUserDBErrorMessage" = "ローカルDBへの取得または更新処理が失敗しました。\nログインし直してください。";
+"localTaskDBErrorMessage" = "ローカルDBへの取得または更新処理が失敗しました。\n一覧を更新してください。";
+"signInErrorMessage" = "ログインに失敗しました。\n入力内容をご確認のうえ、再度ログインください。";
+"signOutErrorMessage" = "ログアウトに失敗しました。\nもう一度実行してください。";
+"tokenErrorMessage" = "トークンの取得に失敗しました。\nログアウト後に、もう一度ログインし直してください。";
+"fetchTaskErrorMessage" = "タスクの取得に失敗しました。\nもう一度実行してください。";
+"addTaskErrorMessage" = "タスクの登録に失敗しました。\nもう一度実行してください。";
+"updateTaskErrorMessage" = "タスクの更新に失敗しました。\nもう一度実行してください。";
+"deleteTaskErrorMessage" = "タスクの削除に失敗しました。\nもう一度実行してください。";
+"networkErrorMessage" = "ネットワークに接続してください。\nもう一度実行してください。";
+"unknownErrorMessage" = "処理に失敗しました。\n時間をあけてから、もう一度お試しください。";
 
-// MARK: - WarningDialogTitle
-"deleteWarningDialogTitle" = "タスクの削除";
+// MARK: - WarningTitle
+"deleteWarningTitle" = "タスクの削除";
 
-// MARK: - WarningDialogMessage
-"deleteWarningDialogMessage" = "タスクを削除してもよろしいですか？";
+// MARK: - WarningMessage
+"deleteWarningMessage" = "タスクを削除してもよろしいですか？";
 
-// MARK: - ValidateDialogTitle
-"emptyTitleDialogTitle" = "入力エラー";
-"overTitleLengthDialogTitle" = "文字数制限";
+// MARK: - ValidateTitle
+"emptyTitleTitle" = "入力エラー";
+"overTitleLengthTitle" = "文字数制限";
 
-// MARK: - ValidateDialogMessage
-"emptyTitleDialogMessage" = "タイトルが空白です";
-"overTitleLengthDialogMessage" = "タイトルは%@文字以内でお願いします";
+// MARK: - ValidateMessage
+"emptyTitleMessage" = "タイトルが空白です";
+"overTitleLengthMessage" = "タイトルは%@文字以内でお願いします";
 
 // MARK: - Common
 "ok" = "OK";

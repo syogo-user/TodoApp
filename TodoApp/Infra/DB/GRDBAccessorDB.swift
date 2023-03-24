@@ -24,7 +24,7 @@ class GRDBAccessor {
                     try operation(db)
                 }
                 .catchError { error in
-                    throw DomainError.unownedError
+                    throw DomainError.unKnownError
                 }
             }
     }
@@ -37,7 +37,7 @@ class GRDBAccessor {
                 }
                 .andThen(Single.just(()))
                 .catchError { error in
-                    throw DomainError.unownedError
+                    throw DomainError.unKnownError
                 }
             }
     }

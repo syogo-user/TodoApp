@@ -35,11 +35,6 @@ class UpdateTaskViewController: BaseViewController {
         self.setUp()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationItem.hidesBackButton = true
-    }
-
     private func bindViewModelEvent() {
         viewModel.isLoading
             .drive(onNext: { [unowned self] isLoading in
@@ -51,9 +46,13 @@ class UpdateTaskViewController: BaseViewController {
             .emit(onNext: { [unowned self] result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
-                    self.handlerError(error: error) {
-                        
-                    }
+                    self.handlerError(
+                        error: error,
+                        onAuthError: { self.tokenErrorDialog() },
+                        onLocalDbError: { self.localDbErrorDialog() },
+                        onAPIError: { self.updateTaskErrorDialog() },
+                        onUnKnowError: { self.unKnowErrorDialog() }
+                    )
                     return
                 }
                 // 更新完了通知
@@ -73,7 +72,7 @@ class UpdateTaskViewController: BaseViewController {
             self.scheduledDatePicker.date = date.toDate() ?? Date()
         }
         let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(putTask))
-        self.navigationItem.leftBarButtonItems = [editBarButtonItem]
+        self.navigationItem.rightBarButtonItems = [editBarButtonItem]
     }
 
     @objc private func putTask() {
@@ -93,20 +92,36 @@ class UpdateTaskViewController: BaseViewController {
         viewModel.updateTask(taskInfoItem: taskInfoItem)
     }
 
-    private func emptyTitleDialog(completion: (() -> Void)? = nil) {
-        let dialog = UIAlertController(title: R.string.localizable.emptyTitleDialogTitle(), message: R.string.localizable.emptyTitleDialogMessage(), preferredStyle: .alert)
-        dialog.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: { action in
-            completion?()
-        }))
-        self.present(dialog,animated: true,completion: nil)
+    private func updateTaskErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.updateTaskErrorTitle(),
+            message: R.string.localizable.updateTaskErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
+    }
+    
+    private func localDbErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.localDbErrorTitle(),
+            message: R.string.localizable.localTaskDBErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
     }
 
-    private func overTitleLengthDialog(completion: (() -> Void)? = nil) {
-        let dialog = UIAlertController(title: R.string.localizable.overTitleLengthDialogTitle(), message: R.string.localizable.overTitleLengthDialogMessage(String(Constants.titleWordLimit)), preferredStyle: .alert)
-        dialog.addAction(UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: { action in
-            completion?()
-        }))
-        self.present(dialog,animated: true,completion: nil)
+    private func emptyTitleDialog() {
+        self.showDialog(
+            title: R.string.localizable.emptyTitleTitle(),
+            message: R.string.localizable.emptyTitleMessage(),
+            buttonTitle:  R.string.localizable.ok()
+        )
+    }
+
+    private func overTitleLengthDialog() {
+        self.showDialog(
+            title: R.string.localizable.overTitleLengthTitle(),
+            message: R.string.localizable.overTitleLengthMessage(String(Constants.titleWordLimit)),
+            buttonTitle:  R.string.localizable.ok()
+        )
     }
 
     @IBAction private func complete(_ sender: Any) {

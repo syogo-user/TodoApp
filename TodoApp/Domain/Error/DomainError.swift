@@ -11,9 +11,9 @@ enum DomainError: Error {
     /// 認証関係のエラー
     case authError
     /// ローカルDBに関するエラー
-    case localDBError
-    /// その他のエラー
-    case unownedError
+    case localDbError
     /// APIのエラー
-    case unacceptableResultCode(code: String)
+    case onAPIError(code: String)
+    /// その他のエラー
+    case unKnownError
 }
