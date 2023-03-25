@@ -7,7 +7,12 @@
 
 import Foundation
 
-class TaskInfoItem {
+protocol SortProtocol {
+    var taskId: String { get }
+    var scheduledDate: String { get }
+}
+
+class TaskInfoItem: SortProtocol {
     let taskId: String
     let title: String
     let content: String

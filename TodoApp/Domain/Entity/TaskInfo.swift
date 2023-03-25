@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TaskInfo {
+class TaskInfo: SortProtocol {
     let taskId: String
     let title: String
     let content: String

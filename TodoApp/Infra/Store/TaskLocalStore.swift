@@ -22,6 +22,8 @@ protocol TaskLocalStore {
     func deleteLocalTask(taskId: String) -> Single<Void>
 
     func deleteLocalTaskAll() -> Single<Void>
+
+    func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
 }
 
 class TaskLocalStoreImpl: TaskLocalStore {
@@ -51,4 +53,7 @@ class TaskLocalStoreImpl: TaskLocalStore {
         accessor.taskInfoDao.deleteLocalTaskAll()
     }
 
+    func deleteLocalTaskList(taskIdList: [String]) -> Single<Void> {
+        accessor.taskInfoDao.deleteLocalTaskList(taskIdList: taskIdList)
+    }
 }

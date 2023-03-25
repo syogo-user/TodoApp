@@ -60,23 +60,42 @@ class TaskListViewModelImpl: TaskListViewModel {
     }()
 
     func fetchTaskList() {
+        // ユーザIDとトークンを取得
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
-            .flatMap { (user, idToken) in
+            .flatMap { (user: UserInfoAttribute, idToken: String) in
+                // タスクをAPIから取得
                 self.taskUseCase.fetchTask(userId: user.userId, authorization: idToken)
+            }
+            .flatMap { (list: [TaskInfo])  in
+                return Single<Any>.zip({
+                    // ローカルに登録
+                    var taskList = list
+                    self.sortTask(itemList: &taskList)
+
+                    let taskInfoList = taskList.map {
+                        TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
+                    }
+                    return self.taskUseCase.insertLocalTaskList(taskInfoList: taskInfoList)
+                }(), {
+                    // APIとローカルそれぞれタスクのtaskIdを比較して不要なものを削除
+                    let tablviewItems = Set(self.tableViewItems.map{ $0.taskId })
+                    let taskList = Set(list.map{ $0.taskId })
+                    /// ローカルから取得したタスクには存在するがにAPIから取得したタスクには存在しないものtaskIDを抽出
+                    let result = tablviewItems.subtracting(taskList)
+                    let deleteIdList = Array(result)
+                    return self.taskUseCase.deleteLocalTaskList(taskIdList: deleteIdList)
+                }())
+            }
+            .flatMap { _ in
+                self.taskUseCase.loadLocalTaskList()
             }
             .do(onSuccess: { taskList in
                 self.tableViewItems = taskList.map {
-                     TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
+                    TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
-                self.sortTask()
+                self.sortTask(itemList: &self.tableViewItems)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
-            .flatMap { _ in
-                let taskInfoList = self.tableViewItems.map {
-                    TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
-                }
-                return self.taskUseCase.insertLocalTaskList(taskInfoList: taskInfoList)
-            }
             .map { _ in
                 return .success(())
             }
@@ -98,7 +117,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.tableViewItems.removeAll { task in
                     task.taskId == taskId
                 }
-                self.sortTask()
+                self.sortTask(itemList: &self.tableViewItems)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .flatMap { taskId in
@@ -120,7 +139,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.tableViewItems = taskList.map {
                     TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
-                self.sortTask()
+                self.sortTask(itemList: &self.tableViewItems)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .map { taskList -> VMResult<Void> in
@@ -149,8 +168,8 @@ class TaskListViewModelImpl: TaskListViewModel {
         selectItemAt(index: index).taskId
     }
 
-    private func sortTask() {
-        self.tableViewItems.sort{ (task1: TaskInfoItem, task2: TaskInfoItem) -> Bool in
+    private func sortTask<T: SortProtocol>(itemList: inout [T]) {
+        itemList.sort{ (task1: T, task2: T) -> Bool in
             if task1.scheduledDate == task2.scheduledDate {
                 // 日付が同じ場合
                 return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
@@ -160,17 +179,5 @@ class TaskListViewModelImpl: TaskListViewModel {
             }
         }
     }
-
-//    /// ローカルDBのタスクを削除
-//    private func deleteLocalTask(taskId: String) {
-//        taskUseCase.deleteLocalTask(taskId: taskId)
-//            .map { result -> VMResult<Void> in
-//                .success(())
-//            }
-//            .asSignal(onErrorRecover: { .just(.failure($0))})
-//            .startWith(.loading())
-//            .emit(to: deleteLocalTaskInfoRelay)
-//            .disposed(by: disposeBag)
-//    }
 }
 

@@ -23,6 +23,8 @@ protocol TaskInfoDao {
     func deleteLocalTask(taskId: String) -> Single<Void>
     ///  ローカルのタスクをすべて削除
     func deleteLocalTaskAll() -> Single<Void>
+    ///  ローカルのタスクを複数削除
+    func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
 }
 
 class TaskInfoDaoImpl: GRDBAccessor, TaskInfoDao {
@@ -60,6 +62,12 @@ class TaskInfoDaoImpl: GRDBAccessor, TaskInfoDao {
     func deleteLocalTaskAll() -> Single<Void> {
         writeToDBwith { db in
             try TaskInfoRecord.deleteAll(db)
+        }
+    }
+
+    func deleteLocalTaskList(taskIdList: [String]) -> Single<Void> {
+        writeToDBwith { db in
+            try taskIdList.forEach { try TaskInfoRecord.deleteOne(db, key: $0) }
         }
     }
 }
