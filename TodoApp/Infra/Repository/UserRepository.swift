@@ -17,6 +17,12 @@ protocol UserRepository {
     func fetchCurrentAuthToken() async throws -> String
     /// ユーザ情報の取得
     func fetchUserInfo() async throws -> [AuthUserAttribute]?
+    /// サインイン判定
+    func isSignIn() async throws -> Bool
+    /// ソーシャルサインイン
+    func sosialSignIn(provider: AuthProvider) async throws -> AuthSignInResult
+    /// サインアウト
+    func signOut() async -> AuthSignOutResult 
     /// ローカルのユーザ情報を取得
     func loadLocalUser() -> Single<[UserInfoRecord]>
     /// ローカルにユーザ情報を追加
@@ -40,6 +46,18 @@ class UserRepositoryImpl: UserRepository {
 
     func fetchUserInfo() async throws -> [AuthUserAttribute]? {
         try await remoteStore.fetchUserInfo()
+    }
+
+    func isSignIn() async throws -> Bool {
+        try await remoteStore.isSignIn()
+    }
+
+    func sosialSignIn(provider: AuthProvider) async throws -> AuthSignInResult {
+        try await remoteStore.socialSignIn(provider: provider)
+    }
+
+    func signOut() async -> AuthSignOutResult {
+        await remoteStore.signOut()
     }
 
     func loadLocalUser() -> Single<[UserInfoRecord]> {

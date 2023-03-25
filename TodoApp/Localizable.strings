@@ -10,6 +10,7 @@
 "signInErrorTitle" = "ログインエラー";
 "signOutErrorTitle" = "ログアウトエラー";
 "tokenErrorTitle" = "トークンエラー";
+"sessionErrorTitle" = "認証エラー";
 "fetchTaskErrorTitle" = "取得エラー";
 "addTaskErrorTitle" = "登録エラー";
 "updateTaskErrorTitle" = "更新エラー";
@@ -23,6 +24,7 @@
 "signInErrorMessage" = "ログインに失敗しました。\n入力内容をご確認のうえ、再度ログインください。";
 "signOutErrorMessage" = "ログアウトに失敗しました。\nもう一度実行してください。";
 "tokenErrorMessage" = "トークンの取得に失敗しました。\nログアウト後に、もう一度ログインし直してください。";
+"sessionErrorMessage" = "認証情報の取得に失敗しました。\nログアウト後に、もう一度ログインし直してください。";
 "fetchTaskErrorMessage" = "タスクの取得に失敗しました。\nもう一度実行してください。";
 "addTaskErrorMessage" = "タスクの登録に失敗しました。\nもう一度実行してください。";
 "updateTaskErrorMessage" = "タスクの更新に失敗しました。\nもう一度実行してください。";
