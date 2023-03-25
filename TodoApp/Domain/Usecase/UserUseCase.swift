@@ -13,20 +13,16 @@ import RxSwift
 protocol UserUseCase {
     /// サインイン画面を経由したか
     var isFromSignIn: Bool { get set }
-    /// サインアップ
-    func signUp(userName: String, password: String, email: String) async
-    /// 認証コード確認
-    func confirmSignUp(for username: String, with confirmationCode: String) async
     /// トークンを取得
     func fetchCurrentAuthToken() -> Single<String>
     /// ユーザ情報を取得
     func fetchUserInfo() -> Single<[AuthUserAttribute]>
     /// ログイン中かどうか判定
-    func isSignIn() async -> Bool
+    func isSignIn() -> Single<Bool>
+    /// ソーシャルサインイン
+    func socialSignIn(provider: AuthProvider) -> Single<Void>
     /// サインアウト
     func signOut() -> Single<Void>
-    /// ソーシャルサインイン
-    func socialSignInWithWebUI(provider :AuthProvider) -> Single<Void>
     /// ユーザ情報取得
     func loadLocalUser() -> Single<UserInfoAttribute>
     /// ユーザ情報を登録
@@ -41,41 +37,6 @@ class UserUseCaseImpl: UserUseCase {
     var isFromSignIn: Bool {
         get { repository.isFromSignIn }
         set { repository.isFromSignIn = newValue }
-    }
-    
-    func signUp(userName: String, password: String, email: String) async {
-        let userAttributes = [AuthUserAttribute(.email, value: email)]
-        let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
-        do {
-            let signUpResult = try await Amplify.Auth.signUp(
-                username: userName,
-                password: password,
-                options: options
-            )
-            if case let .confirmUser(deliveryDetails, _, userId) = signUpResult.nextStep {
-                print("Delivery details \(String(describing: deliveryDetails)) for userId: \(String(describing: userId))")
-            } else {
-                print("SignUp Complete")
-            }
-        } catch let error as AuthError {
-            print("An error occurred while registering a user \(error)")
-        } catch {
-            print("Unexpected error: \(error)")
-        }
-    }
-
-    func confirmSignUp(for username: String, with confirmationCode: String) async {
-        do {
-            let confirmSignUpResult = try await Amplify.Auth.confirmSignUp(
-                for: username,
-                confirmationCode: confirmationCode
-            )
-            print("Confirm sign up result completed: \(confirmSignUpResult.isSignUpComplete)")
-        } catch let error as AuthError {
-            print("An error occurred while confirming sign up \(error)")
-        } catch {
-            print("Unexpected error: \(error)")
-        }
     }
 
     func fetchCurrentAuthToken() -> Single<String> {
@@ -108,17 +69,39 @@ class UserUseCaseImpl: UserUseCase {
         }
     }
 
-    func isSignIn() async -> Bool {
-        do {
-            let session = try await Amplify.Auth.fetchAuthSession()
-            print("Is user signed in - \(session.isSignedIn)")
-            return session.isSignedIn
-        } catch let error as AuthError {
-            print("Fetch session failed with error \(error)")
-            return false
-        } catch {
-            print("Unexpected error: \(error)")
-            return false
+    func isSignIn() -> Single<Bool> {
+        return Single.create { single in
+            Task {
+                do {
+                    let isSignIn = try await self.repository.isSignIn()
+                    single(.success(isSignIn))
+                } catch let error as AuthError {
+                    print("Fetch session failed with error \(error)")
+                    single(.error(DomainError.authError))
+                } catch {
+                    print("Unexpected error: \(error)")
+                    single(.error(DomainError.unKnownError))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+
+    func socialSignIn(provider: AuthProvider) -> Single<Void> {
+        return Single.create { single in
+            Task {
+                do {
+                    let signInResult = try await self.repository.sosialSignIn(provider: provider)
+                    if signInResult.isSignedIn {
+                        print("Sign in succeeded")
+                        single(.success(()))
+                    }
+                    single(.error(DomainError.authError))
+                } catch {
+                    single(.error(DomainError.unKnownError))
+                }
+            }
+            return Disposables.create()
         }
     }
 
@@ -126,10 +109,10 @@ class UserUseCaseImpl: UserUseCase {
         return Single.create { single in
             Task {
                 do {
-                    let result = await Amplify.Auth.signOut()
+                    let result = await self.repository.signOut()
                     guard let signOutResult = result as? AWSCognitoSignOutResult else {
                         print("Signout failed")
-                        return
+                        throw DomainError.authError
                     }
                     print("Local signout successful: \(signOutResult.signedOutLocally)")
                     switch signOutResult {
@@ -142,25 +125,6 @@ class UserUseCaseImpl: UserUseCase {
                         print("SignOut failed with \(error)")
                         single(.error(DomainError.authError))
                     }
-                }
-            }
-            return Disposables.create()
-        }
-    }
-
-    func socialSignInWithWebUI(provider :AuthProvider) -> Single<Void> {
-        return Single.create { single in
-            Task {
-                do {
-                    let signInResult = try await Amplify.Auth.signInWithWebUI(for: provider, presentationAnchor: nil)
-
-                    if signInResult.isSignedIn {
-                        print("Sign in succeeded")
-                        single(.success(()))
-                    }
-                    single(.error(DomainError.authError))
-                } catch {
-                    single(.error(error))
                 }
             }
             return Disposables.create()

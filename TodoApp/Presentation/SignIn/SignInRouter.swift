@@ -9,11 +9,6 @@ import Foundation
 import UIKit
 
 extension SignInViewController {
-    func toAccount() {
-        guard let signUpVC = R.storyboard.signIn.signUpVC() else { return }
-        signUpVC.modalPresentationStyle = .fullScreen
-        self.present(signUpVC, animated: true, completion: nil)
-    }
 
     func toTabBar() {
         guard let tabBarVC = R.storyboard.main.tabBarVC() else { return }

@@ -17,6 +17,12 @@ protocol UserRemoteStore {
     func fetchCurrentAuthToken() async throws -> String
     /// ユーザ情報の取得
     func fetchUserInfo() async throws -> [AuthUserAttribute]?
+    /// サインイン判定
+    func isSignIn() async throws -> Bool
+    /// ソーシャルサインイン
+    func socialSignIn(provider: AuthProvider) async throws -> AuthSignInResult
+    /// サインアウト
+    func signOut() async -> AuthSignOutResult
 }
 
 class UserRemoteStoreImpl: UserRemoteStore {
@@ -28,9 +34,21 @@ class UserRemoteStoreImpl: UserRemoteStore {
         let token = try cognitoTokenProvider.getCognitoTokens().get()
         return token.idToken
     }
-
     /// ユーザ情報の取得
     func fetchUserInfo() async throws -> [AuthUserAttribute]? {
         try await Amplify.Auth.fetchUserAttributes()
+    }
+    /// サインイン判定
+    func isSignIn() async throws -> Bool {
+        let session = try await Amplify.Auth.fetchAuthSession()
+        return session.isSignedIn
+    }
+    /// ソーシャルサインイン
+    func socialSignIn(provider: AuthProvider) async throws -> AuthSignInResult {
+        try await Amplify.Auth.signInWithWebUI(for: provider, presentationAnchor: nil)
+    }
+    /// サインアウト
+    func signOut() async  -> AuthSignOutResult {
+        await Amplify.Auth.signOut()
     }
 }

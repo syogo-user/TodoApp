@@ -11,25 +11,13 @@ import AWSCognitoAuthPlugin
 import RxSwift
 
 class SignInViewController: BaseViewController {
-    
-    @IBOutlet private weak var emailTextField: UITextField!
-    @IBOutlet private weak var passwordTextField: UITextField!
-    
+
     private let viewModel: SignInViewModel = SignInViewModelImpl()
     private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModelValue()
-    }
-    
-    @IBAction private func signIn(_ sender: Any) {
-        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
-        viewModel.signIn(userName: email, password: password)
-    }
-    
-    @IBAction private func createAccount(_ sender: Any) {
-        self.toAccount()
     }
         
     @IBAction private func googleSignIn(_ sender: Any) {

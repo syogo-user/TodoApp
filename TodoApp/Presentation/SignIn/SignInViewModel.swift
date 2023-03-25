@@ -56,7 +56,7 @@ class SignInViewModelImpl: SignInViewModel {
     }
 
     func socialSigIn(provider: AuthProvider) {
-        self.usecase.socialSignInWithWebUI(provider: provider)
+        self.usecase.socialSignIn(provider: provider)
             .flatMap { () in
                 self.usecase.fetchUserInfo()
             }
