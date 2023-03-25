@@ -29,6 +29,8 @@ protocol TaskUseCase {
     func deleteLocalTask(taskId: String) -> Single<Void>
     /// ローカルのタスクをすべて削除
     func deleteLocalTaskAll() -> Single<Void>
+    /// ローカルタスクを複数削除
+    func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
 }
 
 class TaskUseCaseImpl: TaskUseCase {
@@ -131,5 +133,9 @@ class TaskUseCaseImpl: TaskUseCase {
 
     func deleteLocalTaskAll() -> Single<Void> {
         repository.deleteLocalTaskAll()
+    }
+
+    func deleteLocalTaskList(taskIdList: [String]) -> Single<Void> {
+        repository.deleteLocalTaskList(taskIdList: taskIdList)
     }
 }
