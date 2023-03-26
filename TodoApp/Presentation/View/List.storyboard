@@ -99,19 +99,19 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97U-xT-mn3">
                                         <rect key="frame" x="0.0" y="130" width="393" height="50"/>
                                         <subviews>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="36f-TL-sLm">
-                                                <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="dateAndTime" translatesAutoresizingMaskIntoConstraints="NO" id="36f-TL-sLm">
+                                                <rect key="frame" x="0.0" y="0.0" width="293" height="50"/>
                                                 <color key="backgroundColor" red="0.15823707789999999" green="1" blue="0.89846642509999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="xMF-Mp-nMj"/>
-                                                </constraints>
                                                 <locale key="locale" localeIdentifier="ja"/>
                                                 <connections>
                                                     <action selector="selectDate:" destination="zXX-2r-wUg" eventType="valueChanged" id="jTH-gA-Rmv"/>
                                                 </connections>
                                             </datePicker>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBv-5F-Ch5">
-                                                <rect key="frame" x="150" y="0.0" width="243" height="50"/>
+                                                <rect key="frame" x="293" y="0.0" width="100" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="hj4-Lx-rPj"/>
+                                                </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="送信"/>
                                                 <connections>
@@ -183,11 +183,10 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             </button>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="tZt-O7-T3T">
-                                <rect key="frame" x="223" y="69" width="150" height="40"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="tZt-O7-T3T">
+                                <rect key="frame" x="120" y="69" width="253" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kZU-7f-swd"/>
-                                    <constraint firstAttribute="width" constant="150" id="x0s-aX-iFm"/>
                                 </constraints>
                                 <locale key="locale" localeIdentifier="ja"/>
                                 <connections>
@@ -210,6 +209,7 @@
                             <constraint firstItem="ZNg-qJ-b2r" firstAttribute="trailing" secondItem="tZt-O7-T3T" secondAttribute="trailing" constant="20" id="6rH-Cu-VIZ"/>
                             <constraint firstItem="oHu-ea-dxt" firstAttribute="leading" secondItem="9pA-5C-tEl" secondAttribute="trailing" constant="10" id="86M-Se-HsN"/>
                             <constraint firstItem="tZt-O7-T3T" firstAttribute="top" secondItem="oHu-ea-dxt" secondAttribute="top" id="8Ew-fc-4qZ"/>
+                            <constraint firstItem="tZt-O7-T3T" firstAttribute="leading" secondItem="oHu-ea-dxt" secondAttribute="trailing" constant="10" id="C6i-70-MW6"/>
                             <constraint firstItem="UDF-92-dKb" firstAttribute="leading" secondItem="ZNg-qJ-b2r" secondAttribute="leading" constant="20" id="Dtu-ct-grv"/>
                             <constraint firstItem="O6A-Gp-Z8r" firstAttribute="trailing" secondItem="UDF-92-dKb" secondAttribute="trailing" id="F7I-v1-NnQ"/>
                             <constraint firstItem="O6A-Gp-Z8r" firstAttribute="leading" secondItem="UDF-92-dKb" secondAttribute="leading" id="Jyb-mV-aTe"/>

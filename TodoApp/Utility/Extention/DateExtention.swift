@@ -7,14 +7,11 @@
 
 import Foundation
 extension Date {
-    // TODO: 
     // Date → String に変換
     func dateFormat() -> String {
-        var strDate:String = ""
-        let format  = DateFormatter()
+        let format = DateFormatter()
         format.locale = Locale(identifier: "ja_JP")
-        format.dateFormat = "yyyyMMdd"
-        strDate = format.string(from:self)
-        return strDate
+        format.dateFormat = "yyyyMMddHHmm"
+        return format.string(from: self)
     }
 }

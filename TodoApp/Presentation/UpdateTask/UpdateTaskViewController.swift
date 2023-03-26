@@ -29,7 +29,6 @@ class UpdateTaskViewController: BaseViewController {
     weak var delegate: UpdateTaskViewControllerDelegate?
     var updateTask: TaskInfoItem?
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bindViewModelEvent()
@@ -108,6 +107,14 @@ class UpdateTaskViewController: BaseViewController {
         self.showDialog(
             title: R.string.localizable.localDbErrorTitle(),
             message: R.string.localizable.localTaskDBErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
+    }
+
+    private func dateParseErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.dateParseErrorTitle(),
+            message: R.string.localizable.dateParseErrorMessage(),
             buttonTitle: R.string.localizable.ok()
         )
     }

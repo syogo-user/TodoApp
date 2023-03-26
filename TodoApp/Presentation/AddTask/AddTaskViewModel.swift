@@ -40,6 +40,9 @@ class AddTaskViewModelImpl: AddTaskViewModel {
                 .flatMap { (user, idToken) in
                     self.taskUseCase.addTask(title: title, content: content, scheduledDate: scheduledDate, isCompleted: false, isFavorite: false, userId: user.userId, authorization: idToken)
                 }
+                .do(onSuccess: { task in
+                    self.taskUseCase.registerNotification(notificationId: task.taskId, title: task.title, body: task.content, scheduledDate: task.scheduledDate)
+                })
                 .flatMap { result in
                     // ローカルDBに追加
                     let taskInfoRecord = TaskInfoRecord(taskId: result.taskId, title: result.title, content: result.content, scheduledDate: result.scheduledDate, isCompleted: result.isCompleted, isFavorite: result.isFavorite, userId: result.userId)
