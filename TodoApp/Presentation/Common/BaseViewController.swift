@@ -20,6 +20,7 @@ class BaseViewController: UIViewController {
         onAuthError: (() -> Void)? = nil,
         onLocalDbError: (() -> Void)? = nil,
         onAPIError: (() -> Void)? = nil,
+        onParseError: (() -> Void)? = nil,
         onUnKnowError: (() -> Void)
     ) {
         switch error {
@@ -32,6 +33,9 @@ class BaseViewController: UIViewController {
         case DomainError.onAPIError(_):
             print("通信処理に失敗しました。")
             onAPIError?()
+        case DomainError.parseError:
+            print("変換に処理に失敗しました。")
+            onParseError?()
         case DomainError.unKnownError:
             print("処理に失敗しました。")
             onUnKnowError()

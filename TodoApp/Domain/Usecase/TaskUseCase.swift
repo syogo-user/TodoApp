@@ -31,6 +31,10 @@ protocol TaskUseCase {
     func deleteLocalTaskAll() -> Single<Void>
     /// ローカルタスクを複数削除
     func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
+    /// 通知の登録/更新
+    func registerNotification(notificationId: String, title: String, body: String, scheduledDate: String)
+    /// 通知の削除
+    func removeNotification(taskId: String)
 }
 
 class TaskUseCaseImpl: TaskUseCase {
@@ -138,4 +142,27 @@ class TaskUseCaseImpl: TaskUseCase {
     func deleteLocalTaskList(taskIdList: [String]) -> Single<Void> {
         repository.deleteLocalTaskList(taskIdList: taskIdList)
     }
+
+    func registerNotification(notificationId: String, title: String, body: String, scheduledDate: String) {
+        let targetDate = Calendar.current.dateComponents(
+            [.year, .month, .day, .hour, .minute],
+            from: scheduledDate.toDate() ?? Date())
+        // トリガーとコンテンツの作成
+        let trigger = UNCalendarNotificationTrigger.init(dateMatching: targetDate, repeats: false)
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound.default
+        let request = UNNotificationRequest.init(
+            identifier: notificationId,
+            content: content,
+            trigger: trigger
+        )
+        // 通知リクエストの登録
+        UNUserNotificationCenter.current().add(request)
+    }
+
+    func removeNotification(taskId: String) {
+       UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [taskId])
+   }
 }

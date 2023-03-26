@@ -114,7 +114,6 @@ class TaskListViewModelImpl: TaskListViewModel {
             .startWith(.loading())
             .emit(to: taskInfoRelay)
             .disposed(by: disposeBag)
-
     }
 
     func deleteTask(index: Int) {
@@ -131,11 +130,14 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.sortTask(itemList: &self.tableViewItems)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
+            .do(onSuccess: { taskId in
+                self.taskUseCase.removeNotification(taskId: taskId)
+            })
             .flatMap { taskId in
                 self.taskUseCase.deleteLocalTask(taskId: taskId)
             }
             .map { _ in
-                    .success(())
+                .success(())
             }
             .asSignal(onErrorRecover: { .just(.failure($0))})
             .startWith(.loading())
@@ -230,7 +232,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
             } else {
                 // 日付が異なる場合
-                return task1.scheduledDate < task2.scheduledDate
+                return task1.scheduledDate.toDate() ?? Date() < task2.scheduledDate.toDate() ?? Date()
             }
         }
     }

@@ -8,28 +8,39 @@
 import Foundation
 
 extension String {
-    // TODO: 
-    /// yyyyMMdd → yyyy年MM月dd日 に変換
-    func dateJpFormat() -> String {
-        let (year, month, day) = self.dateTupleFormat()
-        let str = "\(year)年\(month)月\(day)日"
-        return str
-    }
 
-    /// yyyyMMdd → (yyyy, MM, dd)に変換
-    func dateTupleFormat() -> (String, String, String) {
-        let year = String(self.prefix(4))
-        let startIndex = self.index(self.startIndex, offsetBy: 4)
-        let endIndex = self.index(self.endIndex, offsetBy: -3)
-        let month = String(self[startIndex...endIndex])
-        let day = String(self.suffix(2))
-        return (year, month, day)
+    func isConvertibleDate() -> Bool {
+        let format = DateFormatter()
+        format.locale = Locale(identifier: "ja_JP")
+        format.dateFormat = "yyyyMMddHHmm"
+        if format.date(from: self) != nil {
+            return true
+        } else {
+            return false
+        }
     }
 
     func toDate() -> Date? {
-        let (year, month, day) = self.dateTupleFormat()
-        let calendar = Calendar.current
-        let selectDate = calendar.date(from: DateComponents(year: Int(year), month: Int(month), day: Int(day)))
-        return selectDate
+        let format = DateFormatter()
+        format.locale = Locale(identifier: "ja_JP")
+        format.dateFormat = "yyyyMMddHHmm"
+        return format.date(from: self)
     }
+
+    func dateJpFormat() -> String {
+        let (year, month, day, hour, minute) = self.dateTimeTupleFormat()
+        return  "\(year)年\(month)月\(day)日 \(hour)時\(minute)分"
+    }
+
+    func dateTimeTupleFormat() -> (String, String, String, String, String) {
+        let datePart = String(self.prefix(8))
+        let timePart = String(self.suffix(4))
+        let year = String(datePart.prefix(4))
+        let month = String(datePart.dropFirst(4).prefix(2))
+        let day = String(datePart.dropFirst(6).prefix(2))
+        let hour = String(timePart.prefix(2))
+        let minute = String(timePart.suffix(2))
+        return (year, month, day, hour, minute)
+    }
+
 }
