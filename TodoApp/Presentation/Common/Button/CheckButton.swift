@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CheckButton :UIButton{
+class CheckButton: UIButton{
     let checkedImage = UIImage(named:"icon_check_on")! as UIImage
     let uncheckedImage = UIImage(named:"icon_check_off")! as UIImage
 
@@ -22,11 +22,11 @@ class CheckButton :UIButton{
     }
 
     override func awakeFromNib() {
-        self.addTarget(self, action: #selector(tapButton(sender:)), for: UIControl.Event.touchUpInside)
+        self.addTarget(self, action: #selector(tapCheck(sender:)), for: UIControl.Event.touchUpInside)
         self.isChecked = false
     }
 
-    @objc func tapButton(sender:UIButton){
+    @objc func tapCheck(sender:UIButton){
         if sender == self{
             isChecked = !isChecked
         }

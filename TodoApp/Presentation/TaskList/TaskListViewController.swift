@@ -34,6 +34,26 @@ class TaskListViewController: BaseViewController {
                     return
                 }
                 taskTableViewCell.setUp(taskInfoItem: element)
+                // 明示的にdisposeしないと開放されない
+                taskTableViewCell.disposeBag = DisposeBag()
+                // セル内のボタンタップイベント
+                taskTableViewCell.completeCheckButton.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        guard let self = self else { return }
+                        guard let indexPath = self.tableView.indexPath(for: cell) else { return }
+                        let isCompleted = taskTableViewCell.completeCheckButton.isChecked
+                        self.changeComplete(index: indexPath.row, isCompleted: isCompleted)
+                    })
+                    .disposed(by: taskTableViewCell.disposeBag)
+
+                taskTableViewCell.favoriteButton.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        guard let self = self else { return }
+                        guard let indexPath = self.tableView.indexPath(for: cell) else { return }
+                        let isFavorite = taskTableViewCell.favoriteButton.isFavorite
+                        self.changeFavorite(index: indexPath.row, isFavorite: isFavorite)
+                    })
+                    .disposed(by: taskTableViewCell.disposeBag)
             }
             .disposed(by: disposeBag)
 
@@ -51,6 +71,24 @@ class TaskListViewController: BaseViewController {
                     )
                     return
                 }
+            })
+            .disposed(by: disposeBag)
+
+        // タスクの更新結果
+        viewModel.updateTaskInfo
+            .emit(onNext: { [unowned self] result in
+                guard let result = result, result.isCompleted else { return }
+                if let error = result.error {
+                    self.handlerError(
+                        error: error,
+                        onAuthError: { self.tokenErrorDialog() },
+                        onLocalDbError: { self.localDbErrorDialog() },
+                        onAPIError: { self.updateTaskErrorDialog() },
+                        onUnKnowError: { self.unKnowErrorDialog() }
+                    )
+                    return
+                }
+                self.viewModel.loadLocalTaskList()
             })
             .disposed(by: disposeBag)
 
@@ -89,10 +127,28 @@ class TaskListViewController: BaseViewController {
         }
     }
 
+    private func changeComplete(index: Int, isCompleted: Bool) {
+        viewModel.changeComplete(index: index, isCompleted: isCompleted)
+        viewModel.updateTask(index: index)
+    }
+
+    private func changeFavorite(index: Int, isFavorite: Bool) {
+        viewModel.changeFavorite(index: index, isFavorite: isFavorite)
+        viewModel.updateTask(index: index)
+    }
+
     private func fetchTaskErrorDialog() {
         self.showDialog(
             title: R.string.localizable.fetchTaskErrorTitle(),
             message: R.string.localizable.fetchTaskErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
+    }
+
+    private func updateTaskErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.updateTaskErrorTitle(),
+            message: R.string.localizable.updateTaskErrorMessage(),
             buttonTitle: R.string.localizable.ok()
         )
     }
@@ -160,14 +216,6 @@ extension TaskListViewController: UITableViewDelegate {
     /// セルタップ
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         toUpdateTask(taskInfoItem: viewModel.selectItemAt(index: indexPath.row))
-    }
-
-    /// セルを左から右にスワイプ
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .destructive, title: nil) { _, _, handler in
-            handler(true)
-        }
-        return UISwipeActionsConfiguration(actions: [action])
     }
 
     /// セルを右から左にスワイプ

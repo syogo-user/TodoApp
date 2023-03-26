@@ -17,14 +17,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="332" height="123"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yH-jf-1gz">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yH-jf-1gz" customClass="CheckButton" customModule="TodoApp" customModuleProvider="target">
                         <rect key="frame" x="5" y="41.666666666666664" width="40" height="39.999999999999993"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="a9p-nc-guT"/>
                             <constraint firstAttribute="height" constant="40" id="xmG-dc-GvB"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="□"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     </button>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b6d-WK-OT3">
                         <rect key="frame" x="55" y="10" width="217" height="103"/>
@@ -57,29 +56,32 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iqq-QU-1wV">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHQ-Yj-bhk" customClass="FavoriteButton" customModule="TodoApp" customModuleProvider="target">
                         <rect key="frame" x="282" y="41.666666666666664" width="40" height="39.999999999999993"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="M8R-tO-yVC"/>
-                            <constraint firstAttribute="width" constant="40" id="tn6-K2-mAs"/>
+                            <constraint firstAttribute="height" constant="40" id="Gvq-lx-ePl"/>
+                            <constraint firstAttribute="width" constant="40" id="ykb-cx-e1q"/>
                         </constraints>
-                    </imageView>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="Iqq-QU-1wV" firstAttribute="leading" secondItem="b6d-WK-OT3" secondAttribute="trailing" constant="10" id="0sT-yq-F5m"/>
-                    <constraint firstItem="Iqq-QU-1wV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CBH-AJ-JlL"/>
+                    <constraint firstItem="DHQ-Yj-bhk" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GN9-uJ-lfa"/>
                     <constraint firstAttribute="bottom" secondItem="b6d-WK-OT3" secondAttribute="bottom" constant="10" id="Iqn-zM-cTa"/>
+                    <constraint firstItem="DHQ-Yj-bhk" firstAttribute="leading" secondItem="b6d-WK-OT3" secondAttribute="trailing" constant="10" id="JDK-WY-bqj"/>
                     <constraint firstItem="b6d-WK-OT3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="OsY-vs-uNq"/>
                     <constraint firstItem="1yH-jf-1gz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="ULa-wi-M3W"/>
                     <constraint firstItem="1yH-jf-1gz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YVA-gc-URh"/>
+                    <constraint firstAttribute="trailing" secondItem="DHQ-Yj-bhk" secondAttribute="trailing" constant="10" id="cRC-jN-5gr"/>
                     <constraint firstItem="b6d-WK-OT3" firstAttribute="leading" secondItem="1yH-jf-1gz" secondAttribute="trailing" constant="10" id="dgp-BH-ZEw"/>
-                    <constraint firstAttribute="trailing" secondItem="Iqq-QU-1wV" secondAttribute="trailing" constant="10" id="tXF-qR-wPy"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="completeCheckButton" destination="1yH-jf-1gz" id="jOZ-uV-wp6"/>
                 <outlet property="contentLabel" destination="TAY-4q-vlV" id="rVG-Nf-KdN"/>
+                <outlet property="favoriteButton" destination="DHQ-Yj-bhk" id="5qo-DF-R0E"/>
                 <outlet property="scheduledDateLabel" destination="A7G-eU-5zA" id="Gt6-83-H1A"/>
                 <outlet property="title" destination="nKP-rK-61i" id="hWr-HF-hjl"/>
             </connections>
