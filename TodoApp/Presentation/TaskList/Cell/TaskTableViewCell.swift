@@ -6,27 +6,31 @@
 //
 
 import UIKit
+import RxSwift
 
 class TaskTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var completeCheckButton: CheckButton!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var scheduledDateLabel: UILabel!
+    @IBOutlet weak var favoriteButton: FavoriteButton!
+
+    var disposeBag = DisposeBag()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     func setUp(taskInfoItem: TaskInfoItem) {
+        completeCheckButton.isChecked = taskInfoItem.isCompleted
         title.text = taskInfoItem.title
         contentLabel.text = taskInfoItem.content
         scheduledDateLabel.text = taskInfoItem.scheduledDate.dateJpFormat()
+        favoriteButton.isFavorite = taskInfoItem.isFavorite
     }
 }

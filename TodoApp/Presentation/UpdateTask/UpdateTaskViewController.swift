@@ -17,6 +17,7 @@ protocol UpdateTaskViewControllerDelegate: AnyObject {
 class UpdateTaskViewController: BaseViewController {
 
     @IBOutlet weak var completeCheckButton: CheckButton!
+    @IBOutlet weak var favoriteButton: FavoriteButton!
     @IBOutlet weak var scheduledDatePicker: UIDatePicker!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
@@ -65,6 +66,8 @@ class UpdateTaskViewController: BaseViewController {
 
     private func setUp() {
         guard let task = self.updateTask else { return }
+        completeCheckButton.isChecked = task.isCompleted
+        favoriteButton.isFavorite = task.isFavorite
         titleTextField.text = task.title
         contentTextView.text = task.content
         selectedDate = task.scheduledDate
@@ -88,7 +91,8 @@ class UpdateTaskViewController: BaseViewController {
         }
 
         let isCompleted = completeCheckButton.isChecked
-        let taskInfoItem = TaskInfoItem(taskId: task.taskId, title: title, content: content, scheduledDate: selectedDate, isCompleted: isCompleted, isFavorite: task.isFavorite, userId: task.taskId)
+        let isFavorite = favoriteButton.isFavorite
+        let taskInfoItem = TaskInfoItem(taskId: task.taskId, title: title, content: content, scheduledDate: selectedDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: task.taskId)
         viewModel.updateTask(taskInfoItem: taskInfoItem)
     }
 
@@ -122,10 +126,6 @@ class UpdateTaskViewController: BaseViewController {
             message: R.string.localizable.overTitleLengthMessage(String(Constants.titleWordLimit)),
             buttonTitle:  R.string.localizable.ok()
         )
-    }
-
-    @IBAction private func complete(_ sender: Any) {
-
     }
 
     @IBAction func selectDate(_ sender: Any) {

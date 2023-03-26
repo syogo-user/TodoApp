@@ -13,12 +13,15 @@ protocol TaskListViewModel {
     var isLoading: Driver<Bool> { get }
     var taskItems: Driver<[TaskInfoItem]> { get }
     var taskInfo: Signal<VMResult<Void>?> { get }
+    var updateTaskInfo: Signal<VMResult<Void>?> { get }
     var deleteTaskInfo: Signal<VMResult<Void>?> { get }
 
     /// タスクリストを取得
     func fetchTaskList()
     /// タスクを削除
     func deleteTask(index: Int)
+    /// タスクを更新
+    func updateTask(index: Int)
     /// ローカルDBからタスクリストを取得
     func loadLocalTaskList()
     /// サインイン画面を経由したか
@@ -27,6 +30,10 @@ protocol TaskListViewModel {
     func setFromSignIn()
     /// 指定したインデックスのタスクを返却する
     func selectItemAt(index: Int) -> TaskInfoItem
+    /// 完了状態を変更
+    func changeComplete(index: Int, isCompleted: Bool)
+    /// お気に入り状態を変更
+    func changeFavorite(index: Int, isFavorite: Bool)
 }
 
 class TaskListViewModelImpl: TaskListViewModel {
@@ -42,6 +49,10 @@ class TaskListViewModelImpl: TaskListViewModel {
     /// タスクの取得通知
     private let taskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var taskInfo = taskInfoRelay.asSignal(onErrorSignalWith: .empty())
+
+    /// タスクの更新通知
+    private let updateTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
+    lazy var updateTaskInfo = updateTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
     /// タスクの削除通知
     private let deleteTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
@@ -124,7 +135,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.taskUseCase.deleteLocalTask(taskId: taskId)
             }
             .map { _ in
-                .success(())
+                    .success(())
             }
             .asSignal(onErrorRecover: { .just(.failure($0))})
             .startWith(.loading())
@@ -143,7 +154,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .map { taskList -> VMResult<Void> in
-                .success(())
+                    .success(())
             }
             .asSignal(onErrorRecover: { .just(.failure($0))})
             .startWith(.loading())
@@ -163,6 +174,50 @@ class TaskListViewModelImpl: TaskListViewModel {
         tableViewItems[index]
     }
 
+    func changeComplete(index: Int, isCompleted: Bool) {
+        let item = selectItemAt(index: index)
+        tableViewItems[index] = TaskInfoItem(
+            taskId: item.taskId,
+            title: item.title,
+            content: item.content,
+            scheduledDate: item.scheduledDate,
+            isCompleted: isCompleted,
+            isFavorite: item.isFavorite,
+            userId: item.userId
+        )
+    }
+
+    func changeFavorite(index: Int, isFavorite: Bool) {
+        let item = selectItemAt(index: index)
+        tableViewItems[index] = TaskInfoItem(
+            taskId: item.taskId,
+            title: item.title,
+            content: item.content,
+            scheduledDate: item.scheduledDate,
+            isCompleted: item.isCompleted,
+            isFavorite: isFavorite,
+            userId: item.userId
+        )
+    }
+
+    func updateTask(index: Int) {
+        let taskInfoItem = selectItemAt(index: index)
+        Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
+            .flatMap { (user, idToken) in
+                self.taskUseCase.updateTask(taskId: taskInfoItem.taskId,title: taskInfoItem.title, content: taskInfoItem.content, scheduledDate: taskInfoItem.scheduledDate, isCompleted: taskInfoItem.isCompleted, isFavorite: taskInfoItem.isFavorite, userId: user.userId, authorization: idToken)
+            }
+            .flatMap { result in
+                let taskInfoRecord = TaskInfoRecord(taskId: result.taskId, title: result.title, content: result.content, scheduledDate: result.scheduledDate, isCompleted: result.isCompleted, isFavorite: result.isFavorite, userId: result.userId)
+                return self.taskUseCase.updateLocalTask(taskInfo: taskInfoRecord)
+            }
+            .map { _ in
+                return .success(())
+            }
+            .asSignal(onErrorRecover: { .just(.failure($0))})
+            .startWith(.loading())
+            .emit(to: updateTaskInfoRelay)
+            .disposed(by: disposeBag)
+    }
     /// インデックスからタスクIDを取得
     private func toTaskId(index: Int) -> String {
         selectItemAt(index: index).taskId

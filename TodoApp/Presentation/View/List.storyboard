@@ -176,17 +176,15 @@
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pA-5C-tEl" customClass="CheckButton" customModule="TodoApp" customModuleProvider="target">
                                 <rect key="frame" x="20" y="69" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.17472918309999999" green="0.83608176069999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="66a-ol-ibK"/>
                                     <constraint firstAttribute="width" constant="40" id="zdk-ev-ZIF"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <connections>
-                                    <action selector="complete:" destination="TJy-yz-tGi" eventType="touchUpInside" id="WCk-Dh-7GV"/>
-                                </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="tZt-O7-T3T">
-                                <rect key="frame" x="121.66666666666669" y="69" width="150" height="40"/>
+                                <rect key="frame" x="223" y="69" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kZU-7f-swd"/>
                                     <constraint firstAttribute="width" constant="150" id="x0s-aX-iFm"/>
@@ -196,16 +194,27 @@
                                     <action selector="selectDate:" destination="TJy-yz-tGi" eventType="valueChanged" id="Rpr-tk-1lT"/>
                                 </connections>
                             </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHu-ea-dxt" customClass="FavoriteButton" customModule="TodoApp" customModuleProvider="target">
+                                <rect key="frame" x="70" y="69" width="40" height="40"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="4q5-en-tbM"/>
+                                    <constraint firstAttribute="height" constant="40" id="w51-Oq-KbO"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZNg-qJ-b2r"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ZNg-qJ-b2r" firstAttribute="trailing" secondItem="tZt-O7-T3T" secondAttribute="trailing" constant="20" id="6rH-Cu-VIZ"/>
+                            <constraint firstItem="oHu-ea-dxt" firstAttribute="leading" secondItem="9pA-5C-tEl" secondAttribute="trailing" constant="10" id="86M-Se-HsN"/>
+                            <constraint firstItem="tZt-O7-T3T" firstAttribute="top" secondItem="oHu-ea-dxt" secondAttribute="top" id="8Ew-fc-4qZ"/>
                             <constraint firstItem="UDF-92-dKb" firstAttribute="leading" secondItem="ZNg-qJ-b2r" secondAttribute="leading" constant="20" id="Dtu-ct-grv"/>
                             <constraint firstItem="O6A-Gp-Z8r" firstAttribute="trailing" secondItem="UDF-92-dKb" secondAttribute="trailing" id="F7I-v1-NnQ"/>
                             <constraint firstItem="O6A-Gp-Z8r" firstAttribute="leading" secondItem="UDF-92-dKb" secondAttribute="leading" id="Jyb-mV-aTe"/>
                             <constraint firstItem="UDF-92-dKb" firstAttribute="top" secondItem="tZt-O7-T3T" secondAttribute="bottom" constant="20" id="Loh-SM-GpB"/>
                             <constraint firstItem="9pA-5C-tEl" firstAttribute="leading" secondItem="ZNg-qJ-b2r" secondAttribute="leading" constant="20" id="OyZ-b2-xmf"/>
-                            <constraint firstItem="tZt-O7-T3T" firstAttribute="centerX" secondItem="RWK-mZ-FUK" secondAttribute="centerX" id="QnJ-DG-QQE"/>
                             <constraint firstItem="tZt-O7-T3T" firstAttribute="top" secondItem="9pA-5C-tEl" secondAttribute="top" id="eF2-YQ-grh"/>
                             <constraint firstItem="tZt-O7-T3T" firstAttribute="top" secondItem="ZNg-qJ-b2r" secondAttribute="top" constant="10" id="i5P-K4-gxZ"/>
                             <constraint firstItem="ZNg-qJ-b2r" firstAttribute="trailing" secondItem="UDF-92-dKb" secondAttribute="trailing" constant="20" id="riv-ga-2jg"/>
@@ -216,6 +225,7 @@
                     <connections>
                         <outlet property="completeCheckButton" destination="9pA-5C-tEl" id="CEL-Ey-BNp"/>
                         <outlet property="contentTextView" destination="O6A-Gp-Z8r" id="pv0-dp-JoL"/>
+                        <outlet property="favoriteButton" destination="oHu-ea-dxt" id="qbi-59-ZPH"/>
                         <outlet property="scheduledDatePicker" destination="tZt-O7-T3T" id="81l-7w-cpp"/>
                         <outlet property="titleTextField" destination="UDF-92-dKb" id="G0m-55-cjs"/>
                     </connections>
@@ -252,6 +262,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
