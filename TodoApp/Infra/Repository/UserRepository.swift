@@ -13,6 +13,8 @@ import Amplify
 protocol UserRepository {
     /// サインイン画面を経由したか
     var isFromSignIn: Bool { get set }
+    /// 並び順
+    var sortOrder: String? { get set }
     /// トークンの取得
     func fetchCurrentAuthToken() async throws -> String
     /// ユーザ情報の取得
@@ -20,7 +22,7 @@ protocol UserRepository {
     /// サインイン判定
     func isSignIn() async throws -> Bool
     /// ソーシャルサインイン
-    func sosialSignIn(provider: AuthProvider) async throws -> AuthSignInResult
+    func socialSignIn(provider: AuthProvider) async throws -> AuthSignInResult
     /// サインアウト
     func signOut() async -> AuthSignOutResult 
     /// ローカルのユーザ情報を取得
@@ -40,6 +42,11 @@ class UserRepositoryImpl: UserRepository {
         set { localStore.isFromSignIn = newValue }
     }
 
+    var sortOrder: String? {
+        get { localStore.sortOrder }
+        set { localStore.sortOrder = newValue }
+    }
+
     func fetchCurrentAuthToken() async throws -> String {
         try await remoteStore.fetchCurrentAuthToken()
     }
@@ -52,7 +59,7 @@ class UserRepositoryImpl: UserRepository {
         try await remoteStore.isSignIn()
     }
 
-    func sosialSignIn(provider: AuthProvider) async throws -> AuthSignInResult {
+    func socialSignIn(provider: AuthProvider) async throws -> AuthSignInResult {
         try await remoteStore.socialSignIn(provider: provider)
     }
 

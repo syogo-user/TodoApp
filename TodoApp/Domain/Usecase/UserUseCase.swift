@@ -13,6 +13,8 @@ import RxSwift
 protocol UserUseCase {
     /// サインイン画面を経由したか
     var isFromSignIn: Bool { get set }
+    /// 並び順
+    var sortOrder: String? { get set }
     /// トークンを取得
     func fetchCurrentAuthToken() -> Single<String>
     /// ユーザ情報を取得
@@ -37,6 +39,11 @@ class UserUseCaseImpl: UserUseCase {
     var isFromSignIn: Bool {
         get { repository.isFromSignIn }
         set { repository.isFromSignIn = newValue }
+    }
+
+    var sortOrder: String? {
+        get { repository.sortOrder }
+        set { repository.sortOrder = newValue }
     }
 
     func fetchCurrentAuthToken() -> Single<String> {
@@ -91,7 +98,7 @@ class UserUseCaseImpl: UserUseCase {
         return Single.create { single in
             Task {
                 do {
-                    let signInResult = try await self.repository.sosialSignIn(provider: provider)
+                    let signInResult = try await self.repository.socialSignIn(provider: provider)
                     if signInResult.isSignedIn {
                         print("Sign in succeeded")
                         single(.success(()))

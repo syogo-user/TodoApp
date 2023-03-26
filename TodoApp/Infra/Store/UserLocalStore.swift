@@ -11,6 +11,8 @@ import RxSwift
 protocol UserLocalStore {
     /// サインイン画面を経由したか
     var isFromSignIn: Bool { get set }
+    /// 並び順
+    var sortOrder: String? { get set }
     /// ユーザ情報を取得
     func loadLocalUserInfo() -> Single<[UserInfoRecord]>
     /// ユーザ情報を追加
@@ -22,12 +24,18 @@ protocol UserLocalStore {
 class UserLocalStoreImpl: UserLocalStore {
     private let accessor: DBAccessor = GRDBAccessor()
     private enum Key: String {
-        case isFromSignIn = "isFromSignIn"
+        case isFromSignIn = "IsFromSignIn"
+        case sortOrder = "SortOrder"
     }
 
     var isFromSignIn: Bool {
         get { UserDefaults.standard.bool(forKey: Key.isFromSignIn.rawValue)}
         set { UserDefaults.standard.set(newValue, forKey: Key.isFromSignIn.rawValue)}
+    }
+
+    var sortOrder: String? {
+        get { UserDefaults.standard.string(forKey: Key.sortOrder.rawValue)}
+        set { UserDefaults.standard.set(newValue, forKey: Key.sortOrder.rawValue)}
     }
 
     func loadLocalUserInfo() -> Single<[UserInfoRecord]> {

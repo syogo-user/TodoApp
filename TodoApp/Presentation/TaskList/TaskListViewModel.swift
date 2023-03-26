@@ -9,6 +9,11 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+enum Sort: String {
+    case ascendingOrderDate = "ascendingOrderDate"
+    case descendingOrderDate = "descendingOrderDate"
+}
+
 protocol TaskListViewModel {
     var isLoading: Driver<Bool> { get }
     var taskItems: Driver<[TaskInfoItem]> { get }
@@ -34,6 +39,8 @@ protocol TaskListViewModel {
     func changeComplete(index: Int, isCompleted: Bool)
     /// お気に入り状態を変更
     func changeFavorite(index: Int, isFavorite: Bool)
+    /// 並び順を設定
+    func setSortOrder(sortOrder: String)
 }
 
 class TaskListViewModelImpl: TaskListViewModel {
@@ -71,6 +78,7 @@ class TaskListViewModelImpl: TaskListViewModel {
     }()
 
     func fetchTaskList() {
+        let sortOrder = getSortOrder()
         // ユーザIDとトークンを取得
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
             .flatMap { (user: UserInfoAttribute, idToken: String) in
@@ -81,7 +89,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 return Single<Any>.zip({
                     // ローカルに登録
                     var taskList = list
-                    self.sortTask(itemList: &taskList)
+                    self.sortTask(itemList: &taskList, sort: sortOrder)
 
                     let taskInfoList = taskList.map {
                         TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
@@ -104,7 +112,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.tableViewItems = taskList.map {
                     TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
-                self.sortTask(itemList: &self.tableViewItems)
+                self.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .map { _ in
@@ -117,6 +125,7 @@ class TaskListViewModelImpl: TaskListViewModel {
     }
 
     func deleteTask(index: Int) {
+        let sortOrder = getSortOrder()
         self.userUseCase.fetchCurrentAuthToken()
             .flatMap { idToken in
                 let taskId = self.toTaskId(index: index)
@@ -127,7 +136,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.tableViewItems.removeAll { task in
                     task.taskId == taskId
                 }
-                self.sortTask(itemList: &self.tableViewItems)
+                self.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .do(onSuccess: { taskId in
@@ -147,12 +156,13 @@ class TaskListViewModelImpl: TaskListViewModel {
 
     /// ローカルからタスク取得
     func loadLocalTaskList() {
+        let sortOrder = getSortOrder()
         taskUseCase.loadLocalTaskList()
             .do(onSuccess: { taskList in
                 self.tableViewItems = taskList.map {
                     TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
-                self.sortTask(itemList: &self.tableViewItems)
+                self.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .map { taskList -> VMResult<Void> in
@@ -220,21 +230,44 @@ class TaskListViewModelImpl: TaskListViewModel {
             .emit(to: updateTaskInfoRelay)
             .disposed(by: disposeBag)
     }
+
+    func setSortOrder(sortOrder: String) {
+        userUseCase.sortOrder = sortOrder
+    }
+
+    private func getSortOrder() -> String {
+        userUseCase.sortOrder ?? Sort.descendingOrderDate.rawValue
+    }
+
+    private func sortTask<T: SortProtocol>(itemList: inout [T], sort: String) {
+        switch sort {
+        case Sort.ascendingOrderDate.rawValue:
+            itemList.sort{ (task1: T, task2: T) -> Bool in
+                if task1.scheduledDate == task2.scheduledDate {
+                    // 日付が同じ場合
+                    return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
+                } else {
+                    // 日付が異なる場合
+                    return task1.scheduledDate.toDate() ?? Date() < task2.scheduledDate.toDate() ?? Date()
+                }
+            }
+        case Sort.descendingOrderDate.rawValue:
+            itemList.sort{ (task1: T, task2: T) -> Bool in
+                if task1.scheduledDate == task2.scheduledDate {
+                    // 日付が同じ場合
+                    return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
+                } else {
+                    // 日付が異なる場合
+                    return task1.scheduledDate.toDate() ?? Date() > task2.scheduledDate.toDate() ?? Date()
+                }
+            }
+        default:
+            print("")
+        }
+    }
+
     /// インデックスからタスクIDを取得
     private func toTaskId(index: Int) -> String {
         selectItemAt(index: index).taskId
     }
-
-    private func sortTask<T: SortProtocol>(itemList: inout [T]) {
-        itemList.sort{ (task1: T, task2: T) -> Bool in
-            if task1.scheduledDate == task2.scheduledDate {
-                // 日付が同じ場合
-                return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
-            } else {
-                // 日付が異なる場合
-                return task1.scheduledDate.toDate() ?? Date() < task2.scheduledDate.toDate() ?? Date()
-            }
-        }
-    }
 }
-
