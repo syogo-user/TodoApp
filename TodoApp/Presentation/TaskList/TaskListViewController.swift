@@ -10,8 +10,10 @@ import RxSwift
 
 class TaskListViewController: BaseViewController {
     private var viewModel: TaskListViewModel = TaskListViewModelImpl()
+    private var selectMenuView: SelectMenuView?
     private let disposeBag = DisposeBag()
     @IBOutlet private weak var tableView: UITableView!
+
     let refreshCtl = UIRefreshControl()
 
     override func viewDidLoad() {
@@ -112,6 +114,9 @@ class TaskListViewController: BaseViewController {
 
     private func setUp() {
         navigationItem.backButtonDisplayMode = .minimal
+        let selectMenuButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(showSelectMenuView))
+        navigationItem.rightBarButtonItem = selectMenuButton
+
         tableView.register(R.nib.taskTableViewCell)
         tableView.refreshControl = refreshCtl
         refreshCtl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -125,6 +130,24 @@ class TaskListViewController: BaseViewController {
             // ローカルからデータを取得
             viewModel.loadLocalTaskList()
         }
+    }
+
+
+    @objc private func showSelectMenuView() {
+        selectMenuView = SelectMenuView(frame: .null)
+        guard let selectMenuView = self.selectMenuView else { return }
+        selectMenuView.delegate = self
+        selectMenuView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(selectMenuView)
+        selectMenuView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
+        selectMenuView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3).isActive = true
+        selectMenuView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0).isActive = true
+        selectMenuView.topAnchor.constraint(equalTo: view.topAnchor, constant: 64.0).isActive = true
+    }
+
+    private func dismissSelectMenuView() {
+        selectMenuView?.removeFromSuperview()
+//        selectMenuView = nil
     }
 
     private func changeComplete(index: Int, isCompleted: Bool) {
@@ -228,5 +251,23 @@ extension TaskListViewController: UITableViewDelegate {
             handler(true)
         }
         return UISwipeActionsConfiguration(actions: [action])
+    }
+}
+
+extension TaskListViewController: SelectMenuViewDelegate {
+    func sortDateAscendingOrder() {
+        dismissSelectMenuView()
+        // ユーザデフォルトに保存
+        viewModel.setSortOrder(sortOrder: Sort.ascendingOrderDate.rawValue)
+        // ロードする
+        viewModel.loadLocalTaskList()
+    }
+
+    func sortDateDescendingOrder() {
+        dismissSelectMenuView()
+        // ユーザデフォルトに保存
+        viewModel.setSortOrder(sortOrder: Sort.descendingOrderDate.rawValue)
+        // ロードする
+        viewModel.loadLocalTaskList()
     }
 }
