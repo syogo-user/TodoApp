@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,9 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s5Y-h1-5sP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s5Y-h1-5sP">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.08235294118" green="0.12549019610000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" name="background"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2I-cn-tZI" userLabel="button">
                                 <rect key="frame" x="323" y="699" width="50" height="50"/>
@@ -41,7 +44,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="s5Y-h1-5sP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4eC-mY-sRf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Q2I-cn-tZI" secondAttribute="bottom" constant="20" id="AcH-QQ-0EO"/>
@@ -184,11 +187,19 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="tZt-O7-T3T">
-                                <rect key="frame" x="120" y="69" width="253" height="40"/>
+                                <rect key="frame" x="203" y="69" width="170" height="40"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kZU-7f-swd"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="170" id="yR7-1A-XcM"/>
                                 </constraints>
                                 <locale key="locale" localeIdentifier="ja"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="highlightsToday" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="selectDate:" destination="TJy-yz-tGi" eventType="valueChanged" id="Rpr-tk-1lT"/>
                                 </connections>
@@ -204,17 +215,17 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZNg-qJ-b2r"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.12549019610000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="ZNg-qJ-b2r" firstAttribute="trailing" secondItem="tZt-O7-T3T" secondAttribute="trailing" constant="20" id="6rH-Cu-VIZ"/>
                             <constraint firstItem="oHu-ea-dxt" firstAttribute="leading" secondItem="9pA-5C-tEl" secondAttribute="trailing" constant="10" id="86M-Se-HsN"/>
                             <constraint firstItem="tZt-O7-T3T" firstAttribute="top" secondItem="oHu-ea-dxt" secondAttribute="top" id="8Ew-fc-4qZ"/>
-                            <constraint firstItem="tZt-O7-T3T" firstAttribute="leading" secondItem="oHu-ea-dxt" secondAttribute="trailing" constant="10" id="C6i-70-MW6"/>
                             <constraint firstItem="UDF-92-dKb" firstAttribute="leading" secondItem="ZNg-qJ-b2r" secondAttribute="leading" constant="20" id="Dtu-ct-grv"/>
                             <constraint firstItem="O6A-Gp-Z8r" firstAttribute="trailing" secondItem="UDF-92-dKb" secondAttribute="trailing" id="F7I-v1-NnQ"/>
                             <constraint firstItem="O6A-Gp-Z8r" firstAttribute="leading" secondItem="UDF-92-dKb" secondAttribute="leading" id="Jyb-mV-aTe"/>
                             <constraint firstItem="UDF-92-dKb" firstAttribute="top" secondItem="tZt-O7-T3T" secondAttribute="bottom" constant="20" id="Loh-SM-GpB"/>
                             <constraint firstItem="9pA-5C-tEl" firstAttribute="leading" secondItem="ZNg-qJ-b2r" secondAttribute="leading" constant="20" id="OyZ-b2-xmf"/>
+                            <constraint firstItem="tZt-O7-T3T" firstAttribute="leading" secondItem="oHu-ea-dxt" secondAttribute="trailing" constant="93" id="beI-VI-CJa"/>
                             <constraint firstItem="tZt-O7-T3T" firstAttribute="top" secondItem="9pA-5C-tEl" secondAttribute="top" id="eF2-YQ-grh"/>
                             <constraint firstItem="tZt-O7-T3T" firstAttribute="top" secondItem="ZNg-qJ-b2r" secondAttribute="top" constant="10" id="i5P-K4-gxZ"/>
                             <constraint firstItem="ZNg-qJ-b2r" firstAttribute="trailing" secondItem="UDF-92-dKb" secondAttribute="trailing" constant="20" id="riv-ga-2jg"/>
@@ -257,6 +268,9 @@
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="87"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <namedColor name="background">
+            <color red="0.082352941176470587" green="0.12549019607843137" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
