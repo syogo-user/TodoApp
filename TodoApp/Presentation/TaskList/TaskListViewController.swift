@@ -38,6 +38,7 @@ class TaskListViewController: BaseViewController {
                 taskTableViewCell.setUp(taskInfoItem: element)
                 // 明示的にdisposeしないと開放されない
                 taskTableViewCell.disposeBag = DisposeBag()
+                taskTableViewCell.selectionStyle = .none
                 // セル内のボタンタップイベント
                 taskTableViewCell.completeCheckButton.rx.tap
                     .subscribe(onNext: { [weak self] in

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +18,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="332" height="123"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rGb-N6-Um9">
+                        <rect key="frame" x="5" y="5" width="322" height="113"/>
+                        <color key="backgroundColor" name="background"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="30"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yH-jf-1gz" customClass="CheckButton" customModule="TodoApp" customModuleProvider="target">
                         <rect key="frame" x="5" y="41.666666666666664" width="40" height="39.999999999999993"/>
                         <constraints>
@@ -26,7 +36,7 @@
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     </button>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b6d-WK-OT3">
-                        <rect key="frame" x="55" y="10" width="222" height="103"/>
+                        <rect key="frame" x="55" y="10" width="212" height="103"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKP-rK-61i">
                                 <rect key="frame" x="0.0" y="0.0" width="34" height="30"/>
@@ -34,7 +44,7 @@
                                     <constraint firstAttribute="height" constant="30" id="Ip4-fG-a8m"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="textWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAY-4q-vlV">
@@ -43,7 +53,7 @@
                                     <constraint firstAttribute="height" constant="30" id="1ff-El-2r3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="textWhite2"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="scheduledDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7G-eU-5zA">
@@ -54,10 +64,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHQ-Yj-bhk" customClass="FavoriteButton" customModule="TodoApp" customModuleProvider="target">
-                        <rect key="frame" x="287" y="44" width="35" height="35"/>
+                        <rect key="frame" x="277" y="44" width="35" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="Gvq-lx-ePl"/>
                             <constraint firstAttribute="width" constant="35" id="ykb-cx-e1q"/>
@@ -65,19 +75,24 @@
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     </button>
                 </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="rGb-N6-Um9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="9qZ-ng-o59"/>
+                    <constraint firstItem="rGb-N6-Um9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="DXq-Xw-gio"/>
                     <constraint firstItem="DHQ-Yj-bhk" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GN9-uJ-lfa"/>
                     <constraint firstAttribute="bottom" secondItem="b6d-WK-OT3" secondAttribute="bottom" constant="10" id="Iqn-zM-cTa"/>
                     <constraint firstItem="DHQ-Yj-bhk" firstAttribute="leading" secondItem="b6d-WK-OT3" secondAttribute="trailing" constant="10" id="JDK-WY-bqj"/>
                     <constraint firstItem="b6d-WK-OT3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="OsY-vs-uNq"/>
                     <constraint firstItem="1yH-jf-1gz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="ULa-wi-M3W"/>
                     <constraint firstItem="1yH-jf-1gz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YVA-gc-URh"/>
-                    <constraint firstAttribute="trailing" secondItem="DHQ-Yj-bhk" secondAttribute="trailing" constant="10" id="cRC-jN-5gr"/>
+                    <constraint firstAttribute="trailing" secondItem="DHQ-Yj-bhk" secondAttribute="trailing" constant="20" id="cRC-jN-5gr"/>
                     <constraint firstItem="b6d-WK-OT3" firstAttribute="leading" secondItem="1yH-jf-1gz" secondAttribute="trailing" constant="10" id="dgp-BH-ZEw"/>
+                    <constraint firstAttribute="trailing" secondItem="rGb-N6-Um9" secondAttribute="trailing" constant="5" id="pLt-QQ-Yng"/>
+                    <constraint firstAttribute="bottom" secondItem="rGb-N6-Um9" secondAttribute="bottom" constant="5" id="wll-PB-or4"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="completeCheckButton" destination="1yH-jf-1gz" id="jOZ-uV-wp6"/>
                 <outlet property="contentLabel" destination="TAY-4q-vlV" id="rVG-Nf-KdN"/>
@@ -88,4 +103,15 @@
             <point key="canvasLocation" x="148.09160305343511" y="48.239436619718312"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="background">
+            <color red="0.082352941176470587" green="0.12549019607843137" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textWhite">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textWhite2">
+            <color red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

@@ -88,6 +88,7 @@
 		91E41A5129B7791800DA4EAE /* TodoAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A5029B7791800DA4EAE /* TodoAppUITestsLaunchTests.swift */; };
 		91E5AB2B29D067E30025886F /* SelectMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E5AB2A29D067E30025886F /* SelectMenuView.xib */; };
 		91E5AB2D29D0699C0025886F /* SelectMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E5AB2C29D0699C0025886F /* SelectMenuView.swift */; };
+		91E5AB2F29D1DBCC0025886F /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91E5AB2E29D1DBCC0025886F /* Color.xcassets */; };
 		DE894961FB28065937AFF75F /* Pods_TodoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A55C08FAE394420DE963DCF /* Pods_TodoAppTests.framework */; };
 		FE034D04104C84FCA9EA9D87 /* Pods_TodoApp_TodoAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A2606FE38009DDE7EB6C9E /* Pods_TodoApp_TodoAppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -196,6 +197,7 @@
 		91E41A5029B7791800DA4EAE /* TodoAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		91E5AB2A29D067E30025886F /* SelectMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectMenuView.xib; sourceTree = "<group>"; };
 		91E5AB2C29D0699C0025886F /* SelectMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMenuView.swift; sourceTree = "<group>"; };
+		91E5AB2E29D1DBCC0025886F /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		95EDCD9AF626E5613192543D /* Pods-TodoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.debug.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		9A55C08FAE394420DE963DCF /* Pods_TodoAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B922F38A60BFF4B57B60A399 /* Pods_TodoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -586,6 +588,7 @@
 				91E41A2D29B7791600DA4EAE /* AppDelegate.swift */,
 				91E41A2F29B7791600DA4EAE /* SceneDelegate.swift */,
 				91E41A3629B7791800DA4EAE /* Assets.xcassets */,
+				91E5AB2E29D1DBCC0025886F /* Color.xcassets */,
 				91E41A3829B7791800DA4EAE /* LaunchScreen.storyboard */,
 				91E41A3B29B7791800DA4EAE /* Info.plist */,
 				919A407229C3541000D63E44 /* Localizable.strings */,
@@ -732,6 +735,7 @@
 				91E41A3729B7791800DA4EAE /* Assets.xcassets in Resources */,
 				91E41A3529B7791600DA4EAE /* Main.storyboard in Resources */,
 				9136502729C6E8EC00F9BC29 /* TaskTableViewCell.xib in Resources */,
+				91E5AB2F29D1DBCC0025886F /* Color.xcassets in Resources */,
 				91E5AB2B29D067E30025886F /* SelectMenuView.xib in Resources */,
 				919A407329C3541000D63E44 /* Localizable.strings in Resources */,
 				3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */,
