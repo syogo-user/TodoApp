@@ -8,8 +8,8 @@
 import UIKit
 
 class FavoriteButton: UIButton {
-    let favoriteImage = UIImage(named:"icon_check_on")! as UIImage
-    let unfavoriteImage = UIImage(named:"icon_check_off")! as UIImage
+    let favoriteImage = UIImage(named:"star_fill")! as UIImage
+    let unfavoriteImage = UIImage(named:"star_frame")! as UIImage
 
     var isFavorite : Bool = false{
         didSet{
