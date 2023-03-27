@@ -23,7 +23,7 @@ protocol SettingViewModel {
 
 class SettingViewModelImpl: SettingViewModel {
     private let disposeBag = DisposeBag()
-    private let userUseCase: UserUseCase = UserUseCaseImpl()
+    private var userUseCase: UserUseCase = UserUseCaseImpl()
     private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
 
     /// サインアウトの通知
@@ -53,6 +53,9 @@ class SettingViewModelImpl: SettingViewModel {
             .flatMap {
                 self.userUseCase.deleteLocalUser()
             }
+            .do(onSuccess: { _ in
+                self.userUseCase.sortOrder = nil
+            })
             .map { result -> VMResult<Void> in
                 .success(result)
             }

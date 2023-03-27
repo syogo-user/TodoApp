@@ -176,7 +176,7 @@
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pA-5C-tEl" customClass="CheckButton" customModule="TodoApp" customModuleProvider="target">
                                 <rect key="frame" x="20" y="69" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.17472918309999999" green="0.83608176069999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="66a-ol-ibK"/>
                                     <constraint firstAttribute="width" constant="40" id="zdk-ev-ZIF"/>
@@ -195,7 +195,7 @@
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHu-ea-dxt" customClass="FavoriteButton" customModule="TodoApp" customModuleProvider="target">
                                 <rect key="frame" x="70" y="69" width="40" height="40"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="4q5-en-tbM"/>
                                     <constraint firstAttribute="height" constant="40" id="w51-Oq-KbO"/>
@@ -262,9 +262,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
