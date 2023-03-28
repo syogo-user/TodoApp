@@ -20,11 +20,14 @@ extension String {
         }
     }
 
-    func toDate() -> Date? {
+    func toDate() throws -> Date {
         let format = DateFormatter()
         format.locale = Locale(identifier: "ja_JP")
         format.dateFormat = "yyyyMMddHHmm"
-        return format.date(from: self)
+        guard let date = format.date(from: self) else {
+            throw DomainError.parseError
+        }
+        return date
     }
 
     func dateJpFormat() -> String {

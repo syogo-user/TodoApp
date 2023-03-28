@@ -42,12 +42,4 @@ class LaunchViewContoller: BaseViewController {
             }
             .disposed(by: disposeBag)
     }
-
-    private func sessionErrorDialog() {
-        self.showDialog(
-            title: R.string.localizable.sessionErrorTitle(),
-            message: R.string.localizable.sessionErrorMessage(),
-            buttonTitle: R.string.localizable.ok()
-        )
-    }
 }

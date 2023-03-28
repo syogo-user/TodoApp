@@ -216,7 +216,7 @@ class TaskListViewModelImpl: TaskListViewModel {
         let taskInfoItem = selectItemAt(index: index)
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
             .flatMap { (user, idToken) in
-                self.taskUseCase.updateTask(taskId: taskInfoItem.taskId,title: taskInfoItem.title, content: taskInfoItem.content, scheduledDate: taskInfoItem.scheduledDate, isCompleted: taskInfoItem.isCompleted, isFavorite: taskInfoItem.isFavorite, userId: user.userId, authorization: idToken)
+                self.taskUseCase.updateTask(taskId: taskInfoItem.taskId,title: taskInfoItem.title, content: taskInfoItem.content, scheduledDate: taskInfoItem.scheduledDate.dateFormat(), isCompleted: taskInfoItem.isCompleted, isFavorite: taskInfoItem.isFavorite, userId: user.userId, authorization: idToken)
             }
             .flatMap { result in
                 let taskInfoRecord = TaskInfoRecord(taskId: result.taskId, title: result.title, content: result.content, scheduledDate: result.scheduledDate, isCompleted: result.isCompleted, isFavorite: result.isFavorite, userId: result.userId)
@@ -248,7 +248,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                     return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
                 } else {
                     // 日付が異なる場合
-                    return task1.scheduledDate.toDate() ?? Date() < task2.scheduledDate.toDate() ?? Date()
+                    return task1.scheduledDate < task2.scheduledDate
                 }
             }
         case Sort.descendingOrderDate.rawValue:
@@ -258,7 +258,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                     return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
                 } else {
                     // 日付が異なる場合
-                    return task1.scheduledDate.toDate() ?? Date() > task2.scheduledDate.toDate() ?? Date()
+                    return task1.scheduledDate > task2.scheduledDate
                 }
             }
         default:

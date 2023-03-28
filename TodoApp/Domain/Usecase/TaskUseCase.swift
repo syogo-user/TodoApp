@@ -32,7 +32,7 @@ protocol TaskUseCase {
     /// ローカルタスクを複数削除
     func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
     /// 通知の登録/更新
-    func registerNotification(notificationId: String, title: String, body: String, scheduledDate: String)
+    func registerNotification(notificationId: String, title: String, body: String, scheduledDate: Date)
     /// 通知の削除
     func removeNotification(taskId: String)
 }
@@ -48,11 +48,11 @@ class TaskUseCaseImpl: TaskUseCase {
                 }
             })
             .map { task in
-                task.data.map { TaskInfo(
+                try task.data.map { try TaskInfo(
                     taskId: $0.taskId,
                     title: $0.title,
                     content: $0.content,
-                    scheduledDate: $0.scheduledDate,
+                    scheduledDate: $0.scheduledDate.toDate(),
                     isCompleted: $0.isCompleted,
                     isFavorite: $0.isFavorite,
                     userId: $0.userId
@@ -69,11 +69,11 @@ class TaskUseCaseImpl: TaskUseCase {
             })
             .map {
                 let task = $0.data
-                return TaskInfo(
+                return try TaskInfo(
                     taskId: task.taskId,
                     title: task.title,
                     content: task.content,
-                    scheduledDate: task.scheduledDate,
+                    scheduledDate: task.scheduledDate.toDate(),
                     isCompleted: task.isCompleted,
                     isFavorite: task.isFavorite,
                     userId: task.userId
@@ -91,11 +91,11 @@ class TaskUseCaseImpl: TaskUseCase {
             })
             .map {
                 let task = $0.data
-                return TaskInfo(
+                return try TaskInfo(
                     taskId: task.taskId,
                     title: task.title,
                     content: task.content,
-                    scheduledDate: task.scheduledDate,
+                    scheduledDate: task.scheduledDate.toDate(),
                     isCompleted: task.isCompleted,
                     isFavorite: task.isFavorite,
                     userId: task.userId
@@ -143,10 +143,10 @@ class TaskUseCaseImpl: TaskUseCase {
         repository.deleteLocalTaskList(taskIdList: taskIdList)
     }
 
-    func registerNotification(notificationId: String, title: String, body: String, scheduledDate: String) {
+    func registerNotification(notificationId: String, title: String, body: String, scheduledDate: Date) {
         let targetDate = Calendar.current.dateComponents(
             [.year, .month, .day, .hour, .minute],
-            from: scheduledDate.toDate() ?? Date())
+            from: scheduledDate)
         // トリガーとコンテンツの作成
         let trigger = UNCalendarNotificationTrigger.init(dateMatching: targetDate, repeats: false)
         let content = UNMutableNotificationContent()

@@ -30,7 +30,7 @@ class TaskTableViewCell: UITableViewCell {
         completeCheckButton.isChecked = taskInfoItem.isCompleted
         title.text = taskInfoItem.title
         contentLabel.text = taskInfoItem.content
-        scheduledDateLabel.text = taskInfoItem.scheduledDate.dateJpFormat()
+        scheduledDateLabel.text = taskInfoItem.scheduledDate.dateFormat().dateJpFormat()
         favoriteButton.isFavorite = taskInfoItem.isFavorite
     }
 }

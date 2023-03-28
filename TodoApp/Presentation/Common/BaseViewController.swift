@@ -60,10 +60,34 @@ class BaseViewController: UIViewController {
         self.present(dialog,animated: true,completion: nil)
     }
 
+    func sessionErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.sessionErrorTitle(),
+            message: R.string.localizable.sessionErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
+    }
+
+    func localDbErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.localDbErrorTitle(),
+            message: R.string.localizable.localUserDBErrorMessage(),
+            buttonTitle: R.string.localizable.ok()
+        )
+    }
+
     func tokenErrorDialog() {
         self.showDialog(
             title: R.string.localizable.tokenErrorTitle(),
             message:  R.string.localizable.tokenErrorMessage(),
+            buttonTitle:  R.string.localizable.ok()
+        )
+    }
+
+    func parseErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.dateParseErrorTitle(),
+            message:  R.string.localizable.dateParseErrorMessage(),
             buttonTitle:  R.string.localizable.ok()
         )
     }
@@ -107,7 +131,6 @@ class BaseViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.handlerError(
                     error: DomainError.networkError,
-                    onNetworkError: { self.networkErrorDialog() },
                     onUnKnowError: { self.unKnowErrorDialog() })
             }
         }

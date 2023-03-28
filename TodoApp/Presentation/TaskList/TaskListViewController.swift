@@ -70,6 +70,7 @@ class TaskListViewController: BaseViewController {
                         onAuthError: { self.tokenErrorDialog() },
                         onLocalDbError: { self.localDbErrorDialog() },
                         onAPIError: { self.fetchTaskErrorDialog() },
+                        onParseError: { self.parseErrorDialog() },
                         onUnKnowError: { self.unKnowErrorDialog() }
                     )
                     return
@@ -187,7 +188,7 @@ class TaskListViewController: BaseViewController {
         )
     }
 
-    private func localDbErrorDialog() {
+    override func localDbErrorDialog() {
         self.showDialog(
             title: R.string.localizable.localDbErrorTitle(),
             message: R.string.localizable.localTaskDBErrorMessage(),

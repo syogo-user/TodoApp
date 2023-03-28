@@ -25,7 +25,7 @@ class UpdateTaskViewController: BaseViewController {
     private let viewModel: UpdateTaskViewModel = UpdateTaskViewModelImpl()
     private let validate: Validate = Validate()
     private let disposeBag = DisposeBag()
-    private var selectedDate: String?
+    private var selectedDate: Date?
     weak var delegate: UpdateTaskViewControllerDelegate?
     var updateTask: TaskInfoItem?
 
@@ -51,6 +51,7 @@ class UpdateTaskViewController: BaseViewController {
                         onAuthError: { self.tokenErrorDialog() },
                         onLocalDbError: { self.localDbErrorDialog() },
                         onAPIError: { self.updateTaskErrorDialog() },
+                        onParseError: { self.parseErrorDialog() },
                         onUnKnowError: { self.unKnowErrorDialog() }
                     )
                     return
@@ -71,7 +72,7 @@ class UpdateTaskViewController: BaseViewController {
         contentTextView.text = task.content
         selectedDate = task.scheduledDate
         if let date = selectedDate {
-            self.scheduledDatePicker.date = date.toDate() ?? Date()
+            self.scheduledDatePicker.date = date
         }
         let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(putTask))
         self.navigationItem.rightBarButtonItems = [editBarButtonItem]
@@ -105,7 +106,7 @@ class UpdateTaskViewController: BaseViewController {
         )
     }
     
-    private func localDbErrorDialog() {
+    override func localDbErrorDialog() {
         self.showDialog(
             title: R.string.localizable.localDbErrorTitle(),
             message: R.string.localizable.localTaskDBErrorMessage(),
@@ -138,6 +139,6 @@ class UpdateTaskViewController: BaseViewController {
     }
 
     @IBAction func selectDate(_ sender: Any) {
-        selectedDate = scheduledDatePicker.date.dateFormat()
+        selectedDate = scheduledDatePicker.date
     }
 }
