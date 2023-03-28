@@ -157,8 +157,9 @@ class AddTaskViewController: BaseViewController {
             overTitleLengthDialog()
             return
         }
-
-        viewModel.addTask(title: title, content: content, scheduledDate: scheduledDate)
+        self.isConnect() {
+            viewModel.addTask(title: title, content: content, scheduledDate: scheduledDate)
+        }
     }
 }
 

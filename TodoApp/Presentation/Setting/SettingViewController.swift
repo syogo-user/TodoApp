@@ -64,7 +64,9 @@ class SettingViewController: BaseViewController {
     }
 
     @IBAction func signOut(_ sender: Any) {
-        viewModel.signOutLocally()
+        self.isConnect() {
+            viewModel.signOutLocally()
+        }
     }
 
 

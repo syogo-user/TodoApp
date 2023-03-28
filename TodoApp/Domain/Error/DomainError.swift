@@ -16,6 +16,8 @@ enum DomainError: Error {
     case onAPIError(code: String)
     /// パースエラー
     case parseError
+    /// ネットワークエラー
+    case networkError
     /// その他のエラー
     case unKnownError
 }

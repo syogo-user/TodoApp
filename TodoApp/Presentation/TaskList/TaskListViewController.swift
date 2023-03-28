@@ -124,9 +124,11 @@ class TaskListViewController: BaseViewController {
         tableView.delegate = self
         
         if viewModel.isFromSignIn() {
-            // サーバからデータを取得
-            viewModel.fetchTaskList()
-            viewModel.setFromSignIn()
+            self.isConnect() {
+                // サーバからデータを取得
+                viewModel.fetchTaskList()
+                viewModel.setFromSignIn()
+            }
         } else {
             // ローカルからデータを取得
             viewModel.loadLocalTaskList()
@@ -203,7 +205,9 @@ class TaskListViewController: BaseViewController {
     }
 
     @objc private func refresh() {
-        viewModel.fetchTaskList()
+        self.isConnect() {
+            viewModel.fetchTaskList()
+        }
         refreshCtl.endRefreshing()
     }
 
@@ -245,9 +249,11 @@ extension TaskListViewController: UITableViewDelegate {
     /// セルを右から左にスワイプ
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: nil) { _, _, handler in
-            self.deleteWarningDialog() {
-                // タスクの削除
-                self.viewModel.deleteTask(index: indexPath.row)
+            self.isConnect() {
+                self.deleteWarningDialog() {
+                    // タスクの削除
+                    self.viewModel.deleteTask(index: indexPath.row)
+                }
             }
             handler(true)
         }

@@ -30,7 +30,7 @@
 "addTaskErrorMessage" = "タスクの登録に失敗しました。\nもう一度実行してください。";
 "updateTaskErrorMessage" = "タスクの更新に失敗しました。\nもう一度実行してください。";
 "deleteTaskErrorMessage" = "タスクの削除に失敗しました。\nもう一度実行してください。";
-"networkErrorMessage" = "ネットワークに接続してください。\nもう一度実行してください。";
+"networkErrorMessage" = "インターネットに接続してください。";
 "dateParseErrorMessage" = "日付の変換に失敗しました。\nお手数ですが、端末の日付設定を西暦でご登録ください。";
 "unknownErrorMessage" = "処理に失敗しました。\n時間をあけてから、もう一度お試しください。";
 
