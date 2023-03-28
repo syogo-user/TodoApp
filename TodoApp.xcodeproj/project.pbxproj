@@ -26,6 +26,9 @@
 		9136502A29C7304200F9BC29 /* LaunchViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136502929C7304200F9BC29 /* LaunchViewContoller.swift */; };
 		9136502C29C7311600F9BC29 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136502B29C7311600F9BC29 /* LaunchRouter.swift */; };
 		9136502E29C7319700F9BC29 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136502D29C7319700F9BC29 /* LaunchViewModel.swift */; };
+		915C5D4029D1F3C2009B2B8C /* NetworkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C5D3F29D1F3C2009B2B8C /* NetworkUseCase.swift */; };
+		915C5D4229D1F474009B2B8C /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C5D4129D1F474009B2B8C /* NetworkRepository.swift */; };
+		915C5D4429D1F4F4009B2B8C /* NetworkRemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C5D4329D1F4F4009B2B8C /* NetworkRemoteStore.swift */; };
 		915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06EE29BA1C2200685156 /* SignInViewController.swift */; };
 		915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06F129BA1CC700685156 /* BaseViewController.swift */; };
 		915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 915F06F329BA1D3900685156 /* SignIn.storyboard */; };
@@ -133,6 +136,9 @@
 		9136502929C7304200F9BC29 /* LaunchViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewContoller.swift; sourceTree = "<group>"; };
 		9136502B29C7311600F9BC29 /* LaunchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
 		9136502D29C7319700F9BC29 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
+		915C5D3F29D1F3C2009B2B8C /* NetworkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUseCase.swift; sourceTree = "<group>"; };
+		915C5D4129D1F474009B2B8C /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
+		915C5D4329D1F4F4009B2B8C /* NetworkRemoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRemoteStore.swift; sourceTree = "<group>"; };
 		915F06EE29BA1C2200685156 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		915F06F129BA1CC700685156 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		915F06F329BA1D3900685156 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
@@ -425,6 +431,7 @@
 			children = (
 				91A033E129BF7A680019D5A9 /* UserRepository.swift */,
 				91A088BC29C552BC000BF175 /* TaskRepository.swift */,
+				915C5D4129D1F474009B2B8C /* NetworkRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -434,6 +441,7 @@
 			children = (
 				91A033D829BF6E540019D5A9 /* UserLocalStore.swift */,
 				9136502129C6BBA300F9BC29 /* UserRemoteStore.swift */,
+				915C5D4329D1F4F4009B2B8C /* NetworkRemoteStore.swift */,
 				91A0889A29C49D7D000BF175 /* TaskRemoteStore.swift */,
 				91A088C029C559E6000BF175 /* TaskLocalStore.swift */,
 			);
@@ -524,6 +532,7 @@
 			children = (
 				91C7609229BC3213003BE148 /* UserUseCase.swift */,
 				91A088BA29C550E4000BF175 /* TaskUseCase.swift */,
+				915C5D3F29D1F3C2009B2B8C /* NetworkUseCase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -894,6 +903,7 @@
 				9136501E29C6AFE600F9BC29 /* AddTaskViewController.swift in Sources */,
 				91A033D129BF675B0019D5A9 /* DatabaseDefinition.swift in Sources */,
 				9136501929C6AFA000F9BC29 /* UpdateTaskViewController.swift in Sources */,
+				915C5D4229D1F474009B2B8C /* NetworkRepository.swift in Sources */,
 				915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */,
 				91A033DE29BF735B0019D5A9 /* DatabaseError.swift in Sources */,
 				91C7609329BC3213003BE148 /* UserUseCase.swift in Sources */,
@@ -927,6 +937,7 @@
 				9136502A29C7304200F9BC29 /* LaunchViewContoller.swift in Sources */,
 				9136501229C5B0FE00F9BC29 /* TaskListViewModel.swift in Sources */,
 				91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */,
+				915C5D4429D1F4F4009B2B8C /* NetworkRemoteStore.swift in Sources */,
 				9127B1B229CFEA26002EC5D5 /* FavoriteButton.swift in Sources */,
 				9191411129CB6B570072BEA0 /* GRDBAccessorDB.swift in Sources */,
 				911C466E29C9CC9C00A9159F /* DateExtention.swift in Sources */,
@@ -948,6 +959,7 @@
 				91A088BF29C558E7000BF175 /* TaskInfoRecord.swift in Sources */,
 				91A088C529C594CC000BF175 /* TaskInfo.swift in Sources */,
 				91A088AC29C4A255000BF175 /* DecodableDataParser.swift in Sources */,
+				915C5D4029D1F3C2009B2B8C /* NetworkUseCase.swift in Sources */,
 				9136501B29C6AFAA00F9BC29 /* UpdateTaskViewModel.swift in Sources */,
 				91CA6F6929C95C9100BC03AB /* CheckButton.swift in Sources */,
 				91E41A3029B7791600DA4EAE /* SceneDelegate.swift in Sources */,

@@ -11,6 +11,8 @@ import MBProgressHUD
 
 class BaseViewController: UIViewController {
 
+    private let networkUseCase: NetworkUseCase = NetworkUseCaseImpl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -21,6 +23,7 @@ class BaseViewController: UIViewController {
         onLocalDbError: (() -> Void)? = nil,
         onAPIError: (() -> Void)? = nil,
         onParseError: (() -> Void)? = nil,
+        onNetworkError: (() -> Void)? = nil,
         onUnKnowError: (() -> Void)
     ) {
         switch error {
@@ -36,6 +39,9 @@ class BaseViewController: UIViewController {
         case DomainError.parseError:
             print("変換に処理に失敗しました。")
             onParseError?()
+        case DomainError.networkError:
+            print("インターネットへの接続に失敗しました。")
+            onNetworkError?()
         case DomainError.unKnownError:
             print("処理に失敗しました。")
             onUnKnowError()
@@ -62,6 +68,14 @@ class BaseViewController: UIViewController {
         )
     }
 
+    func networkErrorDialog() {
+        self.showDialog(
+            title: R.string.localizable.networkErrorTitle(),
+            message:  R.string.localizable.networkErrorMessage(),
+            buttonTitle:  R.string.localizable.ok()
+        )
+    }
+
     func unKnowErrorDialog() {
         self.showDialog(
             title: R.string.localizable.unknownErrorTitle(),
@@ -82,6 +96,20 @@ class BaseViewController: UIViewController {
             }
         } else {
             MBProgressHUD.hide(for: view, animated: animated)
+        }
+    }
+
+    func isConnect(completion: () -> Void ) {
+        if (networkUseCase.isConnect()) {
+            completion()
+        } else {
+            // リフレッシュ時に固まることを防ぐためダイアログ表示を1秒遅らせる
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.handlerError(
+                    error: DomainError.networkError,
+                    onNetworkError: { self.networkErrorDialog() },
+                    onUnKnowError: { self.unKnowErrorDialog() })
+            }
         }
     }
 }

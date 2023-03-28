@@ -12,6 +12,7 @@ target 'TodoApp' do
   pod 'RxCocoa', '5.1.1'
   pod 'APIKit'
   pod 'MBProgressHUD'
+  pod 'ReachabilitySwift'
 
   target 'TodoAppTests' do
     inherit! :search_paths

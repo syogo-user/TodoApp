@@ -92,7 +92,9 @@ class UpdateTaskViewController: BaseViewController {
         let isCompleted = completeCheckButton.isChecked
         let isFavorite = favoriteButton.isFavorite
         let taskInfoItem = TaskInfoItem(taskId: task.taskId, title: title, content: content, scheduledDate: selectedDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: task.taskId)
-        viewModel.updateTask(taskInfoItem: taskInfoItem)
+        self.isConnect() {
+            viewModel.updateTask(taskInfoItem: taskInfoItem)
+        }
     }
 
     private func updateTaskErrorDialog() {
