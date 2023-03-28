@@ -77,12 +77,4 @@ class SettingViewController: BaseViewController {
             buttonTitle: R.string.localizable.ok()
         )
     }
-
-    private func localDbErrorDialog() {
-        self.showDialog(
-            title: R.string.localizable.localDbErrorTitle(),
-            message: R.string.localizable.localUserDBErrorMessage(),
-            buttonTitle: R.string.localizable.ok()
-        )
-    }
 }

@@ -16,7 +16,7 @@ class TaskInfoRecord : Record {
     var taskId: String
     var title: String
     var content: String
-    var scheduledDate: String
+    var scheduledDate: Date
     var isCompleted: Bool
     var isFavorite: Bool
     var userId: String
@@ -26,7 +26,7 @@ class TaskInfoRecord : Record {
             table.column("task_id", .integer).notNull().primaryKey(onConflict: .replace, autoincrement: false)
             table.column("title", .text).notNull()
             table.column("content", .text).notNull()
-            table.column("scheduled_date", .text).notNull()
+            table.column("scheduled_date", .date).notNull()
             table.column("is_completed", .boolean).notNull()
             table.column("is_favorite", .boolean).notNull()
             table.column("user_id", .text).notNull()
@@ -43,7 +43,7 @@ class TaskInfoRecord : Record {
         static let userId = Column("user_id")
     }
 
-    init(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String) {
+    init(taskId: String, title: String, content: String, scheduledDate: Date, isCompleted: Bool, isFavorite: Bool, userId: String) {
         self.taskId = taskId
         self.title = title
         self.content = content

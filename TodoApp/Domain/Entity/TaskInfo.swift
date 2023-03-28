@@ -11,12 +11,12 @@ class TaskInfo: SortProtocol {
     let taskId: String
     let title: String
     let content: String
-    let scheduledDate: String
+    let scheduledDate: Date
     let isCompleted: Bool
     let isFavorite: Bool
     let userId: String
 
-    init(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String)  {
+    init(taskId: String, title: String, content: String, scheduledDate: Date, isCompleted: Bool, isFavorite: Bool, userId: String)  {
         self.taskId = taskId
         self.title = title
         self.content = content
