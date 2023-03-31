@@ -23,8 +23,8 @@ protocol SettingViewModel {
 
 class SettingViewModelImpl: SettingViewModel {
     private let disposeBag = DisposeBag()
-    private var userUseCase: UserUseCase = UserUseCaseImpl()
     private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
+    private var userUseCase: UserUseCase = UserUseCaseImpl()
 
     /// サインアウトの通知
     private let signOutRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
