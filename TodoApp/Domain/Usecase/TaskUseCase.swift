@@ -31,6 +31,8 @@ protocol TaskUseCase {
     func deleteLocalTaskAll() -> Single<Void>
     /// ローカルタスクを複数削除
     func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
+    /// タスクリストをソートする
+    func sortTask<T: SortProtocol>(itemList: inout [T], sort: String)
     /// 通知の登録/更新
     func registerNotification(notificationId: String, title: String, body: String, scheduledDate: Date)
     /// 通知の削除
@@ -39,6 +41,12 @@ protocol TaskUseCase {
 
 class TaskUseCaseImpl: TaskUseCase {
     private var repository: TaskRepository = TaskRepositoryImpl()
+
+    init(repository: TaskRepository) {
+        self.repository = repository
+    }
+
+    init() {}
 
     func fetchTask(userId: String, authorization: String) -> Single<[TaskInfo]> {
         repository.fetchTask(userId: userId, authorization: authorization)
@@ -141,6 +149,33 @@ class TaskUseCaseImpl: TaskUseCase {
 
     func deleteLocalTaskList(taskIdList: [String]) -> Single<Void> {
         repository.deleteLocalTaskList(taskIdList: taskIdList)
+    }
+
+    func sortTask<T: SortProtocol>(itemList: inout [T], sort: String) {
+        switch sort {
+        case Sort.ascendingOrderDate.rawValue:
+            itemList.sort{ (task1: T, task2: T) -> Bool in
+                if task1.scheduledDate == task2.scheduledDate {
+                    // 日付が同じ場合
+                    return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
+                } else {
+                    // 日付が異なる場合
+                    return task1.scheduledDate < task2.scheduledDate
+                }
+            }
+        case Sort.descendingOrderDate.rawValue:
+            itemList.sort{ (task1: T, task2: T) -> Bool in
+                if task1.scheduledDate == task2.scheduledDate {
+                    // 日付が同じ場合
+                    return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
+                } else {
+                    // 日付が異なる場合
+                    return task1.scheduledDate > task2.scheduledDate
+                }
+            }
+        default:
+            print("")
+        }
     }
 
     func registerNotification(notificationId: String, title: String, body: String, scheduledDate: Date) {

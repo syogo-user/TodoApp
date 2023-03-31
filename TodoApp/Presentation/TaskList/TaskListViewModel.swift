@@ -89,7 +89,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 return Single<Any>.zip({
                     // ローカルに登録
                     var taskList = list
-                    self.sortTask(itemList: &taskList, sort: sortOrder)
+                    self.taskUseCase.sortTask(itemList: &taskList, sort: sortOrder)
 
                     let taskInfoList = taskList.map {
                         TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
@@ -112,7 +112,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.tableViewItems = taskList.map {
                     TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
-                self.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
+                self.taskUseCase.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .map { _ in
@@ -136,7 +136,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.tableViewItems.removeAll { task in
                     task.taskId == taskId
                 }
-                self.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
+                self.taskUseCase.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .do(onSuccess: { taskId in
@@ -162,7 +162,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                 self.tableViewItems = taskList.map {
                     TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
-                self.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
+                self.taskUseCase.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .map { taskList -> VMResult<Void> in
@@ -237,33 +237,6 @@ class TaskListViewModelImpl: TaskListViewModel {
 
     private func getSortOrder() -> String {
         userUseCase.sortOrder ?? Sort.descendingOrderDate.rawValue
-    }
-
-    private func sortTask<T: SortProtocol>(itemList: inout [T], sort: String) {
-        switch sort {
-        case Sort.ascendingOrderDate.rawValue:
-            itemList.sort{ (task1: T, task2: T) -> Bool in
-                if task1.scheduledDate == task2.scheduledDate {
-                    // 日付が同じ場合
-                    return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
-                } else {
-                    // 日付が異なる場合
-                    return task1.scheduledDate < task2.scheduledDate
-                }
-            }
-        case Sort.descendingOrderDate.rawValue:
-            itemList.sort{ (task1: T, task2: T) -> Bool in
-                if task1.scheduledDate == task2.scheduledDate {
-                    // 日付が同じ場合
-                    return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
-                } else {
-                    // 日付が異なる場合
-                    return task1.scheduledDate > task2.scheduledDate
-                }
-            }
-        default:
-            print("")
-        }
     }
 
     /// インデックスからタスクIDを取得

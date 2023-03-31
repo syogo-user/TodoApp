@@ -64,8 +64,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="person" catalog="system" width="128" height="121"/>
         <image name="person" width="54" height="64"/>
+        <image name="person" catalog="system" width="128" height="121"/>
         <namedColor name="background">
             <color red="0.082352941176470587" green="0.12549019607843137" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

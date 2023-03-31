@@ -1,5 +1,5 @@
 //
-//  StringExtention.swift
+//  String+Extention.swift
 //  TodoApp
 //
 //  Created by 小野寺祥吾 on 2023/03/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
 
     func isConvertibleDate() -> Bool {
         let format = DateFormatter()
