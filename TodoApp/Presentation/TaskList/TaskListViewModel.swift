@@ -97,8 +97,8 @@ class TaskListViewModelImpl: TaskListViewModel {
                     return self.taskUseCase.insertLocalTaskList(taskInfoList: taskInfoList)
                 }(), {
                     // APIとローカルそれぞれタスクのtaskIdを比較して不要なものを削除
-                    let tablviewItems = Set(self.tableViewItems.map{ $0.taskId })
-                    let taskList = Set(list.map{ $0.taskId })
+                    let tablviewItems = Set(self.tableViewItems.map { $0.taskId })
+                    let taskList = Set(list.map { $0.taskId })
                     /// ローカルから取得したタスクには存在するがにAPIから取得したタスクには存在しないものtaskIDを抽出
                     let result = tablviewItems.subtracting(taskList)
                     let deleteIdList = Array(result)

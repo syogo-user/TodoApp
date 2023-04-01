@@ -151,7 +151,7 @@ class TaskListViewController: BaseViewController {
 
     private func dismissSelectMenuView() {
         selectMenuView?.removeFromSuperview()
-//        selectMenuView = nil
+        selectMenuView = nil
     }
 
     private func changeComplete(index: Int, isCompleted: Bool) {
@@ -258,6 +258,9 @@ extension TaskListViewController: UITableViewDelegate {
             }
             handler(true)
         }
+        action.backgroundColor = R.color.warning()
+        let size = CGSize(width: 30, height: 30)
+        action.image = R.image.iconDelete()?.resize(size: size)
         return UISwipeActionsConfiguration(actions: [action])
     }
 }
