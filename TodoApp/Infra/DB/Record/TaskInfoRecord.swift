@@ -13,13 +13,13 @@ class TaskInfoRecord : Record {
         "task_info"
     }
 
-    var taskId: String
-    var title: String
-    var content: String
-    var scheduledDate: Date
-    var isCompleted: Bool
-    var isFavorite: Bool
-    var userId: String
+    let taskId: String
+    let title: String
+    let content: String
+    let scheduledDate: Date
+    let isCompleted: Bool
+    let isFavorite: Bool
+    let userId: String
 
     static func setupTable(_ db: Database, _ version: MainDatabase.Versions) throws {
         try db.create(table: databaseTableName, body: { (table:TableDefinition) in

@@ -87,7 +87,7 @@ class UserUseCaseImpl: UserUseCase {
                     single(.error(DomainError.authError))
                 } catch {
                     print("Unexpected error: \(error)")
-                    single(.error(DomainError.unKnownError))
+                    single(.error(DomainError.authError))
                 }
             }
             return Disposables.create()

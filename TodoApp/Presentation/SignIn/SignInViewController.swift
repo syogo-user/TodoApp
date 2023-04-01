@@ -19,19 +19,19 @@ class SignInViewController: BaseViewController {
         super.viewDidLoad()
         bindViewModelValue()
     }
-        
-    @IBAction private func googleSignIn(_ sender: Any) {
+
+    @IBAction func googleSignIn(_ sender: Any) {
         self.isConnect() {
             viewModel.socialSigIn(provider: .google)
         }
     }
-    
-    @IBAction private func appleSignIn(_ sender: Any) {
+
+    @IBAction func appleSignIn(_ sender: Any) {
         self.isConnect() {
             viewModel.socialSigIn(provider: .apple)
         }
     }
-
+    
     private func bindViewModelValue() {
         viewModel.isLoading
             .drive(onNext: { [unowned self] isLoading in

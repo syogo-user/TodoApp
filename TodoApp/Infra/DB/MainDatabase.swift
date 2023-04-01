@@ -12,7 +12,7 @@ final class MainDatabase {
     struct Definition: DatabaseDefinition {
         let dbName: String = "MainDatabase"
         let dbFileName: String = "main.sqlite"
-        var migrator = DatabaseMigrator.mainDatabase
+        let migrator = DatabaseMigrator.mainDatabase
     }
 
     static let shared = MainDatabase()

@@ -69,6 +69,7 @@
 		91A088C129C559E6000BF175 /* TaskLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088C029C559E6000BF175 /* TaskLocalStore.swift */; };
 		91A088C329C58151000BF175 /* TaskInfoDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088C229C58151000BF175 /* TaskInfoDao.swift */; };
 		91A088C529C594CC000BF175 /* TaskInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088C429C594CC000BF175 /* TaskInfo.swift */; };
+		91A4A3C029D801EC00E22210 /* UIImage+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4A3BF29D801EC00E22210 /* UIImage+Extention.swift */; };
 		91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC1A6529C0B08D00500A62 /* VMResult.swift */; };
 		91BC1A6929C0C29000500A62 /* UserInfoAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */; };
 		91C7608D29BC2E3F003BE148 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 91C7608C29BC2E3F003BE148 /* AWSCognitoAuthPlugin */; };
@@ -186,6 +187,7 @@
 		91A088C029C559E6000BF175 /* TaskLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLocalStore.swift; sourceTree = "<group>"; };
 		91A088C229C58151000BF175 /* TaskInfoDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoDao.swift; sourceTree = "<group>"; };
 		91A088C429C594CC000BF175 /* TaskInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfo.swift; sourceTree = "<group>"; };
+		91A4A3BF29D801EC00E22210 /* UIImage+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extention.swift"; sourceTree = "<group>"; };
 		91BC1A6529C0B08D00500A62 /* VMResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMResult.swift; sourceTree = "<group>"; };
 		91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoAttribute.swift; sourceTree = "<group>"; };
 		91C7609029BC3002003BE148 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 			isa = PBXGroup;
 			children = (
 				91A0889E29C49EC8000BF175 /* Session+Extention.swift */,
+				91A4A3BF29D801EC00E22210 /* UIImage+Extention.swift */,
 				91A088A029C49F17000BF175 /* URLSessionConfiguration+Extention.swift */,
 				911C466B29C9CBC700A9159F /* String+Extention.swift */,
 				911C466D29C9CC9C00A9159F /* Date+Extention.swift */,
@@ -866,7 +869,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -960,6 +963,7 @@
 				91A033C829BDEF200019D5A9 /* SettingViewController.swift in Sources */,
 				9136501629C5B24300F9BC29 /* TaskListRouter.swift in Sources */,
 				91A033E029BF738A0019D5A9 /* DatabaseQueueFactory.swift in Sources */,
+				91A4A3C029D801EC00E22210 /* UIImage+Extention.swift in Sources */,
 				91A0889F29C49EC8000BF175 /* Session+Extention.swift in Sources */,
 				91A088AA29C4A1CC000BF175 /* APIRequest.swift in Sources */,
 				9136502E29C7319700F9BC29 /* LaunchViewModel.swift in Sources */,

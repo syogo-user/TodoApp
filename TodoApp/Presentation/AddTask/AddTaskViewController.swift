@@ -21,7 +21,7 @@ class AddTaskViewController: BaseViewController {
     @IBOutlet weak var inputAreaStackView: UIStackView!
 
     @IBOutlet weak var datePicker: UIDatePicker!
-    private var viewModel: AddTaskViewModel = AddTaskViewModelImpl()
+    private let viewModel: AddTaskViewModel = AddTaskViewModelImpl()
     private let validate: Validate = Validate()
     private let disposeBag = DisposeBag()
     private var selectDate: String?

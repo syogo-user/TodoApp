@@ -74,8 +74,13 @@ class UpdateTaskViewController: BaseViewController {
         if let date = selectedDate {
             self.scheduledDatePicker.date = date
         }
-        let editBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(putTask))
+        let editBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(putTask))
         self.navigationItem.rightBarButtonItems = [editBarButtonItem]
+
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        gesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(gesture)
+
     }
 
     @objc private func putTask() {
@@ -96,6 +101,10 @@ class UpdateTaskViewController: BaseViewController {
         self.isConnect() {
             viewModel.updateTask(taskInfoItem: taskInfoItem)
         }
+    }
+
+    @objc private func dismissKeyboard() {
+        self.view.endEditing(true)
     }
 
     private func updateTaskErrorDialog() {

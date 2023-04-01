@@ -20,13 +20,13 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s5Y-h1-5sP">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" red="0.08235294118" green="0.12549019610000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="background"/>
+                                <color key="separatorColor" name="accent"/>
                                 <color key="sectionIndexBackgroundColor" name="background"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2I-cn-tZI" userLabel="button">
                                 <rect key="frame" x="323" y="699" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.1087265912" green="0.68257404919999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" name="accent"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="aUk-kA-bVn"/>
                                     <constraint firstAttribute="width" constant="50" id="fml-A9-eff"/>
@@ -115,6 +115,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="hj4-Lx-rPj"/>
                                                 </constraints>
+                                                <color key="tintColor" name="accent"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="送信"/>
                                                 <connections>
@@ -159,23 +160,34 @@
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UDF-92-dKb">
                                 <rect key="frame" x="20" y="129" width="353" height="45"/>
-                                <color key="backgroundColor" red="1" green="0.96489841519999997" blue="0.66302408810000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="nIg-Tr-FBU"/>
                                 </constraints>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="text1"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O6A-Gp-Z8r">
                                 <rect key="frame" x="20" y="194" width="353" height="200"/>
-                                <color key="backgroundColor" red="0.73034332229999999" green="0.82693743939999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="3j9-Ld-RRM"/>
                                 </constraints>
-                                <color key="textColor" systemColor="labelColor"/>
+                                <color key="textColor" name="text2"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pA-5C-tEl" customClass="CheckButton" customModule="TodoApp" customModuleProvider="target">
                                 <rect key="frame" x="20" y="69" width="40" height="40"/>
@@ -188,7 +200,7 @@
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="tZt-O7-T3T">
                                 <rect key="frame" x="203" y="69" width="170" height="40"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="accentColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kZU-7f-swd"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="170" id="yR7-1A-XcM"/>
@@ -215,7 +227,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZNg-qJ-b2r"/>
-                        <color key="backgroundColor" red="0.08235294118" green="0.12549019610000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="ZNg-qJ-b2r" firstAttribute="trailing" secondItem="tZt-O7-T3T" secondAttribute="trailing" constant="20" id="6rH-Cu-VIZ"/>
                             <constraint firstItem="oHu-ea-dxt" firstAttribute="leading" secondItem="9pA-5C-tEl" secondAttribute="trailing" constant="10" id="86M-Se-HsN"/>
@@ -245,15 +257,16 @@
             </objects>
             <point key="canvasLocation" x="980.91603053435108" y="-25.35211267605634"/>
         </scene>
-        <!--List-->
+        <!--一覧-->
         <scene sceneID="3b6-ra-2bU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpg-uM-VdM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" image="list.bullet" catalog="system" id="GFi-Zm-ZXE"/>
+                    <tabBarItem key="tabBarItem" title="一覧" image="list.bullet" catalog="system" id="GFi-Zm-ZXE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MGB-Ql-JMR">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="accent"/>
                         <navigationBarAppearance key="standardAppearance">
                             <color key="backgroundColor" name="background"/>
                         </navigationBarAppearance>
@@ -274,12 +287,21 @@
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="87"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <namedColor name="background">
-            <color red="0.082352941176470587" green="0.12549019607843137" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="accent">
+            <color red="0.17647058823529413" green="0.83529411764705885" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
+        <namedColor name="accentColor">
+            <color red="0.17647058823529413" green="0.83529411764705885" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="text1">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        </namedColor>
+        <namedColor name="text2">
+            <color red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
