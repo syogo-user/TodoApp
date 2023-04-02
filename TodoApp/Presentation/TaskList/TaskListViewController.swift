@@ -123,7 +123,11 @@ class TaskListViewController: BaseViewController {
         tableView.refreshControl = refreshCtl
         refreshCtl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.delegate = self
-        
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissSelectMenuView))
+        gesture.cancelsTouchesInView = false
+        gesture.delegate = self
+        self.view.addGestureRecognizer(gesture)
+
         if viewModel.isFromSignIn() {
             self.isConnect() {
                 // サーバからデータを取得
@@ -149,9 +153,8 @@ class TaskListViewController: BaseViewController {
         selectMenuView.topAnchor.constraint(equalTo: view.topAnchor, constant: 64.0).isActive = true
     }
 
-    private func dismissSelectMenuView() {
+    @objc private func dismissSelectMenuView() {
         selectMenuView?.removeFromSuperview()
-        selectMenuView = nil
     }
 
     private func changeComplete(index: Int, isCompleted: Bool) {
@@ -280,5 +283,15 @@ extension TaskListViewController: SelectMenuViewDelegate {
         viewModel.setSortOrder(sortOrder: Sort.descendingOrderDate.rawValue)
         // ロードする
         viewModel.loadLocalTaskList()
+    }
+}
+
+extension TaskListViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let view = touch.view, let selectMenuView = self.selectMenuView, view.isDescendant(of: selectMenuView) {
+            // selectMenuView内のタップイベントは無視する
+            return false
+        }
+        return true
     }
 }

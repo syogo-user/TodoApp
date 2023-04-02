@@ -11,8 +11,6 @@ enum APIResultCode {
     /// 成功
     static let ok = "OK"
 
-    // TODO:
-
     /// 不明なエラー
     static let errUnknown = "ERR_UNKNOWN"
 }

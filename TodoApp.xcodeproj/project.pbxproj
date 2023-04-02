@@ -70,6 +70,8 @@
 		91A088C329C58151000BF175 /* TaskInfoDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088C229C58151000BF175 /* TaskInfoDao.swift */; };
 		91A088C529C594CC000BF175 /* TaskInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A088C429C594CC000BF175 /* TaskInfo.swift */; };
 		91A4A3C029D801EC00E22210 /* UIImage+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4A3BF29D801EC00E22210 /* UIImage+Extention.swift */; };
+		91A4A3C529D8789900E22210 /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4A3C429D8789900E22210 /* SelectDateViewController.swift */; };
+		91A4A3C729D8796900E22210 /* UpdateTaskRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4A3C629D8796900E22210 /* UpdateTaskRouter.swift */; };
 		91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC1A6529C0B08D00500A62 /* VMResult.swift */; };
 		91BC1A6929C0C29000500A62 /* UserInfoAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */; };
 		91C7608D29BC2E3F003BE148 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 91C7608C29BC2E3F003BE148 /* AWSCognitoAuthPlugin */; };
@@ -188,6 +190,8 @@
 		91A088C229C58151000BF175 /* TaskInfoDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoDao.swift; sourceTree = "<group>"; };
 		91A088C429C594CC000BF175 /* TaskInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfo.swift; sourceTree = "<group>"; };
 		91A4A3BF29D801EC00E22210 /* UIImage+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extention.swift"; sourceTree = "<group>"; };
+		91A4A3C429D8789900E22210 /* SelectDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateViewController.swift; sourceTree = "<group>"; };
+		91A4A3C629D8796900E22210 /* UpdateTaskRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskRouter.swift; sourceTree = "<group>"; };
 		91BC1A6529C0B08D00500A62 /* VMResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMResult.swift; sourceTree = "<group>"; };
 		91BC1A6829C0C29000500A62 /* UserInfoAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoAttribute.swift; sourceTree = "<group>"; };
 		91C7609029BC3002003BE148 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 			children = (
 				9136501829C6AFA000F9BC29 /* UpdateTaskViewController.swift */,
 				9136501A29C6AFAA00F9BC29 /* UpdateTaskViewModel.swift */,
+				91A4A3C629D8796900E22210 /* UpdateTaskRouter.swift */,
 			);
 			path = UpdateTask;
 			sourceTree = "<group>";
@@ -356,6 +361,7 @@
 				91A033B829BDC4640019D5A9 /* TabBar */,
 				91A033C329BDEEB20019D5A9 /* TaskList */,
 				9136501729C6AED900F9BC29 /* UpdateTask */,
+				91A4A3C329D8787F00E22210 /* SelectDate */,
 				9136501C29C6AFCE00F9BC29 /* AddTask */,
 				91A033C629BDEF0D0019D5A9 /* Setting */,
 				915F06ED29BA1BC600685156 /* SignIn */,
@@ -552,6 +558,14 @@
 				915C5D3F29D1F3C2009B2B8C /* NetworkUseCase.swift */,
 			);
 			path = Usecase;
+			sourceTree = "<group>";
+		};
+		91A4A3C329D8787F00E22210 /* SelectDate */ = {
+			isa = PBXGroup;
+			children = (
+				91A4A3C429D8789900E22210 /* SelectDateViewController.swift */,
+			);
+			path = SelectDate;
 			sourceTree = "<group>";
 		};
 		91BC1A6729C0C28000500A62 /* Entity */ = {
@@ -985,6 +999,7 @@
 				9136501229C5B0FE00F9BC29 /* TaskListViewModel.swift in Sources */,
 				91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */,
 				915C5D4429D1F4F4009B2B8C /* NetworkRemoteStore.swift in Sources */,
+				91A4A3C529D8789900E22210 /* SelectDateViewController.swift in Sources */,
 				9127B1B229CFEA26002EC5D5 /* FavoriteButton.swift in Sources */,
 				9191411129CB6B570072BEA0 /* GRDBAccessorDB.swift in Sources */,
 				911C466E29C9CC9C00A9159F /* Date+Extention.swift in Sources */,
@@ -994,6 +1009,7 @@
 				91A088A529C49FF8000BF175 /* TaskListAPI.swift in Sources */,
 				91A088AE29C4A26F000BF175 /* APIResult.swift in Sources */,
 				91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */,
+				91A4A3C729D8796900E22210 /* UpdateTaskRouter.swift in Sources */,
 				91A088BB29C550E4000BF175 /* TaskUseCase.swift in Sources */,
 				91A088BD29C552BC000BF175 /* TaskRepository.swift in Sources */,
 				91A033CA29BDF6920019D5A9 /* SettingViewModel.swift in Sources */,
