@@ -10,6 +10,11 @@ import APIKit
 import RxSwift
 
 protocol TaskRepository {
+    /// 並び順
+    var sortOrder: String? { get set }
+    /// 抽出条件
+    var filterCondition: String? { get set }
+
     func fetchTask(userId: String, authorization: String) -> Single<TaskListAPI.Response>
 
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response>
@@ -35,7 +40,17 @@ protocol TaskRepository {
 
 class TaskRepositoryImpl: TaskRepository {
     private let remoteStore: TaskRemoteStore = TaskRemoteStoreImpl()
-    private let localStore: TaskLocalStore = TaskLocalStoreImpl()
+    private var localStore: TaskLocalStore = TaskLocalStoreImpl()
+
+    var sortOrder: String? {
+        get { localStore.sortOrder }
+        set { localStore.sortOrder = newValue }
+    }
+
+    var filterCondition: String? {
+        get { localStore.filterCondition }
+        set { localStore.filterCondition = newValue }
+    }
 
     func fetchTask(userId: String, authorization: String) -> Single<TaskListAPI.Response> {
         remoteStore.fetchTask(userId: userId, authorization: authorization)

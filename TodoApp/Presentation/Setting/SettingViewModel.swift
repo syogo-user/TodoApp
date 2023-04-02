@@ -23,8 +23,8 @@ protocol SettingViewModel {
 
 class SettingViewModelImpl: SettingViewModel {
     private let disposeBag = DisposeBag()
-    private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
-    private var userUseCase: UserUseCase = UserUseCaseImpl()
+    private let userUseCase: UserUseCase = UserUseCaseImpl()
+    private var taskUseCase: TaskUseCase = TaskUseCaseImpl()
 
     /// サインアウトの通知
     private let signOutRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
@@ -54,7 +54,8 @@ class SettingViewModelImpl: SettingViewModel {
                 self.userUseCase.deleteLocalUser()
             }
             .do(onSuccess: { _ in
-                self.userUseCase.sortOrder = nil
+                self.taskUseCase.sortOrder = nil
+                self.taskUseCase.filterCondition = nil
             })
             .map { result -> VMResult<Void> in
                 .success(result)

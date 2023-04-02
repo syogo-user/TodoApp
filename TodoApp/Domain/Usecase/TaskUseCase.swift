@@ -9,6 +9,10 @@ import Foundation
 import RxSwift
 
 protocol TaskUseCase {
+    /// 並び順
+    var sortOrder: String? { get set }
+    /// 抽出条件
+    var filterCondition: String? { get set }
     /// タスク取得
     func fetchTask(userId: String, authorization: String) -> Single<[TaskInfo]>
     /// タスク登録
@@ -33,6 +37,8 @@ protocol TaskUseCase {
     func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
     /// タスクリストをソートする
     func sortTask<T: SortProtocol>(itemList: inout [T], sort: String)
+    /// タスクをフィルターする
+    func filterTask(itemList: inout [TaskInfoItem], condition: String)
     /// 通知の登録/更新
     func registerNotification(notificationId: String, title: String, body: String, scheduledDate: Date)
     /// 通知の削除
@@ -47,6 +53,16 @@ class TaskUseCaseImpl: TaskUseCase {
     }
 
     init() {}
+
+    var sortOrder: String? {
+        get { repository.sortOrder }
+        set { repository.sortOrder = newValue }
+    }
+
+    var filterCondition: String? {
+        get { repository.filterCondition }
+        set { repository.filterCondition = newValue }
+    }
 
     func fetchTask(userId: String, authorization: String) -> Single<[TaskInfo]> {
         repository.fetchTask(userId: userId, authorization: authorization)
@@ -165,6 +181,25 @@ class TaskUseCaseImpl: TaskUseCase {
                 }
             }
         }
+    }
+
+    func filterTask(itemList: inout [TaskInfoItem], condition: String) {
+        itemList = itemList.filter({ item in
+            switch condition {
+            case FilterCondition.onlyFavorite.rawValue:
+                // お気に入りのみ抽出(完了済も含む)
+                return item.isFavorite
+            case FilterCondition.includeCompleted.rawValue:
+                // 完了済も含めてすべて抽出
+                return true
+            case FilterCondition.notIncludeCompleted.rawValue:
+                // 完了済は含めない
+                return !item.isCompleted
+            default:
+                // 完了済は含めない
+                return !item.isCompleted
+            }
+        })
     }
 
     func registerNotification(notificationId: String, title: String, body: String, scheduledDate: Date) {

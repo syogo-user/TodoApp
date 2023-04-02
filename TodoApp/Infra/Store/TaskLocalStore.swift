@@ -10,6 +10,10 @@ import APIKit
 import RxSwift
 
 protocol TaskLocalStore {
+    /// 並び順
+    var sortOrder: String? { get set }
+    /// 抽出条件
+    var filterCondition: String? { get set }
 
     func loadLocalTaskList() -> Single<[TaskInfoRecord]>
 
@@ -28,6 +32,21 @@ protocol TaskLocalStore {
 
 class TaskLocalStoreImpl: TaskLocalStore {
     private let accessor: DBAccessor = GRDBAccessor()
+
+    private enum Key: String {
+        case sortOrder = "sortOrder"
+        case filterCondition = "filterCondition"
+    }
+
+    var sortOrder: String? {
+        get { UserDefaults.standard.string(forKey: Key.sortOrder.rawValue)}
+        set { UserDefaults.standard.set(newValue, forKey: Key.sortOrder.rawValue)}
+    }
+
+    var filterCondition: String? {
+        get { UserDefaults.standard.string(forKey: Key.filterCondition.rawValue)}
+        set { UserDefaults.standard.set(newValue, forKey: Key.filterCondition.rawValue)}
+    }
 
     func loadLocalTaskList() -> Single<[TaskInfoRecord]> {
         accessor.taskInfoDao.loadLocalTask()

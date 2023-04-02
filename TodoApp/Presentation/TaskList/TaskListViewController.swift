@@ -11,6 +11,7 @@ import RxSwift
 class TaskListViewController: BaseViewController {
     private var viewModel: TaskListViewModel = TaskListViewModelImpl()
     private var selectMenuView: SelectMenuView?
+    private var selectOrderView: SelectOrderView?
     private let disposeBag = DisposeBag()
     private let refreshCtl = UIRefreshControl()
     @IBOutlet private weak var tableView: UITableView!
@@ -91,7 +92,7 @@ class TaskListViewController: BaseViewController {
                     )
                     return
                 }
-                self.viewModel.loadLocalTaskList()
+                self.loadLocalTaskList()
             })
             .disposed(by: disposeBag)
 
@@ -115,14 +116,16 @@ class TaskListViewController: BaseViewController {
 
     private func setUp() {
         navigationItem.backButtonDisplayMode = .minimal
+        let selectOrderButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), style: .plain, target: self, action: #selector(showSelectOrderView))
+
         let selectMenuButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(showSelectMenuView))
-        navigationItem.rightBarButtonItem = selectMenuButton
+        navigationItem.rightBarButtonItems = [selectMenuButton, selectOrderButton]
 
         tableView.register(R.nib.taskTableViewCell)
         tableView.refreshControl = refreshCtl
         refreshCtl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.delegate = self
-        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissSelectMenuView))
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dissmissView))
         gesture.cancelsTouchesInView = false
         gesture.delegate = self
         self.view.addGestureRecognizer(gesture)
@@ -135,25 +138,53 @@ class TaskListViewController: BaseViewController {
             }
         } else {
             // ローカルからデータを取得
-            viewModel.loadLocalTaskList()
+            self.loadLocalTaskList()
         }
     }
 
+    @objc private func showSelectOrderView() {
+        dissmissView()
+        selectOrderView = SelectOrderView(frame: .null)
+        guard let selectOrderView = self.selectOrderView else { return }
+        selectOrderView.setUp(sort: viewModel.getSortOrder())
+        selectOrderView.delegate = self
+        selectOrderView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(selectOrderView)
+        selectOrderView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
+        selectOrderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
+        selectOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        selectOrderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 64.0).isActive = true
+    }
 
     @objc private func showSelectMenuView() {
+        dissmissView()
         selectMenuView = SelectMenuView(frame: .null)
         guard let selectMenuView = self.selectMenuView else { return }
+        selectMenuView.setUp(filterCondition: viewModel.getFilterCondition())
         selectMenuView.delegate = self
         selectMenuView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(selectMenuView)
-        selectMenuView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
+        selectMenuView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
         selectMenuView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3).isActive = true
-        selectMenuView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0).isActive = true
+        selectMenuView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         selectMenuView.topAnchor.constraint(equalTo: view.topAnchor, constant: 64.0).isActive = true
     }
 
-    @objc private func dismissSelectMenuView() {
+    @objc func dissmissView() {
+        dismissSelectMenuView()
+        dismissSelectOrderView()
+    }
+
+    private func dismissSelectMenuView() {
         selectMenuView?.removeFromSuperview()
+    }
+
+    private func dismissSelectOrderView() {
+        selectOrderView?.removeFromSuperview()
+    }
+
+    private func loadLocalTaskList() {
+        viewModel.loadLocalTaskList()
     }
 
     private func changeComplete(index: Int, isCompleted: Bool) {
@@ -204,7 +235,7 @@ class TaskListViewController: BaseViewController {
             completion?()
         }))
         dialog.addAction(UIAlertAction(title: R.string.localizable.cancel(), style: .cancel, handler: nil))
-        self.present(dialog,animated: true,completion: nil)
+        self.present(dialog, animated: true, completion: nil)
     }
 
     @objc private func refresh() {
@@ -268,20 +299,47 @@ extension TaskListViewController: UITableViewDelegate {
 }
 
 extension TaskListViewController: SelectMenuViewDelegate {
-    func sortDateAscendingOrder() {
+
+    func didFilterFavorite() {
         dismissSelectMenuView()
+        // ユーザデフォルトに保存する
+        viewModel.setFilterCondition(filterCondition: FilterCondition.onlyFavorite.rawValue)
+        // ロードする
+        loadLocalTaskList()
+    }
+
+    func includeCompleted() {
+        dismissSelectMenuView()
+        // ユーザデフォルトに保存する
+        viewModel.setFilterCondition(filterCondition: FilterCondition.includeCompleted.rawValue)
+        // ロードする
+        loadLocalTaskList()
+    }
+
+    func notIncludeCompleted() {
+        dismissSelectMenuView()
+        // ユーザデフォルトに保存する
+        viewModel.setFilterCondition(filterCondition: FilterCondition.notIncludeCompleted.rawValue)
+        // ロードする
+        loadLocalTaskList()
+    }
+}
+
+extension TaskListViewController: SelectOrderViewDelegate {
+    func sortDateAscendingOrder() {
+        dismissSelectOrderView()
         // ユーザデフォルトに保存
         viewModel.setSortOrder(sortOrder: Sort.ascendingOrderDate.rawValue)
         // ロードする
-        viewModel.loadLocalTaskList()
+        loadLocalTaskList()
     }
 
     func sortDateDescendingOrder() {
-        dismissSelectMenuView()
+        dismissSelectOrderView()
         // ユーザデフォルトに保存
         viewModel.setSortOrder(sortOrder: Sort.descendingOrderDate.rawValue)
         // ロードする
-        viewModel.loadLocalTaskList()
+        loadLocalTaskList()
     }
 }
 
@@ -289,6 +347,10 @@ extension TaskListViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let view = touch.view, let selectMenuView = self.selectMenuView, view.isDescendant(of: selectMenuView) {
             // selectMenuView内のタップイベントは無視する
+            return false
+        }
+        if let view = touch.view, let selectOrderView = self.selectOrderView, view.isDescendant(of: selectOrderView) {
+            // selectOrderView内のタップイベントは無視する
             return false
         }
         return true
