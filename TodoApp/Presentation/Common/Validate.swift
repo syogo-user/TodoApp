@@ -8,7 +8,6 @@
 import Foundation
 
 class Validate {
-
     /// 空欄チェック
     func isEmpty(inputArray: String...) -> Bool {
         var resutlt = false
@@ -24,5 +23,4 @@ class Validate {
     func isWordLengthOver(word: String, wordLimit: Int) -> Bool {
         word.count > wordLimit
     }
-
 }

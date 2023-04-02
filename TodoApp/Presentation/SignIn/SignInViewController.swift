@@ -11,7 +11,6 @@ import AWSCognitoAuthPlugin
 import RxSwift
 
 class SignInViewController: BaseViewController {
-
     private let viewModel: SignInViewModel = SignInViewModelImpl()
     private let disposeBag = DisposeBag()
 

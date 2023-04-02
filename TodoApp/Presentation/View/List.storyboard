@@ -282,7 +282,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="ZVa-qv-4pJ">
-                                <rect key="frame" x="36" y="253" width="320" height="347"/>
+                                <rect key="frame" x="36.666666666666657" y="252.66666666666663" width="320" height="347"/>
                                 <color key="backgroundColor" name="accent"/>
                                 <color key="tintColor" name="text1"/>
                                 <locale key="locale" localeIdentifier="ja"/>

@@ -10,7 +10,6 @@ import UIKit
 import MBProgressHUD
 
 class BaseViewController: UIViewController {
-
     private let networkUseCase: NetworkUseCase = NetworkUseCaseImpl()
 
     override func viewDidLoad() {

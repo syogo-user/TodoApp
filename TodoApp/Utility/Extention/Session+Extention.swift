@@ -26,10 +26,10 @@ extension Session {
             let task = self.send(request) { result in
                 switch result {
                 case .success(let value):
-                    print("###success: \(value)")
+                    print("success: \(value)")
                     observer(.success(value))
                 case .failure(let error):
-                    print("###error: \(error)")
+                    print("error: \(error)")
                     observer(.error(error))
                 }
             }

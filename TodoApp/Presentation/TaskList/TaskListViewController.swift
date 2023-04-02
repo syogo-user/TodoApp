@@ -12,9 +12,8 @@ class TaskListViewController: BaseViewController {
     private var viewModel: TaskListViewModel = TaskListViewModelImpl()
     private var selectMenuView: SelectMenuView?
     private let disposeBag = DisposeBag()
+    private let refreshCtl = UIRefreshControl()
     @IBOutlet private weak var tableView: UITableView!
-
-    let refreshCtl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()

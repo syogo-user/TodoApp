@@ -15,16 +15,15 @@ protocol UpdateTaskViewControllerDelegate: AnyObject {
 }
 
 class UpdateTaskViewController: BaseViewController {
-
-    @IBOutlet weak var completeCheckButton: CheckButton!
-    @IBOutlet weak var favoriteButton: FavoriteButton!
-    @IBOutlet weak var scheduledButton: UIButton!
-    @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var contentTextView: UITextView!
-
     weak var delegate: UpdateTaskViewControllerDelegate?
-    var updateTask: TaskInfoItem?
 
+    @IBOutlet private weak var completeCheckButton: CheckButton!
+    @IBOutlet private weak var favoriteButton: FavoriteButton!
+    @IBOutlet private weak var scheduledButton: UIButton!
+    @IBOutlet private weak var titleTextField: UITextField!
+    @IBOutlet private weak var contentTextView: UITextView!
+
+    private var updateTask: TaskInfoItem?
     private var selectedDate: Date?
     private let viewModel: UpdateTaskViewModel = UpdateTaskViewModelImpl()
     private let validate: Validate = Validate()
@@ -38,6 +37,10 @@ class UpdateTaskViewController: BaseViewController {
     
     func getSelectDate() -> Date? {
         self.selectedDate
+    }
+
+    func setUpdateTask(task: TaskInfoItem) {
+        self.updateTask = task
     }
 
     private func bindViewModelEvent() {

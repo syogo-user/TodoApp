@@ -152,29 +152,18 @@ class TaskUseCaseImpl: TaskUseCase {
     }
 
     func sortTask<T: SortProtocol>(itemList: inout [T], sort: String) {
-        switch sort {
-        case Sort.ascendingOrderDate.rawValue:
-            itemList.sort{ (task1: T, task2: T) -> Bool in
-                if task1.scheduledDate == task2.scheduledDate {
-                    // 日付が同じ場合
-                    return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
-                } else {
-                    // 日付が異なる場合
+        itemList.sort{ (task1: T, task2: T) -> Bool in
+            if task1.scheduledDate == task2.scheduledDate {
+                // 日付が同じ場合
+                return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
+            } else {
+                // 日付が異なる場合
+                if sort == Sort.ascendingOrderDate.rawValue {
                     return task1.scheduledDate < task2.scheduledDate
-                }
-            }
-        case Sort.descendingOrderDate.rawValue:
-            itemList.sort{ (task1: T, task2: T) -> Bool in
-                if task1.scheduledDate == task2.scheduledDate {
-                    // 日付が同じ場合
-                    return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
                 } else {
-                    // 日付が異なる場合
                     return task1.scheduledDate > task2.scheduledDate
                 }
             }
-        default:
-            print("")
         }
     }
 

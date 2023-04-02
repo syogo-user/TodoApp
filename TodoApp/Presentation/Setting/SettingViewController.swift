@@ -11,8 +11,7 @@ import RxCocoa
 import Foundation
 
 class SettingViewController: BaseViewController {
-
-    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet private weak var emailLabel: UILabel!
     private let disposeBag = DisposeBag()
     private let viewModel: SettingViewModel = SettingViewModelImpl()
 
