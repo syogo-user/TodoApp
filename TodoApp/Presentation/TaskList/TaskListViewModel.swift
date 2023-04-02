@@ -234,6 +234,14 @@ class TaskListViewModelImpl: TaskListViewModel {
             .flatMap { (user, idToken) in
                 self.taskUseCase.updateTask(taskId: taskInfoItem.taskId,title: taskInfoItem.title, content: taskInfoItem.content, scheduledDate: taskInfoItem.scheduledDate.dateFormat(), isCompleted: taskInfoItem.isCompleted, isFavorite: taskInfoItem.isFavorite, userId: user.userId, authorization: idToken)
             }
+            .do(onSuccess: { task in
+                // isCompletedがtrueなら通知を削除する。falseの場合は更新する
+                if task.isCompleted {
+                    self.taskUseCase.removeNotification(taskId: task.taskId)
+                } else {
+                    self.taskUseCase.registerNotification(notificationId: task.taskId, title: task.title, body: task.content, scheduledDate: task.scheduledDate)
+                }
+            })
             .flatMap { result in
                 let taskInfoRecord = TaskInfoRecord(taskId: result.taskId, title: result.title, content: result.content, scheduledDate: result.scheduledDate, isCompleted: result.isCompleted, isFavorite: result.isFavorite, userId: result.userId)
                 return self.taskUseCase.updateLocalTask(taskInfo: taskInfoRecord)

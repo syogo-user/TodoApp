@@ -40,7 +40,12 @@ class UpdateTaskViewModelImpl: UpdateTaskViewModel {
                 self.taskUseCase.updateTask(taskId: taskInfoItem.taskId,title: taskInfoItem.title, content: taskInfoItem.content, scheduledDate: taskInfoItem.scheduledDate.dateFormat(), isCompleted: taskInfoItem.isCompleted, isFavorite: taskInfoItem.isFavorite, userId: user.userId, authorization: idToken)
             }
             .do(onSuccess: { task in
-                self.taskUseCase.registerNotification(notificationId: task.taskId, title: task.title, body: task.content, scheduledDate: task.scheduledDate)
+                // isCompletedがtrueなら削除する。falseの場合は更新する
+                if task.isCompleted {
+                    self.taskUseCase.removeNotification(taskId: task.taskId)
+                } else {
+                    self.taskUseCase.registerNotification(notificationId: task.taskId, title: task.title, body: task.content, scheduledDate: task.scheduledDate)
+                }
             })
             .flatMap { task in
                 let taskInfoRecord = TaskInfoRecord(taskId: task.taskId, title: task.title, content: task.content, scheduledDate: task.scheduledDate, isCompleted: task.isCompleted, isFavorite: task.isFavorite, userId: task.userId)
