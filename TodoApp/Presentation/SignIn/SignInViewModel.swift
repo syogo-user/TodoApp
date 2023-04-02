@@ -83,12 +83,4 @@ class SignInViewModelImpl: SignInViewModel {
     func setViaSignIn() {
         usecase.isFromSignIn = true
     }
-
-    private func validate() -> Bool {
-        // TODO: バリデーション
-        return true
-    }
-
-
-
 }

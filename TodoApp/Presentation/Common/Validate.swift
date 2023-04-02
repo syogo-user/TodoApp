@@ -25,9 +25,4 @@ class Validate {
         word.count > wordLimit
     }
 
-    /// 日付の形式チェック
-    func isDate() -> Bool {
-        // TODO:
-        return false
-    }
 }

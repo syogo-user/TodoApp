@@ -18,21 +18,26 @@ class UpdateTaskViewController: BaseViewController {
 
     @IBOutlet weak var completeCheckButton: CheckButton!
     @IBOutlet weak var favoriteButton: FavoriteButton!
-    @IBOutlet weak var scheduledDatePicker: UIDatePicker!
+    @IBOutlet weak var scheduledButton: UIButton!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
 
+    weak var delegate: UpdateTaskViewControllerDelegate?
+    var updateTask: TaskInfoItem?
+
+    private var selectedDate: Date?
     private let viewModel: UpdateTaskViewModel = UpdateTaskViewModelImpl()
     private let validate: Validate = Validate()
     private let disposeBag = DisposeBag()
-    private var selectedDate: Date?
-    weak var delegate: UpdateTaskViewControllerDelegate?
-    var updateTask: TaskInfoItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bindViewModelEvent()
         self.setUp()
+    }
+    
+    func getSelectDate() -> Date? {
+        self.selectedDate
     }
 
     private func bindViewModelEvent() {
@@ -71,9 +76,8 @@ class UpdateTaskViewController: BaseViewController {
         titleTextField.text = task.title
         contentTextView.text = task.content
         selectedDate = task.scheduledDate
-        if let date = selectedDate {
-            self.scheduledDatePicker.date = date
-        }
+        scheduledButton.setTitle(task.scheduledDate.dateFormat().dateJpFormat(), for: .normal)
+
         let editBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(putTask))
         self.navigationItem.rightBarButtonItems = [editBarButtonItem]
 
@@ -148,6 +152,13 @@ class UpdateTaskViewController: BaseViewController {
     }
 
     @IBAction func selectDate(_ sender: Any) {
-        selectedDate = scheduledDatePicker.date
+        self.toSelectDate()
+    }
+}
+
+extension UpdateTaskViewController: SelectDateViewControllerDelegate {
+    func didSelectDate(_ date: Date) {
+        selectedDate = date
+        scheduledButton.setTitle(date.dateFormat().dateJpFormat(), for: .normal)
     }
 }
