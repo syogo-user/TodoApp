@@ -13,8 +13,6 @@ import Amplify
 protocol UserRepository {
     /// サインイン画面を経由したか
     var isFromSignIn: Bool { get set }
-    /// 並び順
-    var sortOrder: String? { get set }
     /// トークンの取得
     func fetchCurrentAuthToken() async throws -> String
     /// ユーザ情報の取得
@@ -40,11 +38,6 @@ class UserRepositoryImpl: UserRepository {
     var isFromSignIn: Bool {
         get { localStore.isFromSignIn }
         set { localStore.isFromSignIn = newValue }
-    }
-
-    var sortOrder: String? {
-        get { localStore.sortOrder }
-        set { localStore.sortOrder = newValue }
     }
 
     func fetchCurrentAuthToken() async throws -> String {

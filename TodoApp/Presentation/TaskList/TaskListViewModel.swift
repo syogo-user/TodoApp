@@ -14,6 +14,12 @@ enum Sort: String {
     case descendingOrderDate = "descendingOrderDate"
 }
 
+enum FilterCondition: String {
+    case onlyFavorite = "onlyFavorite"
+    case includeCompleted = "includeCompleted"
+    case notIncludeCompleted = "notIncludeCompleted"
+}
+
 protocol TaskListViewModel {
     var isLoading: Driver<Bool> { get }
     var taskItems: Driver<[TaskInfoItem]> { get }
@@ -39,15 +45,21 @@ protocol TaskListViewModel {
     func changeComplete(index: Int, isCompleted: Bool)
     /// お気に入り状態を変更
     func changeFavorite(index: Int, isFavorite: Bool)
+    /// 並び順を取得
+    func getSortOrder() -> String
     /// 並び順を設定
     func setSortOrder(sortOrder: String)
+    /// 抽出条件を取得
+    func getFilterCondition() -> String
+    /// 抽出条件を設定
+    func setFilterCondition(filterCondition: String)
 }
 
 class TaskListViewModelImpl: TaskListViewModel {
-    private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
+    private var taskUseCase: TaskUseCase = TaskUseCaseImpl()
     private var userUseCase: UserUseCase = UserUseCaseImpl()
-    private let disposeBag = DisposeBag()
     private var tableViewItems: [TaskInfoItem] = []
+    private let disposeBag = DisposeBag()
 
     /// タスクの取得(セル用の値)通知
     private let taskItemsRelay = BehaviorRelay<[TaskInfoItem]>(value: [])
@@ -79,6 +91,7 @@ class TaskListViewModelImpl: TaskListViewModel {
 
     func fetchTaskList() {
         let sortOrder = getSortOrder()
+        let filterCondition = getFilterCondition()
         // ユーザIDとトークンを取得
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
             .flatMap { (user: UserInfoAttribute, idToken: String) in
@@ -113,6 +126,7 @@ class TaskListViewModelImpl: TaskListViewModel {
                     TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
                 self.taskUseCase.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
+                self.taskUseCase.filterTask(itemList: &self.tableViewItems, condition: filterCondition)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .map { _ in
@@ -157,12 +171,14 @@ class TaskListViewModelImpl: TaskListViewModel {
     /// ローカルからタスク取得
     func loadLocalTaskList() {
         let sortOrder = getSortOrder()
+        let filterCondition = getFilterCondition()
         taskUseCase.loadLocalTaskList()
             .do(onSuccess: { taskList in
                 self.tableViewItems = taskList.map {
                     TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
                 }
                 self.taskUseCase.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
+                self.taskUseCase.filterTask(itemList: &self.tableViewItems, condition: filterCondition)
                 self.taskItemsRelay.accept(self.tableViewItems)
             })
             .map { taskList -> VMResult<Void> in
@@ -231,12 +247,20 @@ class TaskListViewModelImpl: TaskListViewModel {
             .disposed(by: disposeBag)
     }
 
-    func setSortOrder(sortOrder: String) {
-        userUseCase.sortOrder = sortOrder
+    func getSortOrder() -> String {
+        taskUseCase.sortOrder ?? Sort.descendingOrderDate.rawValue
     }
 
-    private func getSortOrder() -> String {
-        userUseCase.sortOrder ?? Sort.descendingOrderDate.rawValue
+    func setSortOrder(sortOrder: String) {
+        taskUseCase.sortOrder = sortOrder
+    }
+
+    func getFilterCondition() -> String {
+        taskUseCase.filterCondition ?? FilterCondition.notIncludeCompleted.rawValue
+    }
+
+    func setFilterCondition(filterCondition: String) {
+        taskUseCase.filterCondition = filterCondition
     }
 
     /// インデックスからタスクIDを取得

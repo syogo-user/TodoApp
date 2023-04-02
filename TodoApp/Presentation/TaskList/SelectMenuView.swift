@@ -8,15 +8,20 @@
 import UIKit
 
 protocol SelectMenuViewDelegate: AnyObject {
-    /// 日付の昇順
-    func sortDateAscendingOrder()
-    /// 日付の降順
-    func sortDateDescendingOrder()
+    /// お気に入りのみ表示
+    func didFilterFavorite()
+    /// 完了済も表示
+    func includeCompleted()
+    /// 完了済は表示しない
+    func notIncludeCompleted()
 }
 
 class SelectMenuView: UIView {
-
     weak var delegate: SelectMenuViewDelegate?
+
+    @IBOutlet weak var onlyFavoriteCheckImage: UIImageView!
+    @IBOutlet weak var includeCompletedCheckImage: UIImageView!
+    @IBOutlet weak var notIncludeCompletedCheckImage: UIImageView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,20 +33,45 @@ class SelectMenuView: UIView {
         loadNib()
     }
 
+    func setUp(filterCondition: String) {
+        switch filterCondition {
+        case FilterCondition.onlyFavorite.rawValue:
+            onlyFavoriteCheckImage.isHidden = false
+            includeCompletedCheckImage.isHidden = true
+            notIncludeCompletedCheckImage.isHidden = true
+        case FilterCondition.includeCompleted.rawValue:
+            onlyFavoriteCheckImage.isHidden = true
+            includeCompletedCheckImage.isHidden = false
+            notIncludeCompletedCheckImage.isHidden = true
+        case FilterCondition.notIncludeCompleted.rawValue:
+            onlyFavoriteCheckImage.isHidden = true
+            includeCompletedCheckImage.isHidden = true
+            notIncludeCompletedCheckImage.isHidden = false
+        default:
+            onlyFavoriteCheckImage.isHidden = true
+            includeCompletedCheckImage.isHidden = true
+            notIncludeCompletedCheckImage.isHidden = false
+        }
+
+    }
+
     private func loadNib() {
-        // 選択しているものにチェックを付ける
         if let view = Bundle(for: type(of: self)).loadNibNamed(String(describing: type(of: self)), owner: self, options: nil)?.first as? UIView {
             view.frame = self.bounds
             self.addSubview(view)
-
         }
     }
 
-    @IBAction func ascendingOrder(_ sender: Any) {
-        delegate?.sortDateAscendingOrder()
+
+    @IBAction func filterFavorite(_ sender: Any) {
+        delegate?.didFilterFavorite()
     }
 
-    @IBAction func descendingOrder(_ sender: Any) {
-        delegate?.sortDateDescendingOrder()
+    @IBAction func showCompletee(_ sender: Any) {
+        delegate?.includeCompleted()
+    }
+
+    @IBAction func sort(_ sender: Any) {
+        delegate?.notIncludeCompleted()
     }
 }
