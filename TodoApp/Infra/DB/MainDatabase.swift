@@ -28,7 +28,7 @@ final class MainDatabase {
         guard let dbQueue = _dbQueue else {
             throw DatabaseError.accessFailed(reason: "データベースが1度もopenされていません")
         }
-        print("####dbQueue():\(dbQueue.path)")
+        print("dbQueue(): \(dbQueue.path)")
         return dbQueue
     }
 
@@ -40,7 +40,7 @@ final class MainDatabase {
         DatabaseQueueFactory.create(definition: Definition())
             .do(onSuccess: { [unowned self] dbQueue in
                 self._dbQueue = dbQueue
-                print("####open dbQueue():\(dbQueue.path)")
+                print("open dbQueue(): \(dbQueue.path)")
             })
     }
 }

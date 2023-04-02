@@ -121,7 +121,6 @@ class UserUseCaseImpl: UserUseCase {
                         print("Signout failed")
                         throw DomainError.authError
                     }
-                    print("Local signout successful: \(signOutResult.signedOutLocally)")
                     switch signOutResult {
                     case .complete:
                         print("Signed out successfully")

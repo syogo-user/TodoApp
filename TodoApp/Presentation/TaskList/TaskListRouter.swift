@@ -18,7 +18,7 @@ extension TaskListViewController {
 
     func toUpdateTask(taskInfoItem: TaskInfoItem) {
         guard let updateTaskVC =  R.storyboard.list.updateTaskVC() else { return }
-        updateTaskVC.updateTask = taskInfoItem
+        updateTaskVC.setUpdateTask(task: taskInfoItem)
         updateTaskVC.delegate = self
         navigationController?.pushViewController(updateTaskVC, animated: true)
     }
