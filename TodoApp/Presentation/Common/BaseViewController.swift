@@ -130,6 +130,7 @@ class BaseViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.handlerError(
                     error: DomainError.networkError,
+                    onNetworkError: { self.networkErrorDialog() },
                     onUnKnowError: { self.unKnowErrorDialog() })
             }
         }

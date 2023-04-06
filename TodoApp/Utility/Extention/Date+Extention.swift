@@ -10,7 +10,7 @@ public extension Date {
     // Date → String に変換
     func dateFormat() -> String {
         let format = DateFormatter()
-        format.locale = Locale(identifier: "ja_JP")
+        format.locale = Locale(identifier: "en_US_POSIX")
         format.dateFormat = "yyyyMMddHHmm"
         return format.string(from: self)
     }

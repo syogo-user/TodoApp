@@ -292,6 +292,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IHk-R6-7BS">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="34.333333333333336"/>
+                                        <color key="tintColor" name="accent"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="キャンセル"/>
                                         <connections>
@@ -300,6 +301,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iX3-pp-9Ps">
                                         <rect key="frame" x="160" y="0.0" width="160" height="34.333333333333336"/>
+                                        <color key="tintColor" name="accent"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="決定"/>
                                         <connections>
