@@ -164,6 +164,7 @@
                         <outlet property="contentTextView" destination="zST-TB-Z1m" id="gjz-3e-tbT"/>
                         <outlet property="datePicker" destination="36f-TL-sLm" id="iWV-wc-Q6J"/>
                         <outlet property="inputAreaStackView" destination="Hfb-ic-hFj" id="yL6-af-RO1"/>
+                        <outlet property="sendButton" destination="ZBv-5F-Ch5" id="5d0-uO-SiP"/>
                         <outlet property="titleTextField" destination="sau-bJ-3qL" id="ekw-hQ-33P"/>
                     </connections>
                 </viewController>

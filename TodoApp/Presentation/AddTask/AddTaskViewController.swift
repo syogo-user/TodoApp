@@ -19,8 +19,9 @@ class AddTaskViewController: BaseViewController {
 
     @IBOutlet private weak var titleTextField: UITextField!
     @IBOutlet private weak var contentTextView: UITextView!
-    @IBOutlet weak var inputAreaStackView: UIStackView!
-    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet private weak var inputAreaStackView: UIStackView!
+    @IBOutlet private weak var datePicker: UIDatePicker!
+    @IBOutlet private weak var sendButton: UIButton!
 
     private var selectDate: String?
     private let viewModel: AddTaskViewModel = AddTaskViewModelImpl()
@@ -104,6 +105,7 @@ class AddTaskViewController: BaseViewController {
                         onParseError: { self.parseErrorDialog() },
                         onUnKnowError: { self.unKnowErrorDialog() }
                     )
+                    sendButton.isEnabled = true
                     return
                 }
                 delegate?.didAddTask()
@@ -149,6 +151,7 @@ class AddTaskViewController: BaseViewController {
     }
 
     @IBAction private func send(_ sender: Any) {
+
         guard let title = self.titleTextField.text, let content = self.contentTextView.text, let scheduledDate = self.selectDate else { return }
         if (validate.isEmpty(inputArray: title)) {
             emptyTitleDialog()
@@ -159,6 +162,7 @@ class AddTaskViewController: BaseViewController {
             return
         }
         self.isConnect() {
+            sendButton.isEnabled = false
             viewModel.addTask(title: title, content: content, scheduledDate: scheduledDate)
         }
     }
