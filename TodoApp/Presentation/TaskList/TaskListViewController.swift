@@ -152,10 +152,15 @@ class TaskListViewController: BaseViewController {
         selectOrderView.delegate = self
         selectOrderView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(selectOrderView)
+
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64.0
+        let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        let navigationAreaTotalHeight = statusBarHeight + navigationBarHeight
+
         selectOrderView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
-        selectOrderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
+        selectOrderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.18).isActive = true
         selectOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        selectOrderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 64.0).isActive = true
+        selectOrderView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationAreaTotalHeight).isActive = true
     }
 
     @objc private func showSelectMenuView() {
@@ -166,10 +171,15 @@ class TaskListViewController: BaseViewController {
         selectMenuView.delegate = self
         selectMenuView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(selectMenuView)
+
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64.0
+        let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        let navigationAreaTotalHeight = statusBarHeight + navigationBarHeight
+
         selectMenuView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
-        selectMenuView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3).isActive = true
+        selectMenuView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
         selectMenuView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        selectMenuView.topAnchor.constraint(equalTo: view.topAnchor, constant: 64.0).isActive = true
+        selectMenuView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationAreaTotalHeight).isActive = true
     }
 
     @objc func dissmissView() {
