@@ -11,7 +11,7 @@ public extension String {
 
     func isConvertibleDate() -> Bool {
         let format = DateFormatter()
-        format.locale = Locale(identifier: "ja_JP")
+        format.locale = Locale(identifier: "en_US_POSIX")
         format.dateFormat = "yyyyMMddHHmm"
         if format.date(from: self) != nil {
             return true
@@ -22,7 +22,7 @@ public extension String {
 
     func toDate() throws -> Date {
         let format = DateFormatter()
-        format.locale = Locale(identifier: "ja_JP")
+        format.locale = Locale(identifier: "en_US_POSIX")
         format.dateFormat = "yyyyMMddHHmm"
         guard let date = format.date(from: self) else {
             throw DomainError.parseError

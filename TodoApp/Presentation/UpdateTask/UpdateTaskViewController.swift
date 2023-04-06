@@ -81,13 +81,14 @@ class UpdateTaskViewController: BaseViewController {
         selectedDate = task.scheduledDate
         scheduledButton.setTitle(task.scheduledDate.dateFormat().dateJpFormat(), for: .normal)
 
-        let editBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(putTask))
+        let editBarButtonItem = UIBarButtonItem(title: R.string.localizable.updateNavigationButtonName(), style: .plain, target: self, action: #selector(putTask))
         self.navigationItem.rightBarButtonItems = [editBarButtonItem]
 
         let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         gesture.cancelsTouchesInView = false
         self.view.addGestureRecognizer(gesture)
 
+        navigationItem.title = R.string.localizable.updateNavigationTitle()
     }
 
     @objc private func putTask() {

@@ -13,8 +13,6 @@ import RxCocoa
 protocol SignInViewModel {
     var isLoading: Driver<Bool> { get }
     var userInfo: Signal<VMResult<Void>?> { get }
-    /// サインイン
-    func signIn(userName: String, password: String)
     /// ソーシャルサインイン
     func socialSigIn(provider: AuthProvider)
     /// サインイン画面を経由したことを設定
@@ -36,24 +34,6 @@ class SignInViewModelImpl: SignInViewModel {
         }
         .asDriver(onErrorJustReturn: false)
     }()
-
-    func signIn(userName: String, password: String) {
-        Task {
-            do {
-                let signInResult = try await Amplify.Auth.signIn(
-                    username: userName,
-                    password: password
-                )
-                if signInResult.isSignedIn {
-                    print("Sign in succeeded")
-                }
-            } catch let error as AuthError {
-                print("Sign in failed \(error)")
-            } catch {
-                print("Unexpected error: \(error)")
-            }
-        }
-    }
 
     func socialSigIn(provider: AuthProvider) {
         self.usecase.socialSignIn(provider: provider)

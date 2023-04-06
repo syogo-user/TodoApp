@@ -115,6 +115,8 @@ class TaskListViewController: BaseViewController {
     }
 
     private func setUp() {
+        navigationController?.navigationBar.tintColor = R.color.accent()
+        navigationItem.title = R.string.localizable.taskListNavigationTitle()
         navigationItem.backButtonDisplayMode = .minimal
         let selectOrderButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), style: .plain, target: self, action: #selector(showSelectOrderView))
 

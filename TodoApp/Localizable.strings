@@ -51,3 +51,8 @@
 // MARK: - Common
 "ok" = "OK";
 "cancel" = "キャンセル";
+
+// MARK: - NavigationBar
+"taskListNavigationTitle" = "タスク一覧";
+"updateNavigationTitle" = "タスク更新";
+"updateNavigationButtonName" = "保存";
