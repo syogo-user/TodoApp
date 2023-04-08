@@ -26,10 +26,10 @@ PODS:
     - RxSwift (~> 5)
 
 DEPENDENCIES:
-  - APIKit
-  - MBProgressHUD
+  - APIKit (= 5.4.0)
+  - MBProgressHUD (= 1.2.0)
   - R.swift (= 5.1.0)
-  - ReachabilitySwift
+  - ReachabilitySwift (= 5.0.0)
   - RxBlocking (= 5.1.0)
   - RxCocoa (= 5.1.1)
   - RxGRDB (= 0.18.0)
@@ -65,6 +65,6 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxTest: d5e1c9c1880de2751041fa485d476ce006967b31
 
-PODFILE CHECKSUM: e03f6823ba222ba31b44e5e7680dac9a2b1206ad
+PODFILE CHECKSUM: 48c0e0f8f0803e1bcedb0e62db5dc11e56b21f92
 
 COCOAPODS: 1.12.0

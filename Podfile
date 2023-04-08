@@ -10,9 +10,9 @@ target 'TodoApp' do
   pod 'RxGRDB', '0.18.0'
   pod 'RxSwift', '5.1.1'
   pod 'RxCocoa', '5.1.1'
-  pod 'APIKit'
-  pod 'MBProgressHUD'
-  pod 'ReachabilitySwift'
+  pod 'APIKit', '5.4.0'
+  pod 'MBProgressHUD', '1.2.0'
+  pod 'ReachabilitySwift', '5.0.0'
 
   target 'TodoAppTests' do
     inherit! :search_paths
