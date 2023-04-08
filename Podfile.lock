@@ -1,0 +1,70 @@
+PODS:
+  - APIKit (5.4.0)
+  - GRDB.swift (4.14.0):
+    - GRDB.swift/standard (= 4.14.0)
+  - GRDB.swift/standard (4.14.0)
+  - MBProgressHUD (1.2.0)
+  - R.swift (5.1.0):
+    - R.swift.Library (~> 5.1.0)
+  - R.swift.Library (5.1.0)
+  - ReachabilitySwift (5.0.0)
+  - RxBlocking (5.1.0):
+    - RxSwift (~> 5)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxGRDB (0.18.0):
+    - RxGRDB/default (= 0.18.0)
+    - RxSwift (~> 5.0)
+  - RxGRDB/default (0.18.0):
+    - GRDB.swift (~> 4.1)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.3):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - RxTest (5.1.0):
+    - RxSwift (~> 5)
+
+DEPENDENCIES:
+  - APIKit (= 5.4.0)
+  - MBProgressHUD (= 1.2.0)
+  - R.swift (= 5.1.0)
+  - ReachabilitySwift (= 5.0.0)
+  - RxBlocking (= 5.1.0)
+  - RxCocoa (= 5.1.1)
+  - RxGRDB (= 0.18.0)
+  - RxSwift (= 5.1.1)
+  - RxTest (= 5.1.0)
+
+SPEC REPOS:
+  trunk:
+    - APIKit
+    - GRDB.swift
+    - MBProgressHUD
+    - R.swift
+    - R.swift.Library
+    - ReachabilitySwift
+    - RxBlocking
+    - RxCocoa
+    - RxGRDB
+    - RxRelay
+    - RxSwift
+    - RxTest
+
+SPEC CHECKSUMS:
+  APIKit: 0680e86d2e8abd5bc42e64963f5f89d209eb9271
+  GRDB.swift: 8cc3ab7c8b8b4ac1761deb8dca4b51c1c9d429f8
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  R.swift: 8cbc4fc69b740305b6a17c8a8ed968eb788962d9
+  R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  RxBlocking: 5ef131267220f92ef68531dd6afeaf407cd6b41a
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxGRDB: 41dfd8f987aad7a7bdd7c420319d3eb23ee383f3
+  RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  RxTest: d5e1c9c1880de2751041fa485d476ce006967b31
+
+PODFILE CHECKSUM: 48c0e0f8f0803e1bcedb0e62db5dc11e56b21f92
+
+COCOAPODS: 1.12.0

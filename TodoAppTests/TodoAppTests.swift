@@ -7,6 +7,8 @@
 
 import XCTest
 @testable import TodoApp
+@testable import AWSCognitoAuthPlugin
+@testable import Amplify
 
 final class TodoAppTests: XCTestCase {
 

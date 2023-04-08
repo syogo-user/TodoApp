@@ -1,0 +1,61 @@
+/* 
+  Localizable.strings
+  TodoApp
+
+  Created by 小野寺祥吾 on 2023/03/16.
+  
+*/
+// MARK: - ErrorTitle
+"localDbErrorTitle" = "DBエラー";
+"signInErrorTitle" = "ログインエラー";
+"signOutErrorTitle" = "ログアウトエラー";
+"tokenErrorTitle" = "トークンエラー";
+"sessionErrorTitle" = "認証エラー";
+"fetchTaskErrorTitle" = "取得エラー";
+"addTaskErrorTitle" = "登録エラー";
+"updateTaskErrorTitle" = "更新エラー";
+"deleteTaskErrorTitle" = "削除エラー";
+"networkErrorTitle" = "ネットワークエラー";
+"dateParseErrorTitle" = "日付変換エラー";
+"unknownErrorTitle" = "不明なエラー";
+
+// MARK: - ErrorMessage
+"localUserDBErrorMessage" = "ローカルDBへの取得または更新処理が失敗しました。\nログインし直してください。";
+"localTaskDBErrorMessage" = "ローカルDBへの取得または更新処理が失敗しました。\n一覧を更新してください。";
+"signInErrorMessage" = "ログインに失敗しました。\n入力内容をご確認のうえ、再度ログインください。";
+"signOutErrorMessage" = "ログアウトに失敗しました。\nもう一度実行してください。";
+"tokenErrorMessage" = "トークンの取得に失敗しました。\nログアウト後に、もう一度ログインし直してください。";
+"sessionErrorMessage" = "認証情報の取得に失敗しました。\nログアウト後に、もう一度ログインし直してください。";
+"fetchTaskErrorMessage" = "タスクの取得に失敗しました。\nもう一度実行してください。";
+"addTaskErrorMessage" = "タスクの登録に失敗しました。\nもう一度実行してください。";
+"updateTaskErrorMessage" = "タスクの更新に失敗しました。\nもう一度実行してください。";
+"deleteTaskErrorMessage" = "タスクの削除に失敗しました。\nもう一度実行してください。";
+"networkErrorMessage" = "インターネットに接続してください。";
+"dateParseErrorMessage" = "日付の変換に失敗しました。\nお手数ですが、端末の日付設定を西暦でご登録ください。";
+"unknownErrorMessage" = "処理に失敗しました。\n時間をあけてから、もう一度お試しください。";
+
+// MARK: - WarningTitle
+"deleteWarningTitle" = "タスクの削除";
+
+// MARK: - WarningMessage
+"deleteWarningMessage" = "タスクを削除してもよろしいですか？";
+
+// MARK: - ValidateTitle
+"emptyTitleTitle" = "入力エラー";
+"overTitleLengthTitle" = "文字数制限";
+
+// MARK: - ValidateMessage
+"emptyTitleMessage" = "タイトルが空白です";
+"overTitleLengthMessage" = "タイトルは%@文字以内でお願いします";
+
+// MARK: - Common
+"ok" = "OK";
+"cancel" = "キャンセル";
+
+// MARK: - NavigationBar
+"taskListNavigationTitle" = "タスク一覧";
+"updateNavigationTitle" = "タスク更新";
+"updateNavigationButtonName" = "保存";
+
+// MARK: - Database
+"databaseOpenError" = "データベースが1度もopenされていません";
