@@ -33,8 +33,11 @@ target 'TodoApp' do
           end
         end
       end
-      installer.pods_project.build_configurations.each do |config|
-        config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+      
+      installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['EXCLUDED_ARCHS'] = ''
+        end
       end
   end
 end

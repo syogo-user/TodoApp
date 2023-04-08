@@ -20,7 +20,7 @@ protocol DBAccessor {
 class GRDBAccessor {
     /// 取得
     func readFromDBwith<T>(_ operation: @escaping ((GRDB.Database) throws -> (T))) -> Single<T> {
-        MainDatabase.shared.dbQueue()
+        MainDatabase.shared.dbQueueSingle()
             .flatMap { dbQueue in
                 dbQueue.rx.read { db in
                     try operation(db)
@@ -33,7 +33,7 @@ class GRDBAccessor {
 
     /// 更新
     func writeToDBwith(_ operation: @escaping ((GRDB.Database) throws -> Void)) -> Single<Void> {
-        MainDatabase.shared.dbQueue()
+        MainDatabase.shared.dbQueueSingle()
             .flatMap { dbQueue in
                 dbQueue.rx.write { db in
                     try operation(db)
