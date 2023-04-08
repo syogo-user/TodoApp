@@ -17,13 +17,13 @@ enum ServerAPIRoutes {
     var apiUrlPath: String {
         switch self {
         case .taskList:
-            return "list"
+            return "task"
         case .addTask:
-            return "list"
+            return "task"
         case .updateTask(let taskId ):
-            return "list/\(taskId)"
+            return "task/\(taskId)"
         case .deleteTask(let taskId):
-            return "list/\(taskId)"
+            return "task/\(taskId)"
         }
     }
 
