@@ -32,7 +32,7 @@ final class MainDatabase {
         return dbQueue
     }
 
-    func dbQueue() -> Single<DatabaseQueue> {
+    func dbQueueSingle() -> Single<DatabaseQueue> {
         return Single.just(try! dbQueue())
     }
 
