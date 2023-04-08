@@ -43,5 +43,4 @@ enum ServerAPIRoutes {
             return .delete
         }
     }
-
 }

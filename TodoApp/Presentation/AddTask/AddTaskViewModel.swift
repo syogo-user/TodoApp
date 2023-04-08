@@ -10,7 +10,9 @@ import RxSwift
 import RxCocoa
 
 protocol AddTaskViewModel {
+    /// ローディング
     var isLoading: Driver<Bool> { get }
+    /// タスクの追加通知
     var addTaskInfo: Signal<VMResult<Void>?> { get }
     /// タスクを登録
     func addTask(title: String, content: String, scheduledDate: String)
@@ -21,7 +23,7 @@ class AddTaskViewModelImpl: AddTaskViewModel {
     private let userUseCase: UserUseCase = UserUseCaseImpl()
     private let disposeBag = DisposeBag()
 
-    // タスクの登録通知
+    /// タスクの追加通知
     private let addTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var addTaskInfo = addTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
@@ -34,7 +36,7 @@ class AddTaskViewModelImpl: AddTaskViewModel {
         .asDriver(onErrorJustReturn: false)
     }()
 
-
+    /// タスクの追加
     func addTask(title: String, content: String, scheduledDate: String) {
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
                 .flatMap { (user, idToken) in

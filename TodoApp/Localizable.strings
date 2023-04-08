@@ -56,3 +56,6 @@
 "taskListNavigationTitle" = "タスク一覧";
 "updateNavigationTitle" = "タスク更新";
 "updateNavigationButtonName" = "保存";
+
+// MARK: - Database
+"databaseOpenError" = "データベースが1度もopenされていません";

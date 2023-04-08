@@ -10,12 +10,13 @@ import APIKit
 import RxSwift
 
 protocol TaskRemoteStore {
+    /// タスクの取得
     func fetchTask(userId: String, authorization: String) -> Single<TaskListAPI.Response>
-
+    /// タスクの追加
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response>
-
+    /// タスクの更新
     func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<UpdateTaskAPI.Response>
-
+    /// タスクの削除
     func deleteTask(taskId: String, authorization: String) -> Single<DeleteTaskAPI.Response>
 }
 

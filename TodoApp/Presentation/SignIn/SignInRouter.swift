@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension SignInViewController {
-
+    /// タブバー画面に遷移
     func toTabBar() {
         guard let tabBarVC = R.storyboard.main.tabBarVC() else { return }
         tabBarVC.modalPresentationStyle = .fullScreen

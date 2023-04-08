@@ -8,7 +8,9 @@
 import Foundation
 
 class UserInfoAttribute {
+    /// ユーザID
     let userId: String
+    /// メールアドレス
     let email: String
 
     init(userId: String, email:String) {

@@ -16,11 +16,10 @@ protocol SelectOrderViewDelegate: AnyObject {
 }
 
 class SelectOrderView: UIView {
-
     weak var delegate: SelectOrderViewDelegate?
 
-    @IBOutlet weak var ascendingCheckImage: UIImageView!
-    @IBOutlet weak var descendingCheckImage: UIImageView!
+    @IBOutlet private weak var ascendingCheckImage: UIImageView!
+    @IBOutlet private weak var descendingCheckImage: UIImageView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)

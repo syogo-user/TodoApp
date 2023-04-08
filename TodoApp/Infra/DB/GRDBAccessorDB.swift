@@ -11,12 +11,14 @@ import RxGRDB
 import RxSwift
 
 protocol DBAccessor {
+    /// ユーザ情報
     var userInfoDao: UserInfoDao { get }
+    /// タスク情報
     var taskInfoDao: TaskInfoDao { get }
 }
 
 class GRDBAccessor {
-
+    /// 取得
     func readFromDBwith<T>(_ operation: @escaping ((GRDB.Database) throws -> (T))) -> Single<T> {
         MainDatabase.shared.dbQueue()
             .flatMap { dbQueue in
@@ -29,6 +31,7 @@ class GRDBAccessor {
             }
     }
 
+    /// 更新
     func writeToDBwith(_ operation: @escaping ((GRDB.Database) throws -> Void)) -> Single<Void> {
         MainDatabase.shared.dbQueue()
             .flatMap { dbQueue in

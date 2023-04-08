@@ -9,13 +9,14 @@ import Foundation
 import UIKit
 
 extension TaskListViewController {
-
+    /// 追加画面に遷移
     func toAddTask() {
         guard let addTaskVC = R.storyboard.list.addTaskVC() else { return }
         addTaskVC.delegate = self
         self.present(addTaskVC, animated: true)
     }
 
+    /// 更新画面に遷移
     func toUpdateTask(taskInfoItem: TaskInfoItem) {
         guard let updateTaskVC =  R.storyboard.list.updateTaskVC() else { return }
         updateTaskVC.setUpdateTask(task: taskInfoItem)

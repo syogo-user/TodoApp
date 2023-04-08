@@ -18,18 +18,6 @@ class SignInViewController: BaseViewController {
         super.viewDidLoad()
         bindViewModelValue()
     }
-
-    @IBAction func googleSignIn(_ sender: Any) {
-        self.isConnect() {
-            viewModel.socialSigIn(provider: .google)
-        }
-    }
-
-    @IBAction func appleSignIn(_ sender: Any) {
-        self.isConnect() {
-            viewModel.socialSigIn(provider: .apple)
-        }
-    }
     
     private func bindViewModelValue() {
         viewModel.isLoading
@@ -62,5 +50,17 @@ class SignInViewController: BaseViewController {
             message: R.string.localizable.signInErrorMessage(),
             buttonTitle: R.string.localizable.ok()
         )
+    }
+
+    @IBAction private func googleSignIn(_ sender: Any) {
+        self.isConnect() {
+            viewModel.socialSigIn(provider: .google)
+        }
+    }
+
+    @IBAction private func appleSignIn(_ sender: Any) {
+        self.isConnect() {
+            viewModel.socialSigIn(provider: .apple)
+        }
     }
 }

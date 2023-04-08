@@ -10,13 +10,11 @@ import Foundation
 enum APIResultCode {
     /// 成功
     static let ok = "OK"
-
     /// 不明なエラー
     static let errUnknown = "ERR_UNKNOWN"
 }
 
 protocol APIResult {
-
     /// 処理結果
     var message: String { get }
     /// エラーの有無

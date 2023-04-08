@@ -8,6 +8,7 @@
 import Foundation
 import APIKit
 
+/// タスク登録API
 enum AddTaskAPI {
     struct Request: ServerRequest, ServerAuthorization {
 

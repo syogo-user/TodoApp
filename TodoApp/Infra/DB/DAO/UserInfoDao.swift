@@ -11,11 +11,11 @@ import RxGRDB
 import RxSwift
 
 protocol UserInfoDao {
-    /// ユーザ情報を取得
+    /// ローカルユーザ情報取得
     func loadLocalUserInfo() -> Single<[UserInfoRecord]>
-    /// ローカルにユーザを追加する
+    /// ローカルユーザ追加
     func insertLocalUserInfo(userInfo: UserInfoRecord) -> Single<Void>
-    ///  ローカルのユーザ情報を削除する
+    ///  ローカルユーザ情報を削除
     func deleteLocalUserInfo() -> Single<Void>
 }
 

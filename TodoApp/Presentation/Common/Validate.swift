@@ -10,13 +10,13 @@ import Foundation
 class Validate {
     /// 空欄チェック
     func isEmpty(inputArray: String...) -> Bool {
-        var resutlt = false
+        var result = false
         inputArray.forEach { item in
             if item.isEmpty {
-                resutlt = true
+                result = true
             }
         }
-        return resutlt
+        return result
     }
 
     /// 文字数チェック

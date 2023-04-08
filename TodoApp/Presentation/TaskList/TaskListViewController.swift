@@ -9,11 +9,12 @@ import UIKit
 import RxSwift
 
 class TaskListViewController: BaseViewController {
+    private let disposeBag = DisposeBag()
+    private let refreshCtl = UIRefreshControl()
     private var viewModel: TaskListViewModel = TaskListViewModelImpl()
     private var selectMenuView: SelectMenuView?
     private var selectOrderView: SelectOrderView?
-    private let disposeBag = DisposeBag()
-    private let refreshCtl = UIRefreshControl()
+
     @IBOutlet private weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -127,7 +128,7 @@ class TaskListViewController: BaseViewController {
         tableView.refreshControl = refreshCtl
         refreshCtl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.delegate = self
-        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dissmissView))
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissView))
         gesture.cancelsTouchesInView = false
         gesture.delegate = self
         self.view.addGestureRecognizer(gesture)
@@ -145,7 +146,7 @@ class TaskListViewController: BaseViewController {
     }
 
     @objc private func showSelectOrderView() {
-        dissmissView()
+        dismissView()
         selectOrderView = SelectOrderView(frame: .null)
         guard let selectOrderView = self.selectOrderView else { return }
         selectOrderView.setUp(sort: viewModel.getSortOrder())
@@ -164,7 +165,7 @@ class TaskListViewController: BaseViewController {
     }
 
     @objc private func showSelectMenuView() {
-        dissmissView()
+        dismissView()
         selectMenuView = SelectMenuView(frame: .null)
         guard let selectMenuView = self.selectMenuView else { return }
         selectMenuView.setUp(filterCondition: viewModel.getFilterCondition())
@@ -182,13 +183,20 @@ class TaskListViewController: BaseViewController {
         selectMenuView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationAreaTotalHeight).isActive = true
     }
 
-    @objc func dissmissView() {
+    @objc private func dismissView() {
         dismissSelectMenuView()
         dismissSelectOrderView()
     }
 
     private func dismissSelectMenuView() {
         selectMenuView?.removeFromSuperview()
+    }
+
+    @objc private func refresh() {
+        self.isConnect() {
+            viewModel.fetchTaskList()
+        }
+        refreshCtl.endRefreshing()
     }
 
     private func dismissSelectOrderView() {
@@ -248,13 +256,6 @@ class TaskListViewController: BaseViewController {
         }))
         dialog.addAction(UIAlertAction(title: R.string.localizable.cancel(), style: .cancel, handler: nil))
         self.present(dialog, animated: true, completion: nil)
-    }
-
-    @objc private func refresh() {
-        self.isConnect() {
-            viewModel.fetchTaskList()
-        }
-        refreshCtl.endRefreshing()
     }
 
     @IBAction private func add(_ sender: Any) {

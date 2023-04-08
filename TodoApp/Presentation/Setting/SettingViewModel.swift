@@ -12,8 +12,11 @@ import RxCocoa
 import Foundation
 
 protocol SettingViewModel {
+    /// ローディング
     var isLoading: Driver<Bool> { get }
+    /// ユーザ情報取得通知
     var userInfo: Signal<VMResult<UserInfoAttribute>?> { get }
+    /// サインアウト通知
     var signOut: Signal<VMResult<Void>?> { get }
     /// サインアウト
     func signOutLocally()
@@ -29,6 +32,7 @@ class SettingViewModelImpl: SettingViewModel {
     /// サインアウトの通知
     private let signOutRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var signOut = signOutRelay.asSignal(onErrorSignalWith: .empty())
+
     /// ユーザ情報の取得通知
     private let userInfoRelay = BehaviorRelay<VMResult<UserInfoAttribute>?>(value: nil)
     lazy var userInfo = userInfoRelay.asSignal(onErrorSignalWith: .empty())
@@ -45,6 +49,7 @@ class SettingViewModelImpl: SettingViewModel {
         .asDriver(onErrorJustReturn: false)
     }()
 
+    /// サインアウト
     func signOutLocally() {
         userUseCase.signOut()
             .flatMap {
@@ -67,6 +72,7 @@ class SettingViewModelImpl: SettingViewModel {
 
     }
 
+    /// ローカルユーザ情報の取得
     func loadUser() {
        userUseCase.loadLocalUser()
             .map { result -> VMResult<UserInfoAttribute> in

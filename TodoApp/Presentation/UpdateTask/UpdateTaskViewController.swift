@@ -16,18 +16,17 @@ protocol UpdateTaskViewControllerDelegate: AnyObject {
 
 class UpdateTaskViewController: BaseViewController {
     weak var delegate: UpdateTaskViewControllerDelegate?
+    private let viewModel: UpdateTaskViewModel = UpdateTaskViewModelImpl()
+    private let validate: Validate = Validate()
+    private let disposeBag = DisposeBag()
+    private var updateTask: TaskInfoItem?
+    private var selectedDate: Date?
 
     @IBOutlet private weak var completeCheckButton: CheckButton!
     @IBOutlet private weak var favoriteButton: FavoriteButton!
     @IBOutlet private weak var scheduledButton: UIButton!
     @IBOutlet private weak var titleTextField: UITextField!
     @IBOutlet private weak var contentTextView: UITextView!
-
-    private var updateTask: TaskInfoItem?
-    private var selectedDate: Date?
-    private let viewModel: UpdateTaskViewModel = UpdateTaskViewModelImpl()
-    private let validate: Validate = Validate()
-    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,7 +154,7 @@ class UpdateTaskViewController: BaseViewController {
         )
     }
 
-    @IBAction func selectDate(_ sender: Any) {
+    @IBAction private func selectDate(_ sender: Any) {
         self.toSelectDate()
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension SettingViewController {
+extension SettingViewController {    
     func toSignIn() {
         guard let signInVC = R.storyboard.signIn.signInVC() else { return }
         signInVC.modalPresentationStyle = .fullScreen

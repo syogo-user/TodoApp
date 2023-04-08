@@ -19,9 +19,9 @@ protocol SelectMenuViewDelegate: AnyObject {
 class SelectMenuView: UIView {
     weak var delegate: SelectMenuViewDelegate?
 
-    @IBOutlet weak var onlyFavoriteCheckImage: UIImageView!
-    @IBOutlet weak var includeCompletedCheckImage: UIImageView!
-    @IBOutlet weak var notIncludeCompletedCheckImage: UIImageView!
+    @IBOutlet private weak var onlyFavoriteCheckImage: UIImageView!
+    @IBOutlet private weak var includeCompletedCheckImage: UIImageView!
+    @IBOutlet private weak var notIncludeCompletedCheckImage: UIImageView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,15 +63,15 @@ class SelectMenuView: UIView {
     }
 
 
-    @IBAction func filterFavorite(_ sender: Any) {
+    @IBAction private func filterFavorite(_ sender: Any) {
         delegate?.didFilterFavorite()
     }
 
-    @IBAction func showCompletee(_ sender: Any) {
+    @IBAction private func showCompletee(_ sender: Any) {
         delegate?.includeCompleted()
     }
 
-    @IBAction func sort(_ sender: Any) {
+    @IBAction private func sort(_ sender: Any) {
         delegate?.notIncludeCompleted()
     }
 }

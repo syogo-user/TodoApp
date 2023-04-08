@@ -8,7 +8,6 @@
 import UIKit
 
 class InputTitleTextField: UITextField {
-
     var padding: CGPoint = CGPoint(x: 10.0, y: 0.0)
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {

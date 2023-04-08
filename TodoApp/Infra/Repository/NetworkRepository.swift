@@ -11,6 +11,7 @@ protocol NetworkRepository {
     /// ネットに接続しているか
     func isConnect() -> Bool
 }
+
 class NetworkRepositoryImpl: NetworkRepository {
     private let remoteStore: NetworkRemoteStore = NetworkRemoteStoreImpl()
 

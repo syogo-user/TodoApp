@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "apple 2.pdf",
+      "filename" : "apple 1.pdf",
       "idiom" : "universal"
     },
     {
@@ -21,7 +21,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "apple 1.pdf",
+      "filename" : "apple 2.pdf",
       "idiom" : "universal"
     }
   ],

@@ -16,17 +16,16 @@ protocol AddTaskViewControllerDelegate: AnyObject {
 
 class AddTaskViewController: BaseViewController {
     weak var delegate: AddTaskViewControllerDelegate?
-
+    private let viewModel: AddTaskViewModel = AddTaskViewModelImpl()
+    private let validate: Validate = Validate()
+    private let disposeBag = DisposeBag()
+    private var selectDate: String?
+    
     @IBOutlet private weak var titleTextField: UITextField!
     @IBOutlet private weak var contentTextView: UITextView!
     @IBOutlet private weak var inputAreaStackView: UIStackView!
     @IBOutlet private weak var datePicker: UIDatePicker!
     @IBOutlet private weak var sendButton: UIButton!
-
-    private var selectDate: String?
-    private let viewModel: AddTaskViewModel = AddTaskViewModelImpl()
-    private let validate: Validate = Validate()
-    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,7 +145,7 @@ class AddTaskViewController: BaseViewController {
         )        
     }
 
-    @IBAction func selectDate(_ sender: Any) {
+    @IBAction private func selectDate(_ sender: Any) {
         self.selectDate = datePicker.date.dateFormat()
     }
 

@@ -8,7 +8,6 @@
 import UIKit
 
 @IBDesignable class InputTextView: UITextView {
-
     @IBInspectable private var placeHolder: String = "" {
         willSet {
             self.placeHolderLabel.text = newValue

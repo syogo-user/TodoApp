@@ -14,27 +14,27 @@ protocol TaskRepository {
     var sortOrder: String? { get set }
     /// 抽出条件
     var filterCondition: String? { get set }
-
+    /// タスクの取得
     func fetchTask(userId: String, authorization: String) -> Single<TaskListAPI.Response>
-
+    /// タスクの登録
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response>
-
+    /// タスクの更新
     func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<UpdateTaskAPI.Response>
-
+    /// タスクの削除
     func deleteTask(taskId: String, authorization: String) -> Single<DeleteTaskAPI.Response>
-    
+    /// ローカルタスクリストの取得
     func loadLocalTaskList() -> Single<[TaskInfoRecord]>
-
+    /// ローカルタスクの取得
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
-
+    /// ローカルタスクリストの追加
     func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void>
-
+    /// ローカルタスクの更新
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
-
+    /// ローカルタスクの削除
     func deleteLocalTask(taskId: String) -> Single<Void>
-
+    /// ローカルタスクをすべて削除
     func deleteLocalTaskAll() -> Single<Void>
-
+    /// ローカルタスクリストを削除
     func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
 }
 

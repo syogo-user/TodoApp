@@ -11,7 +11,9 @@ import RxSwift
 import RxCocoa
 
 protocol SignInViewModel {
+    /// ローディング
     var isLoading: Driver<Bool> { get }
+    /// ユーザ情報通知
     var userInfo: Signal<VMResult<Void>?> { get }
     /// ソーシャルサインイン
     func socialSigIn(provider: AuthProvider)
@@ -20,10 +22,10 @@ protocol SignInViewModel {
 }
 
 class SignInViewModelImpl: SignInViewModel {
-    private var usecase: UserUseCase = UserUseCaseImpl()
+    private var useCase: UserUseCase = UserUseCaseImpl()
     private let disposeBag = DisposeBag()
 
-    /// ユーザの登録通知
+    /// ユーザ情報通知
     private let userInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var userInfo = userInfoRelay.asSignal(onErrorSignalWith: .empty())
 
@@ -36,9 +38,9 @@ class SignInViewModelImpl: SignInViewModel {
     }()
 
     func socialSigIn(provider: AuthProvider) {
-        self.usecase.socialSignIn(provider: provider)
+        self.useCase.socialSignIn(provider: provider)
             .flatMap { () in
-                self.usecase.fetchUserInfo()
+                self.useCase.fetchUserInfo()
             }
             .flatMap { userInfo in
                 let subAttribute = userInfo.filter { $0.key == .sub }.first
@@ -49,7 +51,7 @@ class SignInViewModelImpl: SignInViewModel {
                 guard let email = emailAttribute?.value else {
                     throw DomainError.authError
                 }
-                return self.usecase.insertLocalUser(userId: userId, email: email)
+                return self.useCase.insertLocalUser(userId: userId, email: email)
             }
             .map {
                 return .success(())
@@ -61,6 +63,6 @@ class SignInViewModelImpl: SignInViewModel {
     }
 
     func setViaSignIn() {
-        usecase.isFromSignIn = true
+        useCase.isFromSignIn = true
     }
 }

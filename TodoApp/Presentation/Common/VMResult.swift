@@ -28,10 +28,6 @@ class VMResult<T>: CustomStringConvertible {
         self.isLoading = isLoading
     }
 
-    init(isReady: Bool) {
-        self.isReady = isReady
-    }
-
     init(data: T?) {
         self.data = data
     }

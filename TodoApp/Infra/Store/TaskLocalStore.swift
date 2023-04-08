@@ -14,19 +14,19 @@ protocol TaskLocalStore {
     var sortOrder: String? { get set }
     /// 抽出条件
     var filterCondition: String? { get set }
-
+    /// ローカルタスクリストの取得
     func loadLocalTaskList() -> Single<[TaskInfoRecord]>
-
+    /// ローカルタスクの追加
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
-
+    /// ローカルタスクリストの追加
     func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void>
-
+    /// ローカルタスクの更新
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
-
+    /// ローカルタスクの削除
     func deleteLocalTask(taskId: String) -> Single<Void>
-
+    /// ローカルタスクをすべて削除
     func deleteLocalTaskAll() -> Single<Void>
-
+    /// ローカルタスクリストを削除
     func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
 }
 
