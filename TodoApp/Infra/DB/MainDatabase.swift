@@ -26,7 +26,7 @@ final class MainDatabase {
 
     func dbQueue() throws -> DatabaseQueue {
         guard let dbQueue = _dbQueue else {
-            throw DatabaseError.accessFailed(reason: "データベースが1度もopenされていません")
+            throw DatabaseError.accessFailed(reason: R.string.localizable.databaseOpenError())
         }
         print("dbQueue(): \(dbQueue.path)")
         return dbQueue
@@ -45,7 +45,6 @@ final class MainDatabase {
     }
 }
 
-
 extension DatabaseMigrator {
     static var mainDatabase: DatabaseMigrator {
         var databaseMigrator = DatabaseMigrator()
@@ -57,7 +56,6 @@ extension DatabaseMigrator {
     }
 }
 
-
 private extension DatabaseMigrator {
     mutating func registerMigration(_ version: MainDatabase.Versions, migrate: @escaping(Database, MainDatabase.Versions) throws -> Void) {
         registerMigration(version.rawValue) {
@@ -66,4 +64,3 @@ private extension DatabaseMigrator {
 
     }
 }
-

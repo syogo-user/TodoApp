@@ -10,30 +10,39 @@ import RxSwift
 import RxCocoa
 
 enum Sort: String {
+    /// 昇順
     case ascendingOrderDate = "ascendingOrderDate"
+    /// 降順
     case descendingOrderDate = "descendingOrderDate"
 }
 
 enum FilterCondition: String {
+    /// お気に入りのみ
     case onlyFavorite = "onlyFavorite"
+    /// 完了済みも含む
     case includeCompleted = "includeCompleted"
+    /// 完了済みを含まない
     case notIncludeCompleted = "notIncludeCompleted"
 }
 
 protocol TaskListViewModel {
+    /// ローディング
     var isLoading: Driver<Bool> { get }
+    /// タスクの取得(セル用の値)通知
     var taskItems: Driver<[TaskInfoItem]> { get }
+    /// タスクの取得通知
     var taskInfo: Signal<VMResult<Void>?> { get }
+    /// タスクの更新通知
     var updateTaskInfo: Signal<VMResult<Void>?> { get }
+    /// タスクの削除通知
     var deleteTaskInfo: Signal<VMResult<Void>?> { get }
-
     /// タスクリストを取得
     func fetchTaskList()
-    /// タスクを削除
-    func deleteTask(index: Int)
     /// タスクを更新
     func updateTask(index: Int)
-    /// ローカルDBからタスクリストを取得
+    /// タスクを削除
+    func deleteTask(index: Int)
+    /// ローカルからタスクリストを取得
     func loadLocalTaskList()
     /// サインイン画面を経由したか
     func isFromSignIn() -> Bool
@@ -89,13 +98,13 @@ class TaskListViewModelImpl: TaskListViewModel {
         .asDriver(onErrorJustReturn: false)
     }()
 
+    /// タスクリストを取得
     func fetchTaskList() {
         let sortOrder = getSortOrder()
         let filterCondition = getFilterCondition()
         // ユーザIDとトークンを取得
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
             .flatMap { (user: UserInfoAttribute, idToken: String) in
-                // タスクをAPIから取得
                 self.taskUseCase.fetchTask(userId: user.userId, authorization: idToken)
             }
             .flatMap { (list: [TaskInfo])  in
@@ -138,6 +147,35 @@ class TaskListViewModelImpl: TaskListViewModel {
             .disposed(by: disposeBag)
     }
 
+    /// タスクを更新
+    func updateTask(index: Int) {
+        let taskInfoItem = selectItemAt(index: index)
+        Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
+            .flatMap { (user, idToken) in
+                self.taskUseCase.updateTask(taskId: taskInfoItem.taskId,title: taskInfoItem.title, content: taskInfoItem.content, scheduledDate: taskInfoItem.scheduledDate.dateFormat(), isCompleted: taskInfoItem.isCompleted, isFavorite: taskInfoItem.isFavorite, userId: user.userId, authorization: idToken)
+            }
+            .do(onSuccess: { task in
+                // isCompletedがtrueなら通知を削除する。falseの場合は更新する
+                if task.isCompleted {
+                    self.taskUseCase.removeNotification(taskId: task.taskId)
+                } else {
+                    self.taskUseCase.registerNotification(notificationId: task.taskId, title: task.title, body: task.content, scheduledDate: task.scheduledDate)
+                }
+            })
+            .flatMap { result in
+                let taskInfoRecord = TaskInfoRecord(taskId: result.taskId, title: result.title, content: result.content, scheduledDate: result.scheduledDate, isCompleted: result.isCompleted, isFavorite: result.isFavorite, userId: result.userId)
+                return self.taskUseCase.updateLocalTask(taskInfo: taskInfoRecord)
+            }
+            .map { _ in
+                return .success(())
+            }
+            .asSignal(onErrorRecover: { .just(.failure($0))})
+            .startWith(.loading())
+            .emit(to: updateTaskInfoRelay)
+            .disposed(by: disposeBag)
+    }
+
+    /// タスクを削除
     func deleteTask(index: Int) {
         let sortOrder = getSortOrder()
         self.userUseCase.fetchCurrentAuthToken()
@@ -168,7 +206,7 @@ class TaskListViewModelImpl: TaskListViewModel {
             .disposed(by: disposeBag)
     }
 
-    /// ローカルからタスク取得
+    /// ローカルからタスクリストを取得
     func loadLocalTaskList() {
         let sortOrder = getSortOrder()
         let filterCondition = getFilterCondition()
@@ -190,18 +228,22 @@ class TaskListViewModelImpl: TaskListViewModel {
             .disposed(by: disposeBag)
     }
 
+    /// サインイン画面を経由したか
     func isFromSignIn() -> Bool {
         userUseCase.isFromSignIn
     }
 
+    /// サインイン画面を経由したかを設定
     func setFromSignIn() {
         userUseCase.isFromSignIn = false
     }
 
+    /// 指定したインデックスのタスクを返却する
     func selectItemAt(index: Int) -> TaskInfoItem {
         tableViewItems[index]
     }
 
+    /// 完了状態を変更
     func changeComplete(index: Int, isCompleted: Bool) {
         let item = selectItemAt(index: index)
         tableViewItems[index] = TaskInfoItem(
@@ -214,7 +256,7 @@ class TaskListViewModelImpl: TaskListViewModel {
             userId: item.userId
         )
     }
-
+    /// お気に入り状態を変更
     func changeFavorite(index: Int, isFavorite: Bool) {
         let item = selectItemAt(index: index)
         tableViewItems[index] = TaskInfoItem(
@@ -228,45 +270,22 @@ class TaskListViewModelImpl: TaskListViewModel {
         )
     }
 
-    func updateTask(index: Int) {
-        let taskInfoItem = selectItemAt(index: index)
-        Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
-            .flatMap { (user, idToken) in
-                self.taskUseCase.updateTask(taskId: taskInfoItem.taskId,title: taskInfoItem.title, content: taskInfoItem.content, scheduledDate: taskInfoItem.scheduledDate.dateFormat(), isCompleted: taskInfoItem.isCompleted, isFavorite: taskInfoItem.isFavorite, userId: user.userId, authorization: idToken)
-            }
-            .do(onSuccess: { task in
-                // isCompletedがtrueなら通知を削除する。falseの場合は更新する
-                if task.isCompleted {
-                    self.taskUseCase.removeNotification(taskId: task.taskId)
-                } else {
-                    self.taskUseCase.registerNotification(notificationId: task.taskId, title: task.title, body: task.content, scheduledDate: task.scheduledDate)
-                }
-            })
-            .flatMap { result in
-                let taskInfoRecord = TaskInfoRecord(taskId: result.taskId, title: result.title, content: result.content, scheduledDate: result.scheduledDate, isCompleted: result.isCompleted, isFavorite: result.isFavorite, userId: result.userId)
-                return self.taskUseCase.updateLocalTask(taskInfo: taskInfoRecord)
-            }
-            .map { _ in
-                return .success(())
-            }
-            .asSignal(onErrorRecover: { .just(.failure($0))})
-            .startWith(.loading())
-            .emit(to: updateTaskInfoRelay)
-            .disposed(by: disposeBag)
-    }
-
+    /// 並び順を取得
     func getSortOrder() -> String {
         taskUseCase.sortOrder ?? Sort.descendingOrderDate.rawValue
     }
 
+    /// 並び順を設定
     func setSortOrder(sortOrder: String) {
         taskUseCase.sortOrder = sortOrder
     }
 
+    /// 抽出条件を取得
     func getFilterCondition() -> String {
         taskUseCase.filterCondition ?? FilterCondition.notIncludeCompleted.rawValue
     }
 
+    /// 抽出条件を設定
     func setFilterCondition(filterCondition: String) {
         taskUseCase.filterCondition = filterCondition
     }

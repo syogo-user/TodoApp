@@ -13,12 +13,19 @@ class TaskInfoRecord : Record {
         "task_info"
     }
 
+    /// タスクID
     let taskId: String
+    /// タイトル
     let title: String
+    /// 内容
     let content: String
+    /// 予定日時
     let scheduledDate: Date
+    /// 完了済みか
     let isCompleted: Bool
+    /// お気に入りか
     let isFavorite: Bool
+    /// ユーザID
     let userId: String
 
     static func setupTable(_ db: Database, _ version: MainDatabase.Versions) throws {
@@ -74,5 +81,4 @@ class TaskInfoRecord : Record {
         container["is_favorite"] = self.isFavorite
         container["user_id"] = self.userId
     }
-
 }

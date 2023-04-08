@@ -10,9 +10,11 @@ import RxSwift
 import RxCocoa
 
 protocol UpdateTaskViewModel {
+    /// ローディング
     var isLoading: Driver<Bool> { get }
+    /// タスクの更新通知
     var updateTaskInfo: Signal<VMResult<Void>?> { get }
-
+    /// タスクの更新
     func updateTask(taskInfoItem: TaskInfoItem)
 }
 
@@ -21,7 +23,7 @@ class UpdateTaskViewModelImpl: UpdateTaskViewModel {
     private let userUseCase: UserUseCase = UserUseCaseImpl()
     private let disposeBag = DisposeBag()
 
-    // タスクの更新通知
+    /// タスクの更新通知
     private let updateTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
     lazy var updateTaskInfo = updateTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
 
@@ -34,6 +36,7 @@ class UpdateTaskViewModelImpl: UpdateTaskViewModel {
         .asDriver(onErrorJustReturn: false)
     }()
 
+    /// タスクの更新
     func updateTask(taskInfoItem: TaskInfoItem) {
         Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
             .flatMap { (user, idToken) in

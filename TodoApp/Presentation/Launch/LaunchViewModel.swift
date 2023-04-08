@@ -10,23 +10,28 @@ import RxSwift
 import RxCocoa
 
 protocol LaunchViewModel {
+    /// サインインの判定通知
     var isSignInResult: Signal<VMResult<Bool>?> { get }
+    /// セットアップ
     func setUp()
+    /// サインインの判定
     func isSignIn()
 }
 
 class LaunchViewModelImpl: LaunchViewModel {
-    private var usecase: UserUseCase = UserUseCaseImpl()
     private let disposeBag = DisposeBag()
+    private var usecase: UserUseCase = UserUseCaseImpl()
 
     /// サインインの判定通知
     private let isSignInRelay = BehaviorRelay<VMResult<Bool>?>(value: nil)
     lazy var isSignInResult = isSignInRelay.asSignal(onErrorSignalWith: .empty())
 
+    /// セットアップ
     func setUp() {
         usecase.isFromSignIn = false
     }
-
+    
+    /// サインインの判定
     func isSignIn() {
         usecase.isSignIn()
             .map { signInResult in

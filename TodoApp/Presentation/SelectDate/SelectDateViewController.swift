@@ -16,7 +16,8 @@ protocol SelectDateViewControllerDelegate: AnyObject {
 class SelectDateViewController: BaseViewController {
     weak var delegate: SelectDateViewControllerDelegate?
     private var selectDate: Date?
-    @IBOutlet weak var datePicker: UIDatePicker!
+
+    @IBOutlet private weak var datePicker: UIDatePicker!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +33,12 @@ class SelectDateViewController: BaseViewController {
         self.datePicker.date = selectDate
     }
 
-    @IBAction func selectDatea(_ sender: Any) {
+    @IBAction private func selectDatea(_ sender: Any) {
         delegate?.didSelectDate(datePicker.date)
         self.dismiss(animated: true)
     }
     
-    @IBAction func cancel(_ sender: Any) {
+    @IBAction private func cancel(_ sender: Any) {
         self.dismiss(animated: true)
     }
 }

@@ -11,9 +11,10 @@ import RxCocoa
 import Foundation
 
 class SettingViewController: BaseViewController {
-    @IBOutlet private weak var emailLabel: UILabel!
     private let disposeBag = DisposeBag()
     private let viewModel: SettingViewModel = SettingViewModelImpl()
+    
+    @IBOutlet private weak var emailLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,18 +63,17 @@ class SettingViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
 
-    @IBAction func signOut(_ sender: Any) {
-        self.isConnect() {
-            viewModel.signOutLocally()
-        }
-    }
-
-
     private func signOutErrorDialog() {
         self.showDialog(
             title: R.string.localizable.signOutErrorTitle(),
             message: R.string.localizable.signOutErrorMessage(),
             buttonTitle: R.string.localizable.ok()
         )
+    }
+
+    @IBAction private func signOut(_ sender: Any) {
+        self.isConnect() {
+            viewModel.signOutLocally()
+        }
     }
 }

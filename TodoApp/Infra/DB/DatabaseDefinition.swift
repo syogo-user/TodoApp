@@ -8,7 +8,10 @@
 import GRDB
 
 protocol DatabaseDefinition {
+    /// データベース名
     var dbName: String { get }
+    /// データファイル名
     var dbFileName: String { get }
+    /// マイグレーション
     var migrator: DatabaseMigrator { get }
 }

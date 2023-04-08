@@ -8,6 +8,7 @@
 import Foundation
 import APIKit
 
+/// タスク削除API
 enum DeleteTaskAPI {
     struct Request: ServerRequest, ServerAuthorization {
 

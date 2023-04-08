@@ -33,12 +33,13 @@ protocol UserUseCase {
 
 class UserUseCaseImpl: UserUseCase {
     private var repository: UserRepository = UserRepositoryImpl()
-
+    /// サインイン画面を経由したか
     var isFromSignIn: Bool {
         get { repository.isFromSignIn }
         set { repository.isFromSignIn = newValue }
     }
 
+    /// トークンを取得
     func fetchCurrentAuthToken() -> Single<String> {
         return Single.create { single in
             Task {
@@ -53,6 +54,7 @@ class UserUseCaseImpl: UserUseCase {
         }
     }
 
+    /// ユーザ情報を取得
     func fetchUserInfo() -> Single<[AuthUserAttribute]> {
         return Single.create { single in
             Task {
@@ -69,6 +71,7 @@ class UserUseCaseImpl: UserUseCase {
         }
     }
 
+    /// ログイン中かどうか判定
     func isSignIn() -> Single<Bool> {
         return Single.create { single in
             Task {
@@ -87,6 +90,7 @@ class UserUseCaseImpl: UserUseCase {
         }
     }
 
+    /// ソーシャルサインイン
     func socialSignIn(provider: AuthProvider) -> Single<Void> {
         return Single.create { single in
             Task {
@@ -105,6 +109,7 @@ class UserUseCaseImpl: UserUseCase {
         }
     }
 
+    /// サインアウト
     func signOut() -> Single<Void> {
         return Single.create { single in
             Task {
@@ -130,6 +135,7 @@ class UserUseCaseImpl: UserUseCase {
         }
     }
 
+    /// ユーザ情報取得
     func loadLocalUser() -> Single<UserInfoAttribute> {
         repository.loadLocalUser()
             .map { user in
@@ -141,12 +147,13 @@ class UserUseCaseImpl: UserUseCase {
             }
     }
 
+    /// ユーザ情報を登録
     func insertLocalUser(userId: String, email: String) -> Single<Void> {
         repository.insertLocalUser(userId: userId, email: email)
     }
 
+    /// ユーザ情報を削除
     func deleteLocalUser() -> Single<Void> {
         repository.deleteLocalUser()
-    }
-    
+    }    
 }

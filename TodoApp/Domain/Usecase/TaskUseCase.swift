@@ -21,7 +21,7 @@ protocol TaskUseCase {
     func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<TaskInfo>
     /// タスク削除
     func deleteTask(taskId: String, authorization: String) -> Single<String>
-    /// ローカルからタスクを取得
+    /// ローカルタスクリストを取得
     func loadLocalTaskList() -> Single<[TaskInfoRecord]>
     /// ローカルにタスクを登録
     func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
@@ -35,9 +35,9 @@ protocol TaskUseCase {
     func deleteLocalTaskAll() -> Single<Void>
     /// ローカルタスクを複数削除
     func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
-    /// タスクリストをソートする
+    /// タスクリストをソート
     func sortTask<T: SortProtocol>(itemList: inout [T], sort: String)
-    /// タスクをフィルターする
+    /// タスクをフィルター
     func filterTask(itemList: inout [TaskInfoItem], condition: String)
     /// 通知の登録/更新
     func registerNotification(notificationId: String, title: String, body: String, scheduledDate: Date)
@@ -54,16 +54,19 @@ class TaskUseCaseImpl: TaskUseCase {
 
     init() {}
 
+    /// 並び順
     var sortOrder: String? {
         get { repository.sortOrder }
         set { repository.sortOrder = newValue }
     }
 
+    /// 抽出条件
     var filterCondition: String? {
         get { repository.filterCondition }
         set { repository.filterCondition = newValue }
     }
 
+    /// タスク取得
     func fetchTask(userId: String, authorization: String) -> Single<[TaskInfo]> {
         repository.fetchTask(userId: userId, authorization: authorization)
             .do(onSuccess: { result in
@@ -84,6 +87,7 @@ class TaskUseCaseImpl: TaskUseCase {
             }
     }
 
+    /// タスク登録
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<TaskInfo> {
         repository.addTask(title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
             .do(onSuccess: { result in
@@ -105,7 +109,7 @@ class TaskUseCaseImpl: TaskUseCase {
             }
     }
 
-
+    /// タスク更新
     func updateTask(taskId: String,title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<TaskInfo> {
         repository.updateTask(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
             .do(onSuccess: { result in
@@ -127,6 +131,7 @@ class TaskUseCaseImpl: TaskUseCase {
             }
     }
 
+    /// タスク削除
     func deleteTask(taskId: String, authorization: String) -> Single<String> {
         repository.deleteTask(taskId: taskId, authorization: authorization)
             .do(onSuccess: { result in
@@ -139,34 +144,42 @@ class TaskUseCaseImpl: TaskUseCase {
             }
     }
 
-    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
-        repository.insertLocalTask(taskInfo: taskInfo)
-    }
-
-    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void> {
-        repository.insertLocalTaskList(taskInfoList: taskInfoList)
-    }
-
+    /// ローカルタスクリストを取得
     func loadLocalTaskList() -> Single<[TaskInfoRecord]> {
         repository.loadLocalTaskList()
     }
 
+    /// ローカルにタスクを登録
+    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
+        repository.insertLocalTask(taskInfo: taskInfo)
+    }
+
+    /// ローカルにタスクリストを登録
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void> {
+        repository.insertLocalTaskList(taskInfoList: taskInfoList)
+    }
+
+    /// ローカルタスクを更新
     func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
         repository.updateLocalTask(taskInfo: taskInfo)
     }
 
+    /// ローカルタスクを削除
     func deleteLocalTask(taskId: String) -> Single<Void> {
         repository.deleteLocalTask(taskId: taskId)
     }
 
+    /// ローカルタスクをすべて削除
     func deleteLocalTaskAll() -> Single<Void> {
         repository.deleteLocalTaskAll()
     }
 
+    /// ローカルタスクを複数削除
     func deleteLocalTaskList(taskIdList: [String]) -> Single<Void> {
         repository.deleteLocalTaskList(taskIdList: taskIdList)
     }
 
+    /// タスクリストをソート
     func sortTask<T: SortProtocol>(itemList: inout [T], sort: String) {
         itemList.sort{ (task1: T, task2: T) -> Bool in
             if task1.scheduledDate == task2.scheduledDate {
@@ -183,6 +196,7 @@ class TaskUseCaseImpl: TaskUseCase {
         }
     }
 
+    /// タスクをフィルター
     func filterTask(itemList: inout [TaskInfoItem], condition: String) {
         itemList = itemList.filter({ item in
             switch condition {
@@ -202,6 +216,7 @@ class TaskUseCaseImpl: TaskUseCase {
         })
     }
 
+    /// 通知の登録/更新
     func registerNotification(notificationId: String, title: String, body: String, scheduledDate: Date) {
         let targetDate = Calendar.current.dateComponents(
             [.year, .month, .day, .hour, .minute],
@@ -221,6 +236,7 @@ class TaskUseCaseImpl: TaskUseCase {
         UNUserNotificationCenter.current().add(request)
     }
 
+    /// 通知の削除
     func removeNotification(taskId: String) {
        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [taskId])
    }

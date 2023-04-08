@@ -12,7 +12,9 @@ class UserInfoRecord : Record {
         "user_info"
     }
 
+    /// ユーザID
     let userId: String
+    /// メールアドレス
     let email: String
 
     static func setupTable(_ db: Database, _ version: MainDatabase.Versions) throws {

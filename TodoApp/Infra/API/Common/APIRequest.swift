@@ -51,7 +51,6 @@ protocol ServerAuthorization {
 }
 
 extension ServerRequest where Self: ServerAuthorization {
-
     var headerFields: [String : String] {
         var header = [String: String]()
         header["charset"] = "utf-8"

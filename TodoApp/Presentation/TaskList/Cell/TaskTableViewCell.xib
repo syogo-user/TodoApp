@@ -91,7 +91,7 @@
             <connections>
                 <outlet property="completeCheckButton" destination="1yH-jf-1gz" id="jOZ-uV-wp6"/>
                 <outlet property="contentLabel" destination="TAY-4q-vlV" id="rVG-Nf-KdN"/>
-                <outlet property="favoriteButton" destination="DHQ-Yj-bhk" id="5qo-DF-R0E"/>
+                <outlet property="favoriteButton" destination="DHQ-Yj-bhk" id="vQp-B5-m9z"/>
                 <outlet property="scheduledDateLabel" destination="A7G-eU-5zA" id="Gt6-83-H1A"/>
                 <outlet property="title" destination="nKP-rK-61i" id="hWr-HF-hjl"/>
             </connections>

@@ -47,7 +47,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Td6-Ja-XVx">
             <objects>
-                <tabBarController storyboardIdentifier="tabBarVC" id="L3S-Rm-gBx" customClass="TabBarController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarVC" id="L3S-Rm-gBx" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Uhr-fU-I6F">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

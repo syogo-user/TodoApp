@@ -11,10 +11,10 @@ import RxSwift
 class TaskTableViewCell: UITableViewCell {
 
     @IBOutlet weak var completeCheckButton: CheckButton!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var contentLabel: UILabel!
-    @IBOutlet weak var scheduledDateLabel: UILabel!
     @IBOutlet weak var favoriteButton: FavoriteButton!
+    @IBOutlet private weak var title: UILabel!
+    @IBOutlet private weak var contentLabel: UILabel!
+    @IBOutlet private weak var scheduledDateLabel: UILabel!
 
     var disposeBag = DisposeBag()
 
