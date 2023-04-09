@@ -232,9 +232,36 @@ class TaskUseCaseTests: XCTestCase {
             XCTFail("Unexpected Error")
         }
     }
+    
+    func testSortAscendingOrderDate() {
+        var itemList = [
+            TaskInfo(taskId: "1", title: "1番目", content: "", scheduledDate: Date(), isCompleted: false, isFavorite: false, userId: "0123456789"),
+            TaskInfo(taskId: "2", title: "2番目", content: "", scheduledDate: Date().addingTimeInterval(3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
+            TaskInfo(taskId: "3", title: "3番目", content: "", scheduledDate: Date().addingTimeInterval(-3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
+            TaskInfo(taskId: "4", title: "4番目", content: "", scheduledDate: Date().addingTimeInterval(7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
+            TaskInfo(taskId: "5", title: "5番目", content: "", scheduledDate: Date().addingTimeInterval(-7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
+        ]
+        useCase.sortTask(itemList: &itemList, sort: Sort.ascendingOrderDate.rawValue)
+        XCTAssertEqual(itemList.map { $0.taskId }, ["5", "3", "1", "2", "4"])
+    }
+    
+    func testSortDescendingOrderDate() {
+        var itemList = [
+            TaskInfo(taskId: "1", title: "1番目", content: "", scheduledDate: Date(), isCompleted: false, isFavorite: false, userId: "0123456789"),
+            TaskInfo(taskId: "2", title: "2番目", content: "", scheduledDate: Date().addingTimeInterval(3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
+            TaskInfo(taskId: "3", title: "3番目", content: "", scheduledDate: Date().addingTimeInterval(-3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
+            TaskInfo(taskId: "4", title: "4番目", content: "", scheduledDate: Date().addingTimeInterval(7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
+            TaskInfo(taskId: "5", title: "5番目", content: "", scheduledDate: Date().addingTimeInterval(-7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
+        ]
+        useCase.sortTask(itemList: &itemList, sort: Sort.descendingOrderDate.rawValue)
+        XCTAssertEqual(itemList.map { $0.taskId }, ["4", "2", "1", "3", "5"])
+    }
+    
 }
 
 class TaskRepositoryMock: TaskRepository {
+    var sortOrder: String?
+    var filterCondition: String?
     var fetchTaskResult: Result<TaskListAPI.Response, Error>!
     var addTaskResult: Result<AddTaskAPI.Response, Error>!
     var updateTaskResult: Result<UpdateTaskAPI.Response, Error>!
@@ -367,5 +394,4 @@ class TaskRepositoryMock: TaskRepository {
             fatalError("fatalError")
         }
     }
-
 }
