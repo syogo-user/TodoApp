@@ -44,7 +44,7 @@ class SettingViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.signOut
+        viewModel.signOutResult
             .emit(onNext: { result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
@@ -73,7 +73,7 @@ class SettingViewController: BaseViewController {
 
     @IBAction private func signOut(_ sender: Any) {
         self.isConnect() {
-            viewModel.signOutLocally()
+            viewModel.signOut()
         }
     }
 }

@@ -25,10 +25,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="Cxm-qx-8oS">
-                                <rect key="frame" x="71.666666666666686" y="298.66666666666669" width="250" height="62"/>
+                                <rect key="frame" x="71.666666666666686" y="298.66666666666669" width="250" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="h6F-lE-yTX"/>
                                     <constraint firstAttribute="width" constant="250" id="xL2-MI-Ui2"/>
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
@@ -45,11 +46,12 @@
                                 </connections>
                             </imageView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="apple" translatesAutoresizingMaskIntoConstraints="NO" id="6p5-Mu-YMV">
-                                <rect key="frame" x="72.666666666666686" y="370.66666666666669" width="248" height="52"/>
+                                <rect key="frame" x="71.666666666666686" y="368.66666666666669" width="250" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="248" id="PBP-PS-nRd"/>
+                                    <constraint firstAttribute="height" constant="60" id="91Y-pX-HcQ"/>
+                                    <constraint firstAttribute="width" constant="250" id="PBP-PS-nRd"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
@@ -92,8 +94,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="apple" width="330" height="53"/>
-        <image name="google" width="346" height="62"/>
+        <image name="apple" width="330" height="52"/>
+        <image name="google" width="1421" height="225"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

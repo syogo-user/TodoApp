@@ -24,4 +24,9 @@ class InputTitleTextField: UITextField {
         // プレースホルダーの内側に余白
         return bounds.insetBy(dx: self.padding.x, dy: self.padding.y)
     }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+    }
 }
