@@ -17,9 +17,9 @@ protocol SettingViewModel {
     /// ユーザ情報取得通知
     var userInfo: Signal<VMResult<UserInfoAttribute>?> { get }
     /// サインアウト通知
-    var signOut: Signal<VMResult<Void>?> { get }
+    var signOutResult: Signal<VMResult<Void>?> { get }
     /// サインアウト
-    func signOutLocally()
+    func signOut()
     /// ユーザ情報取得
     func loadUser()
 }
@@ -31,7 +31,7 @@ class SettingViewModelImpl: SettingViewModel {
 
     /// サインアウトの通知
     private let signOutRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
-    lazy var signOut = signOutRelay.asSignal(onErrorSignalWith: .empty())
+    lazy var signOutResult = signOutRelay.asSignal(onErrorSignalWith: .empty())
 
     /// ユーザ情報の取得通知
     private let userInfoRelay = BehaviorRelay<VMResult<UserInfoAttribute>?>(value: nil)
@@ -39,7 +39,7 @@ class SettingViewModelImpl: SettingViewModel {
 
     private(set) lazy var isLoading: Driver<Bool> = {
         Observable.merge(
-            signOut.map { VMResult(data: $0?.data != nil) }.asObservable(),
+            signOutResult.map { VMResult(data: $0?.data != nil) }.asObservable(),
             userInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
         )
         .map { [unowned self] _ in
@@ -50,7 +50,7 @@ class SettingViewModelImpl: SettingViewModel {
     }()
 
     /// サインアウト
-    func signOutLocally() {
+    func signOut() {
         userUseCase.signOut()
             .flatMap {
                 self.taskUseCase.deleteLocalTaskAll()

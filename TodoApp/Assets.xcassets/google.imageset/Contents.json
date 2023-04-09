@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "google 1.pdf",
+      "filename" : "google_white 1.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "google 2.pdf",
+      "filename" : "google_white.pdf",
       "idiom" : "universal"
     },
     {
@@ -21,7 +21,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "google.pdf",
+      "filename" : "google_blue.pdf",
       "idiom" : "universal"
     }
   ],

@@ -122,7 +122,7 @@ class TaskListViewController: BaseViewController {
         let selectOrderButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), style: .plain, target: self, action: #selector(showSelectOrderView))
 
         let selectMenuButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(showSelectMenuView))
-        navigationItem.rightBarButtonItems = [selectMenuButton, selectOrderButton]
+        navigationItem.rightBarButtonItems = [selectMenuButton, selectOrderButton,]
 
         tableView.register(R.nib.taskTableViewCell)
         tableView.refreshControl = refreshCtl
@@ -278,11 +278,6 @@ extension TaskListViewController: UpdateTaskViewControllerDelegate {
 }
 
 extension TaskListViewController: UITableViewDelegate {
-    /// セクションの高さ
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        20.0
-    }
-
     /// セルの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         120.0
