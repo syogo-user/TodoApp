@@ -36,7 +36,7 @@ public extension String {
         if year == thisYear {
             return "\(month)月\(day)日 \(hour)時\(minute)分"
         } else {
-            return  "\(year)年\(month)月\(day)日 \(hour)時\(minute)分"
+            return "\(year)年\(month)月\(day)日 \(hour)時\(minute)分"
         }
     }
 
