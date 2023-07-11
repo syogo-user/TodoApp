@@ -241,7 +241,7 @@ class TaskUseCaseTests: XCTestCase {
             TaskInfo(taskId: "4", title: "4番目", content: "", scheduledDate: Date().addingTimeInterval(7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
             TaskInfo(taskId: "5", title: "5番目", content: "", scheduledDate: Date().addingTimeInterval(-7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
         ]
-        useCase.sortTask(itemList: &itemList, sort: Sort.ascendingOrderDate.rawValue)
+        useCase.sortTask(itemList: &itemList, sort: SortOrder.ascendingOrderDate.rawValue)
         XCTAssertEqual(itemList.map { $0.taskId }, ["5", "3", "1", "2", "4"])
     }
     
@@ -253,7 +253,7 @@ class TaskUseCaseTests: XCTestCase {
             TaskInfo(taskId: "4", title: "4番目", content: "", scheduledDate: Date().addingTimeInterval(7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
             TaskInfo(taskId: "5", title: "5番目", content: "", scheduledDate: Date().addingTimeInterval(-7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
         ]
-        useCase.sortTask(itemList: &itemList, sort: Sort.descendingOrderDate.rawValue)
+        useCase.sortTask(itemList: &itemList, sort: SortOrder.descendingOrderDate.rawValue)
         XCTAssertEqual(itemList.map { $0.taskId }, ["4", "2", "1", "3", "5"])
     }
     
