@@ -12,8 +12,6 @@ class TaskListViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     private let refreshCtl = UIRefreshControl()
     private var viewModel: TaskListViewModel = TaskListViewModelImpl()
-    private var selectMenuView: SelectMenuView?
-    private var selectOrderView: SelectOrderView?
 
     @IBOutlet private weak var tableView: UITableView!
 
@@ -119,19 +117,12 @@ class TaskListViewController: BaseViewController {
         navigationController?.navigationBar.tintColor = R.color.accent()
         navigationItem.title = R.string.localizable.taskListNavigationTitle()
         navigationItem.backButtonDisplayMode = .minimal
-        let selectOrderButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), style: .plain, target: self, action: #selector(showSelectOrderView))
-
-        let selectMenuButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(showSelectMenuView))
-        navigationItem.rightBarButtonItems = [selectMenuButton, selectOrderButton,]
+        setRightBarButton()
 
         tableView.register(R.nib.taskTableViewCell)
         tableView.refreshControl = refreshCtl
         refreshCtl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.delegate = self
-        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissView))
-        gesture.cancelsTouchesInView = false
-        gesture.delegate = self
-        self.view.addGestureRecognizer(gesture)
 
         if viewModel.isFromSignIn() {
             self.isConnect() {
@@ -145,53 +136,6 @@ class TaskListViewController: BaseViewController {
         }
     }
 
-    @objc private func showSelectOrderView() {
-        dismissView()
-        selectOrderView = SelectOrderView(frame: .null)
-        guard let selectOrderView = self.selectOrderView else { return }
-        selectOrderView.setUp(sort: viewModel.getSortOrder())
-        selectOrderView.delegate = self
-        selectOrderView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(selectOrderView)
-
-        let navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64.0
-        let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        let navigationAreaTotalHeight = statusBarHeight + navigationBarHeight
-
-        selectOrderView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
-        selectOrderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.18).isActive = true
-        selectOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        selectOrderView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationAreaTotalHeight).isActive = true
-    }
-
-    @objc private func showSelectMenuView() {
-        dismissView()
-        selectMenuView = SelectMenuView(frame: .null)
-        guard let selectMenuView = self.selectMenuView else { return }
-        selectMenuView.setUp(filterCondition: viewModel.getFilterCondition())
-        selectMenuView.delegate = self
-        selectMenuView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(selectMenuView)
-
-        let navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64.0
-        let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        let navigationAreaTotalHeight = statusBarHeight + navigationBarHeight
-
-        selectMenuView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
-        selectMenuView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
-        selectMenuView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        selectMenuView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationAreaTotalHeight).isActive = true
-    }
-
-    @objc private func dismissView() {
-        dismissSelectMenuView()
-        dismissSelectOrderView()
-    }
-
-    private func dismissSelectMenuView() {
-        selectMenuView?.removeFromSuperview()
-    }
-
     @objc private func refresh() {
         self.isConnect() {
             viewModel.fetchTaskList()
@@ -199,8 +143,58 @@ class TaskListViewController: BaseViewController {
         refreshCtl.endRefreshing()
     }
 
-    private func dismissSelectOrderView() {
-        selectOrderView?.removeFromSuperview()
+    private func setRightBarButton() {
+        let filterItems: [FilterCondition] = [.onlyFavorite, .includeCompleted, .notIncludeCompleted]
+        let sortItems: [SortOrder] = [.ascendingOrderDate, .descendingOrderDate]
+        let selectedFilterItem = viewModel.getFilterCondition()
+        let selectedSortItem = viewModel.getSortOrder()
+
+        let filterActions = filterItems.map { item in
+            UIAction(title: item.getTitle(), identifier: UIAction.Identifier(item.rawValue), state: selectedFilterItem == item.rawValue ? .on : .off) { [weak self] action in
+                self?.selectedFilterItem(action)
+            }
+        }
+
+        let sortActions = sortItems.map { item in
+            UIAction(title: item.getTitle(), identifier: UIAction.Identifier(item.rawValue), state: selectedSortItem == item.rawValue ? .on : .off) { [weak self] action in
+                self?.selectedSortItem(action)
+            }
+        }
+
+        let filterMenu = UIMenu(title: "", children: filterActions)
+        let sortMenu = UIMenu(title: "", children: sortActions)
+
+        let selectFilterButton = UIBarButtonItem(title: "", image: UIImage(systemName: "ellipsis"), menu: filterMenu)
+        let selectSortButton = UIBarButtonItem(title: "", image: UIImage(systemName: "arrow.up.arrow.down"), menu: sortMenu)
+        navigationItem.rightBarButtonItems = [selectFilterButton, selectSortButton]
+    }
+
+    private func selectedFilterItem(_ action: UIAction) {
+        switch action.identifier.rawValue {
+        case FilterCondition.onlyFavorite.rawValue:
+            viewModel.setFilterCondition(filterCondition: FilterCondition.onlyFavorite.rawValue)
+        case FilterCondition.includeCompleted.rawValue:
+            viewModel.setFilterCondition(filterCondition: FilterCondition.includeCompleted.rawValue)
+        case FilterCondition.notIncludeCompleted.rawValue:
+            viewModel.setFilterCondition(filterCondition: FilterCondition.notIncludeCompleted.rawValue)
+        default:
+            viewModel.setFilterCondition(filterCondition: FilterCondition.notIncludeCompleted.rawValue)
+        }
+        loadLocalTaskList()
+        setRightBarButton()
+    }
+
+    private func selectedSortItem(_ action: UIAction) {
+        switch action.identifier.rawValue {
+        case SortOrder.ascendingOrderDate.rawValue:
+            viewModel.setSortOrder(sortOrder: SortOrder.ascendingOrderDate.rawValue)
+        case SortOrder.descendingOrderDate.rawValue:
+            viewModel.setSortOrder(sortOrder: SortOrder.descendingOrderDate.rawValue)
+        default:
+            viewModel.setSortOrder(sortOrder: SortOrder.descendingOrderDate.rawValue)
+        }
+        loadLocalTaskList()
+        setRightBarButton()
     }
 
     private func loadLocalTaskList() {
@@ -303,64 +297,5 @@ extension TaskListViewController: UITableViewDelegate {
         let size = CGSize(width: 30, height: 30)
         action.image = R.image.iconDelete()?.resize(size: size)
         return UISwipeActionsConfiguration(actions: [action])
-    }
-}
-
-extension TaskListViewController: SelectMenuViewDelegate {
-
-    func didFilterFavorite() {
-        dismissSelectMenuView()
-        // ユーザデフォルトに保存する
-        viewModel.setFilterCondition(filterCondition: FilterCondition.onlyFavorite.rawValue)
-        // ロードする
-        loadLocalTaskList()
-    }
-
-    func includeCompleted() {
-        dismissSelectMenuView()
-        // ユーザデフォルトに保存する
-        viewModel.setFilterCondition(filterCondition: FilterCondition.includeCompleted.rawValue)
-        // ロードする
-        loadLocalTaskList()
-    }
-
-    func notIncludeCompleted() {
-        dismissSelectMenuView()
-        // ユーザデフォルトに保存する
-        viewModel.setFilterCondition(filterCondition: FilterCondition.notIncludeCompleted.rawValue)
-        // ロードする
-        loadLocalTaskList()
-    }
-}
-
-extension TaskListViewController: SelectOrderViewDelegate {
-    func sortDateAscendingOrder() {
-        dismissSelectOrderView()
-        // ユーザデフォルトに保存
-        viewModel.setSortOrder(sortOrder: Sort.ascendingOrderDate.rawValue)
-        // ロードする
-        loadLocalTaskList()
-    }
-
-    func sortDateDescendingOrder() {
-        dismissSelectOrderView()
-        // ユーザデフォルトに保存
-        viewModel.setSortOrder(sortOrder: Sort.descendingOrderDate.rawValue)
-        // ロードする
-        loadLocalTaskList()
-    }
-}
-
-extension TaskListViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if let view = touch.view, let selectMenuView = self.selectMenuView, view.isDescendant(of: selectMenuView) {
-            // selectMenuView内のタップイベントは無視する
-            return false
-        }
-        if let view = touch.view, let selectOrderView = self.selectOrderView, view.isDescendant(of: selectOrderView) {
-            // selectOrderView内のタップイベントは無視する
-            return false
-        }
-        return true
     }
 }

@@ -9,20 +9,40 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-enum Sort: String {
+enum SortOrder: String {
     /// 昇順
     case ascendingOrderDate = "ascendingOrderDate"
     /// 降順
     case descendingOrderDate = "descendingOrderDate"
+
+    func getTitle() -> String {
+        switch self {
+        case .ascendingOrderDate:
+            return R.string.localizable.rightBarButtonAscendingOrderDate()
+        case .descendingOrderDate:
+            return R.string.localizable.rightBarButtonDescendingOrderDate()
+        }
+    }
 }
 
 enum FilterCondition: String {
-    /// お気に入りのみ
+    /// ★(お気に入り)のみ表示
     case onlyFavorite = "onlyFavorite"
-    /// 完了済みも含む
+    /// 完了済も表示
     case includeCompleted = "includeCompleted"
-    /// 完了済みを含まない
+    /// 完了済は非表示
     case notIncludeCompleted = "notIncludeCompleted"
+
+    func getTitle() -> String {
+        switch self {
+        case .onlyFavorite:
+            return R.string.localizable.rightBarButtonOnlyFavorite()
+        case .includeCompleted:
+            return R.string.localizable.rightBarButtonIncludeCompleted()
+        case .notIncludeCompleted:
+            return R.string.localizable.rightBarButtonNotIncludeCompleted()
+        }
+    }
 }
 
 protocol TaskListViewModel {
@@ -119,10 +139,10 @@ class TaskListViewModelImpl: TaskListViewModel {
                     return self.taskUseCase.insertLocalTaskList(taskInfoList: taskInfoList)
                 }(), {
                     // APIとローカルそれぞれタスクのtaskIdを比較して不要なものを削除
-                    let tablviewItems = Set(self.tableViewItems.map { $0.taskId })
+                    let tableViewItems = Set(self.tableViewItems.map { $0.taskId })
                     let taskList = Set(list.map { $0.taskId })
                     /// ローカルから取得したタスクには存在するがにAPIから取得したタスクには存在しないものtaskIDを抽出
-                    let result = tablviewItems.subtracting(taskList)
+                    let result = tableViewItems.subtracting(taskList)
                     let deleteIdList = Array(result)
                     return self.taskUseCase.deleteLocalTaskList(taskIdList: deleteIdList)
                 }())
@@ -272,7 +292,7 @@ class TaskListViewModelImpl: TaskListViewModel {
 
     /// 並び順を取得
     func getSortOrder() -> String {
-        taskUseCase.sortOrder ?? Sort.descendingOrderDate.rawValue
+        taskUseCase.sortOrder ?? SortOrder.descendingOrderDate.rawValue
     }
 
     /// 並び順を設定

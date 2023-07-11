@@ -77,6 +77,8 @@ class UpdateTaskViewController: BaseViewController {
         favoriteButton.isFavorite = task.isFavorite
         titleTextField.text = task.title
         contentTextView.text = task.content
+        contentTextView.layer.borderColor = UIColor.gray.cgColor
+        contentTextView.layer.borderWidth = 0.5
         selectedDate = task.scheduledDate
         scheduledButton.setTitle(task.scheduledDate.dateFormat().dateJpFormat(), for: .normal)
 

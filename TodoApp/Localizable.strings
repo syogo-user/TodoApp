@@ -57,5 +57,12 @@
 "updateNavigationTitle" = "タスク更新";
 "updateNavigationButtonName" = "保存";
 
+// MARK: - Button
+"rightBarButtonOnlyFavorite" = "★のみ表示";
+"rightBarButtonIncludeCompleted" = "完了済も表示";
+"rightBarButtonNotIncludeCompleted" = "完了済は非表示";
+"rightBarButtonAscendingOrderDate" = "日付の昇順";
+"rightBarButtonDescendingOrderDate" = "日付の降順";
+
 // MARK: - Database
 "databaseOpenError" = "データベースが1度もopenされていません";
