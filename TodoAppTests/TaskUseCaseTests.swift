@@ -24,237 +24,263 @@ class TaskUseCaseTests: XCTestCase {
     }
 
     func testFetchTask() {
-        // Arrange
-        let expectedTask = TaskListAPI.Response.Task(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date().dateFormat(), isCompleted: true, isFavorite: false, userId: "0123456789")
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのfetchTaskが正しく返却できるかをテスト") { _ in
+            // Arrange
+            let expectedTask = TaskListAPI.Response.Task(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date().dateFormat(), isCompleted: true, isFavorite: false, userId: "0123456789")
 
-        let response = TaskListAPI.Response(message: "OK", data: [expectedTask])
-        repository.fetchTaskResult = .success(response)
+            let response = TaskListAPI.Response(message: "OK", data: [expectedTask])
+            repository.fetchTaskResult = .success(response)
 
-        // Act
-        let result = try! useCase.fetchTask(userId: expectedTask.userId, authorization: "")
-                    .toBlocking(timeout: 1000.0)
-                    .single()
-        // Assert
-        XCTAssertEqual(result.count, 1)
-        let resultTask = result.first!
-        XCTAssertEqual(resultTask.taskId, expectedTask.taskId)
-        XCTAssertEqual(resultTask.title, expectedTask.title)
-        XCTAssertEqual(resultTask.content, expectedTask.content)
-        XCTAssertEqual(resultTask.scheduledDate.dateFormat(), expectedTask.scheduledDate)
-        XCTAssertEqual(resultTask.isCompleted, expectedTask.isCompleted)
-        XCTAssertEqual(resultTask.isFavorite,expectedTask.isFavorite)
-        XCTAssertEqual(resultTask.userId, expectedTask.userId)
+            // Act
+            let result = try! useCase.fetchTask(userId: expectedTask.userId, authorization: "")
+                .toBlocking(timeout: 1000.0)
+                .single()
+            // Assert
+            XCTAssertEqual(result.count, 1)
+            let resultTask = result.first!
+            XCTAssertEqual(resultTask.taskId, expectedTask.taskId)
+            XCTAssertEqual(resultTask.title, expectedTask.title)
+            XCTAssertEqual(resultTask.content, expectedTask.content)
+            XCTAssertEqual(resultTask.scheduledDate.dateFormat(), expectedTask.scheduledDate)
+            XCTAssertEqual(resultTask.isCompleted, expectedTask.isCompleted)
+            XCTAssertEqual(resultTask.isFavorite,expectedTask.isFavorite)
+            XCTAssertEqual(resultTask.userId, expectedTask.userId)
+        }
     }
 
     func testAddTask() {
-        // Arrange
-        let expectedTask = AddTaskAPI.Response.Task(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date().dateFormat(), isCompleted: true, isFavorite: false, userId: "0123456789")
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのaddTaskが正しく返却できるかをテスト") { _ in
+            // Arrange
+            let expectedTask = AddTaskAPI.Response.Task(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date().dateFormat(), isCompleted: true, isFavorite: false, userId: "0123456789")
 
-        let response = AddTaskAPI.Response(message: "OK", data: expectedTask)
-        repository.addTaskResult = .success(response)
+            let response = AddTaskAPI.Response(message: "OK", data: expectedTask)
+            repository.addTaskResult = .success(response)
 
-        // Act
-        let result = try! useCase.addTask(title: expectedTask.title, content: expectedTask.content, scheduledDate: expectedTask.scheduledDate, isCompleted: expectedTask.isCompleted, isFavorite: expectedTask.isFavorite, userId: expectedTask.userId, authorization: "").toBlocking().single()
+            // Act
+            let result = try! useCase.addTask(title: expectedTask.title, content: expectedTask.content, scheduledDate: expectedTask.scheduledDate, isCompleted: expectedTask.isCompleted, isFavorite: expectedTask.isFavorite, userId: expectedTask.userId, authorization: "").toBlocking().single()
 
-        // Assert
-        XCTAssertEqual(result.taskId, expectedTask.taskId)
-        XCTAssertEqual(result.title, expectedTask.title)
-        XCTAssertEqual(result.content, expectedTask.content)
-        XCTAssertEqual(result.scheduledDate.dateFormat(), expectedTask.scheduledDate)
-        XCTAssertEqual(result.isCompleted, expectedTask.isCompleted)
-        XCTAssertEqual(result.isFavorite, expectedTask.isFavorite)
-        XCTAssertEqual(result.userId, expectedTask.userId)
+            // Assert
+            XCTAssertEqual(result.taskId, expectedTask.taskId)
+            XCTAssertEqual(result.title, expectedTask.title)
+            XCTAssertEqual(result.content, expectedTask.content)
+            XCTAssertEqual(result.scheduledDate.dateFormat(), expectedTask.scheduledDate)
+            XCTAssertEqual(result.isCompleted, expectedTask.isCompleted)
+            XCTAssertEqual(result.isFavorite, expectedTask.isFavorite)
+            XCTAssertEqual(result.userId, expectedTask.userId)
+        }
     }
 
     func testUpdateTask() {
-        // Arrange
-        let expectedTask = UpdateTaskAPI.Response.Task(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date().dateFormat(), isCompleted: true, isFavorite: false, userId: "0123456789")
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのupdateTaskが正しく返却できるかをテスト") { _ in
+            // Arrange
+            let expectedTask = UpdateTaskAPI.Response.Task(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date().dateFormat(), isCompleted: true, isFavorite: false, userId: "0123456789")
 
-        let response = UpdateTaskAPI.Response(message: "OK", data: expectedTask)
-        repository.updateTaskResult = .success(response)
+            let response = UpdateTaskAPI.Response(message: "OK", data: expectedTask)
+            repository.updateTaskResult = .success(response)
 
-        // Act
-        let result = try! useCase.updateTask(taskId: expectedTask.taskId, title: expectedTask.title, content: expectedTask.content, scheduledDate: expectedTask.scheduledDate, isCompleted: expectedTask.isCompleted, isFavorite: expectedTask.isFavorite, userId: expectedTask.userId, authorization: "").toBlocking().single()
+            // Act
+            let result = try! useCase.updateTask(taskId: expectedTask.taskId, title: expectedTask.title, content: expectedTask.content, scheduledDate: expectedTask.scheduledDate, isCompleted: expectedTask.isCompleted, isFavorite: expectedTask.isFavorite, userId: expectedTask.userId, authorization: "").toBlocking().single()
 
-        // Assert
-        XCTAssertEqual(result.taskId, expectedTask.taskId)
-        XCTAssertEqual(result.title, expectedTask.title)
-        XCTAssertEqual(result.content, expectedTask.content)
-        XCTAssertEqual(result.scheduledDate.dateFormat(), expectedTask.scheduledDate)
-        XCTAssertEqual(result.isCompleted, expectedTask.isCompleted)
-        XCTAssertEqual(result.isFavorite, expectedTask.isFavorite)
-        XCTAssertEqual(result.userId, expectedTask.userId)
+            // Assert
+            XCTAssertEqual(result.taskId, expectedTask.taskId)
+            XCTAssertEqual(result.title, expectedTask.title)
+            XCTAssertEqual(result.content, expectedTask.content)
+            XCTAssertEqual(result.scheduledDate.dateFormat(), expectedTask.scheduledDate)
+            XCTAssertEqual(result.isCompleted, expectedTask.isCompleted)
+            XCTAssertEqual(result.isFavorite, expectedTask.isFavorite)
+            XCTAssertEqual(result.userId, expectedTask.userId)
+        }
     }
 
     func testDeleteTask() {
-        // Arrange
-        let expectedTask = DeleteTaskAPI.Response.Task(taskId: "1")
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのdeleteTaskが正しく返却できるかをテスト") { _ in
+            // Arrange
+            let expectedTask = DeleteTaskAPI.Response.Task(taskId: "1")
 
-        let response = DeleteTaskAPI.Response(message: "OK", data: expectedTask)
-        repository.deleteTaskResult = .success(response)
+            let response = DeleteTaskAPI.Response(message: "OK", data: expectedTask)
+            repository.deleteTaskResult = .success(response)
 
-        // Act
-        let result = try! useCase.deleteTask(taskId: expectedTask.taskId, authorization: "").toBlocking().single()
+            // Act
+            let result = try! useCase.deleteTask(taskId: expectedTask.taskId, authorization: "").toBlocking().single()
 
-        // Assert
-        XCTAssertEqual(result, expectedTask.taskId)
+            // Assert
+            XCTAssertEqual(result, expectedTask.taskId)
+        }
     }
 
     func testLoadTaskList() {
-        // Arrange
-        let expectedTask = TaskInfoRecord(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date(), isCompleted: true, isFavorite: false, userId: "0123456789")
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのloadLocalTaskListが正しく返却できるかをテスト") { _ in
+            // Arrange
+            let expectedTask = TaskInfoRecord(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date(), isCompleted: true, isFavorite: false, userId: "0123456789")
 
-        repository.loadLocalTaskListResult = .success([expectedTask])
+            repository.loadLocalTaskListResult = .success([expectedTask])
 
-        // Act
-        let result = try! useCase.loadLocalTaskList()
-                    .toBlocking(timeout: 1000.0)
-                    .single()
-        // Assert
-        XCTAssertEqual(result.count, 1)
-        let resultTask = result.first!
-        XCTAssertEqual(resultTask.taskId, expectedTask.taskId)
-        XCTAssertEqual(resultTask.title, expectedTask.title)
-        XCTAssertEqual(resultTask.content, expectedTask.content)
-        XCTAssertEqual(resultTask.scheduledDate, expectedTask.scheduledDate)
-        XCTAssertEqual(resultTask.isCompleted, expectedTask.isCompleted)
-        XCTAssertEqual(resultTask.isFavorite,expectedTask.isFavorite)
-        XCTAssertEqual(resultTask.userId, expectedTask.userId)
+            // Act
+            let result = try! useCase.loadLocalTaskList()
+                .toBlocking(timeout: 1000.0)
+                .single()
+            // Assert
+            XCTAssertEqual(result.count, 1)
+            let resultTask = result.first!
+            XCTAssertEqual(resultTask.taskId, expectedTask.taskId)
+            XCTAssertEqual(resultTask.title, expectedTask.title)
+            XCTAssertEqual(resultTask.content, expectedTask.content)
+            XCTAssertEqual(resultTask.scheduledDate, expectedTask.scheduledDate)
+            XCTAssertEqual(resultTask.isCompleted, expectedTask.isCompleted)
+            XCTAssertEqual(resultTask.isFavorite,expectedTask.isFavorite)
+            XCTAssertEqual(resultTask.userId, expectedTask.userId)
+        }
     }
 
     func testInsertLocalTask() {
-        // Arrange
-        let expectedTask = TaskInfoRecord(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date(), isCompleted: true, isFavorite: false, userId: "0123456789")
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのinsertLocalTaskが正しく返却できるかをテスト") { _ in
+            // Arrange
+            let expectedTask = TaskInfoRecord(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date(), isCompleted: true, isFavorite: false, userId: "0123456789")
 
-        repository.insertLocalTaskResult = .success(())
+            repository.insertLocalTaskResult = .success(())
 
-        // Act
-        let result = useCase.insertLocalTask(taskInfo: expectedTask)
-                    .toBlocking(timeout: 1000.0)
-                    .materialize()
-        // Assert
-        switch result {
-        case .completed(elements: _): break
+            // Act
+            let result = useCase.insertLocalTask(taskInfo: expectedTask)
+                .toBlocking(timeout: 1000.0)
+                .materialize()
+            // Assert
+            switch result {
+            case .completed(elements: _): break
 
-        case .failed:
-            XCTFail("Unexpected Error")
+            case .failed:
+                XCTFail("Unexpected Error")
+            }
         }
     }
 
     func testInsertLocalTaskList() {
-        // Arrange
-        let expectedTask = TaskInfoRecord(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date(), isCompleted: true, isFavorite: false, userId: "0123456789")
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのinsertLocalTaskListが正しく返却できるかをテスト") { _ in
+            // Arrange
+            let expectedTask = TaskInfoRecord(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date(), isCompleted: true, isFavorite: false, userId: "0123456789")
 
-        repository.insertLocalTaskListResult = .success(())
+            repository.insertLocalTaskListResult = .success(())
 
-        // Act
-        let result = useCase.insertLocalTaskList(taskInfoList: [expectedTask])
-                    .toBlocking(timeout: 1000.0)
-                    .materialize()
-        // Assert
-        switch result {
-        case .completed(elements: _): break
+            // Act
+            let result = useCase.insertLocalTaskList(taskInfoList: [expectedTask])
+                .toBlocking(timeout: 1000.0)
+                .materialize()
+            // Assert
+            switch result {
+            case .completed(elements: _): break
 
-        case .failed:
-            XCTFail("Unexpected Error")
+            case .failed:
+                XCTFail("Unexpected Error")
+            }
         }
     }
 
     func testUpdateLocalTask() {
-        // Arrange
-        let expectedTask = TaskInfoRecord(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date(), isCompleted: true, isFavorite: false, userId: "0123456789")
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのupdateLocalTaskが正しく返却できるかをテスト") { _ in
+            // Arrange
+            let expectedTask = TaskInfoRecord(taskId: "1", title: "Test Task", content: "Test Content", scheduledDate: Date(), isCompleted: true, isFavorite: false, userId: "0123456789")
 
-        repository.updateLocalTaskResult = .success(())
+            repository.updateLocalTaskResult = .success(())
 
-        // Act
-        let result = useCase.updateLocalTask(taskInfo: expectedTask)
-                    .toBlocking(timeout: 1000.0)
-                    .materialize()
-        // Assert
-        switch result {
-        case .completed(elements: _): break
+            // Act
+            let result = useCase.updateLocalTask(taskInfo: expectedTask)
+                .toBlocking(timeout: 1000.0)
+                .materialize()
+            // Assert
+            switch result {
+            case .completed(elements: _): break
 
-        case .failed:
-            XCTFail("Unexpected Error")
+            case .failed:
+                XCTFail("Unexpected Error")
+            }
         }
     }
 
     func testDeleteLocalTask() {
-        // Arrange
-        let expectedTaskId = "1"
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのdeleteLocalTaskが正しく返却できるかをテスト") { _ in
+            // Arrange
+            let expectedTaskId = "1"
 
-        repository.deleteLocalTaskResult = .success(())
+            repository.deleteLocalTaskResult = .success(())
 
-        // Act
-        let result = useCase.deleteLocalTask(taskId: expectedTaskId)
-                    .toBlocking(timeout: 1000.0)
-                    .materialize()
-        // Assert
-        switch result {
-        case .completed(elements: _): break
+            // Act
+            let result = useCase.deleteLocalTask(taskId: expectedTaskId)
+                .toBlocking(timeout: 1000.0)
+                .materialize()
+            // Assert
+            switch result {
+            case .completed(elements: _): break
 
-        case .failed:
-            XCTFail("Unexpected Error")
+            case .failed:
+                XCTFail("Unexpected Error")
+            }
         }
     }
 
     func testDeleteLocalTaskAll() {
-        // Arrange
-        repository.deleteLocalTaskAllResult = .success(())
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのdeleteLocalTaskAllが正しく返却できるかをテスト") { _ in
+            // Arrange
+            repository.deleteLocalTaskAllResult = .success(())
 
-        // Act
-        let result = useCase.deleteLocalTaskAll()
-                    .toBlocking(timeout: 1000.0)
-                    .materialize()
-        // Assert
-        switch result {
-        case .completed(elements: _): break
+            // Act
+            let result = useCase.deleteLocalTaskAll()
+                .toBlocking(timeout: 1000.0)
+                .materialize()
+            // Assert
+            switch result {
+            case .completed(elements: _): break
 
-        case .failed:
-            XCTFail("Unexpected Error")
+            case .failed:
+                XCTFail("Unexpected Error")
+            }
         }
     }
 
     func testDeleteLocalTaskList() {
-        let expectedTaskIdList = ["1", "2"]
-        // Arrange
-        repository.deleteLocalTaskListResult = .success(())
+        XCTContext.runActivity(named: "Repository層から受け取った値をUseCaseのdeleteLocalTaskListが正しく返却できるかをテスト") { _ in
+            let expectedTaskIdList = ["1", "2"]
+            // Arrange
+            repository.deleteLocalTaskListResult = .success(())
 
-        // Act
-        let result = useCase.deleteLocalTaskList(taskIdList: expectedTaskIdList)
-                    .toBlocking(timeout: 1000.0)
-                    .materialize()
-        // Assert
-        switch result {
-        case .completed(elements: _): break
+            // Act
+            let result = useCase.deleteLocalTaskList(taskIdList: expectedTaskIdList)
+                .toBlocking(timeout: 1000.0)
+                .materialize()
+            // Assert
+            switch result {
+            case .completed(elements: _): break
 
-        case .failed:
-            XCTFail("Unexpected Error")
+            case .failed:
+                XCTFail("Unexpected Error")
+            }
         }
     }
     
     func testSortAscendingOrderDate() {
-        var itemList = [
-            TaskInfo(taskId: "1", title: "1番目", content: "", scheduledDate: Date(), isCompleted: false, isFavorite: false, userId: "0123456789"),
-            TaskInfo(taskId: "2", title: "2番目", content: "", scheduledDate: Date().addingTimeInterval(3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
-            TaskInfo(taskId: "3", title: "3番目", content: "", scheduledDate: Date().addingTimeInterval(-3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
-            TaskInfo(taskId: "4", title: "4番目", content: "", scheduledDate: Date().addingTimeInterval(7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
-            TaskInfo(taskId: "5", title: "5番目", content: "", scheduledDate: Date().addingTimeInterval(-7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
-        ]
-        useCase.sortTask(itemList: &itemList, sort: Sort.ascendingOrderDate.rawValue)
-        XCTAssertEqual(itemList.map { $0.taskId }, ["5", "3", "1", "2", "4"])
+        XCTContext.runActivity(named: "タスクの昇順") { _ in
+            var itemList = [
+                TaskInfo(taskId: "1", title: "1番目", content: "", scheduledDate: Date(), isCompleted: false, isFavorite: false, userId: "0123456789"),
+                TaskInfo(taskId: "2", title: "2番目", content: "", scheduledDate: Date().addingTimeInterval(3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
+                TaskInfo(taskId: "3", title: "3番目", content: "", scheduledDate: Date().addingTimeInterval(-3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
+                TaskInfo(taskId: "4", title: "4番目", content: "", scheduledDate: Date().addingTimeInterval(7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
+                TaskInfo(taskId: "5", title: "5番目", content: "", scheduledDate: Date().addingTimeInterval(-7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
+            ]
+            useCase.sortTask(itemList: &itemList, sort: SortOrder.ascendingOrderDate.rawValue)
+            XCTAssertEqual(itemList.map { $0.taskId }, ["5", "3", "1", "2", "4"])
+        }
     }
     
     func testSortDescendingOrderDate() {
-        var itemList = [
-            TaskInfo(taskId: "1", title: "1番目", content: "", scheduledDate: Date(), isCompleted: false, isFavorite: false, userId: "0123456789"),
-            TaskInfo(taskId: "2", title: "2番目", content: "", scheduledDate: Date().addingTimeInterval(3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
-            TaskInfo(taskId: "3", title: "3番目", content: "", scheduledDate: Date().addingTimeInterval(-3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
-            TaskInfo(taskId: "4", title: "4番目", content: "", scheduledDate: Date().addingTimeInterval(7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
-            TaskInfo(taskId: "5", title: "5番目", content: "", scheduledDate: Date().addingTimeInterval(-7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
-        ]
-        useCase.sortTask(itemList: &itemList, sort: Sort.descendingOrderDate.rawValue)
-        XCTAssertEqual(itemList.map { $0.taskId }, ["4", "2", "1", "3", "5"])
+        XCTContext.runActivity(named: "タスクの降順") { _ in
+            var itemList = [
+                TaskInfo(taskId: "1", title: "1番目", content: "", scheduledDate: Date(), isCompleted: false, isFavorite: false, userId: "0123456789"),
+                TaskInfo(taskId: "2", title: "2番目", content: "", scheduledDate: Date().addingTimeInterval(3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
+                TaskInfo(taskId: "3", title: "3番目", content: "", scheduledDate: Date().addingTimeInterval(-3600), isCompleted: false, isFavorite: false, userId: "0123456789"),
+                TaskInfo(taskId: "4", title: "4番目", content: "", scheduledDate: Date().addingTimeInterval(7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
+                TaskInfo(taskId: "5", title: "5番目", content: "", scheduledDate: Date().addingTimeInterval(-7000), isCompleted: false, isFavorite: false, userId: "0123456789"),
+            ]
+            useCase.sortTask(itemList: &itemList, sort: SortOrder.descendingOrderDate.rawValue)
+            XCTAssertEqual(itemList.map { $0.taskId }, ["4", "2", "1", "3", "5"])
+        }
     }
     
 }

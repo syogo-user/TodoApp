@@ -187,7 +187,7 @@ class TaskUseCaseImpl: TaskUseCase {
                 return Int(task1.taskId) ?? 0  < Int(task2.taskId) ?? 0
             } else {
                 // 日付が異なる場合
-                if sort == Sort.ascendingOrderDate.rawValue {
+                if sort == SortOrder.ascendingOrderDate.rawValue {
                     return task1.scheduledDate < task2.scheduledDate
                 } else {
                     return task1.scheduledDate > task2.scheduledDate

@@ -23,15 +23,15 @@
                         <color key="backgroundColor" name="background"/>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yH-jf-1gz" customClass="CheckButton" customModule="TodoApp" customModuleProvider="target">
-                        <rect key="frame" x="5" y="41.666666666666664" width="40" height="39.999999999999993"/>
+                        <rect key="frame" x="5" y="39" width="45" height="45"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="a9p-nc-guT"/>
-                            <constraint firstAttribute="height" constant="40" id="xmG-dc-GvB"/>
+                            <constraint firstAttribute="width" constant="45" id="a9p-nc-guT"/>
+                            <constraint firstAttribute="height" constant="45" id="xmG-dc-GvB"/>
                         </constraints>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     </button>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b6d-WK-OT3">
-                        <rect key="frame" x="55" y="10" width="227" height="103"/>
+                        <rect key="frame" x="60" y="10" width="212" height="103"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKP-rK-61i">
                                 <rect key="frame" x="0.0" y="0.0" width="34" height="30"/>
@@ -53,7 +53,6 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="scheduledDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7G-eU-5zA">
                                 <rect key="frame" x="0.0" y="76" width="115" height="27"/>
-                                <color key="backgroundColor" red="1" green="0.96489841519999997" blue="0.66302408810000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -62,10 +61,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHQ-Yj-bhk" customClass="FavoriteButton" customModule="TodoApp" customModuleProvider="target">
-                        <rect key="frame" x="292" y="51.666666666666664" width="20" height="19.999999999999993"/>
+                        <rect key="frame" x="282" y="46.666666666666664" width="30" height="29.999999999999993"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Gvq-lx-ePl"/>
-                            <constraint firstAttribute="width" constant="20" id="ykb-cx-e1q"/>
+                            <constraint firstAttribute="height" constant="30" id="Gvq-lx-ePl"/>
+                            <constraint firstAttribute="width" constant="30" id="ykb-cx-e1q"/>
                         </constraints>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     </button>

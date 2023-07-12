@@ -6,8 +6,9 @@
 //
 
 import Foundation
+
 public extension Date {
-    // Date → String に変換
+    /// Date → String に変換
     func dateFormat() -> String {
         let format = DateFormatter()
         format.locale = Locale(identifier: "en_US_POSIX")

@@ -26,10 +26,12 @@ final class Date_ExtentionTests: XCTestCase {
     }
 
     func testDateFormat() {
-        let calendar = Calendar(identifier: .gregorian)
-        let date = calendar.date(from: DateComponents(year: 2023, month: 4, day: 13, hour: 14, minute: 30))!
-        let expectedDate = "202304131430"
-        XCTAssertEqual(date.dateFormat(), expectedDate)
+        XCTContext.runActivity(named: "日付型を文字列に変換") { _ in
+            let calendar = Calendar(identifier: .gregorian)
+            let date = calendar.date(from: DateComponents(year: 2023, month: 4, day: 13, hour: 14, minute: 30))!
+            let expectedDate = "202304131430"
+            XCTAssertEqual(date.dateFormat(), expectedDate)
+        }
     }
 
     func testPerformanceExample() throws {

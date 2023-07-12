@@ -31,8 +31,13 @@ public extension String {
     }
 
     func dateJpFormat() -> String {
-        let (year, month, day, hour, minute) = self.dateTimeTupleFormat()
-        return  "\(year)年\(month)月\(day)日 \(hour)時\(minute)分"
+        let (year, month, day, hour, minute) = dateTimeTupleFormat()
+        let thisYear = thisYear()
+        if year == thisYear {
+            return "\(month)月\(day)日 \(hour)時\(minute)分"
+        } else {
+            return "\(year)年\(month)月\(day)日 \(hour)時\(minute)分"
+        }
     }
 
     func dateTimeTupleFormat() -> (String, String, String, String, String) {
@@ -46,4 +51,10 @@ public extension String {
         return (year, month, day, hour, minute)
     }
 
+    func thisYear() -> String {
+        let today = Date().dateFormat()
+        let datePart = String(today.prefix(8))
+        let year = String(datePart.prefix(4))
+        return year
+    }
 }
