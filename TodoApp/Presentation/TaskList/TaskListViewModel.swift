@@ -11,9 +11,9 @@ import RxCocoa
 
 enum SortOrder: String {
     /// 昇順
-    case ascendingOrderDate = "ascendingOrderDate"
+    case ascendingOrderDate
     /// 降順
-    case descendingOrderDate = "descendingOrderDate"
+    case descendingOrderDate
 
     func getTitle() -> String {
         switch self {
@@ -27,11 +27,11 @@ enum SortOrder: String {
 
 enum FilterCondition: String {
     /// ★(お気に入り)のみ表示
-    case onlyFavorite = "onlyFavorite"
+    case onlyFavorite
     /// 完了済も表示
-    case includeCompleted = "includeCompleted"
+    case includeCompleted
     /// 完了済は非表示
-    case notIncludeCompleted = "notIncludeCompleted"
+    case notIncludeCompleted
 
     func getTitle() -> String {
         switch self {

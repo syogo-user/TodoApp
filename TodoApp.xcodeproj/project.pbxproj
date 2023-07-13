@@ -91,24 +91,14 @@
 		91E5AB2F29D1DBCC0025886F /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91E5AB2E29D1DBCC0025886F /* Color.xcassets */; };
 		91F0EAE229D5B8580071F148 /* TaskUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F0EAE129D5B8580071F148 /* TaskUseCaseTests.swift */; };
 		91F0EAE429D5D2330071F148 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 91F0EAE329D5D2330071F148 /* Amplify */; };
-		91F0EAE629D5D2560071F148 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 91F0EAE529D5D2560071F148 /* Amplify */; };
-		91F0EAE829D5D2C60071F148 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 91F0EAE729D5D2C60071F148 /* AWSCognitoAuthPlugin */; };
 		91F0EAEA29D5D2D10071F148 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 91F0EAE929D5D2D10071F148 /* AWSCognitoAuthPlugin */; };
 		91F0EAEC29D5D4060071F148 /* String+ExtentionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F0EAEB29D5D4060071F148 /* String+ExtentionTests.swift */; };
 		91F0EAEE29D5E8A70071F148 /* Date+ExtentionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F0EAED29D5E8A70071F148 /* Date+ExtentionTests.swift */; };
 		DE894961FB28065937AFF75F /* Pods_TodoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A55C08FAE394420DE963DCF /* Pods_TodoAppTests.framework */; };
-		FE034D04104C84FCA9EA9D87 /* Pods_TodoApp_TodoAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A2606FE38009DDE7EB6C9E /* Pods_TodoApp_TodoAppUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		91E41A4129B7791800DA4EAE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 91E41A2229B7791600DA4EAE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 91E41A2929B7791600DA4EAE;
-			remoteInfo = TodoApp;
-		};
-		91E41A4B29B7791800DA4EAE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 91E41A2229B7791600DA4EAE /* Project object */;
 			proxyType = 1;
@@ -203,7 +193,6 @@
 		91E41A3929B7791800DA4EAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		91E41A3B29B7791800DA4EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91E41A4029B7791800DA4EAE /* TodoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		91E41A4A29B7791800DA4EAE /* TodoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E5AB2E29D1DBCC0025886F /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		91F0EAE129D5B8580071F148 /* TaskUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskUseCaseTests.swift; sourceTree = "<group>"; };
 		91F0EAEB29D5D4060071F148 /* String+ExtentionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ExtentionTests.swift"; sourceTree = "<group>"; };
@@ -233,16 +222,6 @@
 				DE894961FB28065937AFF75F /* Pods_TodoAppTests.framework in Frameworks */,
 				91F0EAE429D5D2330071F148 /* Amplify in Frameworks */,
 				91F0EAEA29D5D2D10071F148 /* AWSCognitoAuthPlugin in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		91E41A4729B7791800DA4EAE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FE034D04104C84FCA9EA9D87 /* Pods_TodoApp_TodoAppUITests.framework in Frameworks */,
-				91F0EAE629D5D2560071F148 /* Amplify in Frameworks */,
-				91F0EAE829D5D2C60071F148 /* AWSCognitoAuthPlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,7 +567,6 @@
 			children = (
 				91E41A2A29B7791600DA4EAE /* TodoApp.app */,
 				91E41A4029B7791800DA4EAE /* TodoAppTests.xctest */,
-				91E41A4A29B7791800DA4EAE /* TodoAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -673,30 +651,6 @@
 			productReference = 91E41A4029B7791800DA4EAE /* TodoAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		91E41A4929B7791800DA4EAE /* TodoAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 91E41A5A29B7791800DA4EAE /* Build configuration list for PBXNativeTarget "TodoAppUITests" */;
-			buildPhases = (
-				B6C4081A647132153A4D40E0 /* [CP] Check Pods Manifest.lock */,
-				91E41A4629B7791800DA4EAE /* Sources */,
-				91E41A4729B7791800DA4EAE /* Frameworks */,
-				91E41A4829B7791800DA4EAE /* Resources */,
-				780EB34D80E4B7D78EC3A8C9 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				91E41A4C29B7791800DA4EAE /* PBXTargetDependency */,
-			);
-			name = TodoAppUITests;
-			packageProductDependencies = (
-				91F0EAE529D5D2560071F148 /* Amplify */,
-				91F0EAE729D5D2C60071F148 /* AWSCognitoAuthPlugin */,
-			);
-			productName = TodoAppUITests;
-			productReference = 91E41A4A29B7791800DA4EAE /* TodoAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -711,10 +665,6 @@
 						CreatedOnToolsVersion = 14.2;
 					};
 					91E41A3F29B7791800DA4EAE = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 91E41A2929B7791600DA4EAE;
-					};
-					91E41A4929B7791800DA4EAE = {
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 91E41A2929B7791600DA4EAE;
 					};
@@ -738,7 +688,6 @@
 			targets = (
 				91E41A2929B7791600DA4EAE /* TodoApp */,
 				91E41A3F29B7791800DA4EAE /* TodoAppTests */,
-				91E41A4929B7791800DA4EAE /* TodoAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -763,13 +712,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		91E41A3E29B7791800DA4EAE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		91E41A4829B7791800DA4EAE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -818,23 +760,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		780EB34D80E4B7D78EC3A8C9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TodoApp-TodoAppUITests/Pods-TodoApp-TodoAppUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TodoApp-TodoAppUITests/Pods-TodoApp-TodoAppUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TodoApp-TodoAppUITests/Pods-TodoApp-TodoAppUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		91A033B529BDA36E0019D5A9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -853,28 +778,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
-		};
-		B6C4081A647132153A4D40E0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TodoApp-TodoAppUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 		D8B21517E9256E68A29A9B74 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1003,13 +906,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		91E41A4629B7791800DA4EAE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1017,11 +913,6 @@
 			isa = PBXTargetDependency;
 			target = 91E41A2929B7791600DA4EAE /* TodoApp */;
 			targetProxy = 91E41A4129B7791800DA4EAE /* PBXContainerItemProxy */;
-		};
-		91E41A4C29B7791800DA4EAE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 91E41A2929B7791600DA4EAE /* TodoApp */;
-			targetProxy = 91E41A4B29B7791800DA4EAE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1259,42 +1150,6 @@
 			};
 			name = Release;
 		};
-		91E41A5B29B7791800DA4EAE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7F26B74B22D1A1108237ADF /* Pods-TodoApp-TodoAppUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = onodera.s.identifier.TodoAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = TodoApp;
-			};
-			name = Debug;
-		};
-		91E41A5C29B7791800DA4EAE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69E705BCDD73A49A82E982CD /* Pods-TodoApp-TodoAppUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = onodera.s.identifier.TodoAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = TodoApp;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1321,15 +1176,6 @@
 			buildConfigurations = (
 				91E41A5829B7791800DA4EAE /* Debug */,
 				91E41A5929B7791800DA4EAE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		91E41A5A29B7791800DA4EAE /* Build configuration list for PBXNativeTarget "TodoAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				91E41A5B29B7791800DA4EAE /* Debug */,
-				91E41A5C29B7791800DA4EAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1362,16 +1208,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 91C7608B29BC2E3F003BE148 /* XCRemoteSwiftPackageReference "amplify-swift" */;
 			productName = Amplify;
-		};
-		91F0EAE529D5D2560071F148 /* Amplify */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 91C7608B29BC2E3F003BE148 /* XCRemoteSwiftPackageReference "amplify-swift" */;
-			productName = Amplify;
-		};
-		91F0EAE729D5D2C60071F148 /* AWSCognitoAuthPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 91C7608B29BC2E3F003BE148 /* XCRemoteSwiftPackageReference "amplify-swift" */;
-			productName = AWSCognitoAuthPlugin;
 		};
 		91F0EAE929D5D2D10071F148 /* AWSCognitoAuthPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
