@@ -15,7 +15,7 @@ protocol TaskRepository {
     /// 抽出条件
     var filterCondition: String? { get set }
     /// タスクの取得
-    func fetchTask(userId: String, authorization: String) -> Single<TaskListAPI.Response>
+    func fetchTask(userId: String, authorization: String) async throws -> TaskListAPI.Response
     /// タスクの登録
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response>
     /// タスクの更新
@@ -52,7 +52,7 @@ class TaskRepositoryImpl: TaskRepository {
         set { localStore.filterCondition = newValue }
     }
 
-    func fetchTask(userId: String, authorization: String) -> Single<TaskListAPI.Response> {
+    func fetchTask(userId: String, authorization: String) async throws -> TaskListAPI.Response {
         remoteStore.fetchTask(userId: userId, authorization: authorization)
     }
 

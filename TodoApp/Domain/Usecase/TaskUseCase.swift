@@ -14,7 +14,7 @@ protocol TaskUseCase {
     /// 抽出条件
     var filterCondition: String? { get set }
     /// タスク取得
-    func fetchTask(userId: String, authorization: String) -> Single<[TaskInfo]>
+    func fetchTask(userId: String, authorization: String) async throws -> [TaskInfo]
     /// タスク登録
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<TaskInfo>
     /// タスク更新
@@ -67,24 +67,42 @@ class TaskUseCaseImpl: TaskUseCase {
     }
 
     /// タスク取得
-    func fetchTask(userId: String, authorization: String) -> Single<[TaskInfo]> {
-        repository.fetchTask(userId: userId, authorization: authorization)
-            .do(onSuccess: { result in
-                guard result.isAcceptable else {
-                    throw DomainError.onAPIError(code: result.message)
-                }
-            })
-            .map { task in
-                try task.data.map { try TaskInfo(
-                    taskId: $0.taskId,
-                    title: $0.title,
-                    content: $0.content,
-                    scheduledDate: $0.scheduledDate.toDate(),
-                    isCompleted: $0.isCompleted,
-                    isFavorite: $0.isFavorite,
-                    userId: $0.userId
-                ) }
-            }
+    func fetchTask(userId: String, authorization: String) async throws -> [TaskInfo] {
+        let response = try await repository.fetchTask(userId: userId, authorization: authorization)
+        if response.isAcceptable {
+            throw DomainError.onAPIError(code: result.message)
+        }
+        let tasks = response.data
+        return tasks.map {
+            TaskInfo(
+                taskId: $0.taskId,
+                title: $0.title,
+                content: $0.content,
+                scheduledDate: $0.scheduledDate.toDate(),
+                isCompleted: $0.isCompleted,
+                isFavorite: $0.isFavorite,
+                userId: $0.userId
+            )
+        }
+        
+        
+            // 以下削除する
+//            .do(onSuccess: { result in
+//                guard result.isAcceptable else {
+//                    throw DomainError.onAPIError(code: result.message)
+//                }
+//            })
+//            .map { task in
+//                try task.data.map { try TaskInfo(
+//                    taskId: $0.taskId,
+//                    title: $0.title,
+//                    content: $0.content,
+//                    scheduledDate: $0.scheduledDate.toDate(),
+//                    isCompleted: $0.isCompleted,
+//                    isFavorite: $0.isFavorite,
+//                    userId: $0.userId
+//                ) }
+//            }
     }
 
     /// タスク登録
