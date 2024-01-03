@@ -20,10 +20,6 @@ target 'TodoApp' do
     pod 'RxBlocking', '5.1.0'
     pod 'RxTest', '5.1.0'
   end
-
-  target 'TodoAppUITests' do
-    # Pods for testing
-  end
   
   post_install do |installer|
       installer.generated_projects.each do |project|
