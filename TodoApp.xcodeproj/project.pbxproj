@@ -10,6 +10,9 @@
 		10CE648011B5E37741EFE8A6 /* Pods_TodoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B922F38A60BFF4B57B60A399 /* Pods_TodoApp.framework */; };
 		1107DA970E5914BB89B2054F /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = C42AFA19F5E0A7053707FFE1 /* amplifyconfiguration.json */; };
 		3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 698F70E34828384BED2B116E /* awsconfiguration.json */; };
+		3D19DFB02B462F3A00B1F6BB /* TodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFAF2B462F3A00B1F6BB /* TodoApp.swift */; };
+		3D19DFB32B462F6C00B1F6BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFB22B462F6C00B1F6BB /* ContentView.swift */; };
+		3D19DFB42B462F6C00B1F6BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFB22B462F6C00B1F6BB /* ContentView.swift */; };
 		3D3488962B43C8CF001BCC8F /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3488952B43C8CF001BCC8F /* TaskListView.swift */; };
 		911C466C29C9CBC700A9159F /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911C466B29C9CBC700A9159F /* String+Extention.swift */; };
 		911C466E29C9CC9C00A9159F /* Date+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911C466D29C9CC9C00A9159F /* Date+Extention.swift */; };
@@ -111,6 +114,8 @@
 /* Begin PBXFileReference section */
 		15A2606FE38009DDE7EB6C9E /* Pods_TodoApp_TodoAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApp_TodoAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2416444A1B606F86CB272378 /* Pods-TodoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3D19DFAF2B462F3A00B1F6BB /* TodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApp.swift; sourceTree = "<group>"; };
+		3D19DFB22B462F6C00B1F6BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3D3488952B43C8CF001BCC8F /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		4C97294790A515A2AFDB33D2 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
 		535E5535F9E17976827D8D1A /* Pods-TodoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoAppTests.release.xcconfig"; path = "Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -589,6 +594,8 @@
 				91E41A3829B7791800DA4EAE /* LaunchScreen.storyboard */,
 				91E41A3B29B7791800DA4EAE /* Info.plist */,
 				919A407229C3541000D63E44 /* Localizable.strings */,
+				3D19DFAF2B462F3A00B1F6BB /* TodoApp.swift */,
+				3D19DFB22B462F6C00B1F6BB /* ContentView.swift */,
 			);
 			path = TodoApp;
 			sourceTree = "<group>";
@@ -892,7 +899,9 @@
 				91A088A129C49F17000BF175 /* URLSessionConfiguration+Extention.swift in Sources */,
 				91A088BF29C558E7000BF175 /* TaskInfoRecord.swift in Sources */,
 				91A088C529C594CC000BF175 /* TaskInfo.swift in Sources */,
+				3D19DFB32B462F6C00B1F6BB /* ContentView.swift in Sources */,
 				91A088AC29C4A255000BF175 /* DecodableDataParser.swift in Sources */,
+				3D19DFB02B462F3A00B1F6BB /* TodoApp.swift in Sources */,
 				915C5D4029D1F3C2009B2B8C /* NetworkUseCase.swift in Sources */,
 				9136501B29C6AFAA00F9BC29 /* UpdateTaskViewModel.swift in Sources */,
 				91CA6F6929C95C9100BC03AB /* CheckButton.swift in Sources */,
@@ -906,6 +915,7 @@
 			files = (
 				91F0EAE229D5B8580071F148 /* TaskUseCaseTests.swift in Sources */,
 				91F0EAEE29D5E8A70071F148 /* Date+ExtentionTests.swift in Sources */,
+				3D19DFB42B462F6C00B1F6BB /* ContentView.swift in Sources */,
 				91F0EAEC29D5D4060071F148 /* String+ExtentionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1068,8 +1078,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodoApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1097,8 +1105,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodoApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
