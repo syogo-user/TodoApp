@@ -53,7 +53,7 @@ class TaskRepositoryImpl: TaskRepository {
     }
 
     func fetchTask(userId: String, authorization: String) async throws -> TaskListAPI.Response {
-        remoteStore.fetchTask(userId: userId, authorization: authorization)
+        try await remoteStore.fetchTask(userId: userId, authorization: authorization)
     }
 
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response> {

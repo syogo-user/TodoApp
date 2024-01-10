@@ -11,7 +11,6 @@ struct TaskListView: View {
     @StateObject private var viewModel = TaskListViewModelImpl()
     
     var body: some View {
-
             NavigationStack {
                 // Todo: データが取得してもなかった場合に、データがありませんになるように修正
 //                if viewModel.lifeInfoList.isEmpty {
@@ -33,7 +32,11 @@ struct TaskListView: View {
                 }
             }
             .task {
-                await viewModel.fetchLifeInfo()
+                do {
+                    try await viewModel.fetchTaskList()
+                } catch {
+                    
+                }
             }
     }
     

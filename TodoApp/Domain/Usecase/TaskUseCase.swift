@@ -70,15 +70,15 @@ class TaskUseCaseImpl: TaskUseCase {
     func fetchTask(userId: String, authorization: String) async throws -> [TaskInfo] {
         let response = try await repository.fetchTask(userId: userId, authorization: authorization)
         if response.isAcceptable {
-            throw DomainError.onAPIError(code: result.message)
+            throw DomainError.onAPIError(code: "APIエラー") // あとで修正
         }
         let tasks = response.data
-        return tasks.map {
+        return try tasks.map {
             TaskInfo(
                 taskId: $0.taskId,
                 title: $0.title,
                 content: $0.content,
-                scheduledDate: $0.scheduledDate.toDate(),
+                scheduledDate: try $0.scheduledDate.toDate(),
                 isCompleted: $0.isCompleted,
                 isFavorite: $0.isFavorite,
                 userId: $0.userId

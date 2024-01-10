@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import SwiftUI
 
 enum SortOrder: String {
     /// 昇順
@@ -45,8 +46,8 @@ enum FilterCondition: String {
     }
 }
 
-protocol TaskListViewModel: @ObservableObject {
-    func fetchTaskList() throws
+protocol TaskListViewModel: ObservableObject {
+    func fetchTaskList() async throws
 //    /// ローディング
 //    var isLoading: Driver<Bool> { get }
 //    /// タスクの取得(セル用の値)通知
@@ -91,7 +92,7 @@ class TaskListViewModelImpl: TaskListViewModel {
     private var userUseCase: UserUseCase = UserUseCaseImpl()
     @Published private(set) var taskInfoItems: [TaskInfoItem] = []
     
-    func fetchTaskList() throws {
+    func fetchTaskList() async throws {
         let userId = ""
         let authorization = ""
         try await taskUseCase.fetchTask(userId: userId, authorization: authorization)

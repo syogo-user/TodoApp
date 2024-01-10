@@ -52,14 +52,14 @@ extension Session {
                 }
             }
             
-            continuation.onCancelled {
-                task?.cancel()
-            }
+//            continuation. {
+//                task?.cancel()
+//            }
         }
     }
 
     class func async_send<T: Request>(_ request: T) async throws -> T.Response {
-        shared.async_send(request)
+        try await shared.async_send(request)
     }
     
     class func rx_send<T: APIKit.Request>(_ request: T) -> Single<T.Response> {

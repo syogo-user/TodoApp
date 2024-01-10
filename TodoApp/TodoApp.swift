@@ -9,8 +9,10 @@ import SwiftUI
 
 @main
 struct TodoApp: App {
-    WindowGroup {
-        ContentView()
+    var body: some Scene {
+        WindowGroup {
+            ContentView() // 最初に表示される View
+        }
     }
 }
 
