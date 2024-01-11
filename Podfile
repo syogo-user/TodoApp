@@ -7,9 +7,9 @@ target 'TodoApp' do
 
   # Pods for TodoApp
   pod 'R.swift', '5.1.0'
-  pod 'RxGRDB', '0.18.0'
-  pod 'RxSwift', '5.1.1'
-  pod 'RxCocoa', '5.1.1'
+  pod 'RxGRDB', '2.0.0'
+  pod 'RxSwift', '6.5.0'
+  pod 'RxCocoa', '6.5.0'
   pod 'APIKit', '5.4.0'
   pod 'MBProgressHUD', '1.2.0'
   pod 'ReachabilitySwift', '5.0.0'
@@ -17,8 +17,8 @@ target 'TodoApp' do
   target 'TodoAppTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'RxBlocking', '5.1.0'
-    pod 'RxTest', '5.1.0'
+    pod 'RxBlocking', '6.5.0'
+    pod 'RxTest', '6.5.0'
   end
   
   post_install do |installer|

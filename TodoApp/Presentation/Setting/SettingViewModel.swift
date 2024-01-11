@@ -74,13 +74,13 @@ class SettingViewModelImpl: SettingViewModel {
 
     /// ローカルユーザ情報の取得
     func loadUser() {
-       userUseCase.loadLocalUser()
-            .map { result -> VMResult<UserInfoAttribute> in
-                return .success(result)
-            }
-            .asSignal(onErrorRecover: { .just(.failure($0))})
-            .startWith(.loading())
-            .emit(to: userInfoRelay)
-            .disposed(by: disposeBag)
+//       userUseCase.loadLocalUser()
+//            .map { result -> VMResult<UserInfoAttribute> in
+//                return .success(result)
+//            }
+//            .asSignal(onErrorRecover: { .just(.failure($0))})
+//            .startWith(.loading())
+//            .emit(to: userInfoRelay)
+//            .disposed(by: disposeBag)
     }
 }

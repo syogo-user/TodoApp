@@ -30,7 +30,7 @@ extension Session {
                     observer(.success(value))
                 case .failure(let error):
                     print("error: \(error)")
-                    observer(.error(error))
+//                    observer(.error(error))
                 }
             }
             return Disposables.create {
@@ -44,7 +44,7 @@ extension Session {
             let task = self.send(request) { result in
                 switch result {
                 case .success(let value):
-                    print("success: \(value)")
+                    print("success!: \(value)")
                     continuation.resume(returning: value)
                 case .failure(let error):
                     print("error: \(error)")

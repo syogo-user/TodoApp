@@ -38,7 +38,7 @@ class GRDBAccessor {
                 dbQueue.rx.write { db in
                     try operation(db)
                 }
-                .andThen(Single.just(()))
+//                .andThen(Single.just(()))
                 .catchError { error in
                     throw DomainError.unKnownError
                 }

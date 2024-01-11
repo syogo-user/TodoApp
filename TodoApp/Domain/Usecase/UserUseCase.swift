@@ -14,17 +14,17 @@ protocol UserUseCase {
     /// サインイン画面を経由したか
     var isFromSignIn: Bool { get set }
     /// トークンを取得
-    func fetchCurrentAuthToken() -> Single<String>
+    func fetchCurrentAuthToken() async throws -> String
     /// ユーザ情報を取得
-    func fetchUserInfo() -> Single<[AuthUserAttribute]>
+    func fetchUserInfo() async throws -> [AuthUserAttribute]
     /// ログイン中かどうか判定
     func isSignIn() -> Single<Bool>
     /// ソーシャルサインイン
-    func socialSignIn(provider: AuthProvider) -> Single<Void>
+    func socialSignIn(provider: AuthProvider) async throws
     /// サインアウト
     func signOut() -> Single<Void>
     /// ユーザ情報取得
-    func loadLocalUser() -> Single<UserInfoAttribute>
+    func loadLocalUser() async throws -> UserInfoAttribute
     /// ユーザ情報を登録
     func insertLocalUser(userId: String, email: String) -> Single<Void>
     /// ユーザ情報を削除
@@ -40,35 +40,37 @@ class UserUseCaseImpl: UserUseCase {
     }
 
     /// トークンを取得
-    func fetchCurrentAuthToken() -> Single<String> {
-        return Single.create { single in
-            Task {
-                do {
-                    let token = try await self.repository.fetchCurrentAuthToken()
-                    single(.success("Bearer " + token))
-                } catch {
-                    single(.error(DomainError.authError))
-                }
-            }
-            return Disposables.create()
-        }
+    func fetchCurrentAuthToken() async throws -> String {
+        try await self.repository.fetchCurrentAuthToken()
+//        return Single.create { single in
+//            Task {
+//                do {
+//                    let token = try await self.repository.fetchCurrentAuthToken()
+//                    single(.success("Bearer " + token))
+//                } catch {
+//                    single(.error(DomainError.authError))
+//                }
+//            }
+//            return Disposables.create()
+//        }
     }
 
     /// ユーザ情報を取得
-    func fetchUserInfo() -> Single<[AuthUserAttribute]> {
-        return Single.create { single in
-            Task {
-                do {
-                    guard let result = try await self.repository.fetchUserInfo() else {
-                        throw DomainError.authError
-                    }
-                    single(.success(result))
-                } catch {
-                    single(.error(error))
-                }
-            }
-            return Disposables.create()
-        }
+    func fetchUserInfo() async throws -> [AuthUserAttribute] {
+        try await self.repository.fetchUserInfo() ?? []
+//        return Single.create { single in
+//            Task {
+//                do {
+//                    guard let result = try await self.repository.fetchUserInfo() else {
+//                        throw DomainError.authError
+//                    }
+//                    single(.success(result))
+//                } catch {
+//                    single(.error(error))
+//                }
+//            }
+//            return Disposables.create()
+//        }
     }
 
     /// ログイン中かどうか判定
@@ -80,10 +82,10 @@ class UserUseCaseImpl: UserUseCase {
                     single(.success(isSignIn))
                 } catch let error as AuthError {
                     print("Fetch session failed with error \(error)")
-                    single(.error(DomainError.authError))
+//                    single(.error(DomainError.authError))
                 } catch {
                     print("Unexpected error: \(error)")
-                    single(.error(DomainError.authError))
+//                    single(.error(DomainError.authError))
                 }
             }
             return Disposables.create()
@@ -91,22 +93,27 @@ class UserUseCaseImpl: UserUseCase {
     }
 
     /// ソーシャルサインイン
-    func socialSignIn(provider: AuthProvider) -> Single<Void> {
-        return Single.create { single in
-            Task {
-                do {
-                    let signInResult = try await self.repository.socialSignIn(provider: provider)
-                    if signInResult.isSignedIn {
-                        print("Sign in succeeded")
-                        single(.success(()))
-                    }
-                    single(.error(DomainError.authError))
-                } catch {
-                    single(.error(DomainError.unKnownError))
-                }
-            }
-            return Disposables.create()
+    func socialSignIn(provider: AuthProvider) async throws {
+        let signInResult = try await self.repository.socialSignIn(provider: provider)
+        if signInResult.isSignedIn {
+            print("Sign in succeeded")
+            throw DomainError.authError
         }
+//        return Single.create { single in
+//            Task {
+//                do {
+//                    let signInResult = try await self.repository.socialSignIn(provider: provider)
+//                    if signInResult.isSignedIn {
+//                        print("Sign in succeeded")
+//                        single(.success(()))
+//                    }
+//                    single(.error(DomainError.authError))
+//                } catch {
+////                    single(.error(DomainError.unKnownError))
+//                }
+//            }
+//            return Disposables.create()
+//        }
     }
 
     /// サインアウト
@@ -124,10 +131,11 @@ class UserUseCaseImpl: UserUseCase {
                         print("Signed out successfully")
                         single(.success(()))
                     case .partial:
-                        single(.error(DomainError.authError))
+//                        single(.error(DomainError.authError))
+                        print("SignOut failed with \(DomainError.authError)")
                     case .failed(let error):
                         print("SignOut failed with \(error)")
-                        single(.error(DomainError.authError))
+//                        single(.error(DomainError.authError))
                     }
                 }
             }
@@ -136,8 +144,8 @@ class UserUseCaseImpl: UserUseCase {
     }
 
     /// ユーザ情報取得
-    func loadLocalUser() -> Single<UserInfoAttribute> {
-        repository.loadLocalUser()
+    func loadLocalUser() async throws -> UserInfoAttribute {
+        try await repository.loadLocalUser()
             .map { user in
                 if user.count != 1 {
                     throw DomainError.localDbError
@@ -145,6 +153,7 @@ class UserUseCaseImpl: UserUseCase {
                 guard let user = user.first else { throw DomainError.localDbError }
                 return UserInfoAttribute(userId: user.userId, email: user.email)
             }
+            .value
     }
 
     /// ユーザ情報を登録

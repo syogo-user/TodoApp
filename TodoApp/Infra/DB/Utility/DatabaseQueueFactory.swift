@@ -21,7 +21,7 @@ enum DatabaseQueueFactory {
                 observer(.success(dbQueue))
             } catch {
                 try! initialize(definition: definition)
-                observer(.error(DatabaseError.openFailed(error)))
+//                observer(.error(DatabaseError.openFailed(error)))
             }
             return Disposables.create()
         }

@@ -1,40 +1,40 @@
 PODS:
   - APIKit (5.4.0)
-  - GRDB.swift (4.14.0):
-    - GRDB.swift/standard (= 4.14.0)
-  - GRDB.swift/standard (4.14.0)
+  - GRDB.swift (5.26.1):
+    - GRDB.swift/standard (= 5.26.1)
+  - GRDB.swift/standard (5.26.1)
   - MBProgressHUD (1.2.0)
   - R.swift (5.1.0):
     - R.swift.Library (~> 5.1.0)
   - R.swift.Library (5.1.0)
   - ReachabilitySwift (5.0.0)
-  - RxBlocking (5.1.0):
-    - RxSwift (~> 5)
-  - RxCocoa (5.1.1):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxGRDB (0.18.0):
-    - RxGRDB/default (= 0.18.0)
-    - RxSwift (~> 5.0)
-  - RxGRDB/default (0.18.0):
-    - GRDB.swift (~> 4.1)
-    - RxSwift (~> 5.0)
-  - RxRelay (5.1.3):
-    - RxSwift (~> 5)
-  - RxSwift (5.1.1)
-  - RxTest (5.1.0):
-    - RxSwift (~> 5)
+  - RxBlocking (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxGRDB (2.0.0):
+    - RxGRDB/default (= 2.0.0)
+    - RxSwift (~> 6.0)
+  - RxGRDB/default (2.0.0):
+    - GRDB.swift (~> 5.0)
+    - RxSwift (~> 6.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - RxTest (6.5.0):
+    - RxSwift (= 6.5.0)
 
 DEPENDENCIES:
   - APIKit (= 5.4.0)
   - MBProgressHUD (= 1.2.0)
   - R.swift (= 5.1.0)
   - ReachabilitySwift (= 5.0.0)
-  - RxBlocking (= 5.1.0)
-  - RxCocoa (= 5.1.1)
-  - RxGRDB (= 0.18.0)
-  - RxSwift (= 5.1.1)
-  - RxTest (= 5.1.0)
+  - RxBlocking (= 6.5.0)
+  - RxCocoa (= 6.5.0)
+  - RxGRDB (= 2.0.0)
+  - RxSwift (= 6.5.0)
+  - RxTest (= 6.5.0)
 
 SPEC REPOS:
   trunk:
@@ -53,18 +53,18 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   APIKit: 0680e86d2e8abd5bc42e64963f5f89d209eb9271
-  GRDB.swift: 8cc3ab7c8b8b4ac1761deb8dca4b51c1c9d429f8
+  GRDB.swift: e98cd55ec99dea5da99355d588149063e4cfa0eb
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   R.swift: 8cbc4fc69b740305b6a17c8a8ed968eb788962d9
   R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  RxBlocking: 5ef131267220f92ef68531dd6afeaf407cd6b41a
-  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
-  RxGRDB: 41dfd8f987aad7a7bdd7c420319d3eb23ee383f3
-  RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
-  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
-  RxTest: d5e1c9c1880de2751041fa485d476ce006967b31
+  RxBlocking: 04b5fd28bb5ea49f7d64b80db8bbfe50d9cc1c7d
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxGRDB: 2ed9c18392c87b34d7a085d03831b4081d30e64e
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  RxTest: eb2d23adefc5a5ebf5779c7792fa3edfe6ebcc17
 
-PODFILE CHECKSUM: db69ec3ab227aa0ef28d7c544bfa33744a212d06
+PODFILE CHECKSUM: ee3b66f4670e78bfeab110e2164db305e476e5ff
 
 COCOAPODS: 1.14.3

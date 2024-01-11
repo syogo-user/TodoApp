@@ -93,10 +93,17 @@ class TaskListViewModelImpl: TaskListViewModel {
     @Published private(set) var taskInfoItems: [TaskInfoItem] = []
     
     func fetchTaskList() async throws {
+//        let user = try await userUseCase.loadLocalUser()
+//        let authorization = try await userUseCase.fetchCurrentAuthToken()
         let userId = ""
         let authorization = ""
-        try await taskUseCase.fetchTask(userId: userId, authorization: authorization)
-        
+        do {
+            let tasks = try await taskUseCase.fetchTask(userId: userId, authorization: authorization)
+            print("tasks:\(tasks)")
+        } catch {
+            print(error.localizedDescription)
+        }
+
         // エラーについてはVC側でdo catchしてエラーメッセージを出す。
         
     }
