@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct TodoApp: App {
+    
+    @UIApplicationDelegateAdaptor (AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
-            ContentView() // 最初に表示される View
+//            ContentView() // 最初に表示される View
+            TaskListView()
         }
     }
 }

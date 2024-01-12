@@ -24,11 +24,11 @@ protocol UserUseCase {
     /// サインアウト
     func signOut() -> Single<Void>
     /// ユーザ情報取得
-    func loadLocalUser() async throws -> UserInfoAttribute
+    func loadLocalUser() throws -> UserInfoAttribute
     /// ユーザ情報を登録
-    func insertLocalUser(userId: String, email: String) -> Single<Void>
+    func insertLocalUser(userId: String, email: String) throws
     /// ユーザ情報を削除
-    func deleteLocalUser() -> Single<Void>
+    func deleteLocalUser() throws
 }
 
 class UserUseCaseImpl: UserUseCase {
@@ -144,25 +144,23 @@ class UserUseCaseImpl: UserUseCase {
     }
 
     /// ユーザ情報取得
-    func loadLocalUser() async throws -> UserInfoAttribute {
-        try await repository.loadLocalUser()
-            .map { user in
-                if user.count != 1 {
-                    throw DomainError.localDbError
-                }
-                guard let user = user.first else { throw DomainError.localDbError }
-                return UserInfoAttribute(userId: user.userId, email: user.email)
-            }
-            .value
+    func loadLocalUser() throws -> UserInfoAttribute {
+        let localUser = try repository.loadLocalUser().map { user in
+            UserInfoAttribute(userId: user.userId, email: user.email)
+        }
+        if localUser.count != 1 {
+            throw DomainError.localDbError
+        }
+        return localUser[0]
     }
-
+    
     /// ユーザ情報を登録
-    func insertLocalUser(userId: String, email: String) -> Single<Void> {
-        repository.insertLocalUser(userId: userId, email: email)
+    func insertLocalUser(userId: String, email: String) throws {
+        try repository.insertLocalUser(userId: userId, email: email)
     }
 
     /// ユーザ情報を削除
-    func deleteLocalUser() -> Single<Void> {
-        repository.deleteLocalUser()
-    }    
+    func deleteLocalUser() throws {
+        try repository.deleteLocalUser()
+    }
 }

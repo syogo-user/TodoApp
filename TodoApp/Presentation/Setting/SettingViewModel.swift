@@ -51,24 +51,24 @@ class SettingViewModelImpl: SettingViewModel {
 
     /// サインアウト
     func signOut() {
-        userUseCase.signOut()
-            .flatMap {
-                self.taskUseCase.deleteLocalTaskAll()
-            }
-            .flatMap {
-                self.userUseCase.deleteLocalUser()
-            }
-            .do(onSuccess: { _ in
-                self.taskUseCase.sortOrder = nil
-                self.taskUseCase.filterCondition = nil
-            })
-            .map { result -> VMResult<Void> in
-                .success(result)
-            }
-            .asSignal(onErrorRecover: { .just(.failure($0))})
-            .startWith(.loading())
-            .emit(to: signOutRelay)
-            .disposed(by: disposeBag)
+//        userUseCase.signOut()
+//            .flatMap {
+//                self.taskUseCase.deleteLocalTaskAll()
+//            }
+//            .flatMap {
+//                self.userUseCase.deleteLocalUser()
+//            }
+//            .do(onSuccess: { _ in
+//                self.taskUseCase.sortOrder = nil
+//                self.taskUseCase.filterCondition = nil
+//            })
+//            .map { result -> VMResult<Void> in
+//                .success(result)
+//            }
+//            .asSignal(onErrorRecover: { .just(.failure($0))})
+//            .startWith(.loading())
+//            .emit(to: signOutRelay)
+//            .disposed(by: disposeBag)
 
     }
 

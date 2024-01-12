@@ -19,30 +19,39 @@ protocol DBAccessor {
 
 class GRDBAccessor {
     /// 取得
-    func readFromDBwith<T>(_ operation: @escaping ((GRDB.Database) throws -> (T))) -> Single<T> {
-        MainDatabase.shared.dbQueueSingle()
-            .flatMap { dbQueue in
-                dbQueue.rx.read { db in
-                    try operation(db)
-                }
-                .catchError { error in
-                    throw DomainError.unKnownError
-                }
-            }
+//    func readFromDBwith<T>(_ operation: @escaping ((GRDB.Database) throws -> (T))) -> Single<T> {
+//        MainDatabase.shared.dbQueueSingle()
+//            .flatMap { dbQueue in
+//                dbQueue.rx.read { db in
+//                    try operation(db)
+//                }
+//                .catchError { error in
+//                    throw DomainError.unKnownError
+//                }
+//            }
+//    }
+    
+    func readFromDBwith<T>(_ operation: @escaping ((GRDB.Database) throws -> (T))) throws -> T {
+        try MainDatabase.shared.dbQueueSingle().read { db in
+           try operation(db)
+        }
     }
-
+    
     /// 更新
-    func writeToDBwith(_ operation: @escaping ((GRDB.Database) throws -> Void)) -> Single<Void> {
-        MainDatabase.shared.dbQueueSingle()
-            .flatMap { dbQueue in
-                dbQueue.rx.write { db in
-                    try operation(db)
-                }
-//                .andThen(Single.just(()))
-                .catchError { error in
-                    throw DomainError.unKnownError
-                }
-            }
+    func writeToDBwith(_ operation: @escaping ((GRDB.Database) throws -> Void)) throws -> Void {
+        try MainDatabase.shared.dbQueueSingle().write { db in
+           try operation(db)
+        }
+//        MainDatabase.shared.dbQueueSingle()
+//            .flatMap { dbQueue in
+//                dbQueue.rx.write { db in
+//                    try operation(db)
+//                }
+////                .andThen(Single.just(()))
+//                .catchError { error in
+//                    throw DomainError.unKnownError
+//                }
+//            }
     }
 }
 

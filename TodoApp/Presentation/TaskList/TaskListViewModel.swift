@@ -93,12 +93,18 @@ class TaskListViewModelImpl: TaskListViewModel {
     @Published private(set) var taskInfoItems: [TaskInfoItem] = []
     
     func fetchTaskList() async throws {
+        let id = ""
+        try userUseCase.insertLocalUser(userId: id, email: "test@gmail.com")
 //        let user = try await userUseCase.loadLocalUser()
 //        let authorization = try await userUseCase.fetchCurrentAuthToken()
-        let userId = ""
+        let user = try userUseCase.loadLocalUser()
+        print("!!!user:\(user.userId)")
         let authorization = ""
         do {
-            let tasks = try await taskUseCase.fetchTask(userId: userId, authorization: authorization)
+            let tasks = try await taskUseCase.fetchTask(userId: user.userId, authorization: authorization)
+            self.taskInfoItems = tasks.map {
+                TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
+            }
             print("tasks:\(tasks)")
         } catch {
             print(error.localizedDescription)
