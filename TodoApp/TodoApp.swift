@@ -15,7 +15,8 @@ struct TodoApp: App {
     var body: some Scene {
         WindowGroup {
 //            ContentView() // 最初に表示される View
-            TaskListView()
+//            TaskListView()
+            SignInView()
         }
     }
 }

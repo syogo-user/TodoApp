@@ -18,6 +18,8 @@
 		3D19DFBA2B463B2B00B1F6BB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFB92B463B2B00B1F6BB /* APIClient.swift */; };
 		3D19DFBB2B463B2B00B1F6BB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFB92B463B2B00B1F6BB /* APIClient.swift */; };
 		3D3488962B43C8CF001BCC8F /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3488952B43C8CF001BCC8F /* TaskListView.swift */; };
+		3D5AC5F22B517F7300CBA00F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5AC5F12B517F7300CBA00F /* SignInView.swift */; };
+		3D5AC5F32B517F7300CBA00F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5AC5F12B517F7300CBA00F /* SignInView.swift */; };
 		911C466C29C9CBC700A9159F /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911C466B29C9CBC700A9159F /* String+Extention.swift */; };
 		911C466E29C9CC9C00A9159F /* Date+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911C466D29C9CC9C00A9159F /* Date+Extention.swift */; };
 		9127B1B229CFEA26002EC5D5 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127B1B129CFEA26002EC5D5 /* FavoriteButton.swift */; };
@@ -123,6 +125,7 @@
 		3D19DFB62B463B1500B1F6BB /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		3D19DFB92B463B2B00B1F6BB /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		3D3488952B43C8CF001BCC8F /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		3D5AC5F12B517F7300CBA00F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		4C97294790A515A2AFDB33D2 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
 		535E5535F9E17976827D8D1A /* Pods-TodoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoAppTests.release.xcconfig"; path = "Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		698F70E34828384BED2B116E /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -376,6 +379,7 @@
 				915F06EE29BA1C2200685156 /* SignInViewController.swift */,
 				91C7609029BC3002003BE148 /* SignInViewModel.swift */,
 				91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */,
+				3D5AC5F12B517F7300CBA00F /* SignInView.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -867,6 +871,7 @@
 				91CFA3F829C9A43800C7092A /* Validate.swift in Sources */,
 				91BC1A6929C0C29000500A62 /* UserInfoAttribute.swift in Sources */,
 				91A088B429C4B484000BF175 /* UpdateTaskAPI.swift in Sources */,
+				3D5AC5F22B517F7300CBA00F /* SignInView.swift in Sources */,
 				91A033D929BF6E540019D5A9 /* UserLocalStore.swift in Sources */,
 				91A033C829BDEF200019D5A9 /* SettingViewController.swift in Sources */,
 				9136501629C5B24300F9BC29 /* TaskListRouter.swift in Sources */,
@@ -932,6 +937,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91F0EAE229D5B8580071F148 /* TaskUseCaseTests.swift in Sources */,
+				3D5AC5F32B517F7300CBA00F /* SignInView.swift in Sources */,
 				91F0EAEE29D5E8A70071F148 /* Date+ExtentionTests.swift in Sources */,
 				3D19DFB82B463B1500B1F6BB /* Request.swift in Sources */,
 				3D19DFB42B462F6C00B1F6BB /* ContentView.swift in Sources */,
