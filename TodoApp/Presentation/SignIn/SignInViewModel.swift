@@ -10,7 +10,7 @@ import AWSCognitoAuthPlugin
 import RxSwift
 import RxCocoa
 
-protocol SignInViewModel {
+protocol SignInViewModel: ObservableObject {
     /// ローディング
     var isLoading: Driver<Bool> { get }
     /// ユーザ情報通知
@@ -21,6 +21,7 @@ protocol SignInViewModel {
     func setViaSignIn()
 }
 
+@MainActor
 class SignInViewModelImpl: SignInViewModel {
     private var useCase: UserUseCase = UserUseCaseImpl()
     private let disposeBag = DisposeBag()
@@ -38,7 +39,17 @@ class SignInViewModelImpl: SignInViewModel {
     }()
 
     func socialSigIn(provider: AuthProvider) async throws {
-        try await self.useCase.socialSignIn(provider: provider)
+        try await useCase.socialSignIn(provider: provider)
+        let userInfo = try await useCase.fetchUserInfo()
+        let subAttribute = userInfo.filter { $0.key == .sub }.first
+        let emailAttribute = userInfo.filter { $0.key == .email }.first
+        guard let userId = subAttribute?.value else {
+            throw DomainError.authError
+        }
+        guard let email = emailAttribute?.value else {
+            throw DomainError.authError
+        }
+        try useCase.insertLocalUser(userId: userId, email: email)
 //            .flatMap { () in
 //                self.useCase.fetchUserInfo()
 //            }

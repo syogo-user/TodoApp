@@ -95,10 +95,10 @@ class UserUseCaseImpl: UserUseCase {
     /// ソーシャルサインイン
     func socialSignIn(provider: AuthProvider) async throws {
         let signInResult = try await self.repository.socialSignIn(provider: provider)
-        if signInResult.isSignedIn {
-            print("Sign in succeeded")
+        if !signInResult.isSignedIn {
             throw DomainError.authError
         }
+        print("Sign in succeeded")
 //        return Single.create { single in
 //            Task {
 //                do {
