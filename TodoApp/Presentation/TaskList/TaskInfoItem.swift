@@ -14,7 +14,7 @@ protocol SortProtocol {
     var scheduledDate: Date { get }
 }
 
-class TaskInfoItem: SortProtocol {
+class TaskInfoItem: SortProtocol, Identifiable {
     /// タスクID
     let taskId: String
     /// タイトル

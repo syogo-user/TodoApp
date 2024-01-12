@@ -53,14 +53,14 @@ class SignInViewController: BaseViewController {
     }
 
     @IBAction private func googleSignIn(_ sender: Any) {
-        self.isConnect() {
-            viewModel.socialSigIn(provider: .google)
-        }
+//        self.isConnect() {
+//            viewModel.socialSigIn(provider: .google)
+//        }
     }
 
     @IBAction private func appleSignIn(_ sender: Any) {
-        self.isConnect() {
-            viewModel.socialSigIn(provider: .apple)
-        }
+//        self.isConnect() {
+//            viewModel.socialSigIn(provider: .apple)
+//        }
     }
 }

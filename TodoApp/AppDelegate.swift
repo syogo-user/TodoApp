@@ -10,8 +10,7 @@ import RxSwift
 import Amplify
 import AWSCognitoAuthPlugin
 
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate {
 
     private let disposeBag = DisposeBag()
     

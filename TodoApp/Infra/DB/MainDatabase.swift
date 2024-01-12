@@ -32,10 +32,14 @@ final class MainDatabase {
         return dbQueue
     }
 
-    func dbQueueSingle() -> Single<DatabaseQueue> {
-        return Single.just(try! dbQueue())
+//    func dbQueueSingle() -> Single<DatabaseQueue> {
+//        return Single.just(try! dbQueue())
+//    }
+    
+    func dbQueueSingle() -> DatabaseQueue {
+        return try! dbQueue()
     }
-
+    
     func open() -> Single<DatabaseQueue> {
         DatabaseQueueFactory.create(definition: Definition())
             .do(onSuccess: { [unowned self] dbQueue in

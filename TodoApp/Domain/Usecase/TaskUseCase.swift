@@ -14,7 +14,7 @@ protocol TaskUseCase {
     /// 抽出条件
     var filterCondition: String? { get set }
     /// タスク取得
-    func fetchTask(userId: String, authorization: String) -> Single<[TaskInfo]>
+    func fetchTask(userId: String, authorization: String) async throws -> [TaskInfo]
     /// タスク登録
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<TaskInfo>
     /// タスク更新
@@ -22,19 +22,19 @@ protocol TaskUseCase {
     /// タスク削除
     func deleteTask(taskId: String, authorization: String) -> Single<String>
     /// ローカルタスクリストを取得
-    func loadLocalTaskList() -> Single<[TaskInfoRecord]>
+    func loadLocalTaskList() throws -> [TaskInfoRecord]
     /// ローカルにタスクを登録
-    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
+    func insertLocalTask(taskInfo: TaskInfoRecord) throws
     /// ローカルにタスクリストを登録
-    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void> 
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) throws
     /// ローカルのタスクを更新
-    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
+    func updateLocalTask(taskInfo: TaskInfoRecord) throws
     /// ローカルのタスクを削除
-    func deleteLocalTask(taskId: String) -> Single<Void>
+    func deleteLocalTask(taskId: String) throws
     /// ローカルのタスクをすべて削除
-    func deleteLocalTaskAll() -> Single<Void>
+    func deleteLocalTaskAll() throws
     /// ローカルタスクを複数削除
-    func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
+    func deleteLocalTaskList(taskIdList: [String]) throws
     /// タスクリストをソート
     func sortTask<T: SortProtocol>(itemList: inout [T], sort: String)
     /// タスクをフィルター
@@ -67,24 +67,42 @@ class TaskUseCaseImpl: TaskUseCase {
     }
 
     /// タスク取得
-    func fetchTask(userId: String, authorization: String) -> Single<[TaskInfo]> {
-        repository.fetchTask(userId: userId, authorization: authorization)
-            .do(onSuccess: { result in
-                guard result.isAcceptable else {
-                    throw DomainError.onAPIError(code: result.message)
-                }
-            })
-            .map { task in
-                try task.data.map { try TaskInfo(
-                    taskId: $0.taskId,
-                    title: $0.title,
-                    content: $0.content,
-                    scheduledDate: $0.scheduledDate.toDate(),
-                    isCompleted: $0.isCompleted,
-                    isFavorite: $0.isFavorite,
-                    userId: $0.userId
-                ) }
-            }
+    func fetchTask(userId: String, authorization: String) async throws -> [TaskInfo] {
+        let response = try await repository.fetchTask(userId: userId, authorization: authorization)
+        if !response.isAcceptable {
+            throw DomainError.onAPIError(code: "APIエラー") // あとで修正
+        }
+        let tasks = response.data
+        return try tasks.map {
+            TaskInfo(
+                taskId: $0.taskId,
+                title: $0.title,
+                content: $0.content,
+                scheduledDate: try $0.scheduledDate.toDate(),
+                isCompleted: $0.isCompleted,
+                isFavorite: $0.isFavorite,
+                userId: $0.userId
+            )
+        }
+        
+        
+            // 以下削除する
+//            .do(onSuccess: { result in
+//                guard result.isAcceptable else {
+//                    throw DomainError.onAPIError(code: result.message)
+//                }
+//            })
+//            .map { task in
+//                try task.data.map { try TaskInfo(
+//                    taskId: $0.taskId,
+//                    title: $0.title,
+//                    content: $0.content,
+//                    scheduledDate: $0.scheduledDate.toDate(),
+//                    isCompleted: $0.isCompleted,
+//                    isFavorite: $0.isFavorite,
+//                    userId: $0.userId
+//                ) }
+//            }
     }
 
     /// タスク登録
@@ -145,38 +163,38 @@ class TaskUseCaseImpl: TaskUseCase {
     }
 
     /// ローカルタスクリストを取得
-    func loadLocalTaskList() -> Single<[TaskInfoRecord]> {
-        repository.loadLocalTaskList()
+    func loadLocalTaskList() throws -> [TaskInfoRecord] {
+        try repository.loadLocalTaskList()
     }
 
     /// ローカルにタスクを登録
-    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
-        repository.insertLocalTask(taskInfo: taskInfo)
+    func insertLocalTask(taskInfo: TaskInfoRecord) throws {
+        try repository.insertLocalTask(taskInfo: taskInfo)
     }
 
     /// ローカルにタスクリストを登録
-    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void> {
-        repository.insertLocalTaskList(taskInfoList: taskInfoList)
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) throws {
+        try repository.insertLocalTaskList(taskInfoList: taskInfoList)
     }
 
     /// ローカルタスクを更新
-    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
-        repository.updateLocalTask(taskInfo: taskInfo)
+    func updateLocalTask(taskInfo: TaskInfoRecord) throws {
+        try repository.updateLocalTask(taskInfo: taskInfo)
     }
 
     /// ローカルタスクを削除
-    func deleteLocalTask(taskId: String) -> Single<Void> {
-        repository.deleteLocalTask(taskId: taskId)
+    func deleteLocalTask(taskId: String) throws {
+        try repository.deleteLocalTask(taskId: taskId)
     }
 
     /// ローカルタスクをすべて削除
-    func deleteLocalTaskAll() -> Single<Void> {
-        repository.deleteLocalTaskAll()
+    func deleteLocalTaskAll() throws {
+        try repository.deleteLocalTaskAll()
     }
 
     /// ローカルタスクを複数削除
-    func deleteLocalTaskList(taskIdList: [String]) -> Single<Void> {
-        repository.deleteLocalTaskList(taskIdList: taskIdList)
+    func deleteLocalTaskList(taskIdList: [String]) throws {
+        try repository.deleteLocalTaskList(taskIdList: taskIdList)
     }
 
     /// タスクリストをソート

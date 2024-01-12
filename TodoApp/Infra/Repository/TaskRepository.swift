@@ -15,7 +15,7 @@ protocol TaskRepository {
     /// 抽出条件
     var filterCondition: String? { get set }
     /// タスクの取得
-    func fetchTask(userId: String, authorization: String) -> Single<TaskListAPI.Response>
+    func fetchTask(userId: String, authorization: String) async throws -> TaskListAPI.Response
     /// タスクの登録
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response>
     /// タスクの更新
@@ -23,19 +23,19 @@ protocol TaskRepository {
     /// タスクの削除
     func deleteTask(taskId: String, authorization: String) -> Single<DeleteTaskAPI.Response>
     /// ローカルタスクリストの取得
-    func loadLocalTaskList() -> Single<[TaskInfoRecord]>
+    func loadLocalTaskList() throws -> [TaskInfoRecord]
     /// ローカルタスクの取得
-    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
+    func insertLocalTask(taskInfo: TaskInfoRecord) throws
     /// ローカルタスクリストの追加
-    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void>
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) throws
     /// ローカルタスクの更新
-    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void>
+    func updateLocalTask(taskInfo: TaskInfoRecord) throws
     /// ローカルタスクの削除
-    func deleteLocalTask(taskId: String) -> Single<Void>
+    func deleteLocalTask(taskId: String) throws
     /// ローカルタスクをすべて削除
-    func deleteLocalTaskAll() -> Single<Void>
+    func deleteLocalTaskAll() throws
     /// ローカルタスクリストを削除
-    func deleteLocalTaskList(taskIdList: [String]) -> Single<Void>
+    func deleteLocalTaskList(taskIdList: [String]) throws
 }
 
 class TaskRepositoryImpl: TaskRepository {
@@ -52,8 +52,8 @@ class TaskRepositoryImpl: TaskRepository {
         set { localStore.filterCondition = newValue }
     }
 
-    func fetchTask(userId: String, authorization: String) -> Single<TaskListAPI.Response> {
-        remoteStore.fetchTask(userId: userId, authorization: authorization)
+    func fetchTask(userId: String, authorization: String) async throws -> TaskListAPI.Response {
+        try await remoteStore.fetchTask(userId: userId, authorization: authorization)
     }
 
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response> {
@@ -68,31 +68,31 @@ class TaskRepositoryImpl: TaskRepository {
         remoteStore.deleteTask(taskId: taskId, authorization: authorization)
     }
 
-    func loadLocalTaskList() -> Single<[TaskInfoRecord]> {
-       localStore.loadLocalTaskList()
+    func loadLocalTaskList() throws -> [TaskInfoRecord] {
+       try localStore.loadLocalTaskList()
     }
 
-    func insertLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
-        localStore.insertLocalTask(taskInfo: taskInfo)
+    func insertLocalTask(taskInfo: TaskInfoRecord) throws {
+        try localStore.insertLocalTask(taskInfo: taskInfo)
     }
 
-    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) -> Single<Void> {
-        localStore.insertLocalTaskList(taskInfoList: taskInfoList)
+    func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) throws {
+        try localStore.insertLocalTaskList(taskInfoList: taskInfoList)
     }
 
-    func updateLocalTask(taskInfo: TaskInfoRecord) -> Single<Void> {
-        localStore.updateLocalTask(taskInfo: taskInfo)
+    func updateLocalTask(taskInfo: TaskInfoRecord) throws {
+        try localStore.updateLocalTask(taskInfo: taskInfo)
     }
 
-    func deleteLocalTask(taskId: String) -> Single<Void> {
-       localStore.deleteLocalTask(taskId: taskId)
+    func deleteLocalTask(taskId: String) throws {
+        try localStore.deleteLocalTask(taskId: taskId)
     }
 
-    func deleteLocalTaskAll() -> Single<Void> {
-        localStore.deleteLocalTaskAll()
+    func deleteLocalTaskAll() throws {
+        try localStore.deleteLocalTaskAll()
     }
 
-    func deleteLocalTaskList(taskIdList: [String]) -> Single<Void> {
-        localStore.deleteLocalTaskList(taskIdList: taskIdList)
+    func deleteLocalTaskList(taskIdList: [String]) throws {
+        try localStore.deleteLocalTaskList(taskIdList: taskIdList)
     }
 }

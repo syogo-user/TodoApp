@@ -12,7 +12,7 @@ extension TaskListViewController {
     /// 追加画面に遷移
     func toAddTask() {
         guard let addTaskVC = R.storyboard.list.addTaskVC() else { return }
-        addTaskVC.delegate = self
+//        addTaskVC.delegate = self
         self.present(addTaskVC, animated: true)
     }
 
@@ -20,7 +20,7 @@ extension TaskListViewController {
     func toUpdateTask(taskInfoItem: TaskInfoItem) {
         guard let updateTaskVC =  R.storyboard.list.updateTaskVC() else { return }
         updateTaskVC.setUpdateTask(task: taskInfoItem)
-        updateTaskVC.delegate = self
+//        updateTaskVC.delegate = self
         navigationController?.pushViewController(updateTaskVC, animated: true)
     }
 }

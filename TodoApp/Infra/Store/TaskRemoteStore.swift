@@ -11,7 +11,7 @@ import RxSwift
 
 protocol TaskRemoteStore {
     /// タスクの取得
-    func fetchTask(userId: String, authorization: String) -> Single<TaskListAPI.Response>
+    func fetchTask(userId: String, authorization: String) async throws -> TaskListAPI.Response
     /// タスクの追加
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response>
     /// タスクの更新
@@ -21,9 +21,9 @@ protocol TaskRemoteStore {
 }
 
 class TaskRemoteStoreImpl: TaskRemoteStore {
-    func fetchTask(userId: String, authorization: String) -> Single<TaskListAPI.Response> {
+    func fetchTask(userId: String, authorization: String) async throws -> TaskListAPI.Response {
         let request = TaskListAPI.Request(userId: userId, authorization: authorization)
-        return Session.rx_send(request)
+        return try await Session.async_send(request)
     }
 
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response> {

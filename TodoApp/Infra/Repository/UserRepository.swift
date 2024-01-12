@@ -24,11 +24,11 @@ protocol UserRepository {
     /// サインアウト
     func signOut() async -> AuthSignOutResult 
     /// ローカルのユーザ情報を取得
-    func loadLocalUser() -> Single<[UserInfoRecord]>
+    func loadLocalUser() throws -> [UserInfoRecord]
     /// ローカルにユーザ情報を追加
-    func insertLocalUser(userId: String, email: String) -> Single<Void>
+    func insertLocalUser(userId: String, email: String) throws
     /// ローカルのユーザ情報を削除
-    func deleteLocalUser() -> Single<Void>
+    func deleteLocalUser() throws
 }
 
 class UserRepositoryImpl: UserRepository {
@@ -60,16 +60,16 @@ class UserRepositoryImpl: UserRepository {
         await remoteStore.signOut()
     }
 
-    func loadLocalUser() -> Single<[UserInfoRecord]> {
-        localStore.loadLocalUserInfo()
+    func loadLocalUser() throws -> [UserInfoRecord] {
+        try localStore.loadLocalUserInfo()
     }
 
-    func insertLocalUser(userId: String, email: String) -> Single<Void> {
+    func insertLocalUser(userId: String, email: String) throws {
         let userInfo = UserInfoRecord(userId: userId, email: email)
-        return localStore.insertLocalUser(userInfo: userInfo)
+        return try localStore.insertLocalUser(userInfo: userInfo)
     }
 
-    func deleteLocalUser() -> Single<Void> {
-        localStore.deleteLocalUser()
+    func deleteLocalUser() throws {
+        try localStore.deleteLocalUser()
     }
 }

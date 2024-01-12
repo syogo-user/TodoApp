@@ -12,29 +12,29 @@ import RxSwift
 
 protocol UserInfoDao {
     /// ローカルユーザ情報取得
-    func loadLocalUserInfo() -> Single<[UserInfoRecord]>
+    func loadLocalUserInfo() throws -> [UserInfoRecord]
     /// ローカルユーザ追加
-    func insertLocalUserInfo(userInfo: UserInfoRecord) -> Single<Void>
+    func insertLocalUserInfo(userInfo: UserInfoRecord) throws -> Void
     ///  ローカルユーザ情報を削除
-    func deleteLocalUserInfo() -> Single<Void>
+    func deleteLocalUserInfo() throws -> Void
 }
 
 class UserInfoDaoImpl: GRDBAccessor, UserInfoDao {
 
-    func loadLocalUserInfo() -> Single<[UserInfoRecord]> {
-        readFromDBwith { db in
+    func loadLocalUserInfo() throws -> [UserInfoRecord] {
+        try! readFromDBwith { db in
             try UserInfoRecord.fetchAll(db)
         }
     }
 
-    func insertLocalUserInfo(userInfo: UserInfoRecord) -> Single<Void> {
-        return writeToDBwith { db in
+    func insertLocalUserInfo(userInfo: UserInfoRecord) throws -> Void {
+        try writeToDBwith { db in
             try userInfo.insert(db)
         }
     }
 
-    func deleteLocalUserInfo() -> Single<Void> {
-        writeToDBwith { db in
+    func deleteLocalUserInfo() throws -> Void {
+        try writeToDBwith { db in
             try UserInfoRecord.deleteAll(db)
         }
     }

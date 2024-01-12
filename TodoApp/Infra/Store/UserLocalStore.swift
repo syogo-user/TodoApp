@@ -12,11 +12,11 @@ protocol UserLocalStore {
     /// サインイン画面を経由したか
     var isFromSignIn: Bool { get set }
     /// ユーザ情報を取得
-    func loadLocalUserInfo() -> Single<[UserInfoRecord]>
+    func loadLocalUserInfo() throws -> [UserInfoRecord]
     /// ユーザ情報を追加
-    func insertLocalUser(userInfo: UserInfoRecord) -> Single<Void>
+    func insertLocalUser(userInfo: UserInfoRecord) throws
     /// ユーザ情報を削除
-    func deleteLocalUser() -> Single<Void>
+    func deleteLocalUser() throws
 }
 
 class UserLocalStoreImpl: UserLocalStore {
@@ -31,15 +31,15 @@ class UserLocalStoreImpl: UserLocalStore {
         set { UserDefaults.standard.set(newValue, forKey: Key.isFromSignIn.rawValue)}
     }
 
-    func loadLocalUserInfo() -> Single<[UserInfoRecord]> {
-        accessor.userInfoDao.loadLocalUserInfo()
+    func loadLocalUserInfo() throws -> [UserInfoRecord] {
+        try accessor.userInfoDao.loadLocalUserInfo()
     }
 
-    func insertLocalUser(userInfo: UserInfoRecord) -> Single<Void> {
-        accessor.userInfoDao.insertLocalUserInfo(userInfo: userInfo)
+    func insertLocalUser(userInfo: UserInfoRecord) throws {
+        try accessor.userInfoDao.insertLocalUserInfo(userInfo: userInfo)
     }
 
-    func deleteLocalUser() -> Single<Void> {
-        accessor.userInfoDao.deleteLocalUserInfo()
+    func deleteLocalUser() throws {
+        try accessor.userInfoDao.deleteLocalUserInfo()
     }
 }
