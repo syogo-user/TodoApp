@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TaskListView: View {
     @StateObject private var viewModel = TaskListViewModelImpl()
+    @Binding var isSignIn: Bool
     
     var body: some View {
             NavigationStack {
@@ -38,7 +39,9 @@ struct TaskListView: View {
                     
                 }
             }
+            .navigationBarHidden(true)
     }
+
     
     func delete(offsets: IndexSet) {
         // Todo: firstでindexを取得できそうだった
@@ -48,5 +51,5 @@ struct TaskListView: View {
 }
 
 #Preview {
-    TaskListView()
+    TaskListView(isSignIn: .constant(false))
 }
