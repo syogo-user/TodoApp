@@ -11,12 +11,16 @@ import SwiftUI
 struct TodoApp: App {
     
     @UIApplicationDelegateAdaptor (AppDelegate.self) var appDelegate
+    @State var isSignIn: Bool = false // Todo: AppStorageに変更するといい
     
     var body: some Scene {
         WindowGroup {
 //            ContentView() // 最初に表示される View
-//            TaskListView()
-            SignInView()
+            if isSignIn {
+                TaskListView(isSignIn: $isSignIn)
+            } else {
+                SignInView(isSignIn: $isSignIn)
+            }
         }
     }
 }

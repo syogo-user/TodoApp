@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-//        Text("SwiftUIに移行")
-        TaskListView()
+        Text("SwiftUIに移行")
+//        TaskListView()
+//            .navigationBarBackButtonHidden(true)
     }
 }
 

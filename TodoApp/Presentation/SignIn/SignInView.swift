@@ -9,22 +9,33 @@ import SwiftUI
 
 struct SignInView: View {
     @StateObject private var viewModel = SignInViewModelImpl()
+//    @State private var isPresented = false
+    @Binding var isSignIn: Bool
     
     var body: some View {
-        Button(action: {
-            Task {
-                do {
-                    try await viewModel.socialSigIn(provider: .google)
-                } catch {
-                    
+//        NavigationStack {
+            Button {
+                Task {
+                    do {
+                        try await viewModel.socialSigIn(provider: .google)
+                        isSignIn = true
+//                        isPresented = true
+                    } catch {
+                        
+                    }
                 }
+            } label: {
+                Text("GoogleSignIn")
             }
-        }) {
-            Text("GoogleSignIn")
-        }
+//            .navigationDestination(isPresented: $isPresented) {
+//                 TaskListView()
+//            }
     }
+//        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//    }
+
 }
 
 #Preview {
-    SignInView()
+    SignInView(isSignIn: .constant(false))
 }

@@ -51,10 +51,6 @@ extension Session {
                     continuation.resume(throwing: error)
                 }
             }
-            
-//            continuation. {
-//                task?.cancel()
-//            }
         }
     }
 
