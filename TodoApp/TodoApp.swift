@@ -11,7 +11,7 @@ import SwiftUI
 struct TodoApp: App {
     
     @UIApplicationDelegateAdaptor (AppDelegate.self) var appDelegate
-    @State var isSignIn: Bool = false // Todo: AppStorageに変更するといい
+    @AppStorage("isSignIn") var isSignIn = false
     
     var body: some Scene {
         WindowGroup {
