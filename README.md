@@ -1,9 +1,9 @@
 # TodoApp
 ## 開発環境
-- Mac OS Ventura 13.0 
-- Xcode 14.2
-- Swift 5.7.2 
-- CocoaPods 1.12.0
+- Mac OS Ventura 13.6.2 
+- Xcode 15.0.1
+- Swift 5.8.1 
+- CocoaPods 1.14.3
 
 ## 起動方法
 1. 以下のGitHubリポジトリからプロジェクトをクローンします。 
