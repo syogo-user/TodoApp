@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TaskListView: View {
     @StateObject private var viewModel = TaskListViewModelImpl()
-    @Binding var isSignIn: Bool
     
     var body: some View {
             NavigationStack {
@@ -51,5 +50,5 @@ struct TaskListView: View {
 }
 
 #Preview {
-    TaskListView(isSignIn: .constant(false))
+    TaskListView()
 }

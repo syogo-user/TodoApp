@@ -15,9 +15,8 @@ struct TodoApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            ContentView() // 最初に表示される View
             if isSignIn {
-                TaskListView(isSignIn: $isSignIn)
+                TabBarView()
             } else {
                 SignInView(isSignIn: $isSignIn)
             }
