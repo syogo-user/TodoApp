@@ -10,6 +10,8 @@
 		10CE648011B5E37741EFE8A6 /* Pods_TodoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B922F38A60BFF4B57B60A399 /* Pods_TodoApp.framework */; };
 		1107DA970E5914BB89B2054F /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = C42AFA19F5E0A7053707FFE1 /* amplifyconfiguration.json */; };
 		3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 698F70E34828384BED2B116E /* awsconfiguration.json */; };
+		3D0B45962B5C0C36009A7255 /* UpdateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B45952B5C0C36009A7255 /* UpdateTaskView.swift */; };
+		3D0B45972B5C0C36009A7255 /* UpdateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B45952B5C0C36009A7255 /* UpdateTaskView.swift */; };
 		3D19DFB02B462F3A00B1F6BB /* TodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFAF2B462F3A00B1F6BB /* TodoApp.swift */; };
 		3D19DFB32B462F6C00B1F6BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFB22B462F6C00B1F6BB /* ContentView.swift */; };
 		3D19DFB42B462F6C00B1F6BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFB22B462F6C00B1F6BB /* ContentView.swift */; };
@@ -50,7 +52,6 @@
 		919A407329C3541000D63E44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 919A407229C3541000D63E44 /* Localizable.strings */; };
 		91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */; };
 		91A033B729BDAEAA0019D5A9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033B629BDAEAA0019D5A9 /* R.generated.swift */; };
-		91A033C029BDCAB50019D5A9 /* List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A033BF29BDCAB50019D5A9 /* List.storyboard */; };
 		91A033C529BDEED20019D5A9 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C429BDEED20019D5A9 /* TaskListViewController.swift */; };
 		91A033C829BDEF200019D5A9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C729BDEF200019D5A9 /* SettingViewController.swift */; };
 		91A033CA29BDF6920019D5A9 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C929BDF6920019D5A9 /* SettingViewModel.swift */; };
@@ -121,6 +122,7 @@
 /* Begin PBXFileReference section */
 		15A2606FE38009DDE7EB6C9E /* Pods_TodoApp_TodoAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApp_TodoAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2416444A1B606F86CB272378 /* Pods-TodoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3D0B45952B5C0C36009A7255 /* UpdateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskView.swift; sourceTree = "<group>"; };
 		3D19DFAF2B462F3A00B1F6BB /* TodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApp.swift; sourceTree = "<group>"; };
 		3D19DFB22B462F6C00B1F6BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3D19DFB62B463B1500B1F6BB /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -159,7 +161,6 @@
 		919A407229C3541000D63E44 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
 		91A033B629BDAEAA0019D5A9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
-		91A033BF29BDCAB50019D5A9 /* List.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
 		91A033C429BDEED20019D5A9 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		91A033C729BDEF200019D5A9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		91A033C929BDF6920019D5A9 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -299,6 +300,7 @@
 				9136501829C6AFA000F9BC29 /* UpdateTaskViewController.swift */,
 				9136501A29C6AFAA00F9BC29 /* UpdateTaskViewModel.swift */,
 				91A4A3C629D8796900E22210 /* UpdateTaskRouter.swift */,
+				3D0B45952B5C0C36009A7255 /* UpdateTaskView.swift */,
 			);
 			path = UpdateTask;
 			sourceTree = "<group>";
@@ -375,7 +377,6 @@
 			isa = PBXGroup;
 			children = (
 				915F06F329BA1D3900685156 /* SignIn.storyboard */,
-				91A033BF29BDCAB50019D5A9 /* List.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -734,7 +735,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91A033C029BDCAB50019D5A9 /* List.storyboard in Resources */,
 				91E41A3729B7791800DA4EAE /* Assets.xcassets in Resources */,
 				9136502729C6E8EC00F9BC29 /* TaskTableViewCell.xib in Resources */,
 				91E5AB2F29D1DBCC0025886F /* Color.xcassets in Resources */,
@@ -911,6 +911,7 @@
 				911C466E29C9CC9C00A9159F /* Date+Extention.swift in Sources */,
 				91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */,
 				91A088A829C4A147000BF175 /* APIRoutes.swift in Sources */,
+				3D0B45962B5C0C36009A7255 /* UpdateTaskView.swift in Sources */,
 				9136502029C6AFF000F9BC29 /* AddTaskViewModel.swift in Sources */,
 				91A088A529C49FF8000BF175 /* TaskListAPI.swift in Sources */,
 				91A088AE29C4A26F000BF175 /* APIResult.swift in Sources */,
@@ -948,6 +949,7 @@
 				3D6A59E92B56CDE1006DB110 /* SettingView.swift in Sources */,
 				91F0EAEE29D5E8A70071F148 /* Date+ExtentionTests.swift in Sources */,
 				3D19DFB82B463B1500B1F6BB /* Request.swift in Sources */,
+				3D0B45972B5C0C36009A7255 /* UpdateTaskView.swift in Sources */,
 				3D19DFB42B462F6C00B1F6BB /* ContentView.swift in Sources */,
 				91F0EAEC29D5D4060071F148 /* String+ExtentionTests.swift in Sources */,
 				3D19DFBB2B463B2B00B1F6BB /* APIClient.swift in Sources */,
