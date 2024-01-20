@@ -51,7 +51,6 @@
 		91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */; };
 		91A033B729BDAEAA0019D5A9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033B629BDAEAA0019D5A9 /* R.generated.swift */; };
 		91A033C029BDCAB50019D5A9 /* List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A033BF29BDCAB50019D5A9 /* List.storyboard */; };
-		91A033C229BDCACE0019D5A9 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A033C129BDCACE0019D5A9 /* Setting.storyboard */; };
 		91A033C529BDEED20019D5A9 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C429BDEED20019D5A9 /* TaskListViewController.swift */; };
 		91A033C829BDEF200019D5A9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C729BDEF200019D5A9 /* SettingViewController.swift */; };
 		91A033CA29BDF6920019D5A9 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A033C929BDF6920019D5A9 /* SettingViewModel.swift */; };
@@ -161,7 +160,6 @@
 		91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
 		91A033B629BDAEAA0019D5A9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		91A033BF29BDCAB50019D5A9 /* List.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = List.storyboard; sourceTree = "<group>"; };
-		91A033C129BDCACE0019D5A9 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		91A033C429BDEED20019D5A9 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		91A033C729BDEF200019D5A9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		91A033C929BDF6920019D5A9 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -378,7 +376,6 @@
 			children = (
 				915F06F329BA1D3900685156 /* SignIn.storyboard */,
 				91A033BF29BDCAB50019D5A9 /* List.storyboard */,
-				91A033C129BDCACE0019D5A9 /* Setting.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -745,7 +742,6 @@
 				3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */,
 				915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */,
 				1107DA970E5914BB89B2054F /* amplifyconfiguration.json in Resources */,
-				91A033C229BDCACE0019D5A9 /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

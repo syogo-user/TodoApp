@@ -6,11 +6,11 @@
 //
 
 import UIKit
-
-extension SettingViewController {    
-    func toSignIn() {
-        guard let signInVC = R.storyboard.signIn.signInVC() else { return }
-        signInVC.modalPresentationStyle = .fullScreen
-        self.present(signInVC, animated: true, completion: nil)
-    }
-}
+//
+//extension SettingViewController {    
+//    func toSignIn() {
+//        guard let signInVC = R.storyboard.signIn.signInVC() else { return }
+//        signInVC.modalPresentationStyle = .fullScreen
+//        self.present(signInVC, animated: true, completion: nil)
+//    }
+//}
