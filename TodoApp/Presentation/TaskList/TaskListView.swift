@@ -19,7 +19,7 @@ struct TaskListView: View {
 //                } else {
                 List {
                     ForEach(viewModel.taskInfoItems, id: \.taskId) { task in
-                        NavigationLink(destination: Text("未実装")) {
+                        NavigationLink(destination: UpdateTaskView(updateTask: task)) {
                             // セルのカスタムView
                             VStack {
                                 Text("\(task.taskId)")

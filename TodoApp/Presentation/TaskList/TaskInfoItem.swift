@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SortProtocol {
+protocol SortProtocol: ObservableObject {
     /// タスクID
     var taskId: String { get }
     /// 予定日時
@@ -16,19 +16,19 @@ protocol SortProtocol {
 
 class TaskInfoItem: SortProtocol, Identifiable {
     /// タスクID
-    let taskId: String
+    @Published var taskId: String
     /// タイトル
-    let title: String
+    @Published var title: String
     /// 内容
-    let content: String
+    @Published var content: String
     /// 予定日時
-    let scheduledDate: Date
+    @Published var scheduledDate: Date
     /// 完了済みか
-    let isCompleted: Bool
+    @Published var isCompleted: Bool
     /// お気に入りか
-    let isFavorite: Bool
+    @Published var isFavorite: Bool
     /// ユーザID
-    let userId: String
+    @Published var userId: String
 
     init(taskId: String, title: String, content: String, scheduledDate: Date, isCompleted: Bool, isFavorite: Bool, userId: String)  {
         self.taskId = taskId

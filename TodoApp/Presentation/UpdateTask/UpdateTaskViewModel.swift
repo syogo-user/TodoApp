@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol UpdateTaskViewModel {
+protocol UpdateTaskViewModel: ObservableObject {
     /// ローディング
     var isLoading: Driver<Bool> { get }
     /// タスクの更新通知
@@ -18,6 +18,7 @@ protocol UpdateTaskViewModel {
     func updateTask(taskInfoItem: TaskInfoItem)
 }
 
+@MainActor
 class UpdateTaskViewModelImpl: UpdateTaskViewModel {
     private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
     private let userUseCase: UserUseCase = UserUseCaseImpl()
