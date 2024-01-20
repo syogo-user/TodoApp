@@ -22,7 +22,7 @@ protocol UserUseCase {
     /// ソーシャルサインイン
     func socialSignIn(provider: AuthProvider) async throws
     /// サインアウト
-    func signOut() -> Single<Void>
+    func signOut() async throws 
     /// ユーザ情報取得
     func loadLocalUser() throws -> UserInfoAttribute
     /// ユーザ情報を登録
@@ -33,6 +33,7 @@ protocol UserUseCase {
 
 class UserUseCaseImpl: UserUseCase {
     private var repository: UserRepository = UserRepositoryImpl()
+    
     /// サインイン画面を経由したか
     var isFromSignIn: Bool {
         get { repository.isFromSignIn }
@@ -117,29 +118,20 @@ class UserUseCaseImpl: UserUseCase {
     }
 
     /// サインアウト
-    func signOut() -> Single<Void> {
-        return Single.create { single in
-            Task {
-                do {
-                    let result = await self.repository.signOut()
-                    guard let signOutResult = result as? AWSCognitoSignOutResult else {
-                        print("Signout failed")
-                        throw DomainError.authError
-                    }
-                    switch signOutResult {
-                    case .complete:
-                        print("Signed out successfully")
-                        single(.success(()))
-                    case .partial:
-//                        single(.error(DomainError.authError))
-                        print("SignOut failed with \(DomainError.authError)")
-                    case .failed(let error):
-                        print("SignOut failed with \(error)")
-//                        single(.error(DomainError.authError))
-                    }
-                }
-            }
-            return Disposables.create()
+    func signOut() async throws {
+        let result = await self.repository.signOut()
+        guard let signOutResult = result as? AWSCognitoSignOutResult else {
+            print("Signout failed")
+            throw DomainError.authError
+        }
+        
+        switch signOutResult {
+        case .complete:
+            print("Signed out successfully")
+        case .partial:
+            throw DomainError.authError
+        case .failed(_):
+            throw DomainError.authError
         }
     }
 

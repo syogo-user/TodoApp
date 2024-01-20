@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Foundation
 
-protocol SettingViewModel {
+protocol SettingViewModel: ObservableObject {
     /// ローディング
     var isLoading: Driver<Bool> { get }
     /// ユーザ情報取得通知
@@ -19,11 +19,12 @@ protocol SettingViewModel {
     /// サインアウト通知
     var signOutResult: Signal<VMResult<Void>?> { get }
     /// サインアウト
-    func signOut()
+    func signOut() async throws
     /// ユーザ情報取得
     func loadUser()
 }
 
+@MainActor
 class SettingViewModelImpl: SettingViewModel {
     private let disposeBag = DisposeBag()
     private let userUseCase: UserUseCase = UserUseCaseImpl()
@@ -50,8 +51,12 @@ class SettingViewModelImpl: SettingViewModel {
     }()
 
     /// サインアウト
-    func signOut() {
-//        userUseCase.signOut()
+    func signOut() async throws {
+        try await userUseCase.signOut()
+        try taskUseCase.deleteLocalTaskAll()
+        try userUseCase.deleteLocalUser()
+        taskUseCase.sortOrder = nil
+        taskUseCase.filterCondition = nil
 //            .flatMap {
 //                self.taskUseCase.deleteLocalTaskAll()
 //            }
@@ -69,7 +74,6 @@ class SettingViewModelImpl: SettingViewModel {
 //            .startWith(.loading())
 //            .emit(to: signOutRelay)
 //            .disposed(by: disposeBag)
-
     }
 
     /// ローカルユーザ情報の取得

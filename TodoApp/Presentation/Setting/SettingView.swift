@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct SettingView: View {
+    @StateObject private var viewModel = SettingViewModelImpl()
+    @AppStorage("isSignIn") var isSignIn = false
+    
     var body: some View {
-        Text("aaa")
+        Button {
+            Task {
+                do {
+                    try await viewModel.signOut()
+                    isSignIn = false                    
+                } catch {
+                    print("エラー: \(error)")
+                }
+            }
+        } label: {
+            Text("サインアウト")
+        }
+
 //        VStack{
 //            Image()
 //            Text()
