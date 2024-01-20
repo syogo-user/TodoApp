@@ -10,7 +10,7 @@ import SwiftUI
 struct SignInView: View {
     @StateObject private var viewModel = SignInViewModelImpl()
 //    @State private var isPresented = false
-    @Binding var isSignIn: Bool
+    @AppStorage("isSignIn") var isSignIn = false
     
     var body: some View {
 //        NavigationStack {
@@ -37,5 +37,5 @@ struct SignInView: View {
 }
 
 #Preview {
-    SignInView(isSignIn: .constant(false))
+    SignInView()
 }

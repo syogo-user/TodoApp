@@ -25,7 +25,7 @@ struct TabBarView: View {
                 }
                 .tag(2)
 
-            TaskListView()
+            SettingView()
                 .tabItem {
                     Label("Page3", systemImage: "3.circle")
                 }

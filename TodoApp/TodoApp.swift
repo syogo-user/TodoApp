@@ -17,10 +17,15 @@ struct TodoApp: App {
         WindowGroup {
             if isSignIn {
                 TabBarView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .edgesIgnoringSafeArea(.all)
             } else {
-                SignInView(isSignIn: $isSignIn)
+                SignInView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .edgesIgnoringSafeArea(.all)
             }
         }
+        
     }
 }
 
