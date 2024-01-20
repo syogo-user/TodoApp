@@ -18,8 +18,8 @@ extension LaunchViewContoller {
 
     /// タブバー画面に遷移
     func toTabBar() {
-        guard let tabBarVC = R.storyboard.main.tabBarVC() else { return }
-        tabBarVC.modalPresentationStyle = .fullScreen
-        self.present(tabBarVC, animated: false, completion: nil)
+//        guard let tabBarVC = R.storyboard.main.tabBarVC() else { return }
+//        tabBarVC.modalPresentationStyle = .fullScreen
+//        self.present(tabBarVC, animated: false, completion: nil)
     }
 }

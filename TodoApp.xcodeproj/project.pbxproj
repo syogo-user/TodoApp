@@ -22,6 +22,8 @@
 		3D5AC5F32B517F7300CBA00F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5AC5F12B517F7300CBA00F /* SignInView.swift */; };
 		3D6A59E52B56CA9D006DB110 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A59E42B56CA9D006DB110 /* TabBarView.swift */; };
 		3D6A59E62B56CA9D006DB110 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A59E42B56CA9D006DB110 /* TabBarView.swift */; };
+		3D6A59E82B56CDE1006DB110 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A59E72B56CDE1006DB110 /* SettingView.swift */; };
+		3D6A59E92B56CDE1006DB110 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A59E72B56CDE1006DB110 /* SettingView.swift */; };
 		911C466C29C9CBC700A9159F /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911C466B29C9CBC700A9159F /* String+Extention.swift */; };
 		911C466E29C9CC9C00A9159F /* Date+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911C466D29C9CC9C00A9159F /* Date+Extention.swift */; };
 		9127B1B229CFEA26002EC5D5 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9127B1B129CFEA26002EC5D5 /* FavoriteButton.swift */; };
@@ -97,9 +99,7 @@
 		91CFFD8B29C22A0D0086B5E2 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CFFD8A29C22A0D0086B5E2 /* DomainError.swift */; };
 		91E41A2E29B7791600DA4EAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A2D29B7791600DA4EAE /* AppDelegate.swift */; };
 		91E41A3029B7791600DA4EAE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E41A2F29B7791600DA4EAE /* SceneDelegate.swift */; };
-		91E41A3529B7791600DA4EAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91E41A3329B7791600DA4EAE /* Main.storyboard */; };
 		91E41A3729B7791800DA4EAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91E41A3629B7791800DA4EAE /* Assets.xcassets */; };
-		91E41A3A29B7791800DA4EAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91E41A3829B7791800DA4EAE /* LaunchScreen.storyboard */; };
 		91E5AB2F29D1DBCC0025886F /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91E5AB2E29D1DBCC0025886F /* Color.xcassets */; };
 		91F0EAE229D5B8580071F148 /* TaskUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F0EAE129D5B8580071F148 /* TaskUseCaseTests.swift */; };
 		91F0EAE429D5D2330071F148 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 91F0EAE329D5D2330071F148 /* Amplify */; };
@@ -129,6 +129,7 @@
 		3D3488952B43C8CF001BCC8F /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		3D5AC5F12B517F7300CBA00F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		3D6A59E42B56CA9D006DB110 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		3D6A59E72B56CDE1006DB110 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		4C97294790A515A2AFDB33D2 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
 		535E5535F9E17976827D8D1A /* Pods-TodoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoAppTests.release.xcconfig"; path = "Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		698F70E34828384BED2B116E /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -207,9 +208,7 @@
 		91E41A2A29B7791600DA4EAE /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E41A2D29B7791600DA4EAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91E41A2F29B7791600DA4EAE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		91E41A3429B7791600DA4EAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		91E41A3629B7791800DA4EAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		91E41A3929B7791800DA4EAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		91E41A3B29B7791800DA4EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91E41A4029B7791800DA4EAE /* TodoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E5AB2E29D1DBCC0025886F /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
@@ -377,7 +376,6 @@
 		915F06EB29BA1BA200685156 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				91E41A3329B7791600DA4EAE /* Main.storyboard */,
 				915F06F329BA1D3900685156 /* SignIn.storyboard */,
 				91A033BF29BDCAB50019D5A9 /* List.storyboard */,
 				91A033C129BDCACE0019D5A9 /* Setting.storyboard */,
@@ -426,6 +424,7 @@
 				91A033C729BDEF200019D5A9 /* SettingViewController.swift */,
 				91CFFD8529C1FE420086B5E2 /* SettingRouter.swift */,
 				91A033C929BDF6920019D5A9 /* SettingViewModel.swift */,
+				3D6A59E72B56CDE1006DB110 /* SettingView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -623,7 +622,6 @@
 				91E41A2F29B7791600DA4EAE /* SceneDelegate.swift */,
 				91E41A3629B7791800DA4EAE /* Assets.xcassets */,
 				91E5AB2E29D1DBCC0025886F /* Color.xcassets */,
-				91E41A3829B7791800DA4EAE /* LaunchScreen.storyboard */,
 				91E41A3B29B7791800DA4EAE /* Info.plist */,
 				919A407229C3541000D63E44 /* Localizable.strings */,
 				3D19DFAF2B462F3A00B1F6BB /* TodoApp.swift */,
@@ -739,10 +737,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91E41A3A29B7791800DA4EAE /* LaunchScreen.storyboard in Resources */,
 				91A033C029BDCAB50019D5A9 /* List.storyboard in Resources */,
 				91E41A3729B7791800DA4EAE /* Assets.xcassets in Resources */,
-				91E41A3529B7791600DA4EAE /* Main.storyboard in Resources */,
 				9136502729C6E8EC00F9BC29 /* TaskTableViewCell.xib in Resources */,
 				91E5AB2F29D1DBCC0025886F /* Color.xcassets in Resources */,
 				919A407329C3541000D63E44 /* Localizable.strings in Resources */,
@@ -896,6 +892,7 @@
 				3D19DFB72B463B1500B1F6BB /* Request.swift in Sources */,
 				9136502229C6BBA300F9BC29 /* UserRemoteStore.swift in Sources */,
 				91A033E229BF7A680019D5A9 /* UserRepository.swift in Sources */,
+				3D6A59E82B56CDE1006DB110 /* SettingView.swift in Sources */,
 				91CA6F6429C8840000BC03AB /* InputTextField.swift in Sources */,
 				91A088B229C4A3D5000BF175 /* AddTaskAPI.swift in Sources */,
 				9136501429C5B13200F9BC29 /* TaskInfoItem.swift in Sources */,
@@ -952,6 +949,7 @@
 				91F0EAE229D5B8580071F148 /* TaskUseCaseTests.swift in Sources */,
 				3D5AC5F32B517F7300CBA00F /* SignInView.swift in Sources */,
 				3D6A59E62B56CA9D006DB110 /* TabBarView.swift in Sources */,
+				3D6A59E92B56CDE1006DB110 /* SettingView.swift in Sources */,
 				91F0EAEE29D5E8A70071F148 /* Date+ExtentionTests.swift in Sources */,
 				3D19DFB82B463B1500B1F6BB /* Request.swift in Sources */,
 				3D19DFB42B462F6C00B1F6BB /* ContentView.swift in Sources */,
@@ -969,25 +967,6 @@
 			targetProxy = 91E41A4129B7791800DA4EAE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		91E41A3329B7791600DA4EAE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				91E41A3429B7791600DA4EAE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		91E41A3829B7791800DA4EAE /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				91E41A3929B7791800DA4EAE /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		91E41A5229B7791800DA4EAE /* Debug */ = {
@@ -1041,7 +1020,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -1096,7 +1075,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1118,6 +1097,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodoApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1145,6 +1125,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodoApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
