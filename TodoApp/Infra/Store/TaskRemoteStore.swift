@@ -13,7 +13,7 @@ protocol TaskRemoteStore {
     /// タスクの取得
     func fetchTask(userId: String, authorization: String) async throws -> TaskListAPI.Response
     /// タスクの追加
-    func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response>
+    func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) async throws -> AddTaskAPI.Response
     /// タスクの更新
     func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) async throws -> UpdateTaskAPI.Response
     /// タスクの削除
@@ -26,9 +26,9 @@ class TaskRemoteStoreImpl: TaskRemoteStore {
         return try await Session.async_send(request)
     }
 
-    func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<AddTaskAPI.Response> {
+    func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) async throws -> AddTaskAPI.Response {
         let request = AddTaskAPI.Request(title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
-        return Session.rx_send(request)
+        return try await Session.async_send(request)
     }
 
     func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) async throws -> UpdateTaskAPI.Response {

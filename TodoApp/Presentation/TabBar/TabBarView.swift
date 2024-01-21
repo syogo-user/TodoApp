@@ -15,19 +15,19 @@ struct TabBarView: View {
         TabView(selection: $selection) {
             TaskListView()
                 .tabItem {
-                    Label("Page1", systemImage: "1.circle")
+                    Label("Home", systemImage: "1.circle")
                 }
                 .tag(1)
 
-            TaskListView()
+            AddTaskView()
                 .tabItem {
-                    Label("Page2", systemImage: "2.circle")
+                    Label("Add", systemImage: "2.circle")
                 }
                 .tag(2)
 
             SettingView()
                 .tabItem {
-                    Label("Page3", systemImage: "3.circle")
+                    Label("Setting", systemImage: "3.circle")
                 }
                 .tag(3)
         }
