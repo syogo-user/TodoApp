@@ -17,7 +17,7 @@ protocol TaskRemoteStore {
     /// タスクの更新
     func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) async throws -> UpdateTaskAPI.Response
     /// タスクの削除
-    func deleteTask(taskId: String, authorization: String) -> Single<DeleteTaskAPI.Response>
+    func deleteTask(taskId: String, authorization: String) async throws -> DeleteTaskAPI.Response
 }
 
 class TaskRemoteStoreImpl: TaskRemoteStore {
@@ -36,8 +36,8 @@ class TaskRemoteStoreImpl: TaskRemoteStore {
         return try await Session.async_send(request)
     }
 
-    func deleteTask(taskId: String, authorization: String) -> Single<DeleteTaskAPI.Response> {
+    func deleteTask(taskId: String, authorization: String) async throws -> DeleteTaskAPI.Response {
         let request = DeleteTaskAPI.Request(taskId: taskId, authorization: authorization)
-        return Session.rx_send(request)
+        return try await Session.async_send(request)
     }
 }

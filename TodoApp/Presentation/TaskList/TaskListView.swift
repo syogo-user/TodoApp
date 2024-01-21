@@ -43,9 +43,18 @@ struct TaskListView: View {
 
     
     func delete(offsets: IndexSet) {
-        // Todo: firstでindexを取得できそうだった
-        print("★：\(offsets.first)")
-//        viewModel.delete(index: offsets.lastIndex)
+        Task {
+            do {
+                print("★：\(offsets.first)")
+                if let index = offsets.first {
+                    try await viewModel.deleteTask(index: index)
+                } else {
+                    throw DomainError.unKnownError
+                }
+            } catch {
+                
+            }
+        }
     }
 }
 

@@ -21,7 +21,7 @@ protocol TaskRepository {
     /// タスクの更新
     func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) async throws -> UpdateTaskAPI.Response
     /// タスクの削除
-    func deleteTask(taskId: String, authorization: String) -> Single<DeleteTaskAPI.Response>
+    func deleteTask(taskId: String, authorization: String) async throws -> DeleteTaskAPI.Response
     /// ローカルタスクリストの取得
     func loadLocalTaskList() throws -> [TaskInfoRecord]
     /// ローカルタスクの取得
@@ -64,8 +64,8 @@ class TaskRepositoryImpl: TaskRepository {
         try await remoteStore.updateTask(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
     }
 
-    func deleteTask(taskId: String, authorization: String) -> Single<DeleteTaskAPI.Response> {
-        remoteStore.deleteTask(taskId: taskId, authorization: authorization)
+    func deleteTask(taskId: String, authorization: String) async throws -> DeleteTaskAPI.Response {
+        try await remoteStore.deleteTask(taskId: taskId, authorization: authorization)
     }
 
     func loadLocalTaskList() throws -> [TaskInfoRecord] {
