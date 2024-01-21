@@ -26,7 +26,14 @@ struct UpdateTaskView: View {
 
                 }
             Button {
-                print("更新: \(updateTask.content)")
+                Task {
+                    do {
+                        try await viewModel.updateTask(taskInfoItem: updateTask)
+                        print("更新: \(updateTask.content)")
+                    } catch {
+                        print("エラー: \(error)")
+                    }
+                }
             } label: {
                 Text("保存")
             }

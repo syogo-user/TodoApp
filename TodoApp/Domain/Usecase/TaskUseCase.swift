@@ -18,7 +18,7 @@ protocol TaskUseCase {
     /// タスク登録
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<TaskInfo>
     /// タスク更新
-    func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<TaskInfo>
+    func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String)  async throws -> TaskInfo
     /// タスク削除
     func deleteTask(taskId: String, authorization: String) -> Single<String>
     /// ローカルタスクリストを取得
@@ -128,25 +128,39 @@ class TaskUseCaseImpl: TaskUseCase {
     }
 
     /// タスク更新
-    func updateTask(taskId: String,title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) -> Single<TaskInfo> {
-        repository.updateTask(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
-            .do(onSuccess: { result in
-                guard result.isAcceptable else {
-                    throw DomainError.onAPIError(code: result.message)
-                }
-            })
-            .map {
-                let task = $0.data
-                return try TaskInfo(
-                    taskId: task.taskId,
-                    title: task.title,
-                    content: task.content,
-                    scheduledDate: task.scheduledDate.toDate(),
-                    isCompleted: task.isCompleted,
-                    isFavorite: task.isFavorite,
-                    userId: task.userId
-                )
-            }
+    func updateTask(taskId: String,title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) async throws -> TaskInfo {
+        let response = try await repository.updateTask(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
+        if !response.isAcceptable {
+            throw DomainError.onAPIError(code: "APIエラー") // あとで修正
+        }
+        let task = response.data
+        return TaskInfo(
+            taskId: task.taskId,
+            title: task.title,
+            content: task.content,
+            scheduledDate: try task.scheduledDate.toDate(),
+            isCompleted: task.isCompleted,
+            isFavorite: task.isFavorite,
+            userId: task.userId
+        )
+//        repository.updateTask(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
+//            .do(onSuccess: { result in
+//                guard result.isAcceptable else {
+//                    throw DomainError.onAPIError(code: result.message)
+//                }
+//            })
+//            .map {
+//                let task = $0.data
+//                return try TaskInfo(
+//                    taskId: task.taskId,
+//                    title: task.title,
+//                    content: task.content,
+//                    scheduledDate: task.scheduledDate.toDate(),
+//                    isCompleted: task.isCompleted,
+//                    isFavorite: task.isFavorite,
+//                    userId: task.userId
+//                )
+//            }
     }
 
     /// タスク削除
