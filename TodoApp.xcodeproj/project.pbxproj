@@ -12,6 +12,8 @@
 		3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 698F70E34828384BED2B116E /* awsconfiguration.json */; };
 		3D0B45962B5C0C36009A7255 /* UpdateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B45952B5C0C36009A7255 /* UpdateTaskView.swift */; };
 		3D0B45972B5C0C36009A7255 /* UpdateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B45952B5C0C36009A7255 /* UpdateTaskView.swift */; };
+		3D0B45992B5CCEB7009A7255 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B45982B5CCEB7009A7255 /* AddTaskView.swift */; };
+		3D0B459A2B5CCEB7009A7255 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B45982B5CCEB7009A7255 /* AddTaskView.swift */; };
 		3D19DFB02B462F3A00B1F6BB /* TodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFAF2B462F3A00B1F6BB /* TodoApp.swift */; };
 		3D19DFB32B462F6C00B1F6BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFB22B462F6C00B1F6BB /* ContentView.swift */; };
 		3D19DFB42B462F6C00B1F6BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D19DFB22B462F6C00B1F6BB /* ContentView.swift */; };
@@ -123,6 +125,7 @@
 		15A2606FE38009DDE7EB6C9E /* Pods_TodoApp_TodoAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApp_TodoAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2416444A1B606F86CB272378 /* Pods-TodoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3D0B45952B5C0C36009A7255 /* UpdateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskView.swift; sourceTree = "<group>"; };
+		3D0B45982B5CCEB7009A7255 /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		3D19DFAF2B462F3A00B1F6BB /* TodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApp.swift; sourceTree = "<group>"; };
 		3D19DFB22B462F6C00B1F6BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3D19DFB62B463B1500B1F6BB /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -312,6 +315,7 @@
 				9136501F29C6AFF000F9BC29 /* AddTaskViewModel.swift */,
 				91CA6F6329C8840000BC03AB /* InputTextField.swift */,
 				91CA6F6529C8848200BC03AB /* InputTextView.swift */,
+				3D0B45982B5CCEB7009A7255 /* AddTaskView.swift */,
 			);
 			path = AddTask;
 			sourceTree = "<group>";
@@ -910,6 +914,7 @@
 				9191411129CB6B570072BEA0 /* GRDBAccessorDB.swift in Sources */,
 				911C466E29C9CC9C00A9159F /* Date+Extention.swift in Sources */,
 				91BC1A6629C0B08D00500A62 /* VMResult.swift in Sources */,
+				3D0B45992B5CCEB7009A7255 /* AddTaskView.swift in Sources */,
 				91A088A829C4A147000BF175 /* APIRoutes.swift in Sources */,
 				3D0B45962B5C0C36009A7255 /* UpdateTaskView.swift in Sources */,
 				9136502029C6AFF000F9BC29 /* AddTaskViewModel.swift in Sources */,
@@ -943,6 +948,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D0B459A2B5CCEB7009A7255 /* AddTaskView.swift in Sources */,
 				91F0EAE229D5B8580071F148 /* TaskUseCaseTests.swift in Sources */,
 				3D5AC5F32B517F7300CBA00F /* SignInView.swift in Sources */,
 				3D6A59E62B56CA9D006DB110 /* TabBarView.swift in Sources */,
