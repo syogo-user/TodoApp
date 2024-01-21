@@ -63,7 +63,7 @@ protocol TaskListViewModel: ObservableObject {
 //    /// タスクを更新
 //    func updateTask(index: Int)
 //    /// タスクを削除
-//    func deleteTask(index: Int)
+    func deleteTask(index: Int) async throws
 //    /// ローカルからタスクリストを取得
 //    func loadLocalTaskList()
 //    /// サインイン画面を経由したか
@@ -245,36 +245,24 @@ class TaskListViewModelImpl: TaskListViewModel {
 //            .disposed(by: disposeBag)
 //    }
 //
-//    /// タスクを削除
-//    func deleteTask(index: Int) {
-//        let sortOrder = getSortOrder()
-//        self.userUseCase.fetchCurrentAuthToken()
-//            .flatMap { idToken in
-//                let taskId = self.toTaskId(index: index)
-//                return self.taskUseCase.deleteTask(taskId: taskId, authorization: idToken)
-//            }
-//            .do(onSuccess: { taskId in
-//                // tableViewItemsからデータを削除
-//                self.tableViewItems.removeAll { task in
-//                    task.taskId == taskId
-//                }
-//                self.taskUseCase.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
-//                self.taskItemsRelay.accept(self.tableViewItems)
-//            })
-//            .do(onSuccess: { taskId in
-//                self.taskUseCase.removeNotification(taskId: taskId)
-//            })
-//            .flatMap { taskId in
-//                self.taskUseCase.deleteLocalTask(taskId: taskId)
-//            }
-//            .map { _ in
-//                .success(())
-//            }
-//            .asSignal(onErrorRecover: { .just(.failure($0))})
-//            .startWith(.loading())
-//            .emit(to: deleteTaskInfoRelay)
-//            .disposed(by: disposeBag)
-//    }
+    /// タスクを削除
+    func deleteTask(index: Int) async throws {
+        let sortOrder = getSortOrder()
+        let authorization = try await userUseCase.fetchCurrentAuthToken()
+        let taskId = toTaskId(index: index)
+        _ = try await taskUseCase.deleteTask(taskId: taskId, authorization: authorization)
+        
+        // taskInfoItemsからデータを削除
+        taskInfoItems.removeAll { task in
+            task.taskId == taskId
+        }
+        
+        taskUseCase.sortTask(itemList: &self.taskInfoItems, sort: sortOrder)
+        
+        taskUseCase.removeNotification(taskId: taskId)
+        
+        try taskUseCase.deleteLocalTask(taskId: taskId)
+    }
 //
 //    /// ローカルからタスクリストを取得
 //    func loadLocalTaskList() {
@@ -308,10 +296,10 @@ class TaskListViewModelImpl: TaskListViewModel {
 //        userUseCase.isFromSignIn = false
 //    }
 //
-//    /// 指定したインデックスのタスクを返却する
-//    func selectItemAt(index: Int) -> TaskInfoItem {
-//        tableViewItems[index]
-//    }
+    /// 指定したインデックスのタスクを返却する
+    func selectItemAt(index: Int) -> TaskInfoItem {
+        taskInfoItems[index]
+    }
 //
 //    /// 完了状態を変更
 //    func changeComplete(index: Int, isCompleted: Bool) {
@@ -360,8 +348,8 @@ class TaskListViewModelImpl: TaskListViewModel {
         taskUseCase.filterCondition = filterCondition
     }
 //
-//    /// インデックスからタスクIDを取得
-//    private func toTaskId(index: Int) -> String {
-//        selectItemAt(index: index).taskId
-//    }
+    /// インデックスからタスクIDを取得
+    private func toTaskId(index: Int) -> String {
+        selectItemAt(index: index).taskId
+    }
 }

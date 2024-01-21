@@ -20,7 +20,7 @@ protocol TaskUseCase {
     /// タスク更新
     func updateTask(taskId: String, title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String)  async throws -> TaskInfo
     /// タスク削除
-    func deleteTask(taskId: String, authorization: String) -> Single<String>
+    func deleteTask(taskId: String, authorization: String) async throws -> String
     /// ローカルタスクリストを取得
     func loadLocalTaskList() throws -> [TaskInfoRecord]
     /// ローカルにタスクを登録
@@ -161,16 +161,13 @@ class TaskUseCaseImpl: TaskUseCase {
     }
 
     /// タスク削除
-    func deleteTask(taskId: String, authorization: String) -> Single<String> {
-        repository.deleteTask(taskId: taskId, authorization: authorization)
-            .do(onSuccess: { result in
-                guard result.isAcceptable else {
-                    throw DomainError.onAPIError(code: result.message)
-                }
-            })
-            .map {
-                $0.data.taskId
-            }
+    func deleteTask(taskId: String, authorization: String) async throws -> String {
+        let response = try await repository.deleteTask(taskId: taskId, authorization: authorization)
+        if !response.isAcceptable {
+            throw DomainError.onAPIError(code: "APIエラー")
+        }
+        let task = response.data
+        return task.taskId
     }
 
     /// ローカルタスクリストを取得
