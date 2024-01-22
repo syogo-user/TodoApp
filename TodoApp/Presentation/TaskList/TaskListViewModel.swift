@@ -64,8 +64,8 @@ protocol TaskListViewModel: ObservableObject {
 //    func updateTask(index: Int)
 //    /// タスクを削除
     func deleteTask(index: Int) async throws
-//    /// ローカルからタスクリストを取得
-//    func loadLocalTaskList()
+    /// ローカルからタスクリストを取得
+    func loadLocalTaskList() throws
 //    /// サインイン画面を経由したか
 //    func isFromSignIn() -> Bool
 //    /// サインイン画面を経由したかを設定
@@ -186,23 +186,7 @@ class TaskListViewModelImpl: TaskListViewModel {
     
     
     
-//    private let disposeBag = DisposeBag()
-//
-//    /// タスクの取得(セル用の値)通知
-//    private let taskItemsRelay = BehaviorRelay<[TaskInfoItem]>(value: [])
-//    lazy var taskItems = taskItemsRelay.asDriver()
-//
-//    /// タスクの取得通知
-//    private let taskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
-//    lazy var taskInfo = taskInfoRelay.asSignal(onErrorSignalWith: .empty())
-//
-//    /// タスクの更新通知
-//    private let updateTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
-//    lazy var updateTaskInfo = updateTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
-//
-//    /// タスクの削除通知
-//    private let deleteTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
-//    lazy var deleteTaskInfo = deleteTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
+
 //
 //    private(set) lazy var isLoading: Driver<Bool> = {
 //        Observable.merge(
@@ -264,27 +248,20 @@ class TaskListViewModelImpl: TaskListViewModel {
         try taskUseCase.deleteLocalTask(taskId: taskId)
     }
 //
-//    /// ローカルからタスクリストを取得
-//    func loadLocalTaskList() {
-//        let sortOrder = getSortOrder()
-//        let filterCondition = getFilterCondition()
-//        taskUseCase.loadLocalTaskList()
-//            .do(onSuccess: { taskList in
-//                self.tableViewItems = taskList.map {
-//                    TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
-//                }
-//                self.taskUseCase.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
-//                self.taskUseCase.filterTask(itemList: &self.tableViewItems, condition: filterCondition)
-//                self.taskItemsRelay.accept(self.tableViewItems)
-//            })
-//            .map { taskList -> VMResult<Void> in
-//                    .success(())
-//            }
-//            .asSignal(onErrorRecover: { .just(.failure($0))})
-//            .startWith(.loading())
-//            .emit(to: taskInfoRelay)
-//            .disposed(by: disposeBag)
-//    }
+    /// ローカルからタスクリストを取得
+    func loadLocalTaskList() throws {
+        let sortOrder = getSortOrder()
+        let filterCondition = getFilterCondition()
+        
+        let taskList = try taskUseCase.loadLocalTaskList()
+        
+        self.taskInfoItems = taskList.map {
+            TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
+        }
+        
+        taskUseCase.sortTask(itemList: &self.taskInfoItems, sort: sortOrder)
+        taskUseCase.filterTask(itemList: &self.taskInfoItems, condition: filterCondition)
+    }
 //
 //    /// サインイン画面を経由したか
 //    func isFromSignIn() -> Bool {
