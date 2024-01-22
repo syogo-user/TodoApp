@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TaskListView: View {
     @StateObject private var viewModel = TaskListViewModelImpl()
+    @State private var isShowAlert = false
+    @State private var errorMessage = ""
     
     var body: some View {
             NavigationStack {
@@ -30,6 +32,28 @@ struct TaskListView: View {
                     //                    }
                     .onDelete(perform: delete)
                 }
+                .navigationBarItems(trailing: HStack {
+                    Menu("並び順") {
+                        Button(R.string.localizable.rightBarButtonAscendingOrderDate(), action: {
+                            selectedSortItem(sortOrder: SortOrder.ascendingOrderDate)
+                        })
+                          Button(R.string.localizable.rightBarButtonDescendingOrderDate(), action: {
+                              selectedSortItem(sortOrder: SortOrder.descendingOrderDate)
+                          })
+                    }
+                    Menu("フィルター") {
+                        Button(R.string.localizable.rightBarButtonOnlyFavorite(), action: {
+                            selectedFilterItem(filterCondition: FilterCondition.onlyFavorite)
+                        })
+                        Button(R.string.localizable.rightBarButtonIncludeCompleted(), action: {
+                            selectedFilterItem(filterCondition: FilterCondition.includeCompleted)
+                        })
+                        Button(R.string.localizable.rightBarButtonNotIncludeCompleted(), action: {
+                            selectedFilterItem(filterCondition: FilterCondition.notIncludeCompleted)
+                        })
+                    }
+                })
+
             }
             .task {
                 do {
@@ -38,14 +62,24 @@ struct TaskListView: View {
                     
                 }
             }
-            .navigationBarHidden(true)
+            .alert(
+                "エラー",
+                isPresented: $isShowAlert,
+                presenting: errorMessage
+            ) { errorMessage in
+                Button(errorMessage, role: .destructive) {
+                    
+                }
+            } message: { errorMessage in
+                Text(errorMessage)
+            }
+//            .navigationBarHidden(true)
     }
 
     
-    func delete(offsets: IndexSet) {
+    private func delete(offsets: IndexSet) {
         Task {
             do {
-                print("★：\(offsets.first)")
                 if let index = offsets.first {
                     try await viewModel.deleteTask(index: index)
                 } else {
@@ -55,6 +89,30 @@ struct TaskListView: View {
                 
             }
         }
+    }
+    
+    private func selectedFilterItem(filterCondition: FilterCondition) {
+        viewModel.setFilterCondition(filterCondition: filterCondition.rawValue)
+        do {
+            try loadLocalTaskList()
+        } catch {
+            errorMessage = R.string.localizable.localTaskDBErrorMessage()
+            isShowAlert = true
+        }
+    }
+    
+    private func selectedSortItem(sortOrder: SortOrder) {
+        viewModel.setSortOrder(sortOrder: sortOrder.rawValue)
+        do {
+            try loadLocalTaskList()
+        } catch {
+            errorMessage = R.string.localizable.localTaskDBErrorMessage()
+            isShowAlert = true
+        }
+    }
+    
+    private func loadLocalTaskList() throws {
+        try viewModel.loadLocalTaskList()
     }
 }
 
