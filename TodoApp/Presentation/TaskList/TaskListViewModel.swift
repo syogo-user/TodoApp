@@ -10,12 +10,14 @@ import RxSwift
 import RxCocoa
 import SwiftUI
 
-enum SortOrder: String {
+enum SortOrder: String, CaseIterable, Identifiable {
     /// 昇順
     case ascendingOrderDate
     /// 降順
     case descendingOrderDate
-
+    
+    var id: String { rawValue }
+    
     func getTitle() -> String {
         switch self {
         case .ascendingOrderDate:
@@ -26,14 +28,16 @@ enum SortOrder: String {
     }
 }
 
-enum FilterCondition: String {
+enum FilterCondition: String, CaseIterable, Identifiable {
     /// ★(お気に入り)のみ表示
     case onlyFavorite
-    /// 完了済も表示
+    /// ✔も表示
     case includeCompleted
-    /// 完了済は非表示
+    /// ✔は非表示
     case notIncludeCompleted
-
+    
+    var id: String { rawValue }
+    
     func getTitle() -> String {
         switch self {
         case .onlyFavorite:
