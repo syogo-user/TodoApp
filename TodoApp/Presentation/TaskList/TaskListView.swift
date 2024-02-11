@@ -11,6 +11,8 @@ struct TaskListView: View {
     @StateObject private var viewModel = TaskListViewModelImpl()
     @State private var isShowAlert = false
     @State private var errorMessage = ""
+//    @State private var selectedOrder = SortOrder.descendingOrderDate
+//    @State private var filterCondition = FilterCondition.notIncludeCompleted
     
     var body: some View {
             NavigationStack {
@@ -33,6 +35,13 @@ struct TaskListView: View {
                     .onDelete(perform: delete)
                 }
                 .navigationBarItems(trailing: HStack {
+//                    Picker("", selection: $selectedOrder) {
+//                        ForEach(SortOrder.allCases) {
+//                            Text($0.getTitle()).tag($0)
+//                        }
+//                        .pickerStyle(.menu)
+//                    }
+
                     Menu("並び順") {
                         Button(R.string.localizable.rightBarButtonAscendingOrderDate(), action: {
                             selectedSortItem(sortOrder: SortOrder.ascendingOrderDate)
@@ -42,7 +51,16 @@ struct TaskListView: View {
                           })
                     }
                     Menu("フィルター") {
-                        Button(R.string.localizable.rightBarButtonOnlyFavorite(), action: {
+//                        HStack {
+//                            if filterCondition == FilterCondition.onlyFavorite {
+//                                Text("✔")
+//                            }
+//                            Button(R.string.localizable.rightBarButtonOnlyFavorite(), action: {
+//                                selectedFilterItem(filterCondition: FilterCondition.onlyFavorite)
+//                            })
+                        
+                        Button(R.string.localizable.rightBarButtonOnlyFavorite(),
+                               action: {
                             selectedFilterItem(filterCondition: FilterCondition.onlyFavorite)
                         })
                         Button(R.string.localizable.rightBarButtonIncludeCompleted(), action: {
@@ -53,7 +71,6 @@ struct TaskListView: View {
                         })
                     }
                 })
-
             }
             .task {
                 do {
@@ -92,6 +109,7 @@ struct TaskListView: View {
     }
     
     private func selectedFilterItem(filterCondition: FilterCondition) {
+//        self.filterCondition = filterCondition
         viewModel.setFilterCondition(filterCondition: filterCondition.rawValue)
         do {
             try loadLocalTaskList()

@@ -15,7 +15,7 @@ enum SortOrder: String {
     case ascendingOrderDate
     /// 降順
     case descendingOrderDate
-
+    
     func getTitle() -> String {
         switch self {
         case .ascendingOrderDate:
@@ -33,7 +33,7 @@ enum FilterCondition: String {
     case includeCompleted
     /// 完了済は非表示
     case notIncludeCompleted
-
+    
     func getTitle() -> String {
         switch self {
         case .onlyFavorite:
