@@ -51,6 +51,7 @@
 // MARK: - Common
 "ok" = "OK";
 "cancel" = "キャンセル";
+"appName" = "TodoApp";
 
 // MARK: - NavigationBar
 "taskListNavigationTitle" = "タスク一覧";
