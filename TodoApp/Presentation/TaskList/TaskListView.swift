@@ -11,8 +11,6 @@ struct TaskListView: View {
     @StateObject private var viewModel = TaskListViewModelImpl()
     @State private var isShowAlert = false
     @State private var errorMessage = ""
-//    @State private var selectedOrder = SortOrder.descendingOrderDate
-//    @State private var filterCondition = FilterCondition.notIncludeCompleted
     
     var body: some View {
             NavigationStack {
@@ -35,30 +33,22 @@ struct TaskListView: View {
                     .onDelete(perform: delete)
                 }
                 .navigationBarItems(trailing: HStack {
-//                    Picker("", selection: $selectedOrder) {
-//                        ForEach(SortOrder.allCases) {
-//                            Text($0.getTitle()).tag($0)
-//                        }
-//                        .pickerStyle(.menu)
-//                    }
-
-                    Menu("並び順") {
+                    Menu {
                         Button(R.string.localizable.rightBarButtonAscendingOrderDate(), action: {
                             selectedSortItem(sortOrder: SortOrder.ascendingOrderDate)
                         })
-                          Button(R.string.localizable.rightBarButtonDescendingOrderDate(), action: {
-                              selectedSortItem(sortOrder: SortOrder.descendingOrderDate)
-                          })
+                        Button(R.string.localizable.rightBarButtonDescendingOrderDate(), action: {
+                            selectedSortItem(sortOrder: SortOrder.descendingOrderDate)
+                        })
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20)
+                                        .foregroundColor(Color(R.color.accent() ?? UIColor.cyan))
                     }
-                    Menu("フィルター") {
-//                        HStack {
-//                            if filterCondition == FilterCondition.onlyFavorite {
-//                                Text("✔")
-//                            }
-//                            Button(R.string.localizable.rightBarButtonOnlyFavorite(), action: {
-//                                selectedFilterItem(filterCondition: FilterCondition.onlyFavorite)
-//                            })
-                        
+                    
+                    Menu {
                         Button(R.string.localizable.rightBarButtonOnlyFavorite(),
                                action: {
                             selectedFilterItem(filterCondition: FilterCondition.onlyFavorite)
@@ -69,6 +59,14 @@ struct TaskListView: View {
                         Button(R.string.localizable.rightBarButtonNotIncludeCompleted(), action: {
                             selectedFilterItem(filterCondition: FilterCondition.notIncludeCompleted)
                         })
+
+                    } label: {
+                        Image(systemName: "ellipsis")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20)
+                                        .foregroundColor(Color(R.color.accent() ?? UIColor.cyan))
+
                     }
                 })
             }
@@ -90,7 +88,6 @@ struct TaskListView: View {
             } message: { errorMessage in
                 Text(errorMessage)
             }
-//            .navigationBarHidden(true)
     }
 
     
@@ -109,7 +106,6 @@ struct TaskListView: View {
     }
     
     private func selectedFilterItem(filterCondition: FilterCondition) {
-//        self.filterCondition = filterCondition
         viewModel.setFilterCondition(filterCondition: filterCondition.rawValue)
         do {
             try loadLocalTaskList()

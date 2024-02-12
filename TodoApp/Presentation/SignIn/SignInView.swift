@@ -24,7 +24,6 @@ struct SignInView: View {
                 socialSignIn(provider: .google)
             } label: {
                 Image(R.image.google.name)
-                    .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
@@ -34,7 +33,6 @@ struct SignInView: View {
                 socialSignIn(provider: .apple)
             } label: {
                 Image(R.image.apple.name)
-                    .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
