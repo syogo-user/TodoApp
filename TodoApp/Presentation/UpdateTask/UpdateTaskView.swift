@@ -9,35 +9,59 @@ import SwiftUI
 
 struct UpdateTaskView: View {
     @StateObject private var viewModel = UpdateTaskViewModelImpl()
-    @StateObject var updateTask: TaskInfoItem // TODO: ここの実装はStateObjectが適切か
-    
+    @StateObject var updateTask: TaskInfoItem
+    @SwiftUI.Environment(\.presentationMode) var presentation
+
     var body: some View {
-        VStack {
-            TextField("タイトル", text: $updateTask.title)
-                .textFieldStyle(.roundedBorder)
-                .padding()
-                .onSubmit {
-
-                }
-            TextField("内容", text: $updateTask.content)
-                .textFieldStyle(.roundedBorder)
-                .padding()
-                .onSubmit {
-
-                }
-            Button {
-                Task {
-                    do {
-                        try await viewModel.updateTask(taskInfoItem: updateTask)
-                        print("更新: \(updateTask.content)")
-                    } catch {
-                        print("エラー: \(error)")
+        NavigationStack {
+            VStack(spacing: 16) {
+                HStack {
+                    Toggle(isOn: $updateTask.isCompleted) {
                     }
+                    .toggleStyle(.checkBox)
+                    .padding(8)
+                    
+                    Button {
+                        
+                    } label: {
+                        let imageName = updateTask.isFavorite ? "star_fill" : "star_frame"
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20, alignment: .trailing)
+
+                    }
+                    Spacer()
+                    DatePicker("日時", selection: $updateTask.scheduledDate)
+                        .labelsHidden()
                 }
-            } label: {
-                Text("保存")
+                TextField("タイトル", text: $updateTask.title)
+                    .textFieldStyle(.roundedBorder)
+                    .onSubmit {
+                        
+                    }
+                TextField("内容", text: $updateTask.content, axis: .vertical)
+                    .textFieldStyle(.roundedBorder)
+                    .onSubmit {
+                        print("OK")
+                    }
+                Spacer()
             }
-            Spacer()
+            .navigationBarItems(trailing: HStack {
+                Button {
+                    Task {
+                        do {
+                            try await viewModel.updateTask(taskInfoItem: updateTask)
+                            self.presentation.wrappedValue.dismiss()
+                            print("更新: \(updateTask.content)")
+                        } catch {
+                            print("エラー: \(error)")
+                        }
+                    }
+                } label: {
+                    Text("保存")
+                }
+            })
         }
     }
 }

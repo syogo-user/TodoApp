@@ -13,7 +13,7 @@ struct TaskListView: View {
     @State private var errorMessage = ""
     
     var body: some View {
-            NavigationStack {
+        NavigationStack {
                 // Todo: データが取得してもなかった場合に、データがありませんになるように修正
 //                if viewModel.lifeInfoList.isEmpty {
 //                    ProgressView() // ローディング
@@ -22,14 +22,9 @@ struct TaskListView: View {
                 List {
                     ForEach(viewModel.taskInfoItems, id: \.taskId) { task in
                         NavigationLink(destination: UpdateTaskView(updateTask: task)) {
-                            // セルのカスタムView
-                            VStack {
-                                Text("\(task.taskId)")
-                                Text("\(task.content)")
-                            }
+                            TaskCellView(task: task)
                         }
                     }
-                    //                    }
                     .onDelete(perform: delete)
                 }
                 .navigationBarItems(trailing: HStack {
@@ -126,6 +121,52 @@ struct TaskListView: View {
     private func loadLocalTaskList() throws {
         try viewModel.loadLocalTaskList()
     }
+}
+struct RefreshChecker {
+    init() {
+        print("refreshed!")
+    }
+}
+struct TaskCellView: View {
+    @StateObject var task: TaskInfoItem
+    
+    var body: some View {
+        let checker = RefreshChecker()
+        HStack(alignment: .center) {
+            Toggle(isOn: $task.isCompleted) {
+                
+            }
+            .toggleStyle(.checkBox)
+            .padding(.trailing, 8)
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text(task.title)
+                    .fontWeight(.semibold)
+                Text(task.content)
+                    .lineLimit(1)
+                Text(task.scheduledDate.dateFormat().dateJpFormat())
+                    .foregroundColor(Color(.darkGray))
+            }
+            
+            Spacer()
+            
+            Button {
+               // お気に入り更新
+//                viewModel.changeFavorite(index: index, isFavorite: isFavorite)
+//                viewModel.updateTask(index: index)
+            } label: {
+                let imageName = task.isFavorite ? "star_fill" : "star_frame"
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30, alignment: .trailing)
+            }
+            .buttonStyle(.plain)
+
+        }
+
+    }
+
 }
 
 #Preview {

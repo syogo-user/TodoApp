@@ -291,19 +291,19 @@ class TaskListViewModelImpl: TaskListViewModel {
 //            userId: item.userId
 //        )
 //    }
-//    /// お気に入り状態を変更
-//    func changeFavorite(index: Int, isFavorite: Bool) {
-//        let item = selectItemAt(index: index)
-//        tableViewItems[index] = TaskInfoItem(
-//            taskId: item.taskId,
-//            title: item.title,
-//            content: item.content,
-//            scheduledDate: item.scheduledDate,
-//            isCompleted: item.isCompleted,
-//            isFavorite: isFavorite,
-//            userId: item.userId
-//        )
-//    }
+    /// お気に入り状態を変更
+    func changeFavorite(index: Int, isFavorite: Bool) {
+        let item = selectItemAt(index: index)
+        taskInfoItems[index] = TaskInfoItem(
+            taskId: item.taskId,
+            title: item.title,
+            content: item.content,
+            scheduledDate: item.scheduledDate,
+            isCompleted: item.isCompleted,
+            isFavorite: isFavorite,
+            userId: item.userId
+        )
+    }
 //
     /// 並び順を取得
     func getSortOrder() -> String {
