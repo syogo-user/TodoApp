@@ -15,22 +15,23 @@ struct TabBarView: View {
         TabView(selection: $selection) {
             TaskListView()
                 .tabItem {
-                    Label("Home", systemImage: "1.circle")
+                    Label("一覧", systemImage: "list.bullet")
                 }
                 .tag(1)
 
             AddTaskView()
                 .tabItem {
-                    Label("Add", systemImage: "2.circle")
+                    Label("投稿", systemImage: "plus")
                 }
                 .tag(2)
 
             SettingView()
                 .tabItem {
-                    Label("Setting", systemImage: "3.circle")
+                    Label("アカウント", systemImage: "person")
                 }
                 .tag(3)
         }
+        .accentColor(Color(R.color.accent() ?? UIColor.cyan))
     }
 }
 
