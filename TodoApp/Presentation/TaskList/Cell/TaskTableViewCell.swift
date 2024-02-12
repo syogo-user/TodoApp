@@ -10,7 +10,7 @@ import RxSwift
 
 class TaskTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var completeCheckButton: CheckButton!
+//    @IBOutlet weak var completeCheckButton: CheckButton!
     @IBOutlet weak var favoriteButton: FavoriteButton!
     @IBOutlet private weak var title: UILabel!
     @IBOutlet private weak var contentLabel: UILabel!
@@ -27,7 +27,7 @@ class TaskTableViewCell: UITableViewCell {
     }
 
     func setUp(taskInfoItem: TaskInfoItem) {
-        completeCheckButton.isChecked = taskInfoItem.isCompleted
+//        completeCheckButton.isChecked = taskInfoItem.isCompleted
         title.text = taskInfoItem.title
         contentLabel.text = taskInfoItem.content
         scheduledDateLabel.text = taskInfoItem.scheduledDate.dateFormat().dateJpFormat()

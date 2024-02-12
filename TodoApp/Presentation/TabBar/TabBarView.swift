@@ -31,7 +31,7 @@ struct TabBarView: View {
                 }
                 .tag(3)
         }
-        .accentColor(Color(R.color.accent() ?? UIColor.cyan))
+        .accentColor(Color(.accent))
     }
 }
 
