@@ -45,7 +45,6 @@ struct TaskListView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 20)
-                                        .foregroundColor(Color(R.color.accent() ?? UIColor.cyan))
                     }
                     
                     Menu {
@@ -65,7 +64,6 @@ struct TaskListView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 20)
-                                        .foregroundColor(Color(R.color.accent() ?? UIColor.cyan))
 
                     }
                 })

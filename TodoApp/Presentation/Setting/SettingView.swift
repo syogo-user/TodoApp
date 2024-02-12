@@ -9,27 +9,43 @@ import SwiftUI
 
 struct SettingView: View {
     @StateObject private var viewModel = SettingViewModelImpl()
+    @State private var email = ""
     @AppStorage("isSignIn") var isSignIn = false
     
     var body: some View {
-        Button {
-            Task {
-                do {
-                    try await viewModel.signOut()
-                    isSignIn = false                    
-                } catch {
-                    print("エラー: \(error)")
+        VStack {
+            Image(R.image.person.name)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100, alignment: .center)
+                .padding(.top, 16)
+            
+            Text(email)
+                .fontWeight(.semibold)
+            
+            Button {
+                Task {
+                    do {
+                        try await viewModel.signOut()
+                        isSignIn = false
+                    } catch {
+                        print("エラー: \(error)")
+                    }
                 }
+            } label: {
+                Text("サインアウト")
+                    .fontWeight(.semibold)
             }
-        } label: {
-            Text("サインアウト")
+            .padding()
+            Spacer()
         }
-
-//        VStack{
-//            Image()
-//            Text()
-//            Button()
-//        }
+        .onAppear {
+            do {
+                email = try viewModel.loadEmail()
+            } catch {
+                
+            }
+        }
     }
 }
 
