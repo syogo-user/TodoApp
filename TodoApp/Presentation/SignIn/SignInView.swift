@@ -6,35 +6,58 @@
 //
 
 import SwiftUI
+import Amplify
 
 struct SignInView: View {
     @StateObject private var viewModel = SignInViewModelImpl()
-//    @State private var isPresented = false
     @AppStorage("isSignIn") var isSignIn = false
     
     var body: some View {
-//        NavigationStack {
+        VStack(alignment: .center) {
+            Text(R.string.localizable.appName())
+                .font(.largeTitle)
+                .fontWeight(.semibold)
+                .foregroundColor(Color.accentColor)
+                .padding(.bottom, 50)
+            
             Button {
-                Task {
-                    do {
-                        try await viewModel.socialSigIn(provider: .google)
-                        isSignIn = true
-//                        isPresented = true
-                    } catch {
-                        
-                    }
-                }
+                socialSignIn(provider: .google)
             } label: {
-                Text("GoogleSignIn")
+                Image(R.image.google.name)
+                    .renderingMode(.original)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
             }
-//            .navigationDestination(isPresented: $isPresented) {
-//                 TaskListView()
-//            }
+            .padding()
+            
+            Button {
+                socialSignIn(provider: .apple)
+            } label: {
+                Image(R.image.apple.name)
+                    .renderingMode(.original)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+            .padding()
+            
+            Spacer()
+        }
+        .padding(.horizontal, 50)
+        .padding(.top, 200)
     }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//    }
-
+    
+    private func socialSignIn(provider: AuthProvider) {
+        Task {
+            do {
+                try await viewModel.socialSigIn(provider: provider)
+                isSignIn = true
+            } catch {
+                
+            }
+        }
+    }
 }
+
 
 #Preview {
     SignInView()
