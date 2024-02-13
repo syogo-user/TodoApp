@@ -19,7 +19,7 @@ struct TabBarView: View {
                 }
                 .tag(1)
 
-            AddTaskView()
+            AddTaskView(selection: $selection)
                 .tabItem {
                     Label("投稿", systemImage: "plus")
                 }
