@@ -149,11 +149,12 @@ struct TaskCellView: View {
             }
             
             Spacer()
-            
+
             Button {
                // お気に入り更新
 //                viewModel.changeFavorite(index: index, isFavorite: isFavorite)
 //                viewModel.updateTask(index: index)
+                task.isFavorite.toggle()
             } label: {
                 let imageName = task.isFavorite ? "star_fill" : "star_frame"
                 Image(imageName)

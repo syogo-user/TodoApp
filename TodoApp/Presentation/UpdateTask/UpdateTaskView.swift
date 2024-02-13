@@ -22,7 +22,7 @@ struct UpdateTaskView: View {
                     .padding(8)
                     
                     Button {
-                        
+                        updateTask.isFavorite.toggle()
                     } label: {
                         let imageName = updateTask.isFavorite ? "star_fill" : "star_frame"
                         Image(imageName)
@@ -40,13 +40,15 @@ struct UpdateTaskView: View {
                     .onSubmit {
                         
                     }
-                TextField("内容", text: $updateTask.content, axis: .vertical)
+
+                TextEditor(text: $updateTask.content)
+                    .frame(height: 100)
+                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 0.2))
                     .textFieldStyle(.roundedBorder)
-                    .onSubmit {
-                        print("OK")
-                    }
+                
                 Spacer()
             }
+            .padding(.horizontal, 16)
             .navigationBarItems(trailing: HStack {
                 Button {
                     Task {

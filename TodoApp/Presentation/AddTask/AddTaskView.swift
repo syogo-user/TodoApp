@@ -18,6 +18,7 @@ struct AddTaskView: View {
         VStack(spacing: 16) {
             TextField("タイトル", text: $inputTitle)
                 .textFieldStyle(.roundedBorder)
+                .padding(.top, 16)
                         
             TextEditor(text: $inputContent)
                 .frame(height: 100)
