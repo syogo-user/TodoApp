@@ -35,6 +35,10 @@ struct SettingView: View {
             } label: {
                 Text("サインアウト")
                     .fontWeight(.semibold)
+                    .frame(width: 220, height: 45)
+                    .foregroundColor(Color(.white))
+                    .background(Color(.accent))
+                    .cornerRadius(24)
             }
             .padding()
             Spacer()
