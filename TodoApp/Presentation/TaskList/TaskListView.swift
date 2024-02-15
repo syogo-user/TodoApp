@@ -22,19 +22,28 @@ struct TaskListView: View {
                 List {
                     ForEach(viewModel.taskInfoItems, id: \.taskId) { task in
                         NavigationLink(destination: UpdateTaskView(updateTask: task)) {
-                            TaskCellView(task: task, favoriteButtonClick: { isFavorite in
-                                Task {
-                                    do {
-                                        // お気に入り更新
-                                        try viewModel.changeFavorite(item: task, isFavorite: isFavorite)
-                                        try await viewModel.updateTask(taskInfoItem: task)
-                                        // 描画のためローカルからデータを取得する
-                                        try self.loadLocalTaskList()
-                                    } catch {
-                                        print("!!!!!エラー!")
+                            TaskCellView(
+                                task: task,
+                                favoriteButtonClick: { isFavorite in
+                                    Task {
+                                        do {
+                                            // お気に入り更新
+                                            try viewModel.changeFavorite(item: task, isFavorite: isFavorite)
+                                            try await viewModel.updateTask(taskInfoItem: task)
+                                        } catch {
+                                            print("!!!!!エラー!")
+                                        }
                                     }
-                                }
-                            })
+                                }, completeButtonClick: { isCompleted in
+                                    Task {
+                                        do {
+                                            try viewModel.changeComplete(item: task, isCompleted: isCompleted)
+                                            try await viewModel.updateTask(taskInfoItem: task)
+                                        } catch {
+                                            
+                                        }
+                                    }
+                                } )
                         }
                     }
                     .onDelete(perform: delete)
@@ -151,12 +160,14 @@ struct RefreshChecker {
 struct TaskCellView: View {
     @ObservedObject var task: TaskInfoItem
     let favoriteButtonClick: (Bool) -> Void
+    let completeButtonClick: (Bool) -> Void
     
     var body: some View {
         let checker = RefreshChecker(task: task)
         HStack(alignment: .center) {
-            Toggle(isOn: $task.isCompleted) {
-                
+            Toggle(isOn: $task.isCompleted) {}
+            .onChange(of: task.isCompleted) { newValue in
+                completeButtonClick(newValue)
             }
             .toggleStyle(.checkBox)
             .padding(.trailing, 8)
