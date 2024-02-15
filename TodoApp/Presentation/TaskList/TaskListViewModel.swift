@@ -72,9 +72,9 @@ protocol TaskListViewModel: ObservableObject {
 //    func setFromSignIn()
 //    /// 指定したインデックスのタスクを返却する
 //    func selectItemAt(index: Int) -> TaskInfoItem
-//    /// 完了状態を変更
-//    func changeComplete(index: Int, isCompleted: Bool)
-//    /// お気に入り状態を変更
+    /// 完了状態を変更
+    func changeComplete(item: TaskInfoItem, isCompleted: Bool) throws
+    /// お気に入り状態を変更
     func changeFavorite(item: TaskInfoItem, isFavorite: Bool) throws
 //    /// 並び順を取得
 //    func getSortOrder() -> String
@@ -268,20 +268,23 @@ class TaskListViewModelImpl: TaskListViewModel {
     func selectItemAt(index: Int) -> TaskInfoItem {
         taskInfoItems[index]
     }
-//
-//    /// 完了状態を変更
-//    func changeComplete(index: Int, isCompleted: Bool) {
-//        let item = selectItemAt(index: index)
-//        tableViewItems[index] = TaskInfoItem(
-//            taskId: item.taskId,
-//            title: item.title,
-//            content: item.content,
-//            scheduledDate: item.scheduledDate,
-//            isCompleted: isCompleted,
-//            isFavorite: item.isFavorite,
-//            userId: item.userId
-//        )
-//    }
+
+    /// 完了状態を変更
+    func changeComplete(item: TaskInfoItem, isCompleted: Bool) throws {
+        guard let index = taskInfoItems.firstIndex(where: { $0.taskId == item.taskId }) else {
+            throw DomainError.parseError
+        }
+        taskInfoItems[index] = TaskInfoItem(
+            taskId: item.taskId,
+            title: item.title,
+            content: item.content,
+            scheduledDate: item.scheduledDate,
+            isCompleted: isCompleted,
+            isFavorite: item.isFavorite,
+            userId: item.userId
+        )
+    }
+    
     /// お気に入り状態を変更
     func changeFavorite(item: TaskInfoItem, isFavorite: Bool) throws {
         guard let index = taskInfoItems.firstIndex(where: { $0.taskId == item.taskId }) else {
@@ -297,7 +300,7 @@ class TaskListViewModelImpl: TaskListViewModel {
             userId: item.userId
         )
     }
-//
+
     /// 並び順を取得
     func getSortOrder() -> String {
         taskUseCase.sortOrder ?? SortOrder.descendingOrderDate.rawValue
