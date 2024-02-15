@@ -60,9 +60,9 @@ protocol TaskListViewModel: ObservableObject {
 //    var deleteTaskInfo: Signal<VMResult<Void>?> { get }
 //    /// タスクリストを取得
 //    func fetchTaskList()
-//    /// タスクを更新
-//    func updateTask(index: Int)
-//    /// タスクを削除
+    /// タスクを更新
+    func updateTask(taskInfoItem: TaskInfoItem) async throws
+    /// タスクを削除
     func deleteTask(index: Int) async throws
     /// ローカルからタスクリストを取得
     func loadLocalTaskList() throws
@@ -75,7 +75,7 @@ protocol TaskListViewModel: ObservableObject {
 //    /// 完了状態を変更
 //    func changeComplete(index: Int, isCompleted: Bool)
 //    /// お気に入り状態を変更
-//    func changeFavorite(index: Int, isFavorite: Bool)
+    func changeFavorite(item: TaskInfoItem, isFavorite: Bool) throws
 //    /// 並び順を取得
 //    func getSortOrder() -> String
 //    /// 並び順を設定
@@ -186,39 +186,31 @@ class TaskListViewModelImpl: TaskListViewModel {
     
     
     
+    func updateTask(taskInfoItem: TaskInfoItem) async throws {
+        guard let index = taskInfoItems.firstIndex(where: { $0.taskId == taskInfoItem.taskId }) else {
+            throw DomainError.parseError
+        }
+        let taskInfoItem = selectItemAt(index: index)
+        let authorization = try await userUseCase.fetchCurrentAuthToken()
+        let user = try userUseCase.loadLocalUser()
+        let taskInfo = try await self.taskUseCase.updateTask(taskId: taskInfoItem.taskId,title: taskInfoItem.title, content: taskInfoItem.content, scheduledDate: taskInfoItem.scheduledDate.dateFormat(), isCompleted: taskInfoItem.isCompleted, isFavorite: taskInfoItem.isFavorite, userId: user.userId, authorization: authorization)
+        // isCompletedがtrueなら通知を削除する。falseの場合は更新する
+        if taskInfo.isCompleted {
+            self.taskUseCase.removeNotification(taskId: taskInfo.taskId)
+        } else {
+            self.taskUseCase.registerNotification(notificationId: taskInfo.taskId, title: taskInfo.title, body: taskInfo.content, scheduledDate: taskInfo.scheduledDate)
+        }
+        let taskInfoRecord = TaskInfoRecord(taskId: taskInfo.taskId, title: taskInfo.title, content: taskInfo.content, scheduledDate: taskInfo.scheduledDate, isCompleted: taskInfo.isCompleted, isFavorite: taskInfo.isFavorite, userId: taskInfo.userId)
+        try self.taskUseCase.updateLocalTask(taskInfo: taskInfoRecord)
+        // ここでupdateのすべてのエラーを一度キャッチして、新たなエラーをなげてもいいかも
+    }
 
-//
-//    private(set) lazy var isLoading: Driver<Bool> = {
-//        Observable.merge(
-//            taskInfo.map { VMResult(data: $0?.data != nil) }.asObservable(),
-//            deleteTaskInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
-//        )
-//        .map { [unowned self] _ in
-//            (self.taskInfoRelay.value?.isLoading ?? false) ||
-//            (self.deleteTaskInfoRelay.value?.isLoading ?? false)
-//        }
-//        .asDriver(onErrorJustReturn: false)
-//    }()
-//
-//
 //    /// タスクを更新
 //    func updateTask(index: Int) {
-//        let taskInfoItem = selectItemAt(index: index)
-//        Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
-//            .flatMap { (user, idToken) in
-//                self.taskUseCase.updateTask(taskId: taskInfoItem.taskId,title: taskInfoItem.title, content: taskInfoItem.content, scheduledDate: taskInfoItem.scheduledDate.dateFormat(), isCompleted: taskInfoItem.isCompleted, isFavorite: taskInfoItem.isFavorite, userId: user.userId, authorization: idToken)
-//            }
-//            .do(onSuccess: { task in
-//                // isCompletedがtrueなら通知を削除する。falseの場合は更新する
-//                if task.isCompleted {
-//                    self.taskUseCase.removeNotification(taskId: task.taskId)
-//                } else {
-//                    self.taskUseCase.registerNotification(notificationId: task.taskId, title: task.title, body: task.content, scheduledDate: task.scheduledDate)
-//                }
-//            })
-//            .flatMap { result in
-//                let taskInfoRecord = TaskInfoRecord(taskId: result.taskId, title: result.title, content: result.content, scheduledDate: result.scheduledDate, isCompleted: result.isCompleted, isFavorite: result.isFavorite, userId: result.userId)
-//                return self.taskUseCase.updateLocalTask(taskInfo: taskInfoRecord)
+
+
+
+
 //            }
 //            .map { _ in
 //                return .success(())
@@ -258,7 +250,6 @@ class TaskListViewModelImpl: TaskListViewModel {
         self.taskInfoItems = taskList.map {
             TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
         }
-        
         taskUseCase.sortTask(itemList: &self.taskInfoItems, sort: sortOrder)
         taskUseCase.filterTask(itemList: &self.taskInfoItems, condition: filterCondition)
     }
@@ -292,8 +283,10 @@ class TaskListViewModelImpl: TaskListViewModel {
 //        )
 //    }
     /// お気に入り状態を変更
-    func changeFavorite(index: Int, isFavorite: Bool) {
-        let item = selectItemAt(index: index)
+    func changeFavorite(item: TaskInfoItem, isFavorite: Bool) throws {
+        guard let index = taskInfoItems.firstIndex(where: { $0.taskId == item.taskId }) else {
+            throw DomainError.parseError
+        }
         taskInfoItems[index] = TaskInfoItem(
             taskId: item.taskId,
             title: item.title,
