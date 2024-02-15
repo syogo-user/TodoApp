@@ -39,6 +39,13 @@ struct TaskListView: View {
                     }
                     .onDelete(perform: delete)
                 }
+                .refreshable {
+                    do {
+                        try await viewModel.fetchTaskList()
+                    } catch {
+                        
+                    }
+                }
                 .navigationBarItems(trailing: HStack {
                     Menu {
                         Button(R.string.localizable.rightBarButtonAscendingOrderDate(), action: {
