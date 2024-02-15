@@ -22,7 +22,19 @@ struct TaskListView: View {
                 List {
                     ForEach(viewModel.taskInfoItems, id: \.taskId) { task in
                         NavigationLink(destination: UpdateTaskView(updateTask: task)) {
-                            TaskCellView(task: task)
+                            TaskCellView(task: task, favoriteButtonClick: { isFavorite in
+                                Task {
+                                    do {
+                                        // お気に入り更新
+                                        try viewModel.changeFavorite(item: task, isFavorite: isFavorite)
+                                        try await viewModel.updateTask(taskInfoItem: task)
+                                        // 描画のためローカルからデータを取得する
+                                        try self.loadLocalTaskList()
+                                    } catch {
+                                        print("!!!!!エラー!")
+                                    }
+                                }
+                            })
                         }
                     }
                     .onDelete(perform: delete)
@@ -122,16 +134,19 @@ struct TaskListView: View {
         try viewModel.loadLocalTaskList()
     }
 }
+
 struct RefreshChecker {
-    init() {
-        print("refreshed!")
+    init(task: TaskInfoItem) {
+        print("refreshed!\(task.title),\(task.isFavorite)")
     }
 }
+
 struct TaskCellView: View {
-    @StateObject var task: TaskInfoItem
+    @ObservedObject var task: TaskInfoItem
+    let favoriteButtonClick: (Bool) -> Void
     
     var body: some View {
-        let checker = RefreshChecker()
+        let checker = RefreshChecker(task: task)
         HStack(alignment: .center) {
             Toggle(isOn: $task.isCompleted) {
                 
@@ -151,10 +166,7 @@ struct TaskCellView: View {
             Spacer()
 
             Button {
-               // お気に入り更新
-//                viewModel.changeFavorite(index: index, isFavorite: isFavorite)
-//                viewModel.updateTask(index: index)
-                task.isFavorite.toggle()
+                favoriteButtonClick(!task.isFavorite)
             } label: {
                 let imageName = task.isFavorite ? "star_fill" : "star_frame"
                 Image(imageName)
