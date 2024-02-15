@@ -21,7 +21,14 @@ struct TaskListView: View {
 //                } else {
                 List {
                     ForEach(viewModel.taskInfoItems, id: \.taskId) { task in
-                        NavigationLink(destination: UpdateTaskView(updateTask: task)) {
+                        NavigationLink(destination: UpdateTaskView(updateTask: task).onDisappear {
+                            // Todo: 更新画面から戻ったときに値が変わってしまう事象は一旦onDisappearで対応にする
+                            do {
+                                try self.loadLocalTaskList()
+                            } catch {
+                                
+                            }
+                        }) {
                             TaskCellView(
                                 task: task,
                                 favoriteButtonClick: { isFavorite in
