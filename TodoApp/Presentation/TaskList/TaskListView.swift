@@ -11,22 +11,22 @@ struct TaskListView: View {
     @StateObject private var viewModel = TaskListViewModelImpl()
     @State private var isShowAlert = false
     @State private var errorMessage = ""
+    @State private var isLoading = false
     
     var body: some View {
         NavigationStack {
                 // Todo: データが取得してもなかった場合に、データがありませんになるように修正
-//                if viewModel.lifeInfoList.isEmpty {
-//                    ProgressView() // ローディング
-//                    Text("取得中")
-//                } else {
+            ZStack {
                 List {
                     ForEach(viewModel.taskInfoItems, id: \.taskId) { task in
                         NavigationLink(destination: UpdateTaskView(updateTask: task).onDisappear {
                             // Todo: 更新画面から戻ったときに値が変わってしまう事象は一旦onDisappearで対応にする
                             do {
+                                isLoading = true
                                 try self.loadLocalTaskList()
+                                isLoading = false
                             } catch {
-                                
+                                isLoading = false
                             }
                         }) {
                             TaskCellView(
@@ -34,20 +34,25 @@ struct TaskListView: View {
                                 favoriteButtonClick: { isFavorite in
                                     Task {
                                         do {
+                                            isLoading = true
                                             // お気に入り更新
                                             try viewModel.changeFavorite(item: task, isFavorite: isFavorite)
                                             try await viewModel.updateTask(taskInfoItem: task)
+                                            isLoading = false
                                         } catch {
+                                            isLoading = false
                                             print("!!!!!エラー!")
                                         }
                                     }
                                 }, completeButtonClick: { isCompleted in
                                     Task {
                                         do {
+                                            isLoading = true
                                             try viewModel.changeComplete(item: task, isCompleted: isCompleted)
                                             try await viewModel.updateTask(taskInfoItem: task)
+                                            isLoading = false
                                         } catch {
-                                            
+                                            isLoading = false
                                         }
                                     }
                                 } )
@@ -57,9 +62,11 @@ struct TaskListView: View {
                 }
                 .refreshable {
                     do {
+                        isLoading = true
                         try await viewModel.fetchTaskList()
+                        isLoading = false
                     } catch {
-                        
+                        isLoading = false
                     }
                 }
                 .navigationBarItems(trailing: HStack {
@@ -72,9 +79,9 @@ struct TaskListView: View {
                         })
                     } label: {
                         Image(systemName: "arrow.up.arrow.down")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20)
                     }
                     
                     Menu {
@@ -88,68 +95,82 @@ struct TaskListView: View {
                         Button(R.string.localizable.rightBarButtonNotIncludeCompleted(), action: {
                             selectedFilterItem(filterCondition: FilterCondition.notIncludeCompleted)
                         })
-
+                        
                     } label: {
                         Image(systemName: "ellipsis")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20)
-
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20)
+                        
                     }
                 })
-            }
-            .task {
-                do {
-                    try await viewModel.fetchTaskList()
-                } catch {
-                    
+                if isLoading {
+                    ProgressView()
                 }
             }
-            .alert(
-                "エラー",
-                isPresented: $isShowAlert,
-                presenting: errorMessage
-            ) { errorMessage in
-                Button(errorMessage, role: .destructive) {
-                    
-                }
-            } message: { errorMessage in
-                Text(errorMessage)
+        }
+        .task {
+            do {
+                isLoading = true
+                try await viewModel.fetchTaskList()
+                isLoading = false
+            } catch {
+                isLoading = false
             }
+        }
+        .alert(
+            "エラー",
+            isPresented: $isShowAlert,
+            presenting: errorMessage
+        ) { errorMessage in
+            Button(errorMessage, role: .destructive) {
+                
+            }
+        } message: { errorMessage in
+            Text(errorMessage)
+        }
     }
 
     
     private func delete(offsets: IndexSet) {
         Task {
             do {
+                isLoading = true
                 if let index = offsets.first {
                     try await viewModel.deleteTask(index: index)
                 } else {
                     throw DomainError.unKnownError
                 }
+                isLoading = false
             } catch {
-                
+                isLoading = false
             }
         }
     }
     
     private func selectedFilterItem(filterCondition: FilterCondition) {
+        isLoading = true
         viewModel.setFilterCondition(filterCondition: filterCondition.rawValue)
         do {
             try loadLocalTaskList()
+            isLoading = false
         } catch {
             errorMessage = R.string.localizable.localTaskDBErrorMessage()
             isShowAlert = true
+            isLoading = false
         }
     }
     
     private func selectedSortItem(sortOrder: SortOrder) {
+        isLoading = true
         viewModel.setSortOrder(sortOrder: sortOrder.rawValue)
         do {
             try loadLocalTaskList()
+            isLoading = false
         } catch {
             errorMessage = R.string.localizable.localTaskDBErrorMessage()
             isShowAlert = true
+            isLoading = false
         }
     }
     

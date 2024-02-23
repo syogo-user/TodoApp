@@ -91,6 +91,7 @@ class TaskListViewModelImpl: TaskListViewModel {
     private var taskUseCase: TaskUseCase = TaskUseCaseImpl()
     private var userUseCase: UserUseCase = UserUseCaseImpl()
     @Published private(set) var taskInfoItems: [TaskInfoItem] = []
+//    @Published private(set) var isLoading = false
     
     func fetchTaskList() async throws {
         let sortOrder = getSortOrder()
