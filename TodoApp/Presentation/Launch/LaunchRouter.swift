@@ -11,9 +11,9 @@ import UIKit
 extension LaunchViewContoller {
     /// サインイン画面に遷移
     func toSignIn() {
-        guard let signInVC = R.storyboard.signIn.signInVC() else { return }
-        signInVC.modalPresentationStyle = .fullScreen
-        self.present(signInVC, animated: true, completion: nil)
+//        guard let signInVC = R.storyboard.signIn.signInVC() else { return }
+//        signInVC.modalPresentationStyle = .fullScreen
+//        self.present(signInVC, animated: true, completion: nil)
     }
 
     /// タブバー画面に遷移

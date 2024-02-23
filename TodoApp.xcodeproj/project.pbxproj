@@ -49,7 +49,6 @@
 		915C5D4429D1F4F4009B2B8C /* NetworkRemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C5D4329D1F4F4009B2B8C /* NetworkRemoteStore.swift */; };
 		915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06EE29BA1C2200685156 /* SignInViewController.swift */; };
 		915F06F229BA1CC700685156 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F06F129BA1CC700685156 /* BaseViewController.swift */; };
-		915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 915F06F329BA1D3900685156 /* SignIn.storyboard */; };
 		9191411129CB6B570072BEA0 /* GRDBAccessorDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9191411029CB6B570072BEA0 /* GRDBAccessorDB.swift */; };
 		919A407329C3541000D63E44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 919A407229C3541000D63E44 /* Localizable.strings */; };
 		91A0333629BC9E1A0019D5A9 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */; };
@@ -159,7 +158,6 @@
 		915C5D4329D1F4F4009B2B8C /* NetworkRemoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRemoteStore.swift; sourceTree = "<group>"; };
 		915F06EE29BA1C2200685156 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		915F06F129BA1CC700685156 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		915F06F329BA1D3900685156 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		9191411029CB6B570072BEA0 /* GRDBAccessorDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDBAccessorDB.swift; sourceTree = "<group>"; };
 		919A407229C3541000D63E44 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		91A0333529BC9E1A0019D5A9 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
@@ -372,17 +370,8 @@
 				91A033C629BDEF0D0019D5A9 /* Setting */,
 				915F06ED29BA1BC600685156 /* SignIn */,
 				915F06F029BA1CB600685156 /* Common */,
-				915F06EB29BA1BA200685156 /* View */,
 			);
 			path = Presentation;
-			sourceTree = "<group>";
-		};
-		915F06EB29BA1BA200685156 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				915F06F329BA1D3900685156 /* SignIn.storyboard */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		915F06ED29BA1BC600685156 /* SignIn */ = {
@@ -744,7 +733,6 @@
 				91E5AB2F29D1DBCC0025886F /* Color.xcassets in Resources */,
 				919A407329C3541000D63E44 /* Localizable.strings in Resources */,
 				3243D1A7D823E47C10905656 /* awsconfiguration.json in Resources */,
-				915F06F429BA1D3900685156 /* SignIn.storyboard in Resources */,
 				1107DA970E5914BB89B2054F /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

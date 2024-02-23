@@ -11,37 +11,46 @@ struct SettingView: View {
     @StateObject private var viewModel = SettingViewModelImpl()
     @State private var email = ""
     @AppStorage("isSignIn") var isSignIn = false
+    @State private var isLoading = false
     
     var body: some View {
-        VStack {
-            Image(R.image.person.name)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100, alignment: .center)
-                .padding(.top, 16)
-            
-            Text(email)
-                .fontWeight(.semibold)
-            
-            Button {
-                Task {
-                    do {
-                        try await viewModel.signOut()
-                        isSignIn = false
-                    } catch {
-                        print("エラー: \(error)")
-                    }
-                }
-            } label: {
-                Text("サインアウト")
+        ZStack {
+            VStack {
+                Image(R.image.person.name)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .padding(.top, 16)
+                
+                Text(email)
                     .fontWeight(.semibold)
-                    .frame(width: 220, height: 45)
-                    .foregroundColor(Color(.white))
-                    .background(Color(.accent))
-                    .cornerRadius(24)
+                
+                Button {
+                    Task {
+                        do {
+                            isLoading = true
+                            try await viewModel.signOut()
+                            isSignIn = false
+                            isLoading = false
+                        } catch {
+                            isLoading = false
+                            print("エラー: \(error)")
+                        }
+                    }
+                } label: {
+                    Text("サインアウト")
+                        .fontWeight(.semibold)
+                        .frame(width: 220, height: 45)
+                        .foregroundColor(Color(.white))
+                        .background(Color(.accent))
+                        .cornerRadius(24)
+                }
+                .padding()
+                Spacer()
             }
-            .padding()
-            Spacer()
+            if isLoading {
+                ProgressView()
+            }
         }
         .onAppear {
             do {
