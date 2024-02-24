@@ -47,43 +47,28 @@ enum FilterCondition: String {
 }
 
 protocol TaskListViewModel: ObservableObject {
+    /// タスクリストを取得
     func fetchTaskList() async throws
-//    /// ローディング
-//    var isLoading: Driver<Bool> { get }
-//    /// タスクの取得(セル用の値)通知
-//    var taskItems: Driver<[TaskInfoItem]> { get }
-//    /// タスクの取得通知
-//    var taskInfo: Signal<VMResult<Void>?> { get }
-//    /// タスクの更新通知
-//    var updateTaskInfo: Signal<VMResult<Void>?> { get }
-//    /// タスクの削除通知
-//    var deleteTaskInfo: Signal<VMResult<Void>?> { get }
-//    /// タスクリストを取得
-//    func fetchTaskList()
     /// タスクを更新
     func updateTask(taskInfoItem: TaskInfoItem) async throws
     /// タスクを削除
     func deleteTask(index: Int) async throws
     /// ローカルからタスクリストを取得
     func loadLocalTaskList() throws
-//    /// サインイン画面を経由したか
-//    func isFromSignIn() -> Bool
-//    /// サインイン画面を経由したかを設定
-//    func setFromSignIn()
-//    /// 指定したインデックスのタスクを返却する
-//    func selectItemAt(index: Int) -> TaskInfoItem
+    /// 指定したインデックスのタスクを返却する
+    func selectItemAt(index: Int) -> TaskInfoItem
     /// 完了状態を変更
     func changeComplete(item: TaskInfoItem, isCompleted: Bool) throws
     /// お気に入り状態を変更
     func changeFavorite(item: TaskInfoItem, isFavorite: Bool) throws
-//    /// 並び順を取得
-//    func getSortOrder() -> String
-//    /// 並び順を設定
-//    func setSortOrder(sortOrder: String)
-//    /// 抽出条件を取得
-//    func getFilterCondition() -> String
-//    /// 抽出条件を設定
-//    func setFilterCondition(filterCondition: String)
+    /// 並び順を取得
+    func getSortOrder() -> String
+    /// 並び順を設定
+    func setSortOrder(sortOrder: String)
+    /// 抽出条件を取得
+    func getFilterCondition() -> String
+    /// 抽出条件を設定
+    func setFilterCondition(filterCondition: String)
 }
 
 @MainActor
@@ -91,7 +76,6 @@ class TaskListViewModelImpl: TaskListViewModel {
     private var taskUseCase: TaskUseCase = TaskUseCaseImpl()
     private var userUseCase: UserUseCase = UserUseCaseImpl()
     @Published private(set) var taskInfoItems: [TaskInfoItem] = []
-//    @Published private(set) var isLoading = false
     
     func fetchTaskList() async throws {
         let sortOrder = getSortOrder()
@@ -178,17 +162,7 @@ class TaskListViewModelImpl: TaskListViewModel {
             throw DomainError.localDbError
         }
     }
-//
-//    /// サインイン画面を経由したか
-//    func isFromSignIn() -> Bool {
-//        userUseCase.isFromSignIn
-//    }
-//
-//    /// サインイン画面を経由したかを設定
-//    func setFromSignIn() {
-//        userUseCase.isFromSignIn = false
-//    }
-//
+
     /// 指定したインデックスのタスクを返却する
     func selectItemAt(index: Int) -> TaskInfoItem {
         taskInfoItems[index]
