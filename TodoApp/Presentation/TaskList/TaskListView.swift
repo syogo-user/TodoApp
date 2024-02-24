@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct TaskListView: View {
-    @StateObject private var viewModel = TaskListViewModelImpl()
-    @State private var isShowAlert = false
-    @State private var errorMessage = ""
-    @State private var isLoading = false
     @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
-    
+    @StateObject private var viewModel = TaskListViewModelImpl()
+    @State private var errorMessage = ""
+    @State private var isShowAlert = false
+    @State private var isLoading = false
+
     var body: some View {
         NavigationStack {
             ZStack {

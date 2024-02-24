@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct UpdateTaskView: View {
+    @SwiftUI.Environment(\.presentationMode) var presentation
     @StateObject private var viewModel = UpdateTaskViewModelImpl()
     @StateObject var updateTask: TaskInfoItem
-    @SwiftUI.Environment(\.presentationMode) var presentation
-    @State private var isShowAlert = false
     @State private var errorMessage = ""
+    @State private var isShowAlert = false
     @State private var isLoading = false
     private let validate: Validate = Validate()
     

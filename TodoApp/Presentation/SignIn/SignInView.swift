@@ -9,10 +9,10 @@ import SwiftUI
 import Amplify
 
 struct SignInView: View {
-    @StateObject private var viewModel = SignInViewModelImpl()
     @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
-    @State private var isShowAlert = false
+    @StateObject private var viewModel = SignInViewModelImpl()
     @State private var errorMessage = ""
+    @State private var isShowAlert = false
     @State private var isLoading = false
     
     var body: some View {

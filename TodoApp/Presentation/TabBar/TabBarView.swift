@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TabBarView: View {
-    @State var selection = 1
     @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
+    @State var selection = 1
     
     var body: some View {
         TabView(selection: $selection) {

@@ -9,13 +9,13 @@ import SwiftUI
 
 struct AddTaskView: View {
     @StateObject private var viewModel = AddTaskViewModelImpl()
+    @State private var errorMessage = ""
+    @State private var isShowAlert = false
+    @State private var isLoading = false
     @State private var inputTitle = ""
     @State private var inputContent = ""
     @State private var inputScheduledDate = Date()
     @Binding var selection: Int
-    @State private var isShowAlert = false
-    @State private var errorMessage = ""
-    @State private var isLoading = false
     private let validate: Validate = Validate()
     
     var body: some View {
