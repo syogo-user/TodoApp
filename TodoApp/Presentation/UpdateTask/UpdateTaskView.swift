@@ -14,6 +14,7 @@ struct UpdateTaskView: View {
     @State private var isShowAlert = false
     @State private var errorMessage = ""
     @State private var isLoading = false
+    private let validate: Validate = Validate()
     
     var body: some View {
         NavigationStack {
@@ -61,6 +62,17 @@ struct UpdateTaskView: View {
                 Button {
                     Task {
                         do {
+                            if (validate.isEmpty(inputArray: updateTask.title)) {
+                                errorMessage = R.string.localizable.emptyTitleMessage()
+                                isShowAlert = true
+                                return
+                            }
+                            if (validate.isWordLengthOver(word: updateTask.title, wordLimit: Constants.titleWordLimit)) {
+                                errorMessage = R.string.localizable.overTitleLengthMessage(String(Constants.titleWordLimit))
+                                isShowAlert = true
+                                return
+                            }
+
                             isLoading = true
                             try await viewModel.updateTask(taskInfoItem: updateTask)
                             self.presentation.wrappedValue.dismiss()

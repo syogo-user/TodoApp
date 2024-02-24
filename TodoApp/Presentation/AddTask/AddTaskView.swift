@@ -16,6 +16,7 @@ struct AddTaskView: View {
     @State private var isShowAlert = false
     @State private var errorMessage = ""
     @State private var isLoading = false
+    private let validate: Validate = Validate()
     
     var body: some View {
         ZStack {
@@ -38,6 +39,16 @@ struct AddTaskView: View {
                 Button {
                     Task {
                         do {
+                            if (validate.isEmpty(inputArray: inputTitle)) {
+                                errorMessage = R.string.localizable.emptyTitleMessage()
+                                isShowAlert = true
+                                return
+                            }
+                            if (validate.isWordLengthOver(word: inputTitle, wordLimit: Constants.titleWordLimit)) {
+                                errorMessage = R.string.localizable.overTitleLengthMessage(String(Constants.titleWordLimit))
+                                isShowAlert = true
+                                return
+                            }
                             isLoading = true
                             try await viewModel.addTask(title: inputTitle, content: inputContent, scheduledDate: Date().dateFormat())
                             inputTitle = ""
