@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
-    @AppStorage("isSignIn") var isSignIn = false
+    @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
     @StateObject private var viewModel = SettingViewModelImpl()
     @State private var email = ""
     @Binding var selection: Int
@@ -43,7 +43,7 @@ struct SettingView: View {
                         }
                     }
                 } label: {
-                    Text("サインアウト")
+                    Text(R.string.localizable.settingSignOutButtonName())
                         .fontWeight(.semibold)
                         .frame(width: 220, height: 45)
                         .foregroundColor(Color(.white))
@@ -66,7 +66,7 @@ struct SettingView: View {
             }
         }
         .alert(
-            "エラー",
+            R.string.localizable.errorTitle(),
             isPresented: $isShowAlert
         ) {} message: {
             Text(errorMessage)

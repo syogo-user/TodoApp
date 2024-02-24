@@ -11,7 +11,7 @@ import SwiftUI
 struct TodoApp: App {
     
     @UIApplicationDelegateAdaptor (AppDelegate.self) var appDelegate
-    @AppStorage("isSignIn") var isSignIn = false
+    @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
     
     var body: some Scene {
         WindowGroup {

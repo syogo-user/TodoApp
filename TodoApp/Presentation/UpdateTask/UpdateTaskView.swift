@@ -28,7 +28,7 @@ struct UpdateTaskView: View {
                         Button {
                             updateTask.isFavorite.toggle()
                         } label: {
-                            let imageName = updateTask.isFavorite ? "star_fill" : "star_frame"
+                            let imageName = updateTask.isFavorite ? R.image.star_fill.name : R.image.star_frame.name
                             Image(imageName)
                                 .resizable()
                                 .scaledToFit()
@@ -36,10 +36,10 @@ struct UpdateTaskView: View {
                             
                         }
                         Spacer()
-                        DatePicker("日時", selection: $updateTask.scheduledDate)
+                        DatePicker(R.string.localizable.datePickerTitle(), selection: $updateTask.scheduledDate)
                             .labelsHidden()
                     }
-                    TextField("タイトル", text: $updateTask.title)
+                    TextField(R.string.localizable.textFieldTitle(), text: $updateTask.title)
                         .textFieldStyle(.roundedBorder)
                         .onSubmit {
                             
@@ -65,20 +65,18 @@ struct UpdateTaskView: View {
                             try await viewModel.updateTask(taskInfoItem: updateTask)
                             self.presentation.wrappedValue.dismiss()
                             isLoading = false
-                            print("更新: \(updateTask.content)")
                         } catch let error {
                             errorMessage = errorMessage(error: error)
                             isShowAlert = true
                             isLoading = false
-                            print("エラー: \(error)")
                         }
                     }
                 } label: {
-                    Text("保存")
+                    Text(R.string.localizable.updateTaskViewSaveButtonText())
                 }
             })
             .alert(
-                "エラー",
+                R.string.localizable.errorTitle(),
                 isPresented: $isShowAlert
             ) {} message: {
                 Text(errorMessage)

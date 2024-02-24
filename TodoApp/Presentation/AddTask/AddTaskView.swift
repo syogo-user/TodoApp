@@ -20,7 +20,7 @@ struct AddTaskView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 16) {
-                TextField("タイトル", text: $inputTitle)
+                TextField(R.string.localizable.textFieldTitle(), text: $inputTitle)
                     .textFieldStyle(.roundedBorder)
                     .padding(.top, 16)
                 
@@ -30,7 +30,7 @@ struct AddTaskView: View {
                     .textFieldStyle(.roundedBorder)
                 
                 HStack {
-                    DatePicker("日時", selection: $inputScheduledDate)
+                    DatePicker(R.string.localizable.datePickerTitle(), selection: $inputScheduledDate)
                         .labelsHidden()
                     Spacer()
                 }
@@ -48,11 +48,10 @@ struct AddTaskView: View {
                             errorMessage = errorMessage(error: error)
                             isShowAlert = true
                             isLoading = false
-                            print("投稿エラー: \(error)")
                         }
                     }
                 } label: {
-                    Text("投稿")
+                    Text(R.string.localizable.addTaskButtonName())
                         .fontWeight(.bold)
                         .frame(width: 220, height: 45)
                         .foregroundColor(Color(.white))
@@ -68,7 +67,7 @@ struct AddTaskView: View {
             }
         }
         .alert(
-            "エラー",
+            R.string.localizable.errorTitle(),
             isPresented: $isShowAlert
         ) {} message: {
             Text(errorMessage)

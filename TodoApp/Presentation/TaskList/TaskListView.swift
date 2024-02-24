@@ -12,16 +12,16 @@ struct TaskListView: View {
     @State private var isShowAlert = false
     @State private var errorMessage = ""
     @State private var isLoading = false
-    @AppStorage("isSignIn") var isSignIn = false
+    @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
     
     var body: some View {
         NavigationStack {
-            // Todo: データが取得してもなかった場合に、データがありませんになるように修正
+            // TODO: データ取得時0件の場合に、データがありませんになるように修正
             ZStack {
                 List {
                     ForEach(viewModel.taskInfoItems, id: \.taskId) { task in
                         NavigationLink(destination: UpdateTaskView(updateTask: task).onDisappear {
-                            // Todo: 更新画面から戻ったときに値が変わってしまう事象は一旦onDisappearで対応にする
+                            // NOTE: 更新画面から戻ったときに値が変わってしまう事象は一旦onDisappearで対応にする
                             do {
                                 isLoading = true
                                 try self.loadLocalTaskList()
@@ -86,7 +86,7 @@ struct TaskListView: View {
                             selectedSortItem(sortOrder: SortOrder.descendingOrderDate)
                         })
                     } label: {
-                        Image(systemName: "arrow.up.arrow.down")
+                        Image(systemName: R.string.localizable.taskListViewOrderButtonImageName())
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20)
@@ -105,7 +105,7 @@ struct TaskListView: View {
                         })
                         
                     } label: {
-                        Image(systemName: "ellipsis")
+                        Image(systemName: R.string.localizable.taskListViewFilterButtonImageName())
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20)
@@ -132,7 +132,7 @@ struct TaskListView: View {
             }
         }
         .alert(
-            "エラー",
+            R.string.localizable.errorTitle(),
             isPresented: $isShowAlert
         ) {} message: {
             Text(errorMessage)
@@ -241,7 +241,7 @@ struct TaskCellView: View {
             Button {
                 favoriteButtonClick(!task.isFavorite)
             } label: {
-                let imageName = task.isFavorite ? "star_fill" : "star_frame"
+                let imageName = task.isFavorite ?  R.image.star_fill.name : R.image.star_frame.name
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
@@ -250,7 +250,6 @@ struct TaskCellView: View {
             .buttonStyle(.plain)
 
         }
-
     }
 
 }

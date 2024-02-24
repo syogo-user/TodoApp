@@ -10,7 +10,7 @@ import Amplify
 
 struct SignInView: View {
     @StateObject private var viewModel = SignInViewModelImpl()
-    @AppStorage("isSignIn") var isSignIn = false
+    @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
     @State private var isShowAlert = false
     @State private var errorMessage = ""
     @State private var isLoading = false
@@ -51,7 +51,7 @@ struct SignInView: View {
             }
         }
         .alert(
-            "エラー1",
+            R.string.localizable.errorTitle(),
             isPresented: $isShowAlert
         ) {} message: {
             Text(errorMessage)

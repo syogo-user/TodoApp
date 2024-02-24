@@ -39,7 +39,7 @@ class SignInViewController: BaseViewController {
                     return
                 }
                 self.viewModel.setViaSignIn()
-                self.toTabBar()
+//                self.toTabBar()
             }
             .disposed(by: disposeBag)
     }

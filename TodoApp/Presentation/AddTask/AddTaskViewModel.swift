@@ -10,10 +10,6 @@ import RxSwift
 import RxCocoa
 
 protocol AddTaskViewModel: ObservableObject {
-    /// ローディング
-//    var isLoading: Driver<Bool> { get }
-//    /// タスクの追加通知
-//    var addTaskInfo: Signal<VMResult<Void>?> { get }
     /// タスクを登録
     func addTask(title: String, content: String, scheduledDate: String) async throws
 }
@@ -22,21 +18,7 @@ protocol AddTaskViewModel: ObservableObject {
 class AddTaskViewModelImpl: AddTaskViewModel {
     private let taskUseCase: TaskUseCase = TaskUseCaseImpl()
     private let userUseCase: UserUseCase = UserUseCaseImpl()
-//    private let disposeBag = DisposeBag()
-
-    /// タスクの追加通知
-//    private let addTaskInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
-//    lazy var addTaskInfo = addTaskInfoRelay.asSignal(onErrorSignalWith: .empty())
-//
-//    private(set) lazy var isLoading: Driver<Bool> = {
-//
-//        addTaskInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
-//        .map { [unowned self] _ in
-//            self.addTaskInfoRelay.value?.isLoading ?? false
-//        }
-//        .asDriver(onErrorJustReturn: false)
-//    }()
-
+    
     /// タスクの追加
     func addTask(title: String, content: String, scheduledDate: String) async throws {
         let authorization = try await userUseCase.fetchCurrentAuthToken()

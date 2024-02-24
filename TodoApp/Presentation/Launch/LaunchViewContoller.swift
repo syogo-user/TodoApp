@@ -34,11 +34,11 @@ class LaunchViewContoller: BaseViewController {
                     return
                 }
                 guard let isSignIn = result.data else { return }
-                if isSignIn {
-                    self.toTabBar()
-                } else {
-                    self.toSignIn()
-                }
+//                if isSignIn {
+//                    self.toTabBar()
+//                } else {
+//                    self.toSignIn()
+//                }
             }
             .disposed(by: disposeBag)
     }
