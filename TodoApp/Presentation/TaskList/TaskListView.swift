@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct TaskListView: View {
-    @StateObject private var viewModel = TaskListViewModelImpl()
-    @State private var isShowAlert = false
-    @State private var errorMessage = ""
-    @State private var isLoading = false
     @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
-    
+    @StateObject private var viewModel = TaskListViewModelImpl()
+    @State private var errorMessage = ""
+    @State private var isShowAlert = false
+    @State private var isLoading = false
+
     var body: some View {
         NavigationStack {
-            // TODO: データ取得時0件の場合に、データがありませんになるように修正
             ZStack {
                 List {
                     ForEach(viewModel.taskInfoItems, id: \.taskId) { task in
@@ -118,9 +117,6 @@ struct TaskListView: View {
             }
         }
         .task {
-//            if !isSignIn {
-//                return
-//            }
             do {
                 isLoading = true
                 try await viewModel.fetchTaskList()
@@ -206,19 +202,12 @@ struct TaskListView: View {
     }
 }
 
-struct RefreshChecker {
-    init(task: TaskInfoItem) {
-        print("refreshed!\(task.title),\(task.isFavorite)")
-    }
-}
-
 struct TaskCellView: View {
     @ObservedObject var task: TaskInfoItem
     let favoriteButtonClick: (Bool) -> Void
     let completeButtonClick: (Bool) -> Void
     
     var body: some View {
-        let checker = RefreshChecker(task: task)
         HStack(alignment: .center) {
             Toggle(isOn: $task.isCompleted) {}
             .onChange(of: task.isCompleted) { newValue in

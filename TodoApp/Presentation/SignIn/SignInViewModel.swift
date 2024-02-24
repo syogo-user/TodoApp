@@ -11,32 +11,13 @@ import RxSwift
 import RxCocoa
 
 protocol SignInViewModel: ObservableObject {
-    /// ローディング
-    var isLoading: Driver<Bool> { get }
-    /// ユーザ情報通知
-    var userInfo: Signal<VMResult<Void>?> { get }
     /// ソーシャルサインイン
     func socialSigIn(provider: AuthProvider) async throws
-    /// サインイン画面を経由したことを設定
-    func setViaSignIn()
 }
 
 @MainActor
 class SignInViewModelImpl: SignInViewModel {
     private var useCase: UserUseCase = UserUseCaseImpl()
-    private let disposeBag = DisposeBag()
-
-    /// ユーザ情報通知
-    private let userInfoRelay = BehaviorRelay<VMResult<Void>?>(value: nil)
-    lazy var userInfo = userInfoRelay.asSignal(onErrorSignalWith: .empty())
-
-    private(set) lazy var isLoading: Driver<Bool> = {
-        userInfo.map { VMResult(data: $0?.data != nil) }.asObservable()
-        .map { [unowned self] _ in
-            self.userInfoRelay.value?.isLoading ?? false
-        }
-        .asDriver(onErrorJustReturn: false)
-    }()
 
     func socialSigIn(provider: AuthProvider) async throws {
         try await useCase.socialSignIn(provider: provider)
@@ -50,9 +31,5 @@ class SignInViewModelImpl: SignInViewModel {
             throw DomainError.authError
         }
         try useCase.insertLocalUser(userId: userId, email: email)
-    }
-
-    func setViaSignIn() {
-        useCase.isFromSignIn = true
     }
 }

@@ -10,11 +10,11 @@ import SwiftUI
 struct SettingView: View {
     @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
     @StateObject private var viewModel = SettingViewModelImpl()
+    @State private var errorMessage = ""
+    @State private var isShowAlert = false
+    @State private var isLoading = false
     @State private var email = ""
     @Binding var selection: Int
-    @State private var isShowAlert = false
-    @State private var errorMessage = ""
-    @State private var isLoading = false
     
     var body: some View {
         ZStack {
