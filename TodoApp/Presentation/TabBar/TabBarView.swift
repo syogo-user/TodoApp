@@ -25,7 +25,7 @@ struct TabBarView: View {
                 }
                 .tag(2)
 
-            SettingView()
+            SettingView(selection: $selection)
                 .tabItem {
                     Label("アカウント", systemImage: "person")
                 }

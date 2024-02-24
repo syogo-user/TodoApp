@@ -42,36 +42,20 @@ class UserUseCaseImpl: UserUseCase {
 
     /// トークンを取得
     func fetchCurrentAuthToken() async throws -> String {
-        try await self.repository.fetchCurrentAuthToken()
-//        return Single.create { single in
-//            Task {
-//                do {
-//                    let token = try await self.repository.fetchCurrentAuthToken()
-//                    single(.success("Bearer " + token))
-//                } catch {
-//                    single(.error(DomainError.authError))
-//                }
-//            }
-//            return Disposables.create()
-//        }
+        do {
+            return try await self.repository.fetchCurrentAuthToken()
+        } catch {
+            throw DomainError.authError
+        }
     }
 
     /// ユーザ情報を取得
     func fetchUserInfo() async throws -> [AuthUserAttribute] {
-        try await self.repository.fetchUserInfo() ?? []
-//        return Single.create { single in
-//            Task {
-//                do {
-//                    guard let result = try await self.repository.fetchUserInfo() else {
-//                        throw DomainError.authError
-//                    }
-//                    single(.success(result))
-//                } catch {
-//                    single(.error(error))
-//                }
-//            }
-//            return Disposables.create()
-//        }
+        do {
+            return try await self.repository.fetchUserInfo() ?? []
+        } catch {
+            throw DomainError.authError
+        }
     }
 
     /// ログイン中かどうか判定
@@ -95,33 +79,20 @@ class UserUseCaseImpl: UserUseCase {
 
     /// ソーシャルサインイン
     func socialSignIn(provider: AuthProvider) async throws {
-        let signInResult = try await self.repository.socialSignIn(provider: provider)
-        if !signInResult.isSignedIn {
+        do {
+            let signInResult = try await self.repository.socialSignIn(provider: provider)
+            if !signInResult.isSignedIn {
+                throw DomainError.authError
+            }
+        } catch {
             throw DomainError.authError
         }
-        print("Sign in succeeded")
-//        return Single.create { single in
-//            Task {
-//                do {
-//                    let signInResult = try await self.repository.socialSignIn(provider: provider)
-//                    if signInResult.isSignedIn {
-//                        print("Sign in succeeded")
-//                        single(.success(()))
-//                    }
-//                    single(.error(DomainError.authError))
-//                } catch {
-////                    single(.error(DomainError.unKnownError))
-//                }
-//            }
-//            return Disposables.create()
-//        }
     }
 
     /// サインアウト
     func signOut() async throws {
         let result = await self.repository.signOut()
         guard let signOutResult = result as? AWSCognitoSignOutResult else {
-            print("Signout failed")
             throw DomainError.authError
         }
         
@@ -137,22 +108,34 @@ class UserUseCaseImpl: UserUseCase {
 
     /// ユーザ情報取得
     func loadLocalUser() throws -> UserInfoAttribute {
-        let localUser = try repository.loadLocalUser().map { user in
-            UserInfoAttribute(userId: user.userId, email: user.email)
-        }
-        if localUser.count != 1 {
+        do {
+            let localUser = try repository.loadLocalUser().map { user in
+                UserInfoAttribute(userId: user.userId, email: user.email)
+            }
+            if localUser.count != 1 {
+                throw DomainError.localDbError
+            }
+            return localUser[0]
+        } catch {
             throw DomainError.localDbError
         }
-        return localUser[0]
     }
     
     /// ユーザ情報を登録
     func insertLocalUser(userId: String, email: String) throws {
-        try repository.insertLocalUser(userId: userId, email: email)
+        do {
+            try repository.insertLocalUser(userId: userId, email: email)
+        } catch {
+            throw DomainError.localDbError
+        }
     }
 
     /// ユーザ情報を削除
     func deleteLocalUser() throws {
-        try repository.deleteLocalUser()
+        do {
+            try repository.deleteLocalUser()
+        } catch {
+            throw DomainError.localDbError
+        }
     }
 }

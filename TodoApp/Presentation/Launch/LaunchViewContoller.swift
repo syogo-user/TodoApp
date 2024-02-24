@@ -26,11 +26,11 @@ class LaunchViewContoller: BaseViewController {
             .emit { result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
-                    self.handlerError(
-                        error: error,
-                        onAuthError: { self.sessionErrorDialog() },
-                        onUnKnowError: { self.unKnowErrorDialog() }
-                    )
+//                    self.handlerError(
+//                        error: error,
+//                        onAuthError: { self.sessionErrorDialog() },
+//                        onUnKnowError: { self.unKnowErrorDialog() }
+//                    )
                     return
                 }
                 guard let isSignIn = result.data else { return }

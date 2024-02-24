@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct SettingView: View {
+    @AppStorage("isSignIn") var isSignIn = false
     @StateObject private var viewModel = SettingViewModelImpl()
     @State private var email = ""
-    @AppStorage("isSignIn") var isSignIn = false
+    @Binding var selection: Int
+    @State private var isShowAlert = false
+    @State private var errorMessage = ""
     @State private var isLoading = false
     
     var body: some View {
@@ -32,9 +35,11 @@ struct SettingView: View {
                             try await viewModel.signOut()
                             isSignIn = false
                             isLoading = false
-                        } catch {
+                            selection = 1
+                        } catch let error {
+                            errorMessage = errorMessage(error: error)
+                            isShowAlert = true
                             isLoading = false
-                            print("エラー: \(error)")
                         }
                     }
                 } label: {
@@ -55,13 +60,33 @@ struct SettingView: View {
         .onAppear {
             do {
                 email = try viewModel.loadEmail()
-            } catch {
-                
+            } catch let error {
+                errorMessage = errorMessage(error: error)
+                isShowAlert = true
             }
+        }
+        .alert(
+            "エラー",
+            isPresented: $isShowAlert
+        ) {} message: {
+            Text(errorMessage)
+        }
+    }
+    
+    private func errorMessage(error: Error) -> String {
+        switch error {
+        case DomainError.authError :
+            return R.string.localizable.signOutErrorMessage()
+        case DomainError.localDbError :
+            return R.string.localizable.localUserDBErrorMessage()
+        case DomainError.unKnownError :
+            return R.string.localizable.unknownErrorMessage()
+        default:
+            return R.string.localizable.unknownErrorMessage()
         }
     }
 }
 
 #Preview {
-    SettingView()
+    SettingView(selection: .constant(1))
 }

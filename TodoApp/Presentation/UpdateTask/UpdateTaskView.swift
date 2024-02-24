@@ -11,6 +11,8 @@ struct UpdateTaskView: View {
     @StateObject private var viewModel = UpdateTaskViewModelImpl()
     @StateObject var updateTask: TaskInfoItem
     @SwiftUI.Environment(\.presentationMode) var presentation
+    @State private var isShowAlert = false
+    @State private var errorMessage = ""
     @State private var isLoading = false
     
     var body: some View {
@@ -64,7 +66,9 @@ struct UpdateTaskView: View {
                             self.presentation.wrappedValue.dismiss()
                             isLoading = false
                             print("更新: \(updateTask.content)")
-                        } catch {
+                        } catch let error {
+                            errorMessage = errorMessage(error: error)
+                            isShowAlert = true
                             isLoading = false
                             print("エラー: \(error)")
                         }
@@ -73,6 +77,26 @@ struct UpdateTaskView: View {
                     Text("保存")
                 }
             })
+            .alert(
+                "エラー",
+                isPresented: $isShowAlert
+            ) {} message: {
+                Text(errorMessage)
+            }
+        }
+    }
+    private func errorMessage(error: Error) -> String {
+        switch error {
+        case DomainError.authError :
+            return R.string.localizable.tokenErrorMessage()
+        case DomainError.localDbError :
+            return R.string.localizable.localTaskDBErrorMessage()
+        case DomainError.onAPIUpdateError:
+            return R.string.localizable.updateTaskErrorMessage()
+        case DomainError.unKnownError :
+            return R.string.localizable.unknownErrorMessage()
+        default:
+            return R.string.localizable.unknownErrorMessage()
         }
     }
 }

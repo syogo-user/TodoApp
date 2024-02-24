@@ -68,141 +68,148 @@ class TaskUseCaseImpl: TaskUseCase {
 
     /// タスク取得
     func fetchTask(userId: String, authorization: String) async throws -> [TaskInfo] {
-        let response = try await repository.fetchTask(userId: userId, authorization: authorization)
-        if !response.isAcceptable {
-            throw DomainError.onAPIError(code: "APIエラー") // あとで修正
+        do {
+            let response = try await repository.fetchTask(userId: userId, authorization: authorization)
+            if !response.isAcceptable {
+                throw DomainError.onAPIFetchError(code: response.message) // あとで修正
+            }
+            let tasks = response.data
+            return try tasks.map {
+                TaskInfo(
+                    taskId: $0.taskId,
+                    title: $0.title,
+                    content: $0.content,
+                    scheduledDate: try $0.scheduledDate.toDate(),
+                    isCompleted: $0.isCompleted,
+                    isFavorite: $0.isFavorite,
+                    userId: $0.userId
+                )
+            }
+        } catch let error {
+            throw DomainError.onAPIFetchError(code: error.localizedDescription)
         }
-        let tasks = response.data
-        return try tasks.map {
-            TaskInfo(
-                taskId: $0.taskId,
-                title: $0.title,
-                content: $0.content,
-                scheduledDate: try $0.scheduledDate.toDate(),
-                isCompleted: $0.isCompleted,
-                isFavorite: $0.isFavorite,
-                userId: $0.userId
-            )
-        }
-        
-        
-            // 以下削除する
-//            .do(onSuccess: { result in
-//                guard result.isAcceptable else {
-//                    throw DomainError.onAPIError(code: result.message)
-//                }
-//            })
-//            .map { task in
-//                try task.data.map { try TaskInfo(
-//                    taskId: $0.taskId,
-//                    title: $0.title,
-//                    content: $0.content,
-//                    scheduledDate: $0.scheduledDate.toDate(),
-//                    isCompleted: $0.isCompleted,
-//                    isFavorite: $0.isFavorite,
-//                    userId: $0.userId
-//                ) }
-//            }
     }
 
     /// タスク登録
     func addTask(title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) async throws -> TaskInfo {
         
-        let response = try await repository.addTask(title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
-        if !response.isAcceptable {
-            throw DomainError.onAPIError(code: "APIエラー")
+        do {
+            let response = try await repository.addTask(title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
+            if !response.isAcceptable {
+                throw DomainError.onAPIUpdateError(code: response.message)
+            }
+            let task = response.data
+            return TaskInfo(
+                taskId: task.taskId,
+                title: task.title,
+                content: task.content,
+                scheduledDate: try task.scheduledDate.toDate(),
+                isCompleted: task.isCompleted,
+                isFavorite: task.isFavorite,
+                userId: task.userId
+            )
+        } catch let error {
+            throw DomainError.onAPIUpdateError(code: error.localizedDescription)
         }
-        let task = response.data
-        return TaskInfo(
-            taskId: task.taskId,
-            title: task.title,
-            content: task.content,
-            scheduledDate: try task.scheduledDate.toDate(),
-            isCompleted: task.isCompleted,
-            isFavorite: task.isFavorite,
-            userId: task.userId
-        )
     }
 
     /// タスク更新
     func updateTask(taskId: String,title: String, content: String, scheduledDate: String, isCompleted: Bool, isFavorite: Bool, userId: String, authorization: String) async throws -> TaskInfo {
-        let response = try await repository.updateTask(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
-        if !response.isAcceptable {
-            throw DomainError.onAPIError(code: "APIエラー")
+        do {
+            let response = try await repository.updateTask(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
+            if !response.isAcceptable {
+                throw DomainError.onAPIUpdateError(code: response.message)
+            }
+            let task = response.data
+            return TaskInfo(
+                taskId: task.taskId,
+                title: task.title,
+                content: task.content,
+                scheduledDate: try task.scheduledDate.toDate(),
+                isCompleted: task.isCompleted,
+                isFavorite: task.isFavorite,
+                userId: task.userId
+            )
+        } catch let error {
+            throw DomainError.onAPIUpdateError(code: error.localizedDescription)
         }
-        let task = response.data
-        return TaskInfo(
-            taskId: task.taskId,
-            title: task.title,
-            content: task.content,
-            scheduledDate: try task.scheduledDate.toDate(),
-            isCompleted: task.isCompleted,
-            isFavorite: task.isFavorite,
-            userId: task.userId
-        )
-//        repository.updateTask(taskId: taskId, title: title, content: content, scheduledDate: scheduledDate, isCompleted: isCompleted, isFavorite: isFavorite, userId: userId, authorization: authorization)
-//            .do(onSuccess: { result in
-//                guard result.isAcceptable else {
-//                    throw DomainError.onAPIError(code: result.message)
-//                }
-//            })
-//            .map {
-//                let task = $0.data
-//                return try TaskInfo(
-//                    taskId: task.taskId,
-//                    title: task.title,
-//                    content: task.content,
-//                    scheduledDate: task.scheduledDate.toDate(),
-//                    isCompleted: task.isCompleted,
-//                    isFavorite: task.isFavorite,
-//                    userId: task.userId
-//                )
-//            }
     }
 
     /// タスク削除
     func deleteTask(taskId: String, authorization: String) async throws -> String {
-        let response = try await repository.deleteTask(taskId: taskId, authorization: authorization)
-        if !response.isAcceptable {
-            throw DomainError.onAPIError(code: "APIエラー")
+        do {
+            let response = try await repository.deleteTask(taskId: taskId, authorization: authorization)
+            if !response.isAcceptable {
+                throw DomainError.onAPIUpdateError(code: "APIエラー")
+            }
+            let task = response.data
+            return task.taskId
+        } catch let error {
+            throw DomainError.onAPIUpdateError(code: error.localizedDescription)
         }
-        let task = response.data
-        return task.taskId
     }
 
     /// ローカルタスクリストを取得
     func loadLocalTaskList() throws -> [TaskInfoRecord] {
-        try repository.loadLocalTaskList()
+        do {
+            return try repository.loadLocalTaskList()
+        } catch {
+            throw DomainError.localDbError
+        }
     }
 
     /// ローカルにタスクを登録
     func insertLocalTask(taskInfo: TaskInfoRecord) throws {
-        try repository.insertLocalTask(taskInfo: taskInfo)
+        do {
+            return try repository.insertLocalTask(taskInfo: taskInfo)
+        } catch {
+            throw DomainError.localDbError
+        }
     }
 
     /// ローカルにタスクリストを登録
     func insertLocalTaskList(taskInfoList: [TaskInfoRecord]) throws {
-        try repository.insertLocalTaskList(taskInfoList: taskInfoList)
+        do {
+            return try repository.insertLocalTaskList(taskInfoList: taskInfoList)
+        } catch {
+            throw DomainError.localDbError
+        }
     }
 
     /// ローカルタスクを更新
     func updateLocalTask(taskInfo: TaskInfoRecord) throws {
-        try repository.updateLocalTask(taskInfo: taskInfo)
+        do {
+            return try repository.updateLocalTask(taskInfo: taskInfo)
+        } catch {
+            throw DomainError.localDbError
+        }
     }
 
     /// ローカルタスクを削除
     func deleteLocalTask(taskId: String) throws {
-        try repository.deleteLocalTask(taskId: taskId)
+        do {
+            return try repository.deleteLocalTask(taskId: taskId)
+        } catch {
+            throw DomainError.localDbError
+        }
     }
 
     /// ローカルタスクをすべて削除
     func deleteLocalTaskAll() throws {
-        try repository.deleteLocalTaskAll()
+        do {
+            return try repository.deleteLocalTaskAll()
+        } catch {
+            throw DomainError.localDbError
+        }
     }
 
     /// ローカルタスクを複数削除
     func deleteLocalTaskList(taskIdList: [String]) throws {
-        try repository.deleteLocalTaskList(taskIdList: taskIdList)
+        do {
+            return try repository.deleteLocalTaskList(taskIdList: taskIdList)
+        } catch {
+            throw DomainError.localDbError
+        }
     }
 
     /// タスクリストをソート
