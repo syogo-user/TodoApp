@@ -53,11 +53,21 @@
 "ok" = "OK";
 "cancel" = "キャンセル";
 "appName" = "TodoApp";
+"isSignIn" = "isSignIn";
+"datePickerTitle" = "日時";
+"textFieldTitle" = "タイトル";
 
 // MARK: - NavigationBar
 "taskListNavigationTitle" = "タスク一覧";
 "updateNavigationTitle" = "タスク更新";
 "updateNavigationButtonName" = "保存";
+"addTaskButtonName" = "投稿";
+"settingSignOutButtonName" = "サインアウト";
+
+// MARK: - TabViewItem
+"tabItemListTitle" = "一覧";
+"tabItemPostTitle" = "投稿";
+"tabItemSettingTitle" = "アカウント";
 
 // MARK: - Button
 "rightBarButtonOnlyFavorite" = "★のみ表示";
@@ -65,6 +75,19 @@
 "rightBarButtonNotIncludeCompleted" = "完了済は非表示";
 "rightBarButtonAscendingOrderDate" = "日付の昇順";
 "rightBarButtonDescendingOrderDate" = "日付の降順";
+"updateTaskViewSaveButtonText" = "保存";
+
+
+
 
 // MARK: - Database
 "databaseOpenError" = "データベースが1度もopenされていません";
+
+// MARK: - ImageName
+"tabItemListImage" = "list.bullet";
+"tabItemPostImage" = "plus";
+"tabItemSettingImage" = "person";
+"taskListViewOrderButtonImage" = "arrow.up.arrow.down";
+"taskListViewFilterButtonImage" = "ellipsis";
+"checkBoxButtonCheckImage" = "checkmark.square";
+"checkBoxButtonSquareImage" = "checkmark.square";

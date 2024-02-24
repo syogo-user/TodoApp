@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
-    @AppStorage("isSignIn") var isSignIn = false
+    @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
     @StateObject private var viewModel = SettingViewModelImpl()
     @State private var email = ""
     @Binding var selection: Int
@@ -22,8 +22,8 @@ struct SettingView: View {
                 Image(R.image.person.name)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 100, alignment: .center)
-                    .padding(.top, 16)
+                    .frame(width: Size.size100, height: Size.size100, alignment: .center)
+                    .padding(.top, Constraint.constraint16)
                 
                 Text(email)
                     .fontWeight(.semibold)
@@ -43,12 +43,12 @@ struct SettingView: View {
                         }
                     }
                 } label: {
-                    Text("サインアウト")
+                    Text(R.string.localizable.settingSignOutButtonName())
                         .fontWeight(.semibold)
-                        .frame(width: 220, height: 45)
+                        .frame(width: Size.size220, height: Size.size50)
                         .foregroundColor(Color(.white))
                         .background(Color(.accent))
-                        .cornerRadius(24)
+                        .cornerRadius(CornerRadius.radius24)
                 }
                 .padding()
                 Spacer()
@@ -66,7 +66,7 @@ struct SettingView: View {
             }
         }
         .alert(
-            "エラー",
+            R.string.localizable.errorTitle(),
             isPresented: $isShowAlert
         ) {} message: {
             Text(errorMessage)

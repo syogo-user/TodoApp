@@ -9,25 +9,25 @@ import SwiftUI
 
 struct TabBarView: View {
     @State var selection = 1
-    @AppStorage("isSignIn") var isSignIn = false
+    @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
     
     var body: some View {
         TabView(selection: $selection) {
             TaskListView()
                 .tabItem {
-                    Label("一覧", systemImage: "list.bullet")
+                    Label(R.string.localizable.tabItemListTitle(), systemImage: R.string.localizable.tabItemListImage())
                 }
                 .tag(1)
 
             AddTaskView(selection: $selection)
                 .tabItem {
-                    Label("投稿", systemImage: "plus")
+                    Label(R.string.localizable.tabItemPostTitle(), systemImage: R.string.localizable.tabItemPostImage())
                 }
                 .tag(2)
 
             SettingView(selection: $selection)
                 .tabItem {
-                    Label("アカウント", systemImage: "person")
+                    Label(R.string.localizable.tabItemSettingTitle(), systemImage: R.string.localizable.tabItemSettingImage())
                 }
                 .tag(3)
         }

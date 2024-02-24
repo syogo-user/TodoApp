@@ -16,21 +16,22 @@ struct AddTaskView: View {
     @State private var isShowAlert = false
     @State private var errorMessage = ""
     @State private var isLoading = false
+    private let validate: Validate = Validate()
     
     var body: some View {
         ZStack {
-            VStack(spacing: 16) {
-                TextField("タイトル", text: $inputTitle)
+            VStack(spacing: Constraint.constraint16) {
+                TextField(R.string.localizable.textFieldTitle(), text: $inputTitle)
                     .textFieldStyle(.roundedBorder)
-                    .padding(.top, 16)
+                    .padding(.top, Constraint.constraint16)
                 
                 TextEditor(text: $inputContent)
-                    .frame(height: 100)
-                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 0.2))
+                    .frame(height: Size.size100)
+                    .overlay(RoundedRectangle(cornerRadius: CornerRadius.radius8).stroke(.gray, lineWidth: Line.thinness02))
                     .textFieldStyle(.roundedBorder)
                 
                 HStack {
-                    DatePicker("日時", selection: $inputScheduledDate)
+                    DatePicker(R.string.localizable.datePickerTitle(), selection: $inputScheduledDate)
                         .labelsHidden()
                     Spacer()
                 }
@@ -38,6 +39,16 @@ struct AddTaskView: View {
                 Button {
                     Task {
                         do {
+                            if (validate.isEmpty(inputArray: inputTitle)) {
+                                errorMessage = R.string.localizable.emptyTitleMessage()
+                                isShowAlert = true
+                                return
+                            }
+                            if (validate.isWordLengthOver(word: inputTitle, wordLimit: Constants.titleWordLimit)) {
+                                errorMessage = R.string.localizable.overTitleLengthMessage(String(Constants.titleWordLimit))
+                                isShowAlert = true
+                                return
+                            }
                             isLoading = true
                             try await viewModel.addTask(title: inputTitle, content: inputContent, scheduledDate: Date().dateFormat())
                             inputTitle = ""
@@ -48,27 +59,26 @@ struct AddTaskView: View {
                             errorMessage = errorMessage(error: error)
                             isShowAlert = true
                             isLoading = false
-                            print("投稿エラー: \(error)")
                         }
                     }
                 } label: {
-                    Text("投稿")
+                    Text(R.string.localizable.addTaskButtonName())
                         .fontWeight(.bold)
-                        .frame(width: 220, height: 45)
+                        .frame(width: Size.size220, height: Size.size50)
                         .foregroundColor(Color(.white))
                         .background(Color(.accent))
-                        .cornerRadius(24)
+                        .cornerRadius(CornerRadius.radius24)
                     
                 }
                 Spacer()
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, Constraint.constraint16)
             if isLoading {
                 ProgressView()
             }
         }
         .alert(
-            "エラー",
+            R.string.localizable.errorTitle(),
             isPresented: $isShowAlert
         ) {} message: {
             Text(errorMessage)

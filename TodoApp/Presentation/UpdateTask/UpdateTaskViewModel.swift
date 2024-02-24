@@ -31,7 +31,5 @@ class UpdateTaskViewModelImpl: UpdateTaskViewModel {
         
         let taskInfoRecord = TaskInfoRecord(taskId: task.taskId, title: task.title, content: task.content, scheduledDate: task.scheduledDate, isCompleted: task.isCompleted, isFavorite: task.isFavorite, userId: task.userId)
         try taskUseCase.updateLocalTask(taskInfo: taskInfoRecord)
-//        let taskList = try taskUseCase.loadLocalTaskList()
-//        print("ローカルデータ:\(taskList)")
     }
 }

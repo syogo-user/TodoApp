@@ -10,7 +10,7 @@ import Amplify
 
 struct SignInView: View {
     @StateObject private var viewModel = SignInViewModelImpl()
-    @AppStorage("isSignIn") var isSignIn = false
+    @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
     @State private var isShowAlert = false
     @State private var errorMessage = ""
     @State private var isLoading = false
@@ -18,11 +18,12 @@ struct SignInView: View {
     var body: some View {
         ZStack {
             VStack(alignment: .center) {
+                Spacer(minLength: Size.size200)
                 Text(R.string.localizable.appName())
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                     .foregroundColor(Color.accentColor)
-                    .padding(.bottom, 50)
+                    .padding(.bottom, Constraint.constraint48)
                 
                 Button {
                     socialSignIn(provider: .google)
@@ -44,14 +45,13 @@ struct SignInView: View {
                 
                 Spacer()
             }
-            .padding(.horizontal, 50)
-            .padding(.top, 200)
+            .padding(.horizontal, Constraint.constraint48)
             if isLoading {
                 ProgressView()
             }
         }
         .alert(
-            "エラー1",
+            R.string.localizable.errorTitle(),
             isPresented: $isShowAlert
         ) {} message: {
             Text(errorMessage)

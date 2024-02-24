@@ -99,7 +99,6 @@ class TaskListViewModelImpl: TaskListViewModel {
         
         let authorization = try await userUseCase.fetchCurrentAuthToken()
         let user = try userUseCase.loadLocalUser()
-        print("!!!user:\(user.userId)")
         let tasks = try await taskUseCase.fetchTask(userId: user.userId, authorization: authorization)
         var taskList = tasks
         self.taskUseCase.sortTask(itemList: &taskList, sort: sortOrder)
@@ -108,10 +107,7 @@ class TaskListViewModelImpl: TaskListViewModel {
             TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
         }
         try taskUseCase.insertLocalTaskList(taskInfoList: taskInfoList)
-        
-        
-        // --- 以下確認した方がいい
-        
+                        
         // APIとローカルそれぞれタスクのtaskIdを比較して不要なものを削除
         let taskItems = Set(self.taskInfoItems.map { $0.taskId })
         let taskIdList = Set(taskList.map { $0.taskId })
@@ -126,65 +122,7 @@ class TaskListViewModelImpl: TaskListViewModel {
         }
         self.taskUseCase.sortTask(itemList: &self.taskInfoItems, sort: sortOrder)
         self.taskUseCase.filterTask(itemList: &self.taskInfoItems, condition: filterCondition)
-        print("tasks:\(taskInfoItems)")
-        // エラーについてはVC側でdo catchしてエラーメッセージを出す。
-        
     }
-    
-    //    /// タスクリストを取得
-//        func fetchTaskListOld() {
-//            let sortOrder = getSortOrder()
-//            let filterCondition = getFilterCondition()
-             //ユーザIDとトークンを取得
-//            Single.zip(self.userUseCase.loadLocalUser(), self.userUseCase.fetchCurrentAuthToken())
-//                .flatMap { (user: UserInfoAttribute, idToken: String) in
-//                    self.taskUseCase.fetchTask(userId: user.userId, authorization: idToken)
-//                }
-//                .flatMap { (list: [TaskInfo])  in
-//                    return Single<Any>.zip({
-//                        // ローカルに登録
-////                        var taskList = list
-////                        taskUseCase.sortTask(itemList: taskList, sort: sortOrder)
-
-//                        let taskInfoList = taskList.map {
-//                            TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
-//                        }
-//                        return self.taskUseCase.insertLocalTaskList(taskInfoList: taskInfoList)
-//                    }(), {
-//                        // APIとローカルそれぞれタスクのtaskIdを比較して不要なものを削除
-//                        let tableViewItems = Set(self.tableViewItems.map { $0.taskId })
-//                        let taskList = Set(list.map { $0.taskId })
-//                        /// ローカルから取得したタスクには存在するがにAPIから取得したタスクには存在しないものtaskIDを抽出
-//                        let result = tableViewItems.subtracting(taskList)
-//                        let deleteIdList = Array(result)
-//                        return self.taskUseCase.deleteLocalTaskList(taskIdList: deleteIdList)
-//                    }())
-//                }
-//                .flatMap { _ in
-////                    self.taskUseCase.loadLocalTaskList()
-//                }
-//                .do(onSuccess: { taskList in
-//                    self.tableViewItems = taskList.map {
-//                        TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
-//                    }
-//                    self.taskUseCase.sortTask(itemList: &self.tableViewItems, sort: sortOrder)
-//                    self.taskUseCase.filterTask(itemList: &self.tableViewItems, condition: filterCondition)
-//                    self.taskItemsRelay.accept(self.tableViewItems)
-//                })
-//                .map { _ in
-//                    return .success(())
-//                }
-//                .asSignal(onErrorRecover: { .just(.failure($0))})
-//                .startWith(.loading())
-//                .emit(to: taskInfoRelay)
-//                .disposed(by: disposeBag)
-//        }
-    
-    
-    
-    
-    
-    
     
     func updateTask(taskInfoItem: TaskInfoItem) async throws {
         guard let index = taskInfoItems.firstIndex(where: { $0.taskId == taskInfoItem.taskId }) else {
@@ -204,22 +142,6 @@ class TaskListViewModelImpl: TaskListViewModel {
         try self.taskUseCase.updateLocalTask(taskInfo: taskInfoRecord)
     }
 
-//    /// タスクを更新
-//    func updateTask(index: Int) {
-
-
-
-
-//            }
-//            .map { _ in
-//                return .success(())
-//            }
-//            .asSignal(onErrorRecover: { .just(.failure($0))})
-//            .startWith(.loading())
-//            .emit(to: updateTaskInfoRelay)
-//            .disposed(by: disposeBag)
-//    }
-//
     /// タスクを削除
     func deleteTask(index: Int) async throws {
         let sortOrder = getSortOrder()
@@ -238,7 +160,7 @@ class TaskListViewModelImpl: TaskListViewModel {
         
         try taskUseCase.deleteLocalTask(taskId: taskId)
     }
-//
+
     /// ローカルからタスクリストを取得
     func loadLocalTaskList() throws {
         do {
@@ -308,22 +230,22 @@ class TaskListViewModelImpl: TaskListViewModel {
     func getSortOrder() -> String {
         taskUseCase.sortOrder ?? SortOrder.descendingOrderDate.rawValue
     }
-//
+
     /// 並び順を設定
     func setSortOrder(sortOrder: String) {
         taskUseCase.sortOrder = sortOrder
     }
-//
+
     /// 抽出条件を取得
     func getFilterCondition() -> String {
         taskUseCase.filterCondition ?? FilterCondition.notIncludeCompleted.rawValue
     }
-//
+
     /// 抽出条件を設定
     func setFilterCondition(filterCondition: String) {
         taskUseCase.filterCondition = filterCondition
     }
-//
+
     /// インデックスからタスクIDを取得
     private func toTaskId(index: Int) -> String {
         selectItemAt(index: index).taskId

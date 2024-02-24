@@ -50,27 +50,6 @@ class SignInViewModelImpl: SignInViewModel {
             throw DomainError.authError
         }
         try useCase.insertLocalUser(userId: userId, email: email)
-//            .flatMap { () in
-//                self.useCase.fetchUserInfo()
-//            }
-//            .flatMap { userInfo in
-//                let subAttribute = userInfo.filter { $0.key == .sub }.first
-//                let emailAttribute = userInfo.filter { $0.key == .email }.first
-//                guard let userId = subAttribute?.value else {
-//                    throw DomainError.authError
-//                }
-//                guard let email = emailAttribute?.value else {
-//                    throw DomainError.authError
-//                }
-//                return self.useCase.insertLocalUser(userId: userId, email: email)
-//            }
-//            .map {
-//                return .success(())
-//            }
-//            .asSignal(onErrorRecover: { .just(.failure($0))})
-//            .startWith(.loading())
-//            .emit(to: userInfoRelay)
-//            .disposed(by: disposeBag)
     }
 
     func setViaSignIn() {

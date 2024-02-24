@@ -14,45 +14,46 @@ struct UpdateTaskView: View {
     @State private var isShowAlert = false
     @State private var errorMessage = ""
     @State private var isLoading = false
+    private let validate: Validate = Validate()
     
     var body: some View {
         NavigationStack {
             ZStack {
-                VStack(spacing: 16) {
+                VStack(spacing: Constraint.constraint16) {
                     HStack {
                         Toggle(isOn: $updateTask.isCompleted) {
                         }
                         .toggleStyle(.checkBox)
-                        .padding(8)
+                        .padding(Constraint.constraint8)
                         
                         Button {
                             updateTask.isFavorite.toggle()
                         } label: {
-                            let imageName = updateTask.isFavorite ? "star_fill" : "star_frame"
+                            let imageName = updateTask.isFavorite ? R.image.star_fill.name : R.image.star_frame.name
                             Image(imageName)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 20, height: 20, alignment: .trailing)
+                                .frame(width: Size.size20, height: Size.size20, alignment: .trailing)
                             
                         }
                         Spacer()
-                        DatePicker("日時", selection: $updateTask.scheduledDate)
+                        DatePicker(R.string.localizable.datePickerTitle(), selection: $updateTask.scheduledDate)
                             .labelsHidden()
                     }
-                    TextField("タイトル", text: $updateTask.title)
+                    TextField(R.string.localizable.textFieldTitle(), text: $updateTask.title)
                         .textFieldStyle(.roundedBorder)
                         .onSubmit {
                             
                         }
                     
                     TextEditor(text: $updateTask.content)
-                        .frame(height: 100)
-                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 0.2))
+                        .frame(height: Size.size100)
+                        .overlay(RoundedRectangle(cornerRadius: CornerRadius.radius8).stroke(.gray, lineWidth: Line.thinness02))
                         .textFieldStyle(.roundedBorder)
                     
                     Spacer()
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, Constraint.constraint16)
                 if isLoading {
                     ProgressView()
                 }
@@ -61,24 +62,33 @@ struct UpdateTaskView: View {
                 Button {
                     Task {
                         do {
+                            if (validate.isEmpty(inputArray: updateTask.title)) {
+                                errorMessage = R.string.localizable.emptyTitleMessage()
+                                isShowAlert = true
+                                return
+                            }
+                            if (validate.isWordLengthOver(word: updateTask.title, wordLimit: Constants.titleWordLimit)) {
+                                errorMessage = R.string.localizable.overTitleLengthMessage(String(Constants.titleWordLimit))
+                                isShowAlert = true
+                                return
+                            }
+
                             isLoading = true
                             try await viewModel.updateTask(taskInfoItem: updateTask)
                             self.presentation.wrappedValue.dismiss()
                             isLoading = false
-                            print("更新: \(updateTask.content)")
                         } catch let error {
                             errorMessage = errorMessage(error: error)
                             isShowAlert = true
                             isLoading = false
-                            print("エラー: \(error)")
                         }
                     }
                 } label: {
-                    Text("保存")
+                    Text(R.string.localizable.updateTaskViewSaveButtonText())
                 }
             })
             .alert(
-                "エラー",
+                R.string.localizable.errorTitle(),
                 isPresented: $isShowAlert
             ) {} message: {
                 Text(errorMessage)

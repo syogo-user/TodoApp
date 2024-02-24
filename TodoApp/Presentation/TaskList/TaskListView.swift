@@ -12,16 +12,16 @@ struct TaskListView: View {
     @State private var isShowAlert = false
     @State private var errorMessage = ""
     @State private var isLoading = false
-    @AppStorage("isSignIn") var isSignIn = false
+    @AppStorage(R.string.localizable.isSignIn()) var isSignIn = false
     
     var body: some View {
         NavigationStack {
-            // Todo: データが取得してもなかった場合に、データがありませんになるように修正
+            // TODO: データ取得時0件の場合に、データがありませんになるように修正
             ZStack {
                 List {
                     ForEach(viewModel.taskInfoItems, id: \.taskId) { task in
                         NavigationLink(destination: UpdateTaskView(updateTask: task).onDisappear {
-                            // Todo: 更新画面から戻ったときに値が変わってしまう事象は一旦onDisappearで対応にする
+                            // NOTE: 更新画面から戻ったときに値が変わってしまう事象は一旦onDisappearで対応にする
                             do {
                                 isLoading = true
                                 try self.loadLocalTaskList()
@@ -86,10 +86,10 @@ struct TaskListView: View {
                             selectedSortItem(sortOrder: SortOrder.descendingOrderDate)
                         })
                     } label: {
-                        Image(systemName: "arrow.up.arrow.down")
+                        Image(systemName: R.string.localizable.taskListViewOrderButtonImage())
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 20)
+                            .frame(width: Size.size20)
                     }
                     
                     Menu {
@@ -105,10 +105,10 @@ struct TaskListView: View {
                         })
                         
                     } label: {
-                        Image(systemName: "ellipsis")
+                        Image(systemName: R.string.localizable.taskListViewFilterButtonImage())
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 20)
+                            .frame(width: Size.size20)
                         
                     }
                 })
@@ -132,7 +132,7 @@ struct TaskListView: View {
             }
         }
         .alert(
-            "エラー",
+            R.string.localizable.errorTitle(),
             isPresented: $isShowAlert
         ) {} message: {
             Text(errorMessage)
@@ -225,9 +225,9 @@ struct TaskCellView: View {
                 completeButtonClick(newValue)
             }
             .toggleStyle(.checkBox)
-            .padding(.trailing, 8)
+            .padding(.trailing, Constraint.constraint8)
             
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: Constraint.constraint8) {
                 Text(task.title)
                     .fontWeight(.semibold)
                 Text(task.content)
@@ -241,16 +241,15 @@ struct TaskCellView: View {
             Button {
                 favoriteButtonClick(!task.isFavorite)
             } label: {
-                let imageName = task.isFavorite ? "star_fill" : "star_frame"
+                let imageName = task.isFavorite ?  R.image.star_fill.name : R.image.star_frame.name
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 30, height: 30, alignment: .trailing)
+                    .frame(width: Size.size30, height: Size.size30, alignment: .trailing)
             }
             .buttonStyle(.plain)
 
         }
-
     }
 
 }
