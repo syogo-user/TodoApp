@@ -19,14 +19,14 @@ struct AddTaskView: View {
     
     var body: some View {
         ZStack {
-            VStack(spacing: 16) {
+            VStack(spacing: Constraint.constraint16) {
                 TextField(R.string.localizable.textFieldTitle(), text: $inputTitle)
                     .textFieldStyle(.roundedBorder)
-                    .padding(.top, 16)
+                    .padding(.top, Constraint.constraint16)
                 
                 TextEditor(text: $inputContent)
-                    .frame(height: 100)
-                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 0.2))
+                    .frame(height: Size.size100)
+                    .overlay(RoundedRectangle(cornerRadius: CornerRadius.radius8).stroke(.gray, lineWidth: Line.thinness02))
                     .textFieldStyle(.roundedBorder)
                 
                 HStack {
@@ -53,15 +53,15 @@ struct AddTaskView: View {
                 } label: {
                     Text(R.string.localizable.addTaskButtonName())
                         .fontWeight(.bold)
-                        .frame(width: 220, height: 45)
+                        .frame(width: Size.size220, height: Size.size50)
                         .foregroundColor(Color(.white))
                         .background(Color(.accent))
-                        .cornerRadius(24)
+                        .cornerRadius(CornerRadius.radius24)
                     
                 }
                 Spacer()
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, Constraint.constraint16)
             if isLoading {
                 ProgressView()
             }

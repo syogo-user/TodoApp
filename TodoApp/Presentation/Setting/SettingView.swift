@@ -22,8 +22,8 @@ struct SettingView: View {
                 Image(R.image.person.name)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 100, alignment: .center)
-                    .padding(.top, 16)
+                    .frame(width: Size.size100, height: Size.size100, alignment: .center)
+                    .padding(.top, Constraint.constraint16)
                 
                 Text(email)
                     .fontWeight(.semibold)
@@ -45,10 +45,10 @@ struct SettingView: View {
                 } label: {
                     Text(R.string.localizable.settingSignOutButtonName())
                         .fontWeight(.semibold)
-                        .frame(width: 220, height: 45)
+                        .frame(width: Size.size220, height: Size.size50)
                         .foregroundColor(Color(.white))
                         .background(Color(.accent))
-                        .cornerRadius(24)
+                        .cornerRadius(CornerRadius.radius24)
                 }
                 .padding()
                 Spacer()

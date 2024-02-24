@@ -18,12 +18,12 @@ struct UpdateTaskView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                VStack(spacing: 16) {
+                VStack(spacing: Constraint.constraint16) {
                     HStack {
                         Toggle(isOn: $updateTask.isCompleted) {
                         }
                         .toggleStyle(.checkBox)
-                        .padding(8)
+                        .padding(Constraint.constraint8)
                         
                         Button {
                             updateTask.isFavorite.toggle()
@@ -32,7 +32,7 @@ struct UpdateTaskView: View {
                             Image(imageName)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 20, height: 20, alignment: .trailing)
+                                .frame(width: Size.size20, height: Size.size20, alignment: .trailing)
                             
                         }
                         Spacer()
@@ -46,13 +46,13 @@ struct UpdateTaskView: View {
                         }
                     
                     TextEditor(text: $updateTask.content)
-                        .frame(height: 100)
-                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 0.2))
+                        .frame(height: Size.size100)
+                        .overlay(RoundedRectangle(cornerRadius: CornerRadius.radius8).stroke(.gray, lineWidth: Line.thinness02))
                         .textFieldStyle(.roundedBorder)
                     
                     Spacer()
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, Constraint.constraint16)
                 if isLoading {
                     ProgressView()
                 }

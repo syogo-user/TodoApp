@@ -28,6 +28,8 @@
 		3D6A59E92B56CDE1006DB110 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A59E72B56CDE1006DB110 /* SettingView.swift */; };
 		3D8386E92B89EE7D00D99100 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8386E82B89EE7D00D99100 /* CheckButton.swift */; };
 		3D8386EA2B89EE7D00D99100 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8386E82B89EE7D00D99100 /* CheckButton.swift */; };
+		3D8386EC2B8A15C700D99100 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8386EB2B8A15C700D99100 /* Resources.swift */; };
+		3D8386ED2B8A15C700D99100 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8386EB2B8A15C700D99100 /* Resources.swift */; };
 		911C466C29C9CBC700A9159F /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911C466B29C9CBC700A9159F /* String+Extention.swift */; };
 		911C466E29C9CC9C00A9159F /* Date+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911C466D29C9CC9C00A9159F /* Date+Extention.swift */; };
 		9136501229C5B0FE00F9BC29 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9136501129C5B0FE00F9BC29 /* TaskListViewModel.swift */; };
@@ -121,6 +123,7 @@
 		3D6A59E42B56CA9D006DB110 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		3D6A59E72B56CDE1006DB110 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3D8386E82B89EE7D00D99100 /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
+		3D8386EB2B8A15C700D99100 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		4C97294790A515A2AFDB33D2 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
 		535E5535F9E17976827D8D1A /* Pods-TodoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoAppTests.release.xcconfig"; path = "Target Support Files/Pods-TodoAppTests/Pods-TodoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		698F70E34828384BED2B116E /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -353,6 +356,7 @@
 				91BC1A6529C0B08D00500A62 /* VMResult.swift */,
 				91CFA3F729C9A43800C7092A /* Validate.swift */,
 				3D8386E82B89EE7D00D99100 /* CheckButton.swift */,
+				3D8386EB2B8A15C700D99100 /* Resources.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -807,6 +811,7 @@
 				91A033DE29BF735B0019D5A9 /* DatabaseError.swift in Sources */,
 				91C7609329BC3213003BE148 /* UserUseCase.swift in Sources */,
 				91A088B029C4A3A0000BF175 /* Constant.swift in Sources */,
+				3D8386EC2B8A15C700D99100 /* Resources.swift in Sources */,
 				91A033D329BF67B10019D5A9 /* MainDatabase.swift in Sources */,
 				915F06EF29BA1C2200685156 /* SignInViewController.swift in Sources */,
 				91CFA3F829C9A43800C7092A /* Validate.swift in Sources */,
@@ -881,6 +886,7 @@
 				3D19DFB82B463B1500B1F6BB /* Request.swift in Sources */,
 				3D0B45972B5C0C36009A7255 /* UpdateTaskView.swift in Sources */,
 				91F0EAEC29D5D4060071F148 /* String+ExtentionTests.swift in Sources */,
+				3D8386ED2B8A15C700D99100 /* Resources.swift in Sources */,
 				3D8386EA2B89EE7D00D99100 /* CheckButton.swift in Sources */,
 				3D19DFBB2B463B2B00B1F6BB /* APIClient.swift in Sources */,
 			);

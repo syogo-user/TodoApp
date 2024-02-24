@@ -89,7 +89,7 @@ struct TaskListView: View {
                         Image(systemName: R.string.localizable.taskListViewOrderButtonImage())
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 20)
+                            .frame(width: Size.size20)
                     }
                     
                     Menu {
@@ -108,7 +108,7 @@ struct TaskListView: View {
                         Image(systemName: R.string.localizable.taskListViewFilterButtonImage())
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 20)
+                            .frame(width: Size.size20)
                         
                     }
                 })
@@ -225,9 +225,9 @@ struct TaskCellView: View {
                 completeButtonClick(newValue)
             }
             .toggleStyle(.checkBox)
-            .padding(.trailing, 8)
+            .padding(.trailing, Constraint.constraint8)
             
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: Constraint.constraint8) {
                 Text(task.title)
                     .fontWeight(.semibold)
                 Text(task.content)
@@ -245,7 +245,7 @@ struct TaskCellView: View {
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 30, height: 30, alignment: .trailing)
+                    .frame(width: Size.size30, height: Size.size30, alignment: .trailing)
             }
             .buttonStyle(.plain)
 
