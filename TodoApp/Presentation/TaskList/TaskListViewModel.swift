@@ -94,44 +94,39 @@ class TaskListViewModelImpl: TaskListViewModel {
 //    @Published private(set) var isLoading = false
     
     func fetchTaskList() async throws {
-        do {
-            let sortOrder = getSortOrder()
-            let filterCondition = getFilterCondition()
-            
-            let authorization = try await userUseCase.fetchCurrentAuthToken()
-            let user = try userUseCase.loadLocalUser()
-            print("!!!user:\(user.userId)")
-            let tasks = try await taskUseCase.fetchTask(userId: user.userId, authorization: authorization)
-            var taskList = tasks
-            self.taskUseCase.sortTask(itemList: &taskList, sort: sortOrder)
-            
-            let taskInfoList = taskList.map {
-                TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
-            }
-            try taskUseCase.insertLocalTaskList(taskInfoList: taskInfoList)
-            
-            
-            // --- 以下確認した方がいい
-            
-            // APIとローカルそれぞれタスクのtaskIdを比較して不要なものを削除
-            let taskItems = Set(self.taskInfoItems.map { $0.taskId })
-            let taskIdList = Set(taskList.map { $0.taskId })
-            /// ローカルから取得したタスクには存在するがにAPIから取得したタスクには存在しないものtaskIDを抽出
-            let result = taskItems.subtracting(taskIdList)
-            let deleteIdList = Array(result)
-            try taskUseCase.deleteLocalTaskList(taskIdList: deleteIdList)
-            
-            let loadTasks = try taskUseCase.loadLocalTaskList()
-            self.taskInfoItems = loadTasks.map {
-                TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
-            }
-            self.taskUseCase.sortTask(itemList: &self.taskInfoItems, sort: sortOrder)
-            self.taskUseCase.filterTask(itemList: &self.taskInfoItems, condition: filterCondition)
-            print("tasks:\(taskInfoItems)")
-        } catch {
-            print("!!!error:\(error)")
+        let sortOrder = getSortOrder()
+        let filterCondition = getFilterCondition()
+        
+        let authorization = try await userUseCase.fetchCurrentAuthToken()
+        let user = try userUseCase.loadLocalUser()
+        print("!!!user:\(user.userId)")
+        let tasks = try await taskUseCase.fetchTask(userId: user.userId, authorization: authorization)
+        var taskList = tasks
+        self.taskUseCase.sortTask(itemList: &taskList, sort: sortOrder)
+        
+        let taskInfoList = taskList.map {
+            TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
         }
-
+        try taskUseCase.insertLocalTaskList(taskInfoList: taskInfoList)
+        
+        
+        // --- 以下確認した方がいい
+        
+        // APIとローカルそれぞれタスクのtaskIdを比較して不要なものを削除
+        let taskItems = Set(self.taskInfoItems.map { $0.taskId })
+        let taskIdList = Set(taskList.map { $0.taskId })
+        /// ローカルから取得したタスクには存在するがにAPIから取得したタスクには存在しないものtaskIDを抽出
+        let result = taskItems.subtracting(taskIdList)
+        let deleteIdList = Array(result)
+        try taskUseCase.deleteLocalTaskList(taskIdList: deleteIdList)
+        
+        let loadTasks = try taskUseCase.loadLocalTaskList()
+        self.taskInfoItems = loadTasks.map {
+            TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
+        }
+        self.taskUseCase.sortTask(itemList: &self.taskInfoItems, sort: sortOrder)
+        self.taskUseCase.filterTask(itemList: &self.taskInfoItems, condition: filterCondition)
+        print("tasks:\(taskInfoItems)")
         // エラーについてはVC側でdo catchしてエラーメッセージを出す。
         
     }
