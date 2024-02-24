@@ -13,7 +13,9 @@ enum DomainError: Error {
     /// ローカルDBに関するエラー
     case localDbError
     /// APIのエラー
-    case onAPIError(code: String)
+    case onAPIFetchError(code: String)
+    /// APIの更新エラー
+    case onAPIUpdateError(code: String)
     /// パースエラー
     case parseError
     /// ネットワークエラー

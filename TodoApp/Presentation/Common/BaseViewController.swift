@@ -16,40 +16,40 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    func handlerError(
-        error: Error,
-        onAuthError: (() -> Void)? = nil,
-        onLocalDbError: (() -> Void)? = nil,
-        onAPIError: (() -> Void)? = nil,
-        onParseError: (() -> Void)? = nil,
-        onNetworkError: (() -> Void)? = nil,
-        onUnKnowError: (() -> Void)
-    ) {
-        switch error {
-        case DomainError.authError:
-            print("認証処理に失敗しました。")
-            onAuthError?()
-        case DomainError.localDbError:
-            print("ローカルDBの更新に失敗しました。再度サインインをお願いします。")
-            onLocalDbError?()
-        case DomainError.onAPIError(_):
-            print("通信処理に失敗しました。")
-            onAPIError?()
-        case DomainError.parseError:
-            print("変換に処理に失敗しました。")
-            onParseError?()
-        case DomainError.networkError:
-            print("インターネットへの接続に失敗しました。")
-            onNetworkError?()
-        case DomainError.unKnownError:
-            print("処理に失敗しました。")
-            onUnKnowError()
-        default:
-            onUnKnowError()
-            print("処理に失敗しました。")
-            break
-        }
-    }
+//    func handlerError(
+//        error: Error,
+//        onAuthError: (() -> Void)? = nil,
+//        onLocalDbError: (() -> Void)? = nil,
+//        onAPIError: (() -> Void)? = nil,
+//        onParseError: (() -> Void)? = nil,
+//        onNetworkError: (() -> Void)? = nil,
+//        onUnKnowError: (() -> Void)
+//    ) {
+//        switch error {
+//        case DomainError.authError:
+//            print("認証処理に失敗しました。")
+//            onAuthError?()
+//        case DomainError.localDbError:
+//            print("ローカルDBの更新に失敗しました。再度サインインをお願いします。")
+//            onLocalDbError?()
+//        case DomainError.onAPIError(_):
+//            print("通信処理に失敗しました。")
+//            onAPIError?()
+//        case DomainError.parseError:
+//            print("変換に処理に失敗しました。")
+//            onParseError?()
+//        case DomainError.networkError:
+//            print("インターネットへの接続に失敗しました。")
+//            onNetworkError?()
+//        case DomainError.unKnownError:
+//            print("処理に失敗しました。")
+//            onUnKnowError()
+//        default:
+//            onUnKnowError()
+//            print("処理に失敗しました。")
+//            break
+//        }
+//    }
 
     func showDialog(title: String, message: String, buttonTitle: String, completion: (() -> Void)? = nil) {
         let dialog = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -127,12 +127,12 @@ class BaseViewController: UIViewController {
             completion()
         } else {
             // リフレッシュ時に固まることを防ぐためダイアログ表示を1秒遅らせる
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.handlerError(
-                    error: DomainError.networkError,
-                    onNetworkError: { self.networkErrorDialog() },
-                    onUnKnowError: { self.unKnowErrorDialog() })
-            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                self.handlerError(
+//                    error: DomainError.networkError,
+//                    onNetworkError: { self.networkErrorDialog() },
+//                    onUnKnowError: { self.unKnowErrorDialog() })
+//            }
         }
     }
 }

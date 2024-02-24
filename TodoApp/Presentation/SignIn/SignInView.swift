@@ -11,6 +11,8 @@ import Amplify
 struct SignInView: View {
     @StateObject private var viewModel = SignInViewModelImpl()
     @AppStorage("isSignIn") var isSignIn = false
+    @State private var isShowAlert = false
+    @State private var errorMessage = ""
     @State private var isLoading = false
     
     var body: some View {
@@ -48,6 +50,12 @@ struct SignInView: View {
                 ProgressView()
             }
         }
+        .alert(
+            "エラー1",
+            isPresented: $isShowAlert
+        ) {} message: {
+            Text(errorMessage)
+        }
     }
     
     private func socialSignIn(provider: AuthProvider) {
@@ -58,10 +66,26 @@ struct SignInView: View {
                 isSignIn = true
                 isLoading = false
             } catch {
+                errorMessage = errorMessage(error: error)
+                isShowAlert = true
                 isLoading = false
             }
         }
     }
+    
+    private func errorMessage(error: Error) -> String {
+        switch error {
+        case DomainError.authError :
+            return R.string.localizable.signInErrorMessage()
+        case DomainError.localDbError :
+            return R.string.localizable.localUserDBErrorMessage()
+        case DomainError.unKnownError :
+            return R.string.localizable.unknownErrorMessage()
+        default:
+            return R.string.localizable.unknownErrorMessage()
+        }
+    }
+    
 }
 
 

@@ -108,7 +108,7 @@ class TaskListViewModelImpl: TaskListViewModel {
             TaskInfoRecord(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
         }
         try taskUseCase.insertLocalTaskList(taskInfoList: taskInfoList)
-
+        
         
         // --- 以下確認した方がいい
         
@@ -127,7 +127,6 @@ class TaskListViewModelImpl: TaskListViewModel {
         self.taskUseCase.sortTask(itemList: &self.taskInfoItems, sort: sortOrder)
         self.taskUseCase.filterTask(itemList: &self.taskInfoItems, condition: filterCondition)
         print("tasks:\(taskInfoItems)")
-
         // エラーについてはVC側でdo catchしてエラーメッセージを出す。
         
     }
@@ -203,7 +202,6 @@ class TaskListViewModelImpl: TaskListViewModel {
         }
         let taskInfoRecord = TaskInfoRecord(taskId: taskInfo.taskId, title: taskInfo.title, content: taskInfo.content, scheduledDate: taskInfo.scheduledDate, isCompleted: taskInfo.isCompleted, isFavorite: taskInfo.isFavorite, userId: taskInfo.userId)
         try self.taskUseCase.updateLocalTask(taskInfo: taskInfoRecord)
-        // ここでupdateのすべてのエラーを一度キャッチして、新たなエラーをなげてもいいかも
     }
 
 //    /// タスクを更新
@@ -243,16 +241,20 @@ class TaskListViewModelImpl: TaskListViewModel {
 //
     /// ローカルからタスクリストを取得
     func loadLocalTaskList() throws {
-        let sortOrder = getSortOrder()
-        let filterCondition = getFilterCondition()
-        
-        let taskList = try taskUseCase.loadLocalTaskList()
-        
-        self.taskInfoItems = taskList.map {
-            TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
+        do {
+            let sortOrder = getSortOrder()
+            let filterCondition = getFilterCondition()
+            
+            let taskList = try taskUseCase.loadLocalTaskList()
+            
+            self.taskInfoItems = taskList.map {
+                TaskInfoItem(taskId: $0.taskId, title: $0.title, content: $0.content, scheduledDate: $0.scheduledDate, isCompleted: $0.isCompleted, isFavorite: $0.isFavorite, userId: $0.userId)
+            }
+            taskUseCase.sortTask(itemList: &self.taskInfoItems, sort: sortOrder)
+            taskUseCase.filterTask(itemList: &self.taskInfoItems, condition: filterCondition)
+        } catch {
+            throw DomainError.localDbError
         }
-        taskUseCase.sortTask(itemList: &self.taskInfoItems, sort: sortOrder)
-        taskUseCase.filterTask(itemList: &self.taskInfoItems, condition: filterCondition)
     }
 //
 //    /// サインイン画面を経由したか

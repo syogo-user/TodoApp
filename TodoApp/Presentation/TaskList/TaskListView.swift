@@ -12,10 +12,11 @@ struct TaskListView: View {
     @State private var isShowAlert = false
     @State private var errorMessage = ""
     @State private var isLoading = false
+    @AppStorage("isSignIn") var isSignIn = false
     
     var body: some View {
         NavigationStack {
-                // Todo: データが取得してもなかった場合に、データがありませんになるように修正
+            // Todo: データが取得してもなかった場合に、データがありませんになるように修正
             ZStack {
                 List {
                     ForEach(viewModel.taskInfoItems, id: \.taskId) { task in
@@ -25,7 +26,9 @@ struct TaskListView: View {
                                 isLoading = true
                                 try self.loadLocalTaskList()
                                 isLoading = false
-                            } catch {
+                            } catch let error {
+                                errorMessage = errorMessage(error: error)
+                                isShowAlert = true
                                 isLoading = false
                             }
                         }) {
@@ -39,9 +42,10 @@ struct TaskListView: View {
                                             try viewModel.changeFavorite(item: task, isFavorite: isFavorite)
                                             try await viewModel.updateTask(taskInfoItem: task)
                                             isLoading = false
-                                        } catch {
+                                        } catch let error {
+                                            errorMessage = errorMessage(error: error)
                                             isLoading = false
-                                            print("!!!!!エラー!")
+                                            isShowAlert = true
                                         }
                                     }
                                 }, completeButtonClick: { isCompleted in
@@ -51,8 +55,10 @@ struct TaskListView: View {
                                             try viewModel.changeComplete(item: task, isCompleted: isCompleted)
                                             try await viewModel.updateTask(taskInfoItem: task)
                                             isLoading = false
-                                        } catch {
+                                        } catch let error {
+                                            errorMessage = errorMessage(error: error)
                                             isLoading = false
+                                            isShowAlert = true
                                         }
                                     }
                                 } )
@@ -65,8 +71,10 @@ struct TaskListView: View {
                         isLoading = true
                         try await viewModel.fetchTaskList()
                         isLoading = false
-                    } catch {
+                    } catch let error {
+                        errorMessage = errorMessage(error: error)
                         isLoading = false
+                        isShowAlert = true
                     }
                 }
                 .navigationBarItems(trailing: HStack {
@@ -110,23 +118,23 @@ struct TaskListView: View {
             }
         }
         .task {
+//            if !isSignIn {
+//                return
+//            }
             do {
                 isLoading = true
                 try await viewModel.fetchTaskList()
                 isLoading = false
-            } catch {
+            } catch let error {
+                errorMessage = errorMessage(error: error)
                 isLoading = false
+                isShowAlert = true
             }
         }
         .alert(
             "エラー",
-            isPresented: $isShowAlert,
-            presenting: errorMessage
-        ) { errorMessage in
-            Button(errorMessage, role: .destructive) {
-                
-            }
-        } message: { errorMessage in
+            isPresented: $isShowAlert
+        ) {} message: {
             Text(errorMessage)
         }
     }
@@ -142,9 +150,28 @@ struct TaskListView: View {
                     throw DomainError.unKnownError
                 }
                 isLoading = false
-            } catch {
+            } catch let error {
+                errorMessage = errorMessage(error: error)
                 isLoading = false
+                isShowAlert = true
             }
+        }
+    }
+    
+    private func errorMessage(error: Error) -> String {
+        switch error {
+        case DomainError.authError :
+            return R.string.localizable.tokenErrorMessage()
+        case DomainError.localDbError :
+            return R.string.localizable.localTaskDBErrorMessage()
+        case DomainError.onAPIFetchError:
+            return R.string.localizable.fetchTaskErrorMessage()
+        case DomainError.onAPIUpdateError:
+            return R.string.localizable.updateTaskErrorMessage()
+        case DomainError.unKnownError :
+            return R.string.localizable.unknownErrorMessage()
+        default:
+            return R.string.localizable.unknownErrorMessage()
         }
     }
     
@@ -154,8 +181,8 @@ struct TaskListView: View {
         do {
             try loadLocalTaskList()
             isLoading = false
-        } catch {
-            errorMessage = R.string.localizable.localTaskDBErrorMessage()
+        } catch let error {
+            errorMessage = errorMessage(error: error)
             isShowAlert = true
             isLoading = false
         }
@@ -167,8 +194,8 @@ struct TaskListView: View {
         do {
             try loadLocalTaskList()
             isLoading = false
-        } catch {
-            errorMessage = R.string.localizable.localTaskDBErrorMessage()
+        } catch let error {
+            errorMessage = errorMessage(error: error)
             isShowAlert = true
             isLoading = false
         }

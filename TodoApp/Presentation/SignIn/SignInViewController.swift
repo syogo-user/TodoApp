@@ -30,12 +30,12 @@ class SignInViewController: BaseViewController {
             .emit { result in
                 guard let result = result, result.isCompleted else { return }
                 if let error = result.error {
-                    self.handlerError(
-                        error: error,
-                        onAuthError: { self.signInErrorDialog() },
-                        onLocalDbError: { self.localDbErrorDialog() },
-                        onUnKnowError: { self.unKnowErrorDialog() }
-                    )
+//                    self.handlerError(
+//                        error: error,
+//                        onAuthError: { self.signInErrorDialog() },
+//                        onLocalDbError: { self.localDbErrorDialog() },
+//                        onUnKnowError: { self.unKnowErrorDialog() }
+//                    )
                     return
                 }
                 self.viewModel.setViaSignIn()

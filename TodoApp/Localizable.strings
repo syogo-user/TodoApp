@@ -18,6 +18,7 @@
 "networkErrorTitle" = "ネットワークエラー";
 "dateParseErrorTitle" = "日付変換エラー";
 "unknownErrorTitle" = "不明なエラー";
+"errorTitle" = "エラー";
 
 // MARK: - ErrorMessage
 "localUserDBErrorMessage" = "ローカルDBへの取得または更新処理が失敗しました。\nログインし直してください。";
