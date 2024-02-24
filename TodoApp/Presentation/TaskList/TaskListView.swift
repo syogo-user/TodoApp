@@ -86,7 +86,7 @@ struct TaskListView: View {
                             selectedSortItem(sortOrder: SortOrder.descendingOrderDate)
                         })
                     } label: {
-                        Image(systemName: R.string.localizable.taskListViewOrderButtonImageName())
+                        Image(systemName: R.string.localizable.taskListViewOrderButtonImage())
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20)
@@ -105,7 +105,7 @@ struct TaskListView: View {
                         })
                         
                     } label: {
-                        Image(systemName: R.string.localizable.taskListViewFilterButtonImageName())
+                        Image(systemName: R.string.localizable.taskListViewFilterButtonImage())
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20)

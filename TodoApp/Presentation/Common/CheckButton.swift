@@ -12,7 +12,7 @@ struct CheckBoxStyle: ToggleStyle {
             Button {
                 configuration.isOn.toggle()
             } label: {
-                Image(systemName: configuration.isOn ? "checkmark.square" : "square")
+                Image(systemName: configuration.isOn ? R.string.localizable.checkBoxButtonCheckImage() : R.string.localizable.checkBoxButtonSquareImage())
             }
             .foregroundStyle(configuration.isOn ? Color.accentColor : Color.primary)
             .buttonStyle(.plain)

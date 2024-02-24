@@ -68,9 +68,6 @@
 "tabItemListTitle" = "一覧";
 "tabItemPostTitle" = "投稿";
 "tabItemSettingTitle" = "アカウント";
-"tabItemListImage" = "list.bullet";
-"tabItemPostImage" = "plus";
-"tabItemSettingImage" = "person";
 
 // MARK: - Button
 "rightBarButtonOnlyFavorite" = "★のみ表示";
@@ -78,8 +75,6 @@
 "rightBarButtonNotIncludeCompleted" = "完了済は非表示";
 "rightBarButtonAscendingOrderDate" = "日付の昇順";
 "rightBarButtonDescendingOrderDate" = "日付の降順";
-"taskListViewOrderButtonImageName" = "arrow.up.arrow.down";
-"taskListViewFilterButtonImageName" = "ellipsis";
 "updateTaskViewSaveButtonText" = "保存";
 
 
@@ -88,3 +83,11 @@
 // MARK: - Database
 "databaseOpenError" = "データベースが1度もopenされていません";
 
+// MARK: - ImageName
+"tabItemListImage" = "list.bullet";
+"tabItemPostImage" = "plus";
+"tabItemSettingImage" = "person";
+"taskListViewOrderButtonImage" = "arrow.up.arrow.down";
+"taskListViewFilterButtonImage" = "ellipsis";
+"checkBoxButtonCheckImage" = "checkmark.square";
+"checkBoxButtonSquareImage" = "checkmark.square";
