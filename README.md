@@ -5,6 +5,10 @@
 - Swift 5.8.1 
 - CocoaPods 1.14.3
 
+## ブランチについて
+- masterブランチ: UIKitとRxSwiftを主に使用した実装
+- swiftui_developブランチ: SwiftUIとSwiftConcurrencyを主に使用した実装(一部対応中)
+
 ## 起動方法
 1. 以下のGitHubリポジトリからプロジェクトをクローンします。 
     https://github.com/syogo-user/TodoApp.git
