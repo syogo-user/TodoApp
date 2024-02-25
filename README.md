@@ -6,7 +6,7 @@
 - CocoaPods 1.14.3
 
 ## ブランチについて
-- masterブランチ: UIKitとRxSwiftを主に使用した実装
+- mainブランチ: UIKitとRxSwiftを主に使用した実装
 - swiftui_developブランチ: SwiftUIとSwiftConcurrencyを主に使用した実装(一部対応中)
 
 ## 起動方法
